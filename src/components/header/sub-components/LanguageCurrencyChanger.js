@@ -22,12 +22,14 @@ const LanguageCurrencyChanger = ({
     <div className="language-currency-wrap">
       <div className="same-language-currency language-style">
         <span>
-          {currentLanguageCode === "en"
-            ? "English"
+          {currentLanguageCode === "vi"
+            ? "Vietnames"
             : currentLanguageCode === "fn"
             ? "French"
             : currentLanguageCode === "de"
             ? "Germany"
+            : currentLanguageCode === "en"
+            ? "English"
             : ""}{" "}
           <i className="fa fa-angle-down" />
         </span>
@@ -46,6 +48,11 @@ const LanguageCurrencyChanger = ({
             <li>
               <button value="de" onClick={e => changeLanguageTrigger(e)}>
                 Germany
+              </button>
+            </li>
+            <li>
+              <button value="vi" onClick={e => changeLanguageTrigger(e)}>
+              Vietnames
               </button>
             </li>
           </ul>

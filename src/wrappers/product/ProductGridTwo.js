@@ -21,6 +21,7 @@ const ProductGridTwo = ({
   colorClass,
   titlePriceClass
 }) => {
+  console.log(products)
   return (
     <Fragment>
       {products.map((product) => {
@@ -72,6 +73,7 @@ ProductGridTwo.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => {
+  console.log(state)
   return {
     products: getProducts(
       state.productData.products,

@@ -13,8 +13,7 @@ const BannerFive = () => {
                   <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
                     <img
                       src={
-                        process.env.PUBLIC_URL +
-                        "/assets/img/banner/banner-21.png"
+                        "https://images.pexels.com/photos/616837/pexels-photo-616837.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                       }
                       alt=""
                     />
@@ -35,8 +34,7 @@ const BannerFive = () => {
                   <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
                     <img
                       src={
-                        process.env.PUBLIC_URL +
-                        "/assets/img/banner/banner-22.png"
+                        "https://images.pexels.com/photos/1414126/pexels-photo-1414126.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                       }
                       alt=""
                     />
@@ -59,7 +57,7 @@ const BannerFive = () => {
               <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
                 <img
                   src={
-                    process.env.PUBLIC_URL + "/assets/img/banner/banner-23.png"
+                    "https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                   }
                   alt=""
                 />
@@ -81,8 +79,7 @@ const BannerFive = () => {
                   <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
                     <img
                       src={
-                        process.env.PUBLIC_URL +
-                        "/assets/img/banner/banner-24.png"
+                        "https://images.pexels.com/photos/1311771/pexels-photo-1311771.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                       }
                       alt=""
                     />
@@ -103,8 +100,7 @@ const BannerFive = () => {
                   <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
                     <img
                       src={
-                        process.env.PUBLIC_URL +
-                        "/assets/img/banner/banner-25.png"
+                       "https://images.pexels.com/photos/12916311/pexels-photo-12916311.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                       }
                       alt=""
                     />

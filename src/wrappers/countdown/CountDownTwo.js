@@ -17,7 +17,7 @@ const CountDownTwo = ({ spaceTopClass, spaceBottomClass, dateTime }) => {
             <div className="funfact-content funfact-res text-center">
               <h2>Deal of the day</h2>
               <div className="timer">
-                <Countdown date={new Date(dateTime)} renderer={Renderer} />
+                <Countdown date={new Date('2023-10-30')} renderer={Renderer} />
               </div>
               <div className="funfact-btn funfact-btn-green btn-hover">
                 <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
@@ -30,7 +30,7 @@ const CountDownTwo = ({ spaceTopClass, spaceBottomClass, dateTime }) => {
             <div className="fruits-deal-img">
               <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
                 <img
-                  src={process.env.PUBLIC_URL + "/assets/img/banner/deal.png"}
+                  src={"https://images.pexels.com/photos/552598/pexels-photo-552598.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"}
                   alt=""
                 />
               </Link>

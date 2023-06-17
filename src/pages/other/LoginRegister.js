@@ -71,6 +71,7 @@ const LoginRegister = ({ location }) => {
       const response = await UserApi.Login(dataLogin) // đưa dữ liệu lên đăng ký
       console.log(response);
       if (response?.data?.decentralizationId !== 3) {
+        alert("bạn là admin nên sẽ phải chuyển vị trí sang trang khác")
           //nếu đi vào đây thì người đó không phải là người dùng nên phải đưa về admin
           return;
       }

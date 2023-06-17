@@ -1,16 +1,16 @@
 [
   {
     "id": 1,
-    "title": "Natural & Healthy",
-    "subtitle": "100% Organic Fruits Collection",
-    "image": "/assets/img/slider/slider-8.jpg",
+    "title": "Tự nhiên & Khỏe mạnh",
+    "subtitle": "Thực phẩm chay thuần chay",
+    "image": "https://images.pexels.com/photos/1458694/pexels-photo-1458694.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     "url": "/shop-grid-standard"
   },
   {
     "id": 2,
-    "title": "Natural & Healthy",
-    "subtitle": "100% Organic Veg Collection",
-    "image": "/assets/img/slider/slider-8-2.jpg",
+    "title": "Tự nhiên & Khỏe mạnh",
+    "subtitle": "100% Thực Phẩm sạch có màu thiên nhiên",
+    "image": "https://images.pexels.com/photos/5677794/pexels-photo-5677794.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     "url": "/shop-grid-standard"
   }
 ]

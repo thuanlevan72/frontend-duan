@@ -14,8 +14,8 @@ const HeroSliderFiveSingle = ({ data, sliderClass }) => {
         <div className="row">
           <div className="col-xl-6 col-lg-6 col-md-7 ml-auto">
             <div className="slider-content-2 slider-content-fruits slider-animated-1">
-              <h3 className="animated">{data.title}</h3>
-              <h1 className="animated">{data.subtitle}</h1>
+              <h3 style={{color:"#fff"}} className="animated" >{data.title}</h3>
+              <h1  style={{color:"#fff"}} className="animated">{data.subtitle}</h1>
               <div className="slider-btn btn-hover">
                 <Link
                   className="animated"

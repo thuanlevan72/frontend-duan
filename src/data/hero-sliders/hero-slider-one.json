@@ -1,16 +1,9 @@
 [
   {
     "id": 1,
-    "title": "Smart Products",
-    "subtitle": "Winter Offer 2020 Collection",
-    "image": "/assets/img/slider/single-slide-hm1-2.png",
-    "url": "/shop-grid-standard"
-  },
-  {
-    "id": 2,
-    "title": "Smart Products",
-    "subtitle": "Summer Offer 2020 Collection",
-    "image": "/assets/img/slider/single-slide-1.png",
+    "title": "Thực Phẩm Thuần Chay",
+    "subtitle": "Vegan Thực Phẩm Sạch Thuần chay",
+    "image": "https://images.pexels.com/photos/1458694/pexels-photo-1458694.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     "url": "/shop-grid-standard"
   }
 ]

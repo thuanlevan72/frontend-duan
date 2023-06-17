@@ -5,7 +5,7 @@ import SectionTitleTwo from "../../components/section-title/SectionTitleTwo";
 
 const NewProductGrid = ({ category, limit }) => {
   return (
-    <div className="product-area pb-60 section-padding-1">
+    <div className="product-area pb-60 section-padding-1">z
       <div className="container-fluid">
         <SectionTitleTwo
           titleText="New Arrival"
