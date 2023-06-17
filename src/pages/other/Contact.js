@@ -12,7 +12,7 @@ const Contact = ({ location }) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | Contact</title>
+        <title>Flone | Liên hệ</title>
         <meta
           name="description"
           content="Contact of flone react minimalist eCommerce template."
@@ -28,7 +28,7 @@ const Contact = ({ location }) => {
         <div className="contact-area pt-100 pb-100">
           <div className="container">
             <div className="contact-map mb-10">
-              <LocationMap latitude="47.444" longitude="-122.176" />
+              <LocationMap latitude="21.0338532" longitude="105.8239858" />
             </div>
             <div className="custom-row-2">
               <div className="col-lg-4 col-md-5">

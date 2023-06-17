@@ -22,7 +22,7 @@ const ShopGridStandard = ({location, products}) => {
     const [currentData, setCurrentData] = useState([]);
     const [sortedProducts, setSortedProducts] = useState([]);
 
-    const pageLimit = 15;
+    const pageLimit = 9;
     const {pathname} = location;
 
     const getLayout = (layout) => {
@@ -46,14 +46,13 @@ const ShopGridStandard = ({location, products}) => {
         setSortedProducts(sortedProducts);
         setCurrentData(sortedProducts.slice(offset, offset + pageLimit));
     }, [offset, products, sortType, sortValue, filterSortType, filterSortValue ]);
-
+    console.log(products)
     return (
         <Fragment>
             <MetaTags>
                 <title>Flone | Shop Page</title>
                 <meta name="description" content="Shop page of flone react minimalist eCommerce template." />
             </MetaTags>
-
             <BreadcrumbsItem to={process.env.PUBLIC_URL + '/'}>Home</BreadcrumbsItem>
             <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>Shop</BreadcrumbsItem>
 

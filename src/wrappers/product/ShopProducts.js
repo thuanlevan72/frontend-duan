@@ -3,6 +3,7 @@ import React from "react";
 import ProductgridList from "./ProductgridList";
 
 const ShopProducts = ({ products, layout }) => {
+  console.log(products)
   return (
     <div className="shop-bottom-area mt-35">
       <div className={`row ${layout ? layout : ""}`}>

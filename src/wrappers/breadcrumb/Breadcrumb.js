@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { Breadcrumbs } from "react-breadcrumbs-dynamic";
 
 const Breadcrumb = () => {
+  console.log(NavLink)
   return (
     <div className="breadcrumb-area pt-35 pb-35 bg-gray-3">
       <div className="container">
