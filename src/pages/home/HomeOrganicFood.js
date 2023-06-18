@@ -35,11 +35,11 @@ const HomeOrganicFood = () => {
           gutterClass="padding-10-row-col"
         />
         {/* tab product */}
-        <TabProductFour
+        {/* <TabProductFour
           spaceBottomClass="pb-100"
           category="organic food"
           productTabClass="product-tab-fruits"
-        />
+        /> */}
         {/* banner */}
         <BannerFive />
         {/* countdown */}
@@ -55,6 +55,12 @@ const HomeOrganicFood = () => {
           spaceLeftClass="ml-70"
           spaceRightClass="mr-70"
           bgColorClass="bg-gray-3"
+        />
+         <FeatureIconFour
+          spaceTopClass="pt-10"
+          spaceBottomClass="pb-90"
+          containerClass="container-fluid"
+          gutterClass="padding-10-row-col"
         />
         {/* newsletter */}
         <NewsletterTwo

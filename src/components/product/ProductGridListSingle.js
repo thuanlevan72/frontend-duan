@@ -37,7 +37,7 @@ const ProductGridListSingle = ({
         <div
           className={`product-wrap ${spaceBottomClass ? spaceBottomClass : ""}`}
         >
-          <div className="product-img"   style={{width: "auto", height:"280px", objectFit:"contain"}}>
+          <div className="product-img"  style={{width: "auto", height:"280px", objectFit:"contain" , display: "flex", alignItems:"center"}}>
             <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
               <img
                
@@ -56,14 +56,14 @@ const ProductGridListSingle = ({
                 ""
               )}
             </Link>
-            {product.discount || product.new ? (
+            {product.discount || product.new_product ? (
               <div className="product-img-badges">
                 {product.discount ? (
                   <span className="pink">-{product.discount}%</span>
                 ) : (
                   ""
                 )}
-                {product.new ? <span className="purple">New</span> : ""}
+                {product.new_product ? <span className="purple">New</span> : ""}
               </div>
             ) : (
               ""
@@ -146,13 +146,14 @@ const ProductGridListSingle = ({
             <div className="product-price">
               {discountedPrice !== null ? (
                 <Fragment>
-                  <span>{currency.currencySymbol + finalDiscountedPrice}</span>{" "}
+                  {console.log(parseInt((currency.currencySymbol + finalDiscountedPrice).replace("$", "")).toLocaleString("en-US") + " VND")}
+                  <span>{parseInt((currency.currencySymbol + finalDiscountedPrice).replace("$", "")).toLocaleString("en-US") + " VND"}</span>{" "}
                   <span className="old">
-                    {currency.currencySymbol + finalProductPrice}
+                    {parseInt((currency.currencySymbol + finalProductPrice).replace("$", "")).toLocaleString("en-US") + " VND"}
                   </span>
                 </Fragment>
               ) : (
-                <span>{currency.currencySymbol + finalProductPrice} </span>
+                <span>{parseInt((currency.currencySymbol + finalProductPrice).replace("$", "")).toLocaleString("en-US") + " VND"} </span>
               )}
             </div>
           </div>
@@ -178,14 +179,14 @@ const ProductGridListSingle = ({
                       ""
                     )}
                   </Link>
-                  {product.discount || product.new ? (
+                  {product.discount || product.new_product ? (
                     <div className="product-img-badges">
                       {product.discount ? (
                         <span className="pink">-{product.discount}%</span>
                       ) : (
                         ""
                       )}
-                      {product.new ? <span className="purple">New</span> : ""}
+                      {product.new_product_product ? <span className="purple">New</span> : ""}
                     </div>
                   ) : (
                     ""
@@ -204,14 +205,14 @@ const ProductGridListSingle = ({
                   {discountedPrice !== null ? (
                     <Fragment>
                       <span>
-                        {currency.currencySymbol + finalDiscountedPrice}
+                        {parseInt((currency.currencySymbol + finalDiscountedPrice).replace("$", "")).toLocaleString("en-US") + " VND"}
                       </span>{" "}
                       <span className="old">
-                        {currency.currencySymbol + finalProductPrice}
+                        {parseInt((currency.currencySymbol + finalProductPrice).replace("$", "")).toLocaleString("en-US") + " VND"}
                       </span>
                     </Fragment>
                   ) : (
-                    <span>{currency.currencySymbol + finalProductPrice} </span>
+                    <span>{parseInt((currency.currencySymbol + finalProductPrice).replace("$", "")).toLocaleString("en-US") + " VND"} </span>
                   )}
                 </div>
                 {product.rating && product.rating > 0 ? (
