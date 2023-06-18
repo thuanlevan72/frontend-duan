@@ -7,7 +7,7 @@ import {
     Route,
     Redirect,
 } from "react-router-dom";
-import { ToastProvider } from "react-toast-notifications";
+import { ToastProvider, useToasts } from "react-toast-notifications";
 import { multilanguage, loadLanguages } from "redux-multilanguage";
 import { connect } from "react-redux";
 import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic";

@@ -108,14 +108,14 @@ const ProductGridListSingle = ({
                     }
                     disabled={cartItem !== undefined && cartItem.quantity > 0}
                     title={
-                      cartItem !== undefined ? "Added to cart" : "Add to cart"
+                      cartItem !== undefined ? "Thêm vào giỏ hàng" : "Thêm vào giỏ hàng"
                     }
                   >
                     {" "}
                     <i className="pe-7s-cart"></i>{" "}
                     {cartItem !== undefined && cartItem.quantity > 0
-                      ? "Added"
-                      : "Add to cart"}
+                      ? "đã thêm"
+                      : "Thêm vào giỏ hàng"}
                   </button>
                 ) : (
                   <button disabled className="active">
@@ -186,7 +186,7 @@ const ProductGridListSingle = ({
                       ) : (
                         ""
                       )}
-                      {product.new_product_product ? <span className="purple">New</span> : ""}
+                      {product.new_product_product ? <span className="purple">Mới</span> : ""}
                     </div>
                   ) : (
                     ""
@@ -260,19 +260,19 @@ const ProductGridListSingle = ({
                         }
                         title={
                           cartItem !== undefined
-                            ? "Added to cart"
-                            : "Add to cart"
+                            ? "Đã thêm vào giỏ hàng"
+                            : "Thêm vào giỏ hàng"
                         }
                       >
                         {" "}
                         <i className="pe-7s-cart"></i>{" "}
                         {cartItem !== undefined && cartItem.quantity > 0
-                          ? "Added"
-                          : "Add to cart"}
+                          ? "Thêm"
+                          : "Thêm vào giỏ hàng"}
                       </button>
                     ) : (
                       <button disabled className="active">
-                        Out of Stock
+                        Hết hàng
                       </button>
                     )}
                   </div>
@@ -283,8 +283,8 @@ const ProductGridListSingle = ({
                       disabled={wishlistItem !== undefined}
                       title={
                         wishlistItem !== undefined
-                          ? "Added to wishlist"
-                          : "Add to wishlist"
+                          ? "Đã thêm vào danh sách yêu thích"
+                          : "thêm vào danh sách yêu thíc"
                       }
                       onClick={() => addToWishlist(product, addToast)}
                     >
@@ -297,8 +297,8 @@ const ProductGridListSingle = ({
                       disabled={compareItem !== undefined}
                       title={
                         compareItem !== undefined
-                          ? "Added to compare"
-                          : "Add to compare"
+                          ? "Đã thêm vào danh sách yêu thích"
+                          : "thêm vào danh sách yêu thíc"
                       }
                       onClick={() => addToCompare(product, addToast)}
                     >

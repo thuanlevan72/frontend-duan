@@ -79,10 +79,11 @@ const Cart = ({
                             const finalDiscountedPrice = (
                               discountedPrice * currency.currencyRate
                             ).toFixed(2);
-
+                              
                             discountedPrice != null
                               ? (cartTotalPrice +=
                                   finalDiscountedPrice * cartItem.quantity)
+                                  
                               : (cartTotalPrice +=
                                   finalProductPrice * cartItem.quantity);
                             return (
@@ -135,18 +136,18 @@ const Cart = ({
                                   {discountedPrice !== null ? (
                                     <Fragment>
                                       <span className="amount old">
-                                        {currency.currencySymbol +
-                                          finalProductPrice}
+                                        {parseInt((currency.currencySymbol +
+                                          finalProductPrice).replace("$", "")).toLocaleString("en-US") + " VND"}
                                       </span>
                                       <span className="amount">
-                                        {currency.currencySymbol +
-                                          finalDiscountedPrice}
+                                        {parseInt((currency.currencySymbol +
+                                          finalDiscountedPrice).replace("$", "")).toLocaleString("en-US") + " VND"}
                                       </span>
                                     </Fragment>
                                   ) : (
                                     <span className="amount">
-                                      {currency.currencySymbol +
-                                        finalProductPrice}
+                                      {parseInt((currency.currencySymbol +
+                                        finalProductPrice).replace("$", "")).toLocaleString("en-US") + " VND"}
                                     </span>
                                   )}
                                 </td>
@@ -193,14 +194,14 @@ const Cart = ({
                                 </td>
                                 <td className="product-subtotal">
                                   {discountedPrice !== null
-                                    ? currency.currencySymbol +
+                                    ? parseInt((currency.currencySymbol +
                                       (
                                         finalDiscountedPrice * cartItem.quantity
-                                      ).toFixed(2)
-                                    : currency.currencySymbol +
+                                      ).toFixed(2)).replace("$", "")).toLocaleString("en-US") + " VND"
+                                    : parseInt((currency.currencySymbol +
                                       (
                                         finalProductPrice * cartItem.quantity
-                                      ).toFixed(2)}
+                                      ).toFixed(2)).replace("$", "")).toLocaleString("en-US") + " VND"}
                                 </td>
 
                                 <td className="product-remove">
@@ -271,14 +272,14 @@ const Cart = ({
                       <h5>
                         Total products{" "}
                         <span>
-                          {currency.currencySymbol + cartTotalPrice.toFixed(2)}
+                          {parseInt((currency.currencySymbol + cartTotalPrice.toFixed(2)).replace("$", "")).toLocaleString("en-US") + " VND"}
                         </span>
                       </h5>
 
                       <h4 className="grand-totall-title">
                         Grand Total{" "}
                         <span>
-                          {currency.currencySymbol + cartTotalPrice.toFixed(2)}
+                          {parseInt((currency.currencySymbol + cartTotalPrice.toFixed(2)).replace("$", "")).toLocaleString("en-US") + " VND"}
                         </span>
                       </h4>
                       <Link to={process.env.PUBLIC_URL + "/checkout"}>
