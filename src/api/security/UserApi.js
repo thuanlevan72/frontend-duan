@@ -2,7 +2,6 @@ import axiosClient from "../AxiosClient";
 
 const UserApi = {
     Register: (body) => {
-        debugger
         const url = "/Login/register-user";
         return axiosClient.post(url, body, {
             headers: {

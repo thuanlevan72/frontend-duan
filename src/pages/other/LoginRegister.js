@@ -73,6 +73,11 @@ const LoginRegister = ({ location }) => {
       if (response?.data?.decentralizationId !== 3) {
         alert("bạn là admin nên sẽ phải chuyển vị trí sang trang khác")
           //nếu đi vào đây thì người đó không phải là người dùng nên phải đưa về admin
+          const userJSON = JSON.stringify(response.data); // lưu dữ liệu người dùng
+          const token = JSON.stringify(response.loginResponse.token); // lưu token vào để sau lấy dữ liệu sẽ cần phải dùng 
+          localStorage.setItem("user", userJSON);
+          localStorage.setItem("token", token);
+          history.push("/admin");
           return;
       }
       // response.data.password = null; 

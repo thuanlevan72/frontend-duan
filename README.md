@@ -1,3 +1,12 @@
+master: Nhánh chính, chứa mã nguồn đã được kiểm tra và phê duyệt, sẵn sàng cho việc triển khai sản phẩm.
+
+develop: Nhánh phát triển chính, là nơi hợp nhất tất cả các tính năng và sửa lỗi từ các nhánh khác. Từ nhánh develop, có thể tạo ra các nhánh con mới để phát triển các tính năng riêng biệt.
+
+feature: Nhánh cho việc phát triển các tính năng mới. Các nhánh feature được tạo từ nhánh develop và sau khi hoàn thành, sẽ được hợp nhất lại vào develop.
+
+release: Nhánh để chuẩn bị cho phiên bản phát hành. Khi tất cả các tính năng được hoàn thành và kiểm tra, nhánh release được tạo từ develop. Trong quá trình chuẩn bị phiên bản phát hành, chỉ các sửa lỗi nhỏ được phép trên nhánh release. Sau đó, nhánh release được hợp nhất vào cả develop và master, và một nhãn (tag) được đánh dấu trên master để đại diện cho phiên bản phát hành.
+
+hotfix: Nhánh để sửa các lỗi gấp trong phiên bản đang hoạt động. Nhánh hotfix được tạo từ nhánh master và sau khi hoàn thành, sẽ được hợp nhất lại vào cả develop và master.
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
