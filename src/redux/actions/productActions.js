@@ -12,9 +12,9 @@ export const fetchProducts =  (products) =>  {
   return async dispatch => {
     try {
       const response = await ProductApi.getAllNoPagition(); 
-      dispatch(fetchProductsSuccess(response)); 
-  } catch (error) {
-      console.error(error);
-  }
+        dispatch(fetchProductsSuccess(response)); 
+      } catch (error) {
+      dispatch(fetchProductsSuccess(products)); 
+      }
   };
 };
