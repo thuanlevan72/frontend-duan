@@ -164,15 +164,14 @@ const Checkout = ({ location, cartItems, currency }) => {
                                   </span>{" "}
                                   <span className="order-price">
                                     {discountedPrice !== null
-                                      ? currency.currencySymbol +
+                                      ? parseInt((currency.currencySymbol +
                                         (
-                                          finalDiscountedPrice *
-                                          cartItem.quantity
-                                        ).toFixed(2)
-                                      : currency.currencySymbol +
+                                          finalDiscountedPrice * cartItem.quantity
+                                        ).toFixed(2)).replace("$", "")).toLocaleString("en-US") + " VND"
+                                      : parseInt((currency.currencySymbol +
                                         (
                                           finalProductPrice * cartItem.quantity
-                                        ).toFixed(2)}
+                                        ).toFixed(2)).replace("$", "")).toLocaleString("en-US") + " VND"}
                                   </span>
                                 </li>
                               );
@@ -189,8 +188,8 @@ const Checkout = ({ location, cartItems, currency }) => {
                           <ul>
                             <li className="order-total">Total</li>
                             <li>
-                              {currency.currencySymbol +
-                                cartTotalPrice.toFixed(2)}
+                              {parseInt((currency.currencySymbol +
+                                cartTotalPrice.toFixed(2)).replace("$", "")).toLocaleString("en-US") + " VND"}
                             </li>
                           </ul>
                         </div>
@@ -201,6 +200,23 @@ const Checkout = ({ location, cartItems, currency }) => {
                       <button className="btn-hover">Place Order</button>
                     </div>
                   </div>
+                  <br />
+                  <div className="discount-code-wrapper">
+                      <div className="title-wrap">
+                        <h4 className="cart-bottom-title section-bg-gray">
+                          Use Coupon Code
+                        </h4>
+                      </div>
+                      <div className="discount-code">
+                        <p>Enter your coupon code if you have one.</p>
+                        <form>
+                          <input type="text" required name="name" />
+                          <button className="cart-btn-2" type="submit">
+                            Apply Coupon
+                          </button>
+                        </form>
+                      </div>
+                    </div>
                 </div>
               </div>
             ) : (

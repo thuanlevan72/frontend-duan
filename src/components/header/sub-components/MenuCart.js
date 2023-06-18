@@ -51,8 +51,9 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
                     <h6>Qty: {single.quantity}</h6>
                     <span>
                       {discountedPrice !== null
-                        ? currency.currencySymbol + finalDiscountedPrice
-                        : currency.currencySymbol + finalProductPrice}
+                        ? parseInt((currency.currencySymbol + finalDiscountedPrice).replace("$", "")).toLocaleString("en-US") + " VND"
+                        : parseInt((currency.currencySymbol + finalProductPrice).replace("$", "")).toLocaleString("en-US") + " VND"
+                        }
                     </span>
                     {single.selectedProductColor &&
                     single.selectedProductSize ? (
@@ -77,7 +78,7 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
             <h4>
               Total :{" "}
               <span className="shop-total">
-                {currency.currencySymbol + cartTotalPrice.toFixed(2)}
+                { parseInt((currency.currencySymbol + cartTotalPrice.toFixed(2)).replace("$", "")).toLocaleString("en-US") + " VND"}
               </span>
             </h4>
           </div>
