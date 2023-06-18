@@ -58,7 +58,7 @@ const LanguageCurrencyChanger = ({
           </ul>
         </div>
       </div>
-      <div className="same-language-currency use-style">
+      {/* <div className="same-language-currency use-style">
         <span>
           {currency.currencyName} <i className="fa fa-angle-down" />
         </span>
@@ -81,7 +81,7 @@ const LanguageCurrencyChanger = ({
             </li>
           </ul>
         </div>
-      </div>
+      </div> */}
       <div className="same-language-currency">
         <p>Call Us 3965410</p>
       </div>
