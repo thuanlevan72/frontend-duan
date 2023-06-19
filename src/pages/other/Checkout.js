@@ -34,9 +34,9 @@ const Checkout = ({ location, cartItems, currency }) => {
               <div className="row">
                 <div className="col-lg-7">
                   <div className="billing-info-wrap">
-                    <h3>Chi tiết thanh toán</h3>
+                    <h3>Thông tin khách hàng</h3>
                     <div className="row">
-                      <div className="col-lg-6 col-md-6">
+                      {/* <div className="col-lg-6 col-md-6">
                         <div className="billing-info mb-20">
                           <label>First Name</label>
                           <input type="text" />
@@ -47,14 +47,14 @@ const Checkout = ({ location, cartItems, currency }) => {
                           <label>Last Name</label>
                           <input type="text" />
                         </div>
-                      </div>
+                      </div> */}
                       <div className="col-lg-12">
                         <div className="billing-info mb-20">
-                          <label>Company Name</label>
+                          <label>Họ và Tên</label>
                           <input type="text" />
                         </div>
                       </div>
-                      <div className="col-lg-12">
+                      {/* <div className="col-lg-12">
                         <div className="billing-select mb-20">
                           <label>Country</label>
                           <select>
@@ -66,22 +66,22 @@ const Checkout = ({ location, cartItems, currency }) => {
                             <option>Barbados</option>
                           </select>
                         </div>
-                      </div>
+                      </div> */}
                       <div className="col-lg-12">
                         <div className="billing-info mb-20">
-                          <label>Street Address</label>
+                          <label>Địa chỉ</label>
                           <input
                             className="billing-address"
-                            placeholder="House number and street name"
+                            // placeholder="Nhập địa chỉ của bạn"
                             type="text"
                           />
-                          <input
+                          {/* <input
                             placeholder="Apartment, suite, unit etc."
                             type="text"
-                          />
+                          /> */}
                         </div>
                       </div>
-                      <div className="col-lg-12">
+                      {/* <div className="col-lg-12">
                         <div className="billing-info mb-20">
                           <label>Town / City</label>
                           <input type="text" />
@@ -98,27 +98,27 @@ const Checkout = ({ location, cartItems, currency }) => {
                           <label>Postcode / ZIP</label>
                           <input type="text" />
                         </div>
-                      </div>
+                      </div> */}
                       <div className="col-lg-6 col-md-6">
                         <div className="billing-info mb-20">
-                          <label>Phone</label>
+                          <label>Điện thoại</label>
                           <input type="text" />
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6">
                         <div className="billing-info mb-20">
-                          <label>Email Address</label>
+                          <label>Email</label>
                           <input type="text" />
                         </div>
                       </div>
                     </div>
 
                     <div className="additional-info-wrap">
-                      <h4>Additional information</h4>
+                      <h4>Ghi chú</h4>
                       <div className="additional-info">
-                        <label>Order notes</label>
+                        {/* <label>Order notes</label> */}
                         <textarea
-                          placeholder="Notes about your order, e.g. special notes for delivery. "
+                          // placeholder="Notes about your order, e.g. special notes for delivery. "
                           name="message"
                           defaultValue={""}
                         />
@@ -129,7 +129,7 @@ const Checkout = ({ location, cartItems, currency }) => {
 
                 <div className="col-lg-5">
                   <div className="your-order-area">
-                    <h3>đơn đặt hàng của bạn</h3>
+                    <h3 className="text-uppercase">Đơn hàng</h3>
                     <div className="your-order-wrap gray-bg-4">
                       <div className="your-order-product-info">
                         <div className="your-order-top">
@@ -154,9 +154,9 @@ const Checkout = ({ location, cartItems, currency }) => {
 
                               discountedPrice != null
                                 ? (cartTotalPrice +=
-                                    finalDiscountedPrice * cartItem.quantity)
+                                  finalDiscountedPrice * cartItem.quantity)
                                 : (cartTotalPrice +=
-                                    finalProductPrice * cartItem.quantity);
+                                  finalProductPrice * cartItem.quantity);
                               return (
                                 <li key={key}>
                                   <span className="order-middle-left">
@@ -180,7 +180,7 @@ const Checkout = ({ location, cartItems, currency }) => {
                         </div>
                         <div className="your-order-bottom">
                           <ul>
-                            <li className="your-order-shipping">Đang chuyển hàng</li>
+                            <li className="your-order-shipping">Khuyến mãi vận chuyển</li>
                             <li>Miễn phí vận chuyển</li>
                           </ul>
                         </div>
@@ -205,21 +205,21 @@ const Checkout = ({ location, cartItems, currency }) => {
                   </div>
                   <br />
                   <div className="discount-code-wrapper">
-                      <div className="title-wrap">
-                        <h4 className="cart-bottom-title section-bg-gray">
-                        Sử dụng mã giảm giá
-                        </h4>
-                      </div>
-                      <div className="discount-code">
-                        <p>Nhập mã phiếu giảm giá của bạn nếu bạn có.</p>
-                        <form>
-                          <input type="text" required name="name" />
-                          <button className="cart-btn-2" type="submit">
-                            áp dụng phiếu giảm giá
-                          </button>
-                        </form>
-                      </div>
+                    <div className="title-wrap">
+                      <h4 className="cart-bottom-title section-bg-gray">
+                        Mã giảm giá
+                      </h4>
                     </div>
+                    <div className="discount-code">
+                      <p>Nhập mã giảm giá của bạn (nếu có).</p>
+                      <form>
+                        <input type="text" required name="name" />
+                        <button className="cart-btn-2" type="submit">
+                          Áp dụng
+                        </button>
+                      </form>
+                    </div>
+                  </div>
                 </div>
               </div>
             ) : (
