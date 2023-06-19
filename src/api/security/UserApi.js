@@ -18,11 +18,15 @@ const UserApi = {
         });
     },
     getAll: (params = null) => {
-        const url = "/Contact";
+        const url = "/User";
         return axiosClient.get(url, {
+            headers:{
+                Authorization: `Bearer ${localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : ""}`
+            },
             params: {
                 ...params
             }
+        
         });
     }
 };

@@ -24,26 +24,26 @@ const AdminLayout = () => {
     const [collapsed, setCollapsed] = useState(false);
     const history = useHistory();
     useEffect(() => {
-        // const Token = localStorage.getItem("token");
-        // if (Token !== null) {
-        //     // Phân tách JWT thành các phần: header, payload và signature
-        //     const parts = Token.split(".");
-        //     const encodedPayload = parts[1];
-        //     // Giải mã phần payload từ Base64
-        //     const decodedPayload = atob(encodedPayload);
-        //     // Chuyển đổi chuỗi JSON thành đối tượng JavaScript
-        //     const payloadObject = JSON.parse(decodedPayload);
-        //     // Truy cập vào giá trị "role"
-        //     const role = payloadObject.role;
-        //     if(role !== "admin"){
-        //         alert("bạn không có quyền để vào dây chơi");
-        //         history.push("/login-register");
-        //     }
-        //     console.log(role); // Kết quả: "admin"
-        // } else {
-        //     alert("vui lòng đăng nhập để có thể vào đây chơi");
-        //     history.push("/login-register");
-        // }
+        const Token = localStorage.getItem("token");
+        if (Token !== null) {
+            // Phân tách JWT thành các phần: header, payload và signature
+            const parts = Token.split(".");
+            const encodedPayload = parts[1];
+            // Giải mã phần payload từ Base64
+            const decodedPayload = atob(encodedPayload);
+            // Chuyển đổi chuỗi JSON thành đối tượng JavaScript
+            const payloadObject = JSON.parse(decodedPayload);
+            // Truy cập vào giá trị "role"
+            const role = payloadObject.role;
+            if(role !== "admin"){
+                alert("bạn không có quyền để vào dây chơi");
+                history.push("/login-register");
+            }
+            console.log(role); // Kết quả: "admin"
+        } else {
+            alert("vui lòng đăng nhập để có thể vào đây chơi");
+            history.push("/login-register");
+        }
     }, []);
     return (
         <Layout className="min-vh-100">
