@@ -41,10 +41,17 @@ const LoginRegister = ({ location }) => {
     console.log(dataRegister);
   };
   const handleSubmitRegister = async (e) => {
-    if(!dataRegister.email || !dataRegister.password || !dataRegister.username){
+    if (!dataRegister.email || !dataRegister.password || !dataRegister.username || !dataRegister.confirmpassword) {
       messageApi.open({
         type: 'error',
-        content: "vui lòng nhập đầy đủ các trường",
+        content: "Không để trống các trường",
+      });
+      return
+    }
+    if (dataRegister.password !== dataRegister.confirmpassword) {
+      messageApi.open({
+        type: 'error',
+        content: "Mật khẩu không khớp",
       });
       return
     }
@@ -58,33 +65,40 @@ const LoginRegister = ({ location }) => {
     formData.append("DecentralizationId", 3);
     setDataRegister(
       (prev) =>
-        (prev = {
-          email: "",
-          password: "",
-          username: "",
-        })
+      (prev = {
+        email: "",
+        password: "",
+        confirmpassword: "",
+        username: "",
+      })
     );
     console.log(formData);
     try {
       setLoading(true);
       const response = await UserApi.Register(formData); // đưa dữ liệu lên đăng ký
-      alert("bạn đã đăng ký thành công");
+      messageApi.open({
+        type: 'success',
+        content: "Bạn đã đăng ký thành công",
+      });
       setActiveKey("login");
       setLoading(false);
       // Xử lý phản hồi từ API tại đây (ví dụ: hiển thị thông báo thành công, điều hướng đến trang khác, vv)
     } catch (error) {
       console.error(error);
-      alert(error.response.data);
+      messageApi.open({
+        type: 'error',
+        content: "Đăng ký thất bại",
+      });
       setLoading(false);
       // Xử lý lỗi tại đây (ví dụ: hiển thị thông báo lỗi)
     }
   };
 
   const handleSubmit = async (e) => {
-    if(!dataLogin.email || !dataLogin.password){
+    if (!dataLogin.email || !dataLogin.password) {
       messageApi.open({
         type: 'error',
-        content: "vui lòng nhập đầy đủ các trường",
+        content: "Không để trống các trường",
       });
       return
     }
@@ -96,7 +110,7 @@ const LoginRegister = ({ location }) => {
       if (response?.data?.decentralizationId !== 3) {
         messageApi.open({
           type: 'success',
-          content: 'bạn là admin.',
+          content: 'Đăng nhập Admin',
         });
         //nếu đi vào đây thì người đó không phải là người dùng nên phải đưa về admin
         const userJSON = JSON.stringify(response.data); // lưu dữ liệu người dùng
@@ -134,7 +148,7 @@ const LoginRegister = ({ location }) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | Login</title>
+        <title>Poly Food | Đăng nhập</title>
         <meta
           name="description"
           content="Compare page of flone react minimalist eCommerce template."
@@ -142,7 +156,7 @@ const LoginRegister = ({ location }) => {
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Trang chủ</BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
-        Login Register
+        Đăng nhập - Đăng ký
       </BreadcrumbsItem>
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
@@ -160,7 +174,7 @@ const LoginRegister = ({ location }) => {
                           eventKey="login"
                           onClick={() => setActiveKey("login")}
                         >
-                          <h4>Login</h4>
+                          <h4>Đăng nhập</h4>
                         </Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
@@ -168,7 +182,7 @@ const LoginRegister = ({ location }) => {
                           eventKey="register"
                           onClick={() => setActiveKey("register")}
                         >
-                          <h4>Register</h4>
+                          <h4>Đăng ký</h4>
                         </Nav.Link>
                       </Nav.Item>
                     </Nav>
@@ -177,7 +191,7 @@ const LoginRegister = ({ location }) => {
                         <div className="login-form-container">
                           {loading && (
                             <div style={{ width: "100%", textAlign: "center" }}>
-                              <Spin style={{ textAlign: "center" }} size="large"/>
+                              <Spin style={{ textAlign: "center" }} size="large" />
                             </div>
                           )}
                           <div className="login-register-form">
@@ -186,7 +200,7 @@ const LoginRegister = ({ location }) => {
                                 type="email"
                                 name="email"
                                 value={dataLogin.email}
-                                placeholder="email"
+                                placeholder="Email"
                                 onChange={changeInputValue}
                                 required
                               />
@@ -194,7 +208,7 @@ const LoginRegister = ({ location }) => {
                                 type="password"
                                 name="password"
                                 value={dataLogin.password}
-                                placeholder="Password"
+                                placeholder="Mật khẩu"
                                 onChange={changeInputValue}
                                 required
                               />
@@ -207,7 +221,7 @@ const LoginRegister = ({ location }) => {
                                   </Link>
                                 </div> */}
                                 <button type="submit" onClick={handleSubmit}>
-                                  <span>Login</span>
+                                  <span>Đăng nhập</span>
                                 </button>
                               </div>
                             </form>
@@ -222,7 +236,7 @@ const LoginRegister = ({ location }) => {
                                 type="text"
                                 name="username"
                                 value={dataRegister.username}
-                                placeholder="Username"
+                                placeholder="Họ tên"
                                 onChange={setInputValue}
                                 required
                               />
@@ -230,7 +244,15 @@ const LoginRegister = ({ location }) => {
                                 type="password"
                                 name="password"
                                 value={dataRegister.password}
-                                placeholder="Password"
+                                placeholder="Mật khẩu"
+                                onChange={setInputValue}
+                                required
+                              />
+                              <input
+                                type="password"
+                                name="confirmpassword"
+                                value={dataRegister.confirmpassword}
+                                placeholder="Xác nhận mật khẩu"
                                 onChange={setInputValue}
                                 required
                               />
@@ -247,7 +269,7 @@ const LoginRegister = ({ location }) => {
                                   type="button"
                                   onClick={handleSubmitRegister}
                                 >
-                                  <span>Register</span>
+                                  <span>Đăng ký</span>
                                 </button>
                               </div>
                             </form>

@@ -33,7 +33,7 @@ const Cart = ({
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | Cart</title>
+        <title>Poly Food | Cart</title>
         <meta
           name="description"
           content="Cart page of flone react minimalist eCommerce template."
@@ -79,13 +79,13 @@ const Cart = ({
                             const finalDiscountedPrice = (
                               discountedPrice * currency.currencyRate
                             ).toFixed(2);
-                              
+
                             discountedPrice != null
                               ? (cartTotalPrice +=
-                                  finalDiscountedPrice * cartItem.quantity)
-                                  
+                                finalDiscountedPrice * cartItem.quantity)
+
                               : (cartTotalPrice +=
-                                  finalProductPrice * cartItem.quantity);
+                                finalProductPrice * cartItem.quantity);
                             return (
                               <tr key={key}>
                                 <td className="product-thumbnail">
@@ -118,7 +118,7 @@ const Cart = ({
                                     {cartItem.name}
                                   </Link>
                                   {cartItem.selectedProductColor &&
-                                  cartItem.selectedProductSize ? (
+                                    cartItem.selectedProductSize ? (
                                     <div className="cart-item-variation">
                                       <span>
                                         Color: {cartItem.selectedProductColor}
@@ -181,11 +181,11 @@ const Cart = ({
                                         cartItem !== undefined &&
                                         cartItem.quantity &&
                                         cartItem.quantity >=
-                                          cartItemStock(
-                                            cartItem,
-                                            cartItem.selectedProductColor,
-                                            cartItem.selectedProductSize
-                                          )
+                                        cartItemStock(
+                                          cartItem,
+                                          cartItem.selectedProductColor,
+                                          cartItem.selectedProductSize
+                                        )
                                       }
                                     >
                                       +
@@ -233,7 +233,7 @@ const Cart = ({
                       </div>
                       <div className="cart-clear">
                         <button onClick={() => deleteAllFromCart(addToast)}>
-                           Xóa giỏ hàng
+                          Xóa giỏ hàng
                         </button>
                       </div>
                     </div>
@@ -260,30 +260,30 @@ const Cart = ({
                     </div> */}
                   </div>
                   <div className="col-lg-6 col-md-6">
-                
-                </div>
+
+                  </div>
                   <div className="col-lg-4 col-md-12">
                     <div className="grand-totall">
                       <div className="title-wrap">
                         <h4 className="cart-bottom-title section-bg-gary-cart">
-                        Tổng số giỏ hàng
+                          Tổng số giỏ hàng
                         </h4>
                       </div>
                       <h5>
-                      Tổng sản phẩm{" "}
+                        Tổng sản phẩm{" "}
                         <span>
                           {parseInt((currency.currencySymbol + cartTotalPrice.toFixed(2)).replace("$", "")).toLocaleString("en-US") + " VND"}
                         </span>
                       </h5>
 
                       <h4 className="grand-totall-title">
-                      Tổng cộng{" "}
+                        Tổng cộng{" "}
                         <span>
                           {parseInt((currency.currencySymbol + cartTotalPrice.toFixed(2)).replace("$", "")).toLocaleString("en-US") + " VND"}
                         </span>
                       </h4>
                       <Link to={process.env.PUBLIC_URL + "/checkout"}>
-                      Tiến hành kiểm tra
+                        Tiến hành kiểm tra
                       </Link>
                     </div>
                   </div>

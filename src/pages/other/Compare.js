@@ -26,7 +26,7 @@ const Compare = ({
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | Compare</title>
+        <title>Poly Food | Compare</title>
         <meta
           name="description"
           content="Compare page of flone react minimalist eCommerce template."
@@ -118,7 +118,7 @@ const Compare = ({
                                         }
                                         className={
                                           cartItem !== undefined &&
-                                          cartItem.quantity > 0
+                                            cartItem.quantity > 0
                                             ? "active"
                                             : ""
                                         }
@@ -133,7 +133,7 @@ const Compare = ({
                                         }
                                       >
                                         {cartItem !== undefined &&
-                                        cartItem.quantity > 0
+                                          cartItem.quantity > 0
                                           ? "Added"
                                           : "Add to cart"}
                                       </button>
