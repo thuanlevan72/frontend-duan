@@ -34,7 +34,7 @@ const Checkout = ({ location, cartItems, currency }) => {
               <div className="row">
                 <div className="col-lg-7">
                   <div className="billing-info-wrap">
-                    <h3>Billing Details</h3>
+                    <h3>Chi tiết thanh toán</h3>
                     <div className="row">
                       <div className="col-lg-6 col-md-6">
                         <div className="billing-info mb-20">
@@ -129,13 +129,13 @@ const Checkout = ({ location, cartItems, currency }) => {
 
                 <div className="col-lg-5">
                   <div className="your-order-area">
-                    <h3>Your order</h3>
+                    <h3>đơn đặt hàng của bạn</h3>
                     <div className="your-order-wrap gray-bg-4">
                       <div className="your-order-product-info">
                         <div className="your-order-top">
                           <ul>
-                            <li>Product</li>
-                            <li>Total</li>
+                            <li>Sản Phẩm</li>
+                            <li>Tổng số lượng</li>
                           </ul>
                         </div>
                         <div className="your-order-middle">
@@ -180,13 +180,13 @@ const Checkout = ({ location, cartItems, currency }) => {
                         </div>
                         <div className="your-order-bottom">
                           <ul>
-                            <li className="your-order-shipping">Shipping</li>
-                            <li>Free shipping</li>
+                            <li className="your-order-shipping">Đang chuyển hàng</li>
+                            <li>Miễn phí vận chuyển</li>
                           </ul>
                         </div>
                         <div className="your-order-total">
                           <ul>
-                            <li className="order-total">Total</li>
+                            <li className="order-total">Tổng cộng</li>
                             <li>
                               {parseInt((currency.currencySymbol +
                                 cartTotalPrice.toFixed(2)).replace("$", "")).toLocaleString("en-US") + " VND"}
@@ -197,22 +197,25 @@ const Checkout = ({ location, cartItems, currency }) => {
                       <div className="payment-method"></div>
                     </div>
                     <div className="place-order mt-25">
-                      <button className="btn-hover">Place Order</button>
+                      <button className="btn-hover">Thanh Toán khi nhận hàng</button>
+                    </div>
+                    <div className="place-order mt-25">
+                      <button className="btn-hover">Thanh Toán online</button>
                     </div>
                   </div>
                   <br />
                   <div className="discount-code-wrapper">
                       <div className="title-wrap">
                         <h4 className="cart-bottom-title section-bg-gray">
-                          Use Coupon Code
+                        Sử dụng mã giảm giá
                         </h4>
                       </div>
                       <div className="discount-code">
-                        <p>Enter your coupon code if you have one.</p>
+                        <p>Nhập mã phiếu giảm giá của bạn nếu bạn có.</p>
                         <form>
                           <input type="text" required name="name" />
                           <button className="cart-btn-2" type="submit">
-                            Apply Coupon
+                            áp dụng phiếu giảm giá
                           </button>
                         </form>
                       </div>

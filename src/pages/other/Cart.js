@@ -52,19 +52,19 @@ const Cart = ({
           <div className="container">
             {cartItems && cartItems.length >= 1 ? (
               <Fragment>
-                <h3 className="cart-page-title">Your cart items</h3>
+                <h3 className="cart-page-title">Các mặt hàng trong giỏ hàng của bạn.</h3>
                 <div className="row">
                   <div className="col-12">
                     <div className="table-content table-responsive cart-table-content">
                       <table>
                         <thead>
                           <tr>
-                            <th>Image</th>
-                            <th>Product Name</th>
-                            <th>Unit Price</th>
-                            <th>Qty</th>
-                            <th>Subtotal</th>
-                            <th>action</th>
+                            <th>Ảnh</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Đơn giá</th>
+                            <th>Số lượng</th>
+                            <th>tổng phụ</th>
+                            <th>hoạt động</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -228,12 +228,12 @@ const Cart = ({
                         <Link
                           to={process.env.PUBLIC_URL + "/shop-grid-standard"}
                         >
-                          Continue Shopping
+                          Tiếp tục mua sắm
                         </Link>
                       </div>
                       <div className="cart-clear">
                         <button onClick={() => deleteAllFromCart(addToast)}>
-                          Clear Shopping Cart
+                           Xóa giỏ hàng
                         </button>
                       </div>
                     </div>
@@ -266,24 +266,24 @@ const Cart = ({
                     <div className="grand-totall">
                       <div className="title-wrap">
                         <h4 className="cart-bottom-title section-bg-gary-cart">
-                          Cart Total
+                        Tổng số giỏ hàng
                         </h4>
                       </div>
                       <h5>
-                        Total products{" "}
+                      Tổng sản phẩm{" "}
                         <span>
                           {parseInt((currency.currencySymbol + cartTotalPrice.toFixed(2)).replace("$", "")).toLocaleString("en-US") + " VND"}
                         </span>
                       </h5>
 
                       <h4 className="grand-totall-title">
-                        Grand Total{" "}
+                      Tổng cộng{" "}
                         <span>
                           {parseInt((currency.currencySymbol + cartTotalPrice.toFixed(2)).replace("$", "")).toLocaleString("en-US") + " VND"}
                         </span>
                       </h4>
                       <Link to={process.env.PUBLIC_URL + "/checkout"}>
-                        Proceed to Checkout
+                      Tiến hành kiểm tra
                       </Link>
                     </div>
                   </div>
@@ -297,9 +297,9 @@ const Cart = ({
                       <i className="pe-7s-cart"></i>
                     </div>
                     <div className="item-empty-area__text">
-                      No items found in cart <br />{" "}
+                      Không tìm thấy mặt hàng nào trong giỏ hàng <br />{" "}
                       <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
-                        Shop Now
+                        Mua ngay
                       </Link>
                     </div>
                   </div>
