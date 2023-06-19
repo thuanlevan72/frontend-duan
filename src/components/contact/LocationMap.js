@@ -11,7 +11,7 @@ const FooterMap = props => {
   return (
     <Map
       google={props.google}
-      zoom={10}
+      zoom={15}
       style={mapStyles}
       initialCenter={{ lat: props.latitude, lng: props.longitude }}
     >

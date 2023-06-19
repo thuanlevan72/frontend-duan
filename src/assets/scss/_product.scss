@@ -270,7 +270,7 @@
         color: #fff;
         border-radius: 3px;
         &.pink {
-          background-color: #fa6bff;
+          background-color: #c61a32;
         }
         &.purple {
           background-color: $theme-color;
@@ -1379,7 +1379,7 @@
       margin-left: 0;
 
       border: medium none;
-      border: 4px solid #fa6bff;
+      border: 4px solid #c61a32;
       border-radius: 50%;
       background: #fff none repeat scroll 0 0;
     }
@@ -1510,7 +1510,7 @@
 
         border-radius: 3px;
         &.pink {
-          color: #fa6bff;
+          color: #c61a32;
         }
         &.purple {
           color: $theme-color;
@@ -1553,7 +1553,7 @@
           &.old {
             text-decoration: line-through;
 
-            color: #fa6bff;
+            color: #c61a32;
             &.red {
               color: #ff3d2a;
             }
@@ -1864,7 +1864,7 @@
           background-color: $theme-color;
         }
         &.pink {
-          background-color: #fa6bff;
+          background-color: #c61a32;
         }
         &:last-child {
           margin-bottom: 0;
@@ -1966,7 +1966,7 @@
           background-color: #a749ff;
           &:hover,
           &.active {
-            background-color: #fa6bff;
+            background-color: #c61a32;
           }
           &:disabled {
             cursor: not-allowed;
@@ -2163,7 +2163,7 @@
         &.old {
           text-decoration: line-through;
 
-          color: #fa6bff;
+          color: #c61a32;
         }
       }
       &.price-4-center {
@@ -2307,7 +2307,7 @@
         background-color: $theme-color;
       }
       &.pink {
-        background-color: #fa6bff;
+        background-color: #c61a32;
       }
       &:last-child {
         margin-bottom: 0;
@@ -2355,7 +2355,7 @@
         &:hover,
         &.active {
           color: #fff;
-          background-color: #fa6bff;
+          background-color: #c61a32;
         }
       }
     }

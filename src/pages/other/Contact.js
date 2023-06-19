@@ -68,7 +68,7 @@ const Contact = ({ location }) => {
           content="Contact of flone react minimalist eCommerce template."
         />
       </MetaTags>
-      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Trang chủ</BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
         Contact
       </BreadcrumbsItem>
@@ -79,7 +79,7 @@ const Contact = ({ location }) => {
         <div className="contact-area pt-100 pb-100">
           <div className="container">
             <div className="contact-map mb-10">
-              <LocationMap latitude="21.0338532" longitude="105.8239858" />
+              <LocationMap latitude="21.0338532" longitude="105.8265661" />
             </div>
             <div className="custom-row-2">
               <div className="col-lg-4 col-md-5">

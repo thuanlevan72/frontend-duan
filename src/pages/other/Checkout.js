@@ -11,7 +11,7 @@ import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 const Checkout = ({ location, cartItems, currency }) => {
   const { pathname } = location;
   let cartTotalPrice = 0;
-
+  console.log(cartItems)
   return (
     <Fragment>
       <MetaTags>
@@ -21,9 +21,9 @@ const Checkout = ({ location, cartItems, currency }) => {
           content="Checkout page of flone react minimalist eCommerce template."
         />
       </MetaTags>
-      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Trang chủ</BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
-        Checkout
+        Thanh Toán
       </BreadcrumbsItem>
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
