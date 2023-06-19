@@ -52,7 +52,8 @@ const AdminLayout = () => {
                 collapsed={collapsed}
                 onCollapse={(value) => setCollapsed(value)}
             >
-                <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline" className="py-5">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/FPT_Polytechnic.png" alt="" width={150} className="py-2" style={{marginLeft: 26}} />
+                <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
                     <Menu.Item key="/admin/dashboard" icon={<RxDashboard />}>
                         <NavLink to="/admin/dashboard">Dashboard</NavLink>
                     </Menu.Item>
