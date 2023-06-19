@@ -14,10 +14,13 @@ import UsersAdd from "../components/admin/UsersManager/UsersAdd";
 import UsersEdit from "../components/admin/UsersManager/UsersEdit";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+// Icons
 import { RxDashboard } from "react-icons/rx";
 import { BsCart2 } from "react-icons/bs";
 import { MdOutlineCategory } from "react-icons/md";
-import { FiUsers } from "react-icons/fi";
+import { FiUsers, FiBookOpen } from "react-icons/fi";
+import { IoCreateOutline } from "react-icons/io5";
+import SubMenu from "antd/es/menu/SubMenu";
 const { Header, Content, Footer, Sider } = Layout;
 
 const AdminLayout = () => {
@@ -35,7 +38,7 @@ const AdminLayout = () => {
             const payloadObject = JSON.parse(decodedPayload);
             // Truy cập vào giá trị "role"
             const role = payloadObject.role;
-            if(role !== "admin"){
+            if (role !== "admin") {
                 alert("bạn không có quyền để vào dây chơi");
                 history.push("/login-register");
             }
@@ -44,30 +47,66 @@ const AdminLayout = () => {
             alert("vui lòng đăng nhập để có thể vào đây chơi");
             history.push("/login-register");
         }
-    }, []);
+    }, [history]);
     return (
         <Layout className="min-vh-100">
             <Sider
                 collapsible
                 collapsed={collapsed}
                 onCollapse={(value) => setCollapsed(value)}
+                width={230}
             >
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/FPT_Polytechnic.png" alt="" width={150} className="py-2" style={{marginLeft: 26}} />
+                <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/2/20/FPT_Polytechnic.png"
+                    alt=""
+                    width={150}
+                    className="py-2"
+                    style={{ marginLeft: 30 }}
+                />
                 <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
                     <Menu.Item key="/admin/dashboard" icon={<RxDashboard />}>
-                        <NavLink to="/admin/dashboard">Dashboard</NavLink>
+                        <NavLink to="/admin/dashboard">Bảng điều khiển</NavLink>
                     </Menu.Item>
-                    <Menu.Item key="/admin/products" icon={<BsCart2 />}>
-                        <NavLink to="/admin/products">Product Manager</NavLink>
-                    </Menu.Item>
-                    <Menu.Item
-                        key="/admin/categories"
-                        icon={<MdOutlineCategory />}
+                    {/* Product Manager */}
+                    <SubMenu
+                        key="subMenu-1"
+                        icon={<BsCart2 />}
+                        title="Quản lý sản phẩm"
                     >
-                        <NavLink to="/admin/categories">
-                            Category Manager
-                        </NavLink>
-                    </Menu.Item>
+                        <Menu.Item key="/admin/products" icon={<FiBookOpen />}>
+                            <NavLink to="/admin/products">
+                                Danh sách sản phẩm
+                            </NavLink>
+                        </Menu.Item>
+                        <Menu.Item
+                            key="/admin/products-add"
+                            icon={<IoCreateOutline />}
+                        >
+                            <NavLink to="/admin/products-add">
+                                Tạo sản phẩm
+                            </NavLink>
+                        </Menu.Item>
+                    </SubMenu>
+                    {/* Category Manager */}
+                    <SubMenu
+                        key="subMenu-2"
+                        icon={<MdOutlineCategory />}
+                        title="Quản lý danh mục"
+                    >
+                        <Menu.Item key="/admin/categories" icon={<FiBookOpen />}>
+                            <NavLink to="/admin/categories">
+                                Danh sách danh mục
+                            </NavLink>
+                        </Menu.Item>
+                        <Menu.Item
+                            key="/admin/categories-add"
+                            icon={<IoCreateOutline />}
+                        >
+                            <NavLink to="/admin/categories-add">
+                                Tạo danh mục
+                            </NavLink>
+                        </Menu.Item>
+                    </SubMenu>
                     <Menu.Item key="/admin/account" icon={<FiUsers />}>
                         <NavLink to="/admin/account">User Manager</NavLink>
                     </Menu.Item>

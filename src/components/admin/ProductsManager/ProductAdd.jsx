@@ -8,8 +8,8 @@ const ProductAdd = () => {
                     margin: "16px 0",
                 }}
             >
-                <Breadcrumb.Item>User</Breadcrumb.Item>
-                <Breadcrumb.Item>Product add</Breadcrumb.Item>
+                <Breadcrumb.Item>Bảng điều khiển</Breadcrumb.Item>
+                <Breadcrumb.Item>Tạo sản phẩm</Breadcrumb.Item>
             </Breadcrumb>
             <div
                 style={{
