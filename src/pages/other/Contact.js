@@ -12,28 +12,28 @@ import { Spin } from 'antd';
 const Contact = ({ location }) => {
   const { pathname } = location;
   const [messageApi, contextHolder] = message.useMessage();
-  const [loading,setLoading] = useState(false);
-  const [dataContact,setDataContact] = useState({
+  const [loading, setLoading] = useState(false);
+  const [dataContact, setDataContact] = useState({
     username: "",
     email: "",
     subject: "",
     phone: ""
   })
-  const changeInputData = (e)=>{
+  const changeInputData = (e) => {
     setDataContact({
       ...dataContact,
       [e.target.name]: e.target.value
     })
   }
-  const handlerSubmit = async (e) =>{
+  const handlerSubmit = async (e) => {
     e.preventDefault();
-    if(!dataContact.email|| !dataContact.username || !dataContact.subject || !dataContact.phone){
+    if (!dataContact.email || !dataContact.username || !dataContact.subject || !dataContact.phone) {
       messageApi.open({
         type: 'error',
         content: 'có trường chưa được nhập đầy đủ thông tin',
-    });
-    return
-    }  
+      });
+      return
+    }
     try {
       setLoading(true);
       const response = await ContactApi.postApiContact(dataContact); // đưa dữ liệu lên đăng ký
@@ -49,20 +49,20 @@ const Contact = ({ location }) => {
       })
       setLoading(false);
       // Xử lý phản hồi từ API tại đây (ví dụ: hiển thị thông báo thành công, điều hướng đến trang khác, vv)
-  } catch (error) {
+    } catch (error) {
       messageApi.open({
         type: 'error',
         content: 'gửi liên hệ thất bại',
-    });
-    setLoading(false);
+      });
+      setLoading(false);
       // Xử lý lỗi tại đây (ví dụ: hiển thị thông báo lỗi)
-  }
+    }
   }
   return (
     <Fragment>
       {contextHolder}
       <MetaTags>
-        <title>Flone | Liên hệ</title>
+        <title>Poly Food | Liên hệ</title>
         <meta
           name="description"
           content="Contact of flone react minimalist eCommerce template."
@@ -73,7 +73,7 @@ const Contact = ({ location }) => {
         Contact
       </BreadcrumbsItem>
       <LayoutOne headerTop="visible">
-        
+
         {/* breadcrumb */}
         <Breadcrumb />
         <div className="contact-area pt-100 pb-100">
@@ -155,12 +155,12 @@ const Contact = ({ location }) => {
                   <form className="contact-form-style">
                     <div className="row">
                       <div className="col-lg-6">
-                        <input name="username" placeholder="Name*" type="text"  onChange={changeInputData} value={dataContact.username}/>
+                        <input name="username" placeholder="Name*" type="text" onChange={changeInputData} value={dataContact.username} />
                       </div>
                       <div className="col-lg-6">
-                        <input name="email" placeholder="Email*" type="email" onChange={changeInputData} value={dataContact.email} required/>
+                        <input name="email" placeholder="Email*" type="email" onChange={changeInputData} value={dataContact.email} required />
                       </div>
-                      
+
                       <div className="col-lg-12">
                         <input
                           name="phone"
@@ -171,7 +171,7 @@ const Contact = ({ location }) => {
                           required
                         />
                       </div>
-                      {loading && <Spin  size="large"/>}
+                      {loading && <Spin size="large" />}
                       <div className="col-lg-12">
                         <textarea
                           name="subject"

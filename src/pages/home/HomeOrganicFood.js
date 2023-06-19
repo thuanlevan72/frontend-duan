@@ -14,7 +14,7 @@ const HomeOrganicFood = () => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | Organic Food Home</title>
+        <title>Poly Food | Organic Food Home</title>
         <meta
           name="description"
           content="Organic food home of flone react minimalist eCommerce template."
@@ -57,7 +57,7 @@ const HomeOrganicFood = () => {
           spaceRightClass="mr-70"
           bgColorClass="bg-gray-3"
         />
-         <FeatureIconFour
+        <FeatureIconFour
           spaceTopClass="pt-10"
           spaceBottomClass="pb-90"
           containerClass="container-fluid"
