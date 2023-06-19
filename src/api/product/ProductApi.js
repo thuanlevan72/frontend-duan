@@ -1,10 +1,10 @@
 import axiosClient from "../AxiosClient";
 
-const UserApi = {
+const ProductApi = {
     getAllNoPagition: (params = null) => {
         const url = "/Product/getallproductfrontend";
         return axiosClient.get(url)
     }
 };
 
-export default UserApi;
+export default ProductApi;
