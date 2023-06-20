@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import MetaTags from "react-meta-tags";
 import { connect } from "react-redux";
@@ -27,6 +27,7 @@ const Checkout = ({ location, cartItems, currency }) => {
       </BreadcrumbsItem>
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
+        {console.log(process.env.PUBLIC_URL)}
         <Breadcrumb />
         <div className="checkout-area pt-95 pb-100">
           <div className="container">
