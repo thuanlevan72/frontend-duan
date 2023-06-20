@@ -5,7 +5,9 @@ import { NavLink } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import { ImBin } from "react-icons/im";
 import UserApi from "../../../api/security/UserApi";
+import { format } from 'date-fns';
 
+const currentDate = new Date();
 const { Text } = Typography;
 const UsersList = () => {
   const [users, setUsers] = useState();
@@ -91,12 +93,22 @@ const UsersList = () => {
       dataIndex: "createdAt",
       key: "createdAt",
       align: "center",
+      render: (createdAt) => (
+        <>
+          {format(new Date(createdAt), 'HH:mm:ss dd/MM/yyyy')}
+        </>
+      ),
     },
     {
       title: "Ngày cập nhật",
       dataIndex: "updateAt",
       key: "updateAt",
       align: "center",
+      render: (updateAt) => (
+        <>
+          {format(new Date(updateAt), 'HH:mm:ss dd/MM/yyyy')}
+        </>
+      ),
     },
     {
       title: "Hành động",
