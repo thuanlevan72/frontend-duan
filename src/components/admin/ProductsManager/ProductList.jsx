@@ -11,23 +11,25 @@ const ProductList = () => {
     useEffect(() => {
         const getProducts = async () => {
             try {
-                const data = await ProductApi.getAllNoPagition({});
-                setProducts(data);
+                const { data } = await ProductApi.getAllProducts({});
+                setProducts(data.data);
             } catch (error) {
                 console.error(error);
             }
         };
         getProducts();
     }, []);
+    console.log(products);
     const dataSource = products?.map((item, index) => {
         return {
             key: index + 1,
-            id: item.id,
-            name: item.name,
-            image: item.image,
+            id: item.productTypeId,
+            name: item.nameProduct,
+            image: item.avartarImageProduct,
             price: item.price,
             discount: item.discount,
-            category: item.category,
+            quantity: item.quantity,
+            categoryName: item.productType.nameProductType,
         };
     });
     const columns = [
@@ -76,9 +78,15 @@ const ProductList = () => {
             align: "center",
         },
         {
-            title: "Danh mục",
-            dataIndex: "category",
-            key: "category",
+            title: "Số lượng",
+            dataIndex: "quantity",
+            key: "quantity",
+            align: "center",
+        },
+        {
+            title: "Tên danh mục",
+            dataIndex: "categoryName",
+            key: "categoryName",
             align: "center",
         },
         {

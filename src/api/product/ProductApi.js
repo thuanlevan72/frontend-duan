@@ -16,6 +16,21 @@ const ProductApi = {
             },
         });
     },
+    getAllProducts: (params = null) => {
+        const url = "/Product?page=1&pageSize=10";
+        return axiosClient.get(url, {
+            headers: {
+                Authorization: `Bearer ${
+                    localStorage.getItem("token")
+                        ? JSON.parse(localStorage.getItem("token"))
+                        : ""
+                }`,
+            },
+            params: {
+                ...params,
+            },
+        });
+    },
 };
 
 export default ProductApi;
