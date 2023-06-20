@@ -54,7 +54,7 @@ const AdminLayout = () => {
                 collapsible
                 collapsed={collapsed}
                 onCollapse={(value) => setCollapsed(value)}
-                width={230}
+                width={240}
             >
                 <img
                     src="https://upload.wikimedia.org/wikipedia/commons/2/20/FPT_Polytechnic.png"
@@ -107,9 +107,17 @@ const AdminLayout = () => {
                             </NavLink>
                         </Menu.Item>
                     </SubMenu>
-                    <Menu.Item key="/admin/account" icon={<FiUsers />}>
-                        <NavLink to="/admin/account">User Manager</NavLink>
-                    </Menu.Item>
+                    <SubMenu
+                        key="subMenu-3"
+                        icon={<FiUsers />}
+                        title="Quản lý người dùng"                    >
+                        <Menu.Item key="/admin/account" icon={<FiBookOpen />}>
+                            <NavLink to="/admin/account">Danh sách người dùng</NavLink>
+                        </Menu.Item>
+                        {/* <Menu.Item key="/admin/users-add" icon={<IoCreateOutline />}>
+                            <NavLink to="/admin/users-add">Thêm người dùng</NavLink>
+                        </Menu.Item> */}
+                    </SubMenu>
                 </Menu>
             </Sider>
             <Layout>
