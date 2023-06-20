@@ -15,18 +15,20 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
   const [loading, setLoading] = useState(false);
+  const localUser  =  localStorage.getItem('user');
   const [messageApi, contextHolder] = message.useMessage();
   const history = useHistory();
   const [userOrder, setUserOrder] = useState({
     paymentId: 1,
+    userId: localUser ??  localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).user.userId : null,
     orderStatusId: 4,
     originalPrice: 0,
     noteOrder: "",
     actualPrice: 0,
-    fullName: "",
-    phone: "",
-    address: "",
-    email: "",
+    fullName: localUser ? JSON.parse(localStorage.getItem('user')).user.userName : "",
+    phone: localUser ? JSON.parse(localStorage.getItem('user')).user.phone : "",
+    address:  localUser ? JSON.parse(localStorage.getItem('user')).user.address : "",
+    email: localUser ? JSON.parse(localStorage.getItem('user')).user.email : "",
   });
   const { pathname } = location;
   let cartTotalPrice = 0;
@@ -40,6 +42,7 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
     const totalPriceNew = cartItems.reduce((total, item) => total + ((item.price - ((item.price / 100) * item.discount)) * item.quantity), 0);
 
     console.log(totalPriceNew); // Kết quả tổng giá trị đã điều chỉnh
+
     const orderDetailDtos = cartItems.map(item => {
       return {
         productId: Number(item.id),
