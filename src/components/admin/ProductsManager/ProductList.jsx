@@ -108,12 +108,7 @@ const ProductList = () => {
                 <Breadcrumb.Item>Bảng điều khiển</Breadcrumb.Item>
                 <Breadcrumb.Item>Danh sách sản phẩm</Breadcrumb.Item>
             </Breadcrumb>
-            <div
-                style={{
-                    padding: 24,
-                    minHeight: 360,
-                }}
-            >
+            <div>
                 <Table dataSource={dataSource} columns={columns} />
             </div>
         </>
