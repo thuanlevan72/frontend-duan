@@ -7,11 +7,86 @@ import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { getDiscountPrice } from "../../helpers/product";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
+import { confirmOrder } from "../../redux/actions/cartActions";
+import { useState } from "react";
+import OrderApi from "../../api/order/OrderApi";
+import { Spin, message } from "antd";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-const Checkout = ({ location, cartItems, currency }) => {
+const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
+  const [loading, setLoading] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
+  const history = useHistory();
+  const [userOrder, setUserOrder] = useState({
+    paymentId: 1,
+    orderStatusId: 4,
+    originalPrice: 0,
+    noteOrder: "",
+    actualPrice: 0,
+    fullName: "",
+    phone: "",
+    address: "",
+    email: "",
+  });
   const { pathname } = location;
   let cartTotalPrice = 0;
-  console.log(cartItems)
+
+  const confirmOrderShipCode = async() => {
+    console.log(cartItems);
+    const totalPriceOld = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+
+    console.log(totalPriceOld); // Kết quả tổng giá trị: 278000
+
+    const totalPriceNew = cartItems.reduce((total, item) => total + ((item.price - ((item.price / 100) * item.discount)) * item.quantity), 0);
+
+    console.log(totalPriceNew); // Kết quả tổng giá trị đã điều chỉnh
+    const orderDetailDtos = cartItems.map(item => {
+      return {
+        productId: Number(item.id),
+        quantity: item.quantity,
+        price: (item.price - ((item.price / 100) * item.discount))
+      };
+    });
+    setUserOrder(prev => prev = {
+      ...prev,
+      originalPrice: totalPriceOld,
+      actualPrice: totalPriceNew,
+      orderDetailDtos
+
+    })
+    const data = userOrder;
+    console.log(data)
+    try{
+      setLoading(true)
+      const response = await OrderApi.CreateOrder(data);
+      messageApi.open({
+        type: 'success',
+        content: "Cảm ơn bạn đã mua sản phẩm của chúng tôi",
+      });
+      console.log(response)
+      setLoading(false)
+      setTimeout(function() {
+        confirmOrders();
+        history.push("/Complete");
+      }, 1500);
+   
+    }catch(error){
+      console.log(error.response)
+      messageApi.open({
+        type: 'error',
+        content: "thanh toán thất bại",
+      });
+      setLoading(false)
+    }
+   
+  };
+  const onChanginput = (e)=>{
+    setUserOrder({
+      ...userOrder,
+      [e.target.name]: e.target.value
+    })
+  }
+  console.log(userOrder)
   return (
     <Fragment>
       <MetaTags>
@@ -21,7 +96,9 @@ const Checkout = ({ location, cartItems, currency }) => {
           content="Checkout page of flone react minimalist eCommerce template."
         />
       </MetaTags>
-      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Trang chủ</BreadcrumbsItem>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>
+        Trang chủ
+      </BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
         Thanh Toán
       </BreadcrumbsItem>
@@ -52,7 +129,7 @@ const Checkout = ({ location, cartItems, currency }) => {
                       <div className="col-lg-12">
                         <div className="billing-info mb-20">
                           <label>Họ và Tên</label>
-                          <input type="text" />
+                          <input   onChange={onChanginput} name="fullName" value={userOrder.fullName} type="text" />
                         </div>
                       </div>
                       {/* <div className="col-lg-12">
@@ -73,8 +150,11 @@ const Checkout = ({ location, cartItems, currency }) => {
                           <label>Địa chỉ</label>
                           <input
                             className="billing-address"
+                            name="address"
                             // placeholder="Nhập địa chỉ của bạn"
                             type="text"
+                            value={userOrder.address}
+                            onChange={onChanginput}
                           />
                           {/* <input
                             placeholder="Apartment, suite, unit etc."
@@ -103,13 +183,13 @@ const Checkout = ({ location, cartItems, currency }) => {
                       <div className="col-lg-6 col-md-6">
                         <div className="billing-info mb-20">
                           <label>Điện thoại</label>
-                          <input type="text" />
+                          <input type="text"   onChange={onChanginput}  name="phone" value={userOrder.phone}/>
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6">
                         <div className="billing-info mb-20">
                           <label>Email</label>
-                          <input type="text" />
+                          <input  name="email"   onChange={onChanginput} type="text" value={userOrder.email} />
                         </div>
                       </div>
                     </div>
@@ -120,14 +200,14 @@ const Checkout = ({ location, cartItems, currency }) => {
                         {/* <label>Order notes</label> */}
                         <textarea
                           // placeholder="Notes about your order, e.g. special notes for delivery. "
-                          name="message"
-                          defaultValue={""}
+                          name="noteOrder"
+                          onChange={onChanginput}
+                          value={userOrder.noteOrder}
                         />
                       </div>
                     </div>
                   </div>
                 </div>
-
                 <div className="col-lg-5">
                   <div className="your-order-area">
                     <h3 className="text-uppercase">Đơn hàng</h3>
@@ -139,6 +219,12 @@ const Checkout = ({ location, cartItems, currency }) => {
                             <li>Tổng số lượng</li>
                           </ul>
                         </div>
+                        {contextHolder}
+                        {loading && (
+                            <div style={{ width: "100%", textAlign: "center" }}>
+                              <Spin style={{ textAlign: "center" }} size="large" />
+                            </div>
+                          )}
                         <div className="your-order-middle">
                           <ul>
                             {cartItems.map((cartItem, key) => {
@@ -155,9 +241,9 @@ const Checkout = ({ location, cartItems, currency }) => {
 
                               discountedPrice != null
                                 ? (cartTotalPrice +=
-                                  finalDiscountedPrice * cartItem.quantity)
+                                    finalDiscountedPrice * cartItem.quantity)
                                 : (cartTotalPrice +=
-                                  finalProductPrice * cartItem.quantity);
+                                    finalProductPrice * cartItem.quantity);
                               return (
                                 <li key={key}>
                                   <span className="order-middle-left">
@@ -165,14 +251,24 @@ const Checkout = ({ location, cartItems, currency }) => {
                                   </span>{" "}
                                   <span className="order-price">
                                     {discountedPrice !== null
-                                      ? parseInt((currency.currencySymbol +
-                                        (
-                                          finalDiscountedPrice * cartItem.quantity
-                                        ).toFixed(2)).replace("$", "")).toLocaleString("en-US") + " VND"
-                                      : parseInt((currency.currencySymbol +
-                                        (
-                                          finalProductPrice * cartItem.quantity
-                                        ).toFixed(2)).replace("$", "")).toLocaleString("en-US") + " VND"}
+                                      ? parseInt(
+                                          (
+                                            currency.currencySymbol +
+                                            (
+                                              finalDiscountedPrice *
+                                              cartItem.quantity
+                                            ).toFixed(2)
+                                          ).replace("$", "")
+                                        ).toLocaleString("en-US") + " VND"
+                                      : parseInt(
+                                          (
+                                            currency.currencySymbol +
+                                            (
+                                              finalProductPrice *
+                                              cartItem.quantity
+                                            ).toFixed(2)
+                                          ).replace("$", "")
+                                        ).toLocaleString("en-US") + " VND"}
                                   </span>
                                 </li>
                               );
@@ -181,7 +277,9 @@ const Checkout = ({ location, cartItems, currency }) => {
                         </div>
                         <div className="your-order-bottom">
                           <ul>
-                            <li className="your-order-shipping">Khuyến mãi vận chuyển</li>
+                            <li className="your-order-shipping">
+                              Khuyến mãi vận chuyển
+                            </li>
                             <li>Miễn phí vận chuyển</li>
                           </ul>
                         </div>
@@ -189,8 +287,12 @@ const Checkout = ({ location, cartItems, currency }) => {
                           <ul>
                             <li className="order-total">Tổng cộng</li>
                             <li>
-                              {parseInt((currency.currencySymbol +
-                                cartTotalPrice.toFixed(2)).replace("$", "")).toLocaleString("en-US") + " VND"}
+                              {parseInt(
+                                (
+                                  currency.currencySymbol +
+                                  cartTotalPrice.toFixed(2)
+                                ).replace("$", "")
+                              ).toLocaleString("en-US") + " VND"}
                             </li>
                           </ul>
                         </div>
@@ -198,7 +300,9 @@ const Checkout = ({ location, cartItems, currency }) => {
                       <div className="payment-method"></div>
                     </div>
                     <div className="place-order mt-25">
-                      <button className="btn-hover">Thanh Toán khi nhận hàng</button>
+                      <button className="btn-hover" onClick={confirmOrderShipCode}>
+                        Thanh Toán khi nhận hàng
+                      </button>
                     </div>
                     <div className="place-order mt-25">
                       <button className="btn-hover">Thanh Toán online</button>
@@ -250,14 +354,21 @@ const Checkout = ({ location, cartItems, currency }) => {
 Checkout.propTypes = {
   cartItems: PropTypes.array,
   currency: PropTypes.object,
-  location: PropTypes.object
+  location: PropTypes.object,
+  confirmOrders: PropTypes.func,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     cartItems: state.cartData,
-    currency: state.currencyData
+    currency: state.currencyData,
   };
 };
-
-export default connect(mapStateToProps)(Checkout);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    confirmOrders: () => {
+      dispatch(confirmOrder());
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

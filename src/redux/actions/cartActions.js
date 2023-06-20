@@ -67,7 +67,11 @@ export const deleteAllFromCart = addToast => {
     dispatch({ type: DELETE_ALL_FROM_CART });
   };
 };
-
+export const confirmOrder = () => {
+  return dispatch => {
+    dispatch({ type: DELETE_ALL_FROM_CART });
+  };
+};
 // get stock of cart item
 export const cartItemStock = (item, color, size) => {
   if (item.stock) {
