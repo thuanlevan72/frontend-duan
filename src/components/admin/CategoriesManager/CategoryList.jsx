@@ -1,11 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Breadcrumb, Image, Space, Table, Typography } from "antd";
 import { NavLink } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import { ImBin } from "react-icons/im";
+import categoryAPI from "../../../api/category/CategoryApi";
+import { useState } from "react";
 const { Text } = Typography;
+
 const CategoryList = () => {
-    const dataSource = [];
+    const [categories, setCategories] = useState();
+    useEffect(() => {
+        const getCategories = async () => {
+            try {
+                const { data } = await categoryAPI.getAllCategories();
+                setCategories(data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        getCategories();
+    }, []);
+    console.log(categories);
+    const dataSource = categories?.data?.map((item, index) => {
+        return {
+            key: index + 1,
+            id: item.productTypeId,
+            nameProductType: item.nameProductType,
+            imageTypeProduct: item.imageTypeProduct,
+            createdAt: item.createdAt,
+            updatedAt: item.updatedAt,
+        };
+    });
     const columns = [
         {
             title: "STT",
