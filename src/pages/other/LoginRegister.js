@@ -104,6 +104,8 @@ const LoginRegister = ({ location }) => {
     }
     e.preventDefault();
     try {
+      const expirationTime = new Date().getTime() + (4 * 60 * 60 * 1000);
+      // const expirationTime = new Date().getTime() + (1 * 60 * 1000);
       setLoading(true);
       const response = await UserApi.Login(dataLogin); // đưa dữ liệu lên đăng ký
       console.log(response);
@@ -117,9 +119,12 @@ const LoginRegister = ({ location }) => {
         const token = JSON.stringify(response.loginResponse.token); // lưu token vào để sau lấy dữ liệu sẽ cần phải dùng
         localStorage.setItem("user", userJSON);
         localStorage.setItem("token", token);
-        setLoading(false);
-        history.push("/admin");
-
+        localStorage.setItem("expiration", expirationTime);
+      
+        setTimeout(function() {
+          setLoading(false);
+          history.push("/admin");
+        }, 1500);
         return;
       }
       // response.data.password = null;
@@ -128,12 +133,15 @@ const LoginRegister = ({ location }) => {
       const token = JSON.stringify(response.loginResponse.token); // lưu token vào để sau lấy dữ liệu sẽ cần phải dùng
       localStorage.setItem("user", userJSON);
       localStorage.setItem("token", token);
+      localStorage.setItem("expiration", expirationTime);
       messageApi.open({
         type: 'success',
         content: 'chào mừng bạn đã đến poly-food.',
       });
-      history.push("/");
-      setLoading(false);
+      setTimeout(function() {
+        setLoading(false);
+        history.push("/admin");
+      }, 1500);
       // Xử lý phản hồi từ API tại đây (ví dụ: hiển thị thông báo thành công, điều hướng đến trang khác, vv)
     } catch (error) {
       messageApi.open({

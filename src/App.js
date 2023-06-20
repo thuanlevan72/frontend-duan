@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { useEffect, Suspense, lazy } from "react";
+import React, { useEffect, Suspense, lazy, useState } from "react";
 import ScrollToTop from "./helpers/scroll-top";
 import {
     BrowserRouter as Router,
@@ -12,6 +12,7 @@ import { multilanguage, loadLanguages } from "redux-multilanguage";
 import { connect } from "react-redux";
 import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic";
 import AdminLayout from "./layouts/AdminLayout";
+import { message } from "antd";
 
 const HomeOrganicFood = lazy(() => import("./pages/home/HomeOrganicFood"));
 // shop pages
@@ -32,6 +33,8 @@ const Checkout = lazy(() => import("./pages/other/Checkout"));
 const NotFound = lazy(() => import("./pages/other/NotFound"));
 
 const App = (props) => {
+    const [userCheckToken, setUserCheckToken] = useState(localStorage.getItem("token") || "");
+    const [messageApi, contextHolder] = message.useMessage();
     useEffect(() => {
         props.dispatch(
             loadLanguages({
@@ -44,7 +47,24 @@ const App = (props) => {
             })
         );
     });
+    useEffect(()=>{
+        const expiration = localStorage.getItem("expiration") || "";
+        const user = localStorage.getItem("user") || "";
 
+        if(userCheckToken && expiration && user){
+            localStorage.removeItem('token');
+            localStorage.removeItem('expiration');
+            localStorage.removeItem('user');
+            messageApi.open({
+                type: 'warning',
+                content: "hết hạn đăng nhập vui lòng đăng nhập lại",
+              });
+              setTimeout(function() {
+                // history.push("/admin");
+              }, 1500)
+        }
+        
+    },[userCheckToken])
     return (
         <ToastProvider placement="bottom-left">
             <BreadcrumbsProvider>
@@ -60,6 +80,7 @@ const App = (props) => {
                                 </div>
                             }
                         >
+                            {contextHolder}
                             <Switch>
                                 <Route
                                     exact
