@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic";
 import AdminLayout from "./layouts/AdminLayout";
 import { message } from "antd";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const HomeOrganicFood = lazy(() => import("./pages/home/HomeOrganicFood"));
 // shop pages
@@ -35,6 +36,7 @@ const NotFound = lazy(() => import("./pages/other/NotFound"));
 const App = (props) => {
     const [userCheckToken, setUserCheckToken] = useState(localStorage.getItem("token") || "");
     const [messageApi, contextHolder] = message.useMessage();
+    const history = useHistory();
     useEffect(() => {
         props.dispatch(
             loadLanguages({
@@ -52,16 +54,19 @@ const App = (props) => {
         const user = localStorage.getItem("user") || "";
 
         if(userCheckToken && expiration && user){
-            localStorage.removeItem('token');
-            localStorage.removeItem('expiration');
-            localStorage.removeItem('user');
-            messageApi.open({
-                type: 'warning',
-                content: "hết hạn đăng nhập vui lòng đăng nhập lại",
-              });
-              setTimeout(function() {
-                // history.push("/admin");
-              }, 1500)
+            const currentTime = new Date().getTime();
+            if (currentTime > expiration) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('expiration');
+                localStorage.removeItem('user');
+                messageApi.open({
+                    type: 'warning',
+                    content: "hết hạn đăng nhập vui lòng đăng nhập lại",
+                  });
+                  setTimeout(function() {
+                    
+                  }, 1500)
+              }
         }
         
     },[userCheckToken])
