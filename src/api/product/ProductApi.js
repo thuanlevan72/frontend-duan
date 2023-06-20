@@ -17,7 +17,7 @@ const ProductApi = {
         });
     },
     getAllProducts: (params = null) => {
-        const url = "/Product?page=1&pageSize=10";
+        const url = "/Product";
         return axiosClient.get(url, {
             headers: {
                 Authorization: `Bearer ${
