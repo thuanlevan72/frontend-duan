@@ -48,7 +48,7 @@ const UsersList = () => {
             key: "Address",
         },
         {
-            title: "Status",
+            title: "Trạng thái",
             dataIndex: "status",
             key: "status",
         },
