@@ -11,13 +11,7 @@ const ProductAdd = () => {
                 <Breadcrumb.Item>Bảng điều khiển</Breadcrumb.Item>
                 <Breadcrumb.Item>Tạo sản phẩm</Breadcrumb.Item>
             </Breadcrumb>
-            <div
-                style={{
-                    padding: 24,
-                    minHeight: 360,
-                    background: "#fff",
-                }}
-            >
+            <div>
                 Thêm sản phẩm
             </div>
         </>
