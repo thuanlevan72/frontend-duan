@@ -83,7 +83,7 @@ const AdminLayout = () => {
                             icon={<IoCreateOutline />}
                         >
                             <NavLink to="/admin/products-add">
-                                Thêm sản phẩm
+                                Tạo sản phẩm
                             </NavLink>
                         </Menu.Item>
                     </SubMenu>
@@ -103,7 +103,7 @@ const AdminLayout = () => {
                             icon={<IoCreateOutline />}
                         >
                             <NavLink to="/admin/categories-add">
-                                thêm danh mục
+                                Tạo danh mục
                             </NavLink>
                         </Menu.Item>
                     </SubMenu>
@@ -114,9 +114,6 @@ const AdminLayout = () => {
                         <Menu.Item key="/admin/account" icon={<FiBookOpen />}>
                             <NavLink to="/admin/account">Danh sách người dùng</NavLink>
                         </Menu.Item>
-                        {/* <Menu.Item key="/admin/users-add" icon={<IoCreateOutline />}>
-                            <NavLink to="/admin/users-add">Thêm người dùng</NavLink>
-                        </Menu.Item> */}
                     </SubMenu>
                     <SubMenu
                         key="subMenu-4"
@@ -175,11 +172,7 @@ const AdminLayout = () => {
                 </Menu>
             </Sider>
             <Layout>
-                <Header
-                    style={{
-                        padding: 0,
-                    }}
-                />
+                <Header className="p-0"/>
                 <Content
                     style={{
                         margin: "0 16px",
