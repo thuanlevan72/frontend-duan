@@ -7,7 +7,7 @@ import { ImBin } from "react-icons/im";
 import UserApi from "../../../api/security/UserApi";
 import { format } from 'date-fns';
 
-const currentDate = new Date();
+// const currentDate = new Date();
 const { Text } = Typography;
 const UsersList = () => {
   const [users, setUsers] = useState();

@@ -7,7 +7,7 @@ import categoryAPI from "../../../api/category/CategoryApi";
 import { useState } from "react";
 import { format } from 'date-fns';
 
-const currentDate = new Date();
+// const currentDate = new Date();
 const { Text } = Typography;
 const CategoryList = () => {
     const [categories, setCategories] = useState();
@@ -44,6 +44,7 @@ const CategoryList = () => {
             title: "ID",
             dataIndex: "id",
             key: "id",
+            align: "center"
         },
         {
             title: "Tên danh mục",
