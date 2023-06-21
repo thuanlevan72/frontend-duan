@@ -139,7 +139,7 @@ const LoginRegister = ({ location }) => {
       });
       setTimeout(function() {
         setLoading(false);
-        history.push("/admin");
+        history.push("/");
       }, 1500);
       // Xử lý phản hồi từ API tại đây (ví dụ: hiển thị thông báo thành công, điều hướng đến trang khác, vv)
     } catch (error) {
