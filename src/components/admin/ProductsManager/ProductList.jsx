@@ -18,10 +18,10 @@ const ProductList = () => {
   });
   const handlePaginationChange = (page, pageSize) => {
     // debugger
-    setParam((prev)=>prev = {
-        ...param,
-        page:page,
-        pageSize: pageSize
+    setParam((prev) => prev = {
+      ...param,
+      page: page,
+      pageSize: pageSize
     })
   };
   const [param, setParam] = useState({
@@ -45,7 +45,7 @@ const ProductList = () => {
   const dataSource = data.data?.map((item, index) => {
     return {
       key: index + 1,
-      id: item.productTypeId,
+      id: item.productId,
       name: item.nameProduct,
       image: item.avartarImageProduct,
       price: item.price,
@@ -65,6 +65,7 @@ const ProductList = () => {
       title: "ID",
       dataIndex: "id",
       key: "id",
+      align: "center"
     },
     {
       title: "Tên món",
@@ -141,8 +142,8 @@ const ProductList = () => {
       <div>
         <Table dataSource={dataSource} columns={columns} pagination={false} />
         <Pagination style={{
-            textAlign:"right",
-            padding:"10px 20px"
+          textAlign: "right",
+          padding: "10px 20px"
         }}
           current={data.page}
           pageSize={data.pageSize}

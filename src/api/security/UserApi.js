@@ -17,16 +17,16 @@ const UserApi = {
             }
         });
     },
-    getAll: (params = null) => {
+    getAllUsers: (params = null) => {
         const url = "/User";
         return axiosClient.get(url, {
-            headers:{
+            headers: {
                 Authorization: `Bearer ${localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : ""}`
             },
             params: {
                 ...params
             }
-        
+
         });
     }
 };

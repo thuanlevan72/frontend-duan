@@ -5,8 +5,10 @@ import { BiEdit } from "react-icons/bi";
 import { ImBin } from "react-icons/im";
 import categoryAPI from "../../../api/category/CategoryApi";
 import { useState } from "react";
-const { Text } = Typography;
+import { format } from 'date-fns';
 
+// const currentDate = new Date();
+const { Text } = Typography;
 const CategoryList = () => {
     const [categories, setCategories] = useState();
     useEffect(() => {
@@ -42,6 +44,7 @@ const CategoryList = () => {
             title: "ID",
             dataIndex: "id",
             key: "id",
+            align: "center"
         },
         {
             title: "Tên danh mục",
@@ -69,12 +72,22 @@ const CategoryList = () => {
             dataIndex: "createdAt",
             key: "createdAt",
             align: "center",
+            render: (createdAt) => (
+                <>
+                    {format(new Date(createdAt), 'HH:mm:ss dd/MM/yyyy')}
+                </>
+            ),
         },
         {
             title: "Ngày cập nhật",
             dataIndex: "updatedAt",
             key: "updatedAt",
             align: "center",
+            render: (updatedAt) => (
+                <>
+                    {format(new Date(updatedAt), 'HH:mm:ss dd/MM/yyyy')}
+                </>
+            ),
         },
         {
             title: "Hành động",
