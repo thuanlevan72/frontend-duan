@@ -15,6 +15,8 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
   const [loading, setLoading] = useState(false);
+  const totalPriceOld = cartItems?.reduce((total, item) => total + (item.price * item.quantity), 0);
+  const totalPriceNew = cartItems?.reduce((total, item) => total + ((item.price - ((item.price / 100) * item.discount)) * item.quantity), 0);
   const localUser  =  localStorage.getItem('user');
   const [messageApi, contextHolder] = message.useMessage();
   const history = useHistory();
@@ -29,36 +31,22 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
     phone: localUser ? JSON.parse(localStorage.getItem('user')).user.phone : "",
     address:  localUser ? JSON.parse(localStorage.getItem('user')).user.address : "",
     email: localUser ? JSON.parse(localStorage.getItem('user')).user.email : "",
-  });
-  const { pathname } = location;
-  let cartTotalPrice = 0;
-
-  const confirmOrderShipCode = async() => {
-    console.log(cartItems);
-    const totalPriceOld = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
-
-    console.log(totalPriceOld); // Kết quả tổng giá trị: 278000
-
-    const totalPriceNew = cartItems.reduce((total, item) => total + ((item.price - ((item.price / 100) * item.discount)) * item.quantity), 0);
-
-    console.log(totalPriceNew); // Kết quả tổng giá trị đã điều chỉnh
-
-    const orderDetailDtos = cartItems.map(item => {
+    originalPrice: totalPriceOld,
+    actualPrice: totalPriceNew,
+    orderDetailDtos: cartItems?.map(item => {
       return {
         productId: Number(item.id),
         quantity: item.quantity,
         price: (item.price - ((item.price / 100) * item.discount))
       };
-    });
-    setUserOrder(prev => prev = {
-      ...prev,
-      originalPrice: totalPriceOld,
-      actualPrice: totalPriceNew,
-      orderDetailDtos
-
     })
+  });
+  const { pathname } = location;
+  let cartTotalPrice = 0;
+
+  const confirmOrderShipCode = async () => {
     const data = userOrder;
-    console.log(data)
+    // validate trang thanh toán 
     try{
       setLoading(true)
       const response = await OrderApi.CreateOrder(data);
@@ -66,7 +54,6 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
         type: 'success',
         content: "Cảm ơn bạn đã mua sản phẩm của chúng tôi",
       });
-      console.log(response)
       setLoading(false)
       setTimeout(function() {
         confirmOrders();
