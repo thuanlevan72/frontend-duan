@@ -16,8 +16,8 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 // Icons
 import { RxDashboard } from "react-icons/rx";
-import { BsCart2, BsBoxSeam, BsClock, BsFillClipboardCheckFill } from "react-icons/bs";
-import { MdOutlineCategory, MdOutlineInfo, MdCancel } from "react-icons/md";
+import { BsCart2, BsBoxSeam, BsClock, BsBagCheck } from "react-icons/bs";
+import { MdOutlineCategory, MdOutlineInfo, MdOutlineCancel } from "react-icons/md";
 import { FiUsers, FiBookOpen } from "react-icons/fi";
 import { IoCreateOutline } from "react-icons/io5";
 import SubMenu from "antd/es/menu/SubMenu";
@@ -157,7 +157,7 @@ const AdminLayout = () => {
                         </Menu.Item>
                         <Menu.Item
                             key="/admin"
-                            icon={<BsFillClipboardCheckFill />}
+                            icon={<BsBagCheck />}
                         >
                             <NavLink to="/admin">
                                 Đơn hàng hoàn thành
@@ -165,7 +165,7 @@ const AdminLayout = () => {
                         </Menu.Item>
                         <Menu.Item
                             key="/admin"
-                            icon={<MdCancel />}
+                            icon={<MdOutlineCancel />}
                         >
                             <NavLink to="/admin">
                                 Đơn hàng đã hủy
