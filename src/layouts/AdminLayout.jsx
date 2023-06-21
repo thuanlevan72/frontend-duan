@@ -16,8 +16,8 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 // Icons
 import { RxDashboard } from "react-icons/rx";
-import { BsCart2 } from "react-icons/bs";
-import { MdOutlineCategory } from "react-icons/md";
+import { BsCart2, BsBoxSeam, BsClock, BsBagCheck } from "react-icons/bs";
+import { MdOutlineCategory, MdOutlineInfo, MdOutlineCancel } from "react-icons/md";
 import { FiUsers, FiBookOpen } from "react-icons/fi";
 import { IoCreateOutline } from "react-icons/io5";
 import SubMenu from "antd/es/menu/SubMenu";
@@ -83,7 +83,7 @@ const AdminLayout = () => {
                             icon={<IoCreateOutline />}
                         >
                             <NavLink to="/admin/products-add">
-                                Tạo sản phẩm
+                                Thêm sản phẩm
                             </NavLink>
                         </Menu.Item>
                     </SubMenu>
@@ -103,7 +103,7 @@ const AdminLayout = () => {
                             icon={<IoCreateOutline />}
                         >
                             <NavLink to="/admin/categories-add">
-                                Tạo danh mục
+                                thêm danh mục
                             </NavLink>
                         </Menu.Item>
                     </SubMenu>
@@ -117,6 +117,60 @@ const AdminLayout = () => {
                         {/* <Menu.Item key="/admin/users-add" icon={<IoCreateOutline />}>
                             <NavLink to="/admin/users-add">Thêm người dùng</NavLink>
                         </Menu.Item> */}
+                    </SubMenu>
+                    <SubMenu
+                        key="subMenu-4"
+                        icon={<MdOutlineInfo />}
+                        title="Quản lý thông tin"
+                    >
+                        <Menu.Item key="/admin" icon={<FiBookOpen />}>
+                            <NavLink to="/admin">
+                                Danh sách thông tin
+                            </NavLink>
+                        </Menu.Item>
+                        <Menu.Item
+                            key="/admin"
+                            icon={<IoCreateOutline />}
+                        >
+                            <NavLink to="/admin">
+                                Thêm thông tin trang
+                            </NavLink>
+                        </Menu.Item>
+                    </SubMenu>
+                    <SubMenu
+                        key="subMenu-5"
+                        icon={<BsBoxSeam />}
+                        title="Quản lý đơn hàng"
+                    >
+                        <Menu.Item key="/admin" icon={<FiBookOpen />}>
+                            <NavLink to="/admin">
+                                Danh sách đơn hàng
+                            </NavLink>
+                        </Menu.Item>
+                        <Menu.Item
+                            key="/admin"
+                            icon={<BsClock />}
+                        >
+                            <NavLink to="/admin">
+                                Đơn hàng chờ
+                            </NavLink>
+                        </Menu.Item>
+                        <Menu.Item
+                            key="/admin"
+                            icon={<BsBagCheck />}
+                        >
+                            <NavLink to="/admin">
+                                Đơn hàng hoàn thành
+                            </NavLink>
+                        </Menu.Item>
+                        <Menu.Item
+                            key="/admin"
+                            icon={<MdOutlineCancel />}
+                        >
+                            <NavLink to="/admin">
+                                Đơn hàng đã hủy
+                            </NavLink>
+                        </Menu.Item>
                     </SubMenu>
                 </Menu>
             </Sider>
