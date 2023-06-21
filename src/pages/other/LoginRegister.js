@@ -30,14 +30,12 @@ const LoginRegister = ({ location }) => {
       ...dataLogin,
       [val.target.name]: val.target.value,
     });
-    console.log(dataLogin);
   };
   const setInputValue = (val) => {
     setDataRegister({
       ...dataRegister,
       [val.target.name]: val.target.value,
     });
-    console.log(dataRegister);
   };
   const handleSubmitRegister = async (e) => {
     if (!dataRegister.email || !dataRegister.password || !dataRegister.username || !dataRegister.confirmpassword) {
@@ -55,23 +53,12 @@ const LoginRegister = ({ location }) => {
       return
     }
     e.preventDefault();
-    console.log(dataRegister);
     const formData = new FormData();
     formData.append("UserName", dataRegister.username);
     formData.append("Email", dataRegister.email);
     formData.append("Password", dataRegister.password);
     formData.append("Status", 1);
     formData.append("DecentralizationId", 3);
-    setDataRegister(
-      (prev) =>
-      (prev = {
-        email: "",
-        password: "",
-        confirmpassword: "",
-        username: "",
-      })
-    );
-    console.log(formData);
     try {
       setLoading(true);
       const response = await UserApi.Register(formData); // đưa dữ liệu lên đăng ký
@@ -79,8 +66,17 @@ const LoginRegister = ({ location }) => {
         type: 'success',
         content: "Bạn đã đăng ký thành công",
       });
-      setActiveKey("login");
       setLoading(false);
+      setDataRegister(
+        (prev) =>
+        (prev = {
+          email: "",
+          password: "",
+          confirmpassword: "",
+          username: "",
+        })
+      );
+      setActiveKey("login");
       // Xử lý phản hồi từ API tại đây (ví dụ: hiển thị thông báo thành công, điều hướng đến trang khác, vv)
     } catch (error) {
       console.error(error);
@@ -107,7 +103,6 @@ const LoginRegister = ({ location }) => {
       // const expirationTime = new Date().getTime() + (1 * 60 * 1000);
       setLoading(true);
       const response = await UserApi.Login(dataLogin); // đưa dữ liệu lên đăng ký
-      console.log(response);
       if (response?.data?.decentralizationId !== 3) {
         messageApi.open({
           type: 'success',
@@ -123,11 +118,10 @@ const LoginRegister = ({ location }) => {
         setTimeout(function() {
           setLoading(false);
           history.push("/admin");
-        }, 1500);
+        }, 1000);
         return;
       }
       // response.data.password = null;
-      console.log(response);
       const userJSON = JSON.stringify(response.data); // lưu dữ liệu người dùng
       const token = JSON.stringify(response.loginResponse.token); // lưu token vào để sau lấy dữ liệu sẽ cần phải dùng
       localStorage.setItem("user", userJSON);
@@ -140,7 +134,7 @@ const LoginRegister = ({ location }) => {
       setTimeout(function() {
         setLoading(false);
         history.push("/");
-      }, 1500);
+      }, 1000);
       // Xử lý phản hồi từ API tại đây (ví dụ: hiển thị thông báo thành công, điều hướng đến trang khác, vv)
     } catch (error) {
       messageApi.open({
@@ -150,7 +144,6 @@ const LoginRegister = ({ location }) => {
       setLoading(false);
       // Xử lý lỗi tại đây (ví dụ: hiển thị thông báo lỗi)
     }
-    console.log(dataLogin);
   };
   return (
     <Fragment>
@@ -233,6 +226,7 @@ const LoginRegister = ({ location }) => {
                       </Tab.Pane>
                       <Tab.Pane eventKey="register">
                         <div className="login-form-container">
+                        {loading && (<div><LoadingSpin/></div>)}
                           <div className="login-register-form">
                             <form>
                               <input

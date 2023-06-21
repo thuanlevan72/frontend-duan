@@ -16,7 +16,7 @@ const IconGroup = ({
     deleteFromCart,
     iconWhiteClass,
 }) => {
-  const history = useHistory();
+    const history = useHistory();
     const handleClick = (e) => {
         e.currentTarget.nextSibling.classList.toggle("active");
     };
@@ -24,7 +24,9 @@ const IconGroup = ({
         localStorage.removeItem("token");
         localStorage.removeItem("expiration");
         localStorage.removeItem("user");
-        history.push("/");
+        setTimeout(() => {
+            history.push("/login-register");
+        }, 500);
     };
     const triggerMobileMenu = () => {
         const offcanvasMobileMenu = document.querySelector(
