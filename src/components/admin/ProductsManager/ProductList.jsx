@@ -12,9 +12,11 @@ import { NavLink } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import { ImBin } from "react-icons/im";
 import ProductApi from "../../../api/product/ProductApi";
+import LoadingSpin from "../../loading/LoadingSpin";
 
 const { Text } = Typography;
 const ProductList = () => {
+    const [loading, setLoading] = useState(false);
     const [data, setData] = useState({
         totalItems: 0,
         totalPages: 0,
@@ -42,10 +44,13 @@ const ProductList = () => {
     useEffect(() => {
         const getProducts = async () => {
             try {
+                setLoading(true);
                 const { data } = await ProductApi.getAllProducts(param);
                 setData(data);
+                setLoading(false)
             } catch (error) {
                 console.error(error);
+                setLoading(false)
             }
         };
         getProducts();
@@ -160,6 +165,7 @@ const ProductList = () => {
                 <Breadcrumb.Item>Danh sách sản phẩm</Breadcrumb.Item>
             </Breadcrumb>
             <div>
+            {loading && (<div><LoadingSpin/></div>)}
                 <Table
                     dataSource={dataSource}
                     columns={columns}

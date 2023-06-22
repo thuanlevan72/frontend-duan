@@ -7,18 +7,23 @@ import { BiEdit } from "react-icons/bi";
 import { ImBin } from "react-icons/im";
 import UserApi from "../../../api/security/UserApi";
 import { format } from "date-fns";
+import LoadingSpin from "../../loading/LoadingSpin";
 
 // const currentDate = new Date();
 const { Text } = Typography;
 const UsersList = () => {
     const [users, setUsers] = useState();
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
         const getUsers = async () => {
             try {
+                setLoading(true);
                 const { data } = await UserApi.getAllUsers();
                 setUsers(data);
+                setLoading(false);
             } catch (error) {
                 console.log(error);
+                setLoading(false)
             }
         };
         getUsers();
@@ -145,6 +150,7 @@ const UsersList = () => {
                 <Breadcrumb.Item>Danh sách người dùng</Breadcrumb.Item>
             </Breadcrumb>
             <div>
+                {loading && (<div><LoadingSpin/></div>)}
                 <Table dataSource={dataSource} columns={columns} />
             </div>
         </>

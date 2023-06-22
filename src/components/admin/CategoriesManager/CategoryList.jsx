@@ -6,18 +6,23 @@ import { ImBin } from "react-icons/im";
 import categoryAPI from "../../../api/category/CategoryApi";
 import { useState } from "react";
 import { format } from 'date-fns';
+import LoadingSpin from "../../loading/LoadingSpin";
 
 // const currentDate = new Date();
 const { Text } = Typography;
 const CategoryList = () => {
     const [categories, setCategories] = useState();
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
         const getCategories = async () => {
             try {
+                setLoading(true);
                 const { data } = await categoryAPI.getAllCategories();
+                setLoading(false)
                 setCategories(data);
             } catch (error) {
                 console.log(error);
+                setLoading(false)
             }
         };
         getCategories();
@@ -117,6 +122,7 @@ const CategoryList = () => {
                 <Breadcrumb.Item>Danh sách sản phẩm</Breadcrumb.Item>
             </Breadcrumb>
             <div>
+                {loading && (<div><LoadingSpin/></div>)}
                 <Table dataSource={dataSource} columns={columns} />
             </div>
         </>
