@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, Menu, theme } from "antd";
+import { Avatar, Badge, Dropdown, Layout, Menu } from "antd";
 import { useState } from "react";
 import { Route, Switch, Redirect, NavLink } from "react-router-dom";
 import ProductList from "../components/admin/ProductsManager/ProductList";
@@ -16,8 +16,18 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 // Icons
 import { RxDashboard } from "react-icons/rx";
+import {
+    UserOutlined,
+    BellOutlined,
+    SettingOutlined,
+    LogoutOutlined,
+} from "@ant-design/icons";
 import { BsCart2, BsBoxSeam, BsClock, BsBagCheck } from "react-icons/bs";
-import { MdOutlineCategory, MdOutlineInfo, MdOutlineCancel } from "react-icons/md";
+import {
+    MdOutlineCategory,
+    MdOutlineInfo,
+    MdOutlineCancel,
+} from "react-icons/md";
 import { FiUsers, FiBookOpen } from "react-icons/fi";
 import { IoCreateOutline } from "react-icons/io5";
 import SubMenu from "antd/es/menu/SubMenu";
@@ -48,6 +58,29 @@ const AdminLayout = () => {
             history.push("/login-register");
         }
     }, [history]);
+    // Handle Logout AdminLayout
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("expiration");
+        localStorage.removeItem("user");
+        history.push("/");
+    };
+    const profile = (
+        <Menu
+            items={[
+                {
+                    key: "1",
+                    icon: <SettingOutlined />,
+                    label: <span>Tài khoản</span>,
+                },
+                {
+                    key: "2",
+                    icon: <LogoutOutlined />,
+                    label: <span onClick={handleLogout}>Đăng xuất</span>,
+                },
+            ]}
+        />
+    );
     return (
         <Layout className="min-vh-100">
             <Sider
@@ -56,13 +89,15 @@ const AdminLayout = () => {
                 onCollapse={(value) => setCollapsed(value)}
                 width={240}
             >
-                <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/2/20/FPT_Polytechnic.png"
-                    alt=""
-                    width={150}
-                    className="py-2"
-                    style={{ marginLeft: 30 }}
-                />
+                <NavLink to="/">
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/2/20/FPT_Polytechnic.png"
+                        alt=""
+                        width={150}
+                        className="py-2"
+                        style={{ marginLeft: 30 }}
+                    />
+                </NavLink>
                 <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
                     <Menu.Item key="/admin/dashboard" icon={<RxDashboard />}>
                         <NavLink to="/admin/dashboard">Bảng điều khiển</NavLink>
@@ -93,7 +128,10 @@ const AdminLayout = () => {
                         icon={<MdOutlineCategory />}
                         title="Quản lý danh mục"
                     >
-                        <Menu.Item key="/admin/categories" icon={<FiBookOpen />}>
+                        <Menu.Item
+                            key="/admin/categories"
+                            icon={<FiBookOpen />}
+                        >
                             <NavLink to="/admin/categories">
                                 Danh sách danh mục
                             </NavLink>
@@ -110,9 +148,12 @@ const AdminLayout = () => {
                     <SubMenu
                         key="subMenu-3"
                         icon={<FiUsers />}
-                        title="Quản lý người dùng"                    >
+                        title="Quản lý người dùng"
+                    >
                         <Menu.Item key="/admin/account" icon={<FiBookOpen />}>
-                            <NavLink to="/admin/account">Danh sách người dùng</NavLink>
+                            <NavLink to="/admin/account">
+                                Danh sách người dùng
+                            </NavLink>
                         </Menu.Item>
                     </SubMenu>
                     <SubMenu
@@ -121,17 +162,10 @@ const AdminLayout = () => {
                         title="Quản lý thông tin"
                     >
                         <Menu.Item key="/admin" icon={<FiBookOpen />}>
-                            <NavLink to="/admin">
-                                Danh sách thông tin
-                            </NavLink>
+                            <NavLink to="/admin">Danh sách thông tin</NavLink>
                         </Menu.Item>
-                        <Menu.Item
-                            key="/admin"
-                            icon={<IoCreateOutline />}
-                        >
-                            <NavLink to="/admin">
-                                Thêm thông tin trang
-                            </NavLink>
+                        <Menu.Item key="/admin" icon={<IoCreateOutline />}>
+                            <NavLink to="/admin">Thêm thông tin trang</NavLink>
                         </Menu.Item>
                     </SubMenu>
                     <SubMenu
@@ -140,39 +174,42 @@ const AdminLayout = () => {
                         title="Quản lý đơn hàng"
                     >
                         <Menu.Item key="/admin" icon={<FiBookOpen />}>
-                            <NavLink to="/admin">
-                                Danh sách đơn hàng
-                            </NavLink>
+                            <NavLink to="/admin">Danh sách đơn hàng</NavLink>
                         </Menu.Item>
-                        <Menu.Item
-                            key="/admin"
-                            icon={<BsClock />}
-                        >
-                            <NavLink to="/admin">
-                                Đơn hàng chờ
-                            </NavLink>
+                        <Menu.Item key="/admin" icon={<BsClock />}>
+                            <NavLink to="/admin">Đơn hàng chờ</NavLink>
                         </Menu.Item>
-                        <Menu.Item
-                            key="/admin"
-                            icon={<BsBagCheck />}
-                        >
-                            <NavLink to="/admin">
-                                Đơn hàng hoàn thành
-                            </NavLink>
+                        <Menu.Item key="/admin" icon={<BsBagCheck />}>
+                            <NavLink to="/admin">Đơn hàng hoàn thành</NavLink>
                         </Menu.Item>
-                        <Menu.Item
-                            key="/admin"
-                            icon={<MdOutlineCancel />}
-                        >
-                            <NavLink to="/admin">
-                                Đơn hàng đã hủy
-                            </NavLink>
+                        <Menu.Item key="/admin" icon={<MdOutlineCancel />}>
+                            <NavLink to="/admin">Đơn hàng đã hủy</NavLink>
                         </Menu.Item>
                     </SubMenu>
                 </Menu>
             </Sider>
             <Layout>
-                <Header className="p-0"/>
+                <Header className="p-0">
+                    <div className="d-flex justify-content-end">
+                        <div className="px-2">
+                            <Badge count={10}>
+                                <BellOutlined
+                                    className="text-light"
+                                    style={{ fontSize: 24 }}
+                                />
+                            </Badge>
+                        </div>
+                        <div className="px-4">
+                            <Dropdown overlay={profile} trigger={["click"]}>
+                                <Avatar
+                                    className="bg-secondary"
+                                    size="large"
+                                    icon={<UserOutlined />}
+                                />
+                            </Dropdown>
+                        </div>
+                    </div>
+                </Header>
                 <Content
                     style={{
                         margin: "0 16px",
