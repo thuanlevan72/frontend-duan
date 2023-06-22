@@ -6,10 +6,52 @@ import Card from "react-bootstrap/Card";
 import Accordion from "react-bootstrap/Accordion";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
+import { useState } from "react";
+import UserApi from "../../api/security/UserApi";
+import LoadingSpin from "../../components/loading/LoadingSpin";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const MyAccount = ({ location }) => {
   const { pathname } = location;
-
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
+  const [user, setUser] = useState(
+    localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : ""
+  );
+  const handleFileChange =  async (event) => {
+    const file = event.target.files[0];
+  
+    if (file.size > 2 * 1024 * 1024) {
+      // Kích thước tệp tin vượt quá 2MB
+      alert('Tệp tin quá lớn. Vui lòng chọn một tệp tin nhỏ hơn 2MB.');
+      return;
+    }
+  
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+      // Định dạng tệp tin không phải là hình ảnh
+      alert('Vui lòng chọn một tệp tin hình ảnh (jpg, png, webp).');
+      return;
+    }
+    setUser({
+      ...user,
+      avartar: URL.createObjectURL(file)
+    })
+    const formData = new FormData();
+    formData.append('Avatar', file);
+    const users = JSON.parse(localStorage.getItem("user"));
+    try {
+      setLoading(true);
+      const res = await UserApi.ChangeAvartar(user.accountId, formData);
+      users.avartar = res.data;
+      localStorage.setItem("user", JSON.stringify(users));
+      setLoading(false);
+      history.go(0);
+   }catch(error){
+    alert(error)
+    setLoading(false)
+   }
+  };
   return (
     <Fragment>
       <MetaTags>
@@ -19,7 +61,9 @@ const MyAccount = ({ location }) => {
           content="Compare page of flone react minimalist eCommerce template."
         />
       </MetaTags>
-      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Trang chủ</BreadcrumbsItem>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>
+        Trang chủ
+      </BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
         My Account
       </BreadcrumbsItem>
@@ -48,34 +92,55 @@ const MyAccount = ({ location }) => {
                               <h5>Your Personal Details</h5>
                             </div>
                             <div className="row">
-                              <div className="col-lg-6 col-md-6">
+                              <div className="col-lg-12 col-md-12">
                                 <div className="billing-info">
-                                  <label>First Name</label>
-                                  <input type="text" />
-                                </div>
-                              </div>
-                              <div className="col-lg-6 col-md-6">
-                                <div className="billing-info">
-                                  <label>Last Name</label>
-                                  <input type="text" />
+                                  <label>Name</label>
+                                  <input type="text"  value={user.user.userName}/>
                                 </div>
                               </div>
                               <div className="col-lg-12 col-md-12">
                                 <div className="billing-info">
-                                  <label>Email Address</label>
-                                  <input type="email" />
+                                  <label>Email</label>
+                                  <input type="email" value={user.email} readOnly disabled/>
                                 </div>
                               </div>
+                              <div className="col-lg-12 col-md-12" >
+                                <div className="billing-info">
+                                  <label>Address</label>
+                                  <input type="text" value={user.user.address}/>
+                                </div>
+                              </div>
+                              {loading && (<div><LoadingSpin/></div>)}
                               <div className="col-lg-6 col-md-6">
                                 <div className="billing-info">
                                   <label>Telephone</label>
-                                  <input type="text" />
+                                  <input type="text" value={user.user.phone}/>
                                 </div>
                               </div>
                               <div className="col-lg-6 col-md-6">
                                 <div className="billing-info">
-                                  <label>Fax</label>
-                                  <input type="text" />
+                                  <label style={{ padding: "0 20px" }}>
+                                    Ảnh đại diện{" "}
+                                  </label>
+
+                                  <img
+                                    src={user.avartar}
+                                    alt="Avatar"
+                                    style={{
+                                      width: "120px",
+                                      height: "120px",
+                                      marginBottom: "10px",
+                                      objectFit: "cover",
+                                      borderRadius: "50%",
+                                      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                                      border: "2px solid #fff",
+                                    }}
+                                  />
+                                  <br />
+                                  <h4 style={{ padding: "10px 20px", fontWeight:"bolder" }}>
+                                    thay avatar{" "}
+                                  </h4>
+                                  <input type="file" onChange={handleFileChange} />
                                 </div>
                               </div>
                             </div>
@@ -180,7 +245,7 @@ const MyAccount = ({ location }) => {
 };
 
 MyAccount.propTypes = {
-  location: PropTypes.object
+  location: PropTypes.object,
 };
 
 export default MyAccount;
