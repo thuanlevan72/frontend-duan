@@ -35,7 +35,7 @@ const UsersList = () => {
             // address: item.address,
             avartar: item.avartar,
             createdAt: item.createdAt,
-            updateAt: item.updateAt,
+            updatedAt: item.updatedAt,
             status:
                 item.status === 1 ? (
                     <Tag color="cyan">Hoạt động</Tag>
@@ -104,11 +104,11 @@ const UsersList = () => {
         },
         {
             title: "Ngày cập nhật",
-            dataIndex: "updateAt",
-            key: "updateAt",
+            dataIndex: "updatedAt",
+            key: "updatedAt",
             align: "center",
-            render: (updateAt) => (
-                <>{format(new Date(updateAt), "HH:mm:ss dd/MM/yyyy")}</>
+            render: (updatedAt) => (
+                <>{format(new Date(updatedAt), "HH:mm:ss dd/MM/yyyy")}</>
             ),
         },
         {
