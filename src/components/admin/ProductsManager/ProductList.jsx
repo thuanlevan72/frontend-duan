@@ -29,11 +29,11 @@ const ProductList = () => {
     const handlePaginationChange = (page, pageSize) => {
         setParam(
             (prev) =>
-                (prev = {
-                    ...param,
-                    page: page,
-                    pageSize: pageSize,
-                })
+            (prev = {
+                ...param,
+                page: page,
+                pageSize: pageSize,
+            })
         );
     };
     const [param, setParam] = useState({
@@ -80,12 +80,12 @@ const ProductList = () => {
             key: "key",
             align: "center",
         },
-        {
-            title: "ID",
-            dataIndex: "id",
-            key: "id",
-            align: "center",
-        },
+        // {
+        //     title: "ID",
+        //     dataIndex: "id",
+        //     key: "id",
+        //     align: "center",
+        // },
         {
             title: "Tên món",
             dataIndex: "name",
@@ -165,7 +165,7 @@ const ProductList = () => {
                 <Breadcrumb.Item>Danh sách sản phẩm</Breadcrumb.Item>
             </Breadcrumb>
             <div>
-            {loading && (<div><LoadingSpin/></div>)}
+                {loading && (<div><LoadingSpin /></div>)}
                 <Table
                     dataSource={dataSource}
                     columns={columns}

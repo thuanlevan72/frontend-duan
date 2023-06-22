@@ -56,11 +56,11 @@ const UsersList = () => {
             key: "key",
             align: "center",
         },
-        {
-            title: "ID",
-            dataIndex: "accountId",
-            key: "accountId",
-        },
+        // {
+        //     title: "ID",
+        //     dataIndex: "accountId",
+        //     key: "accountId",
+        // },
         {
             title: "Họ Tên",
             dataIndex: "userName",
@@ -150,7 +150,7 @@ const UsersList = () => {
                 <Breadcrumb.Item>Danh sách người dùng</Breadcrumb.Item>
             </Breadcrumb>
             <div>
-                {loading && (<div><LoadingSpin/></div>)}
+                {loading && (<div><LoadingSpin /></div>)}
                 <Table dataSource={dataSource} columns={columns} />
             </div>
         </>
