@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Breadcrumb, Image, Space, Table, Typography } from "antd";
+import { Breadcrumb, Image, Space, Table, Typography, Pagination } from "antd";
 import { NavLink } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import { ImBin } from "react-icons/im";
@@ -11,24 +11,48 @@ import LoadingSpin from "../../loading/LoadingSpin";
 // const currentDate = new Date();
 const { Text } = Typography;
 const CategoryList = () => {
-    const [categories, setCategories] = useState();
+    // const [categories, setCategories] = useState();
     const [loading, setLoading] = useState(false);
+    const [data, setData] = useState({
+        totalItems: 0,
+        totalPages: 0,
+        page: 1,
+        pageSize: 10,
+        hasPrevious: false,
+        hasNext: true,
+        data: [],
+    });
+    const handlePaginationChange = (page, pageSize) => {
+        setParam(
+            (prev) =>
+            (prev = {
+                ...param,
+                page: page,
+                pageSize: pageSize,
+            })
+        );
+    };
+    const [param, setParam] = useState({
+        page: 1,
+        pageSize: 5,
+        search: "",
+    });
     useEffect(() => {
         const getCategories = async () => {
             try {
                 setLoading(true);
-                const { data } = await categoryAPI.getAllCategories();
+                const { data } = await categoryAPI.getAllCategories(param);
                 setLoading(false)
-                setCategories(data);
+                setData(data);
             } catch (error) {
                 console.log(error);
                 setLoading(false)
             }
         };
         getCategories();
-    }, []);
-    console.log(categories);
-    const dataSource = categories?.data?.map((item, index) => {
+    }, [param]);
+    console.log(data);
+    const dataSource = data?.data?.map((item, index) => {
         return {
             key: index + 1,
             id: item.productTypeId,
@@ -45,12 +69,12 @@ const CategoryList = () => {
             key: "key",
             align: "center",
         },
-        {
-            title: "ID",
-            dataIndex: "id",
-            key: "id",
-            align: "center"
-        },
+        // {
+        //     title: "ID",
+        //     dataIndex: "id",
+        //     key: "id",
+        //     align: "center"
+        // },
         {
             title: "Tên danh mục",
             dataIndex: "nameProductType",
@@ -122,8 +146,20 @@ const CategoryList = () => {
                 <Breadcrumb.Item>Danh sách sản phẩm</Breadcrumb.Item>
             </Breadcrumb>
             <div>
-                {loading && (<div><LoadingSpin/></div>)}
-                <Table dataSource={dataSource} columns={columns} />
+                {loading && (<div><LoadingSpin /></div>)}
+                <Table dataSource={dataSource} columns={columns} pagination={false} />
+                <Pagination
+                    style={{
+                        textAlign: "right",
+                        padding: "10px 20px",
+                    }}
+                    current={data.page}
+                    pageSize={data.pageSize}
+                    total={data.totalItems}
+                    onChange={handlePaginationChange}
+                    showSizeChanger
+                    showTotal={(total) => `Total ${total} items`}
+                />
             </div>
         </>
     );
