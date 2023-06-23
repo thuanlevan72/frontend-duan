@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { animateScroll } from "react-scroll";
+import Logo from "../../components/header/Logo";
 
 const FooterTwo = ({
   backgroundColorClass,
@@ -59,11 +60,10 @@ const FooterTwo = ({
             <Link to={process.env.PUBLIC_URL}>
               <img
                 alt=""
-                src={
-                  process.env.PUBLIC_URL +
-                  `${footerLogo ? footerLogo : "/assets/img/logo/logo.png"}`
-                }
+                style={{maxWidth:"250px"}}
+                src={"/assets/img/logo/GSlogo.png"}
               />
+  
             </Link>
           </div>
           <p>

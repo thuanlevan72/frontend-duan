@@ -17,6 +17,24 @@ const UserApi = {
             }
         });
     },
+    ChangePass: (body)=>{
+        const url = `/Login/change-pass`;
+        return axiosClient.post(url, body, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : ""}`
+            }
+        });
+    }
+    ,
+    ChangeInfo: (id,body)=>{
+        const url =`/User/updateUser/${id}`;
+        return axiosClient.post(url, body, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : ""}`
+            }
+        });
+    }
+    ,
     ChangeAvartar: (id,body) =>{
         const url =`/User/update_avatar/${id}`;
         return axiosClient.post(url, body, {
