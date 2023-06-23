@@ -35,9 +35,7 @@ const CompleteOrder = lazy(() => import("./pages/other/CompleteOrder"));
 const NotFound = lazy(() => import("./pages/other/NotFound"));
 
 const App = (props) => {
-    const [userCheckToken, setUserCheckToken] = useState(localStorage.getItem("token") || "");
     const [messageApi, contextHolder] = message.useMessage();
-    const history = useHistory();
     useEffect(() => {
         props.dispatch(
             loadLanguages({
@@ -50,32 +48,11 @@ const App = (props) => {
             })
         );
     });
-    useEffect(()=>{
-        const expiration = localStorage.getItem("expiration") || "";
-        const user = localStorage.getItem("user") || "";
-
-        if(userCheckToken && expiration && user){
-            const currentTime = new Date().getTime();
-            if (currentTime > expiration) {
-                localStorage.removeItem('token');
-                localStorage.removeItem('expiration');
-                localStorage.removeItem('user');
-                messageApi.open({
-                    type: 'warning',
-                    content: "hết hạn đăng nhập vui lòng đăng nhập lại",
-                  });
-                  setTimeout(function() {
-                    
-                  }, 1500)
-              }
-        }
-        
-    },[userCheckToken])
     return (
         <ToastProvider placement="bottom-left">
             <BreadcrumbsProvider>
                 <Router>
-                    <ScrollToTop>
+                    <ScrollToTop messageApi={messageApi}>
                         <Suspense
                             fallback={
                                 <div className="flone-preloader-wrapper">
