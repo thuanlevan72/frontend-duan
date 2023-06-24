@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Breadcrumb, Image, Space, Table, Typography, Pagination } from "antd";
+import { Breadcrumb, Image, Space, Table, Typography, Pagination, Tag } from "antd";
 import { NavLink } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import { ImBin } from "react-icons/im";
@@ -69,17 +69,12 @@ const CategoryList = () => {
             key: "key",
             align: "center",
         },
-        // {
-        //     title: "ID",
-        //     dataIndex: "id",
-        //     key: "id",
-        //     align: "center"
-        // },
         {
             title: "Tên danh mục",
             dataIndex: "nameProductType",
             key: "nameProductType",
             align: "center",
+            render: (nameProductType) => (<Tag color="#f50">{nameProductType}</Tag>)
         },
         {
             title: "Hình ảnh",
@@ -143,7 +138,7 @@ const CategoryList = () => {
                 }}
             >
                 <Breadcrumb.Item>Bảng điều khiển</Breadcrumb.Item>
-                <Breadcrumb.Item>Danh sách sản phẩm</Breadcrumb.Item>
+                <Breadcrumb.Item>Danh sách danh mục</Breadcrumb.Item>
             </Breadcrumb>
             <div>
                 {loading && (<div><LoadingSpin /></div>)}
