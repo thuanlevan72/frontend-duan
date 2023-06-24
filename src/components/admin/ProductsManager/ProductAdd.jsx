@@ -2,7 +2,9 @@ import React from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Breadcrumb, Button, Form, Input, Select, Upload } from "antd";
+import Title from "antd/es/typography/Title";
 const { TextArea } = Input;
+
 const ProductAdd = () => {
     return (
         <>
@@ -15,6 +17,7 @@ const ProductAdd = () => {
                 <Breadcrumb.Item>Tạo sản phẩm</Breadcrumb.Item>
             </Breadcrumb>
             <div className="mt-3">
+            <Title level={4} className="text-uppercase text-center">Thêm sản phẩm</Title>
                 <Form
                     name="basic"
                     labelCol={{ span: 8 }}
