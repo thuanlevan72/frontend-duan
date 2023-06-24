@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-    Breadcrumb,
-    Image,
-    Tag,
-    Pagination,
-    Space,
-    Table,
-    Typography,
-} from "antd";
+import { Breadcrumb, Image, Tag, Pagination, Space, Table, Typography } from "antd";
 import { NavLink } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import { ImBin } from "react-icons/im";

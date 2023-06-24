@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Breadcrumb, Space, Table, Typography, Avatar, Tag } from "antd";
+import { Breadcrumb, Space, Table, Typography, Avatar, Tag, Pagination } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
@@ -12,14 +12,37 @@ import LoadingSpin from "../../loading/LoadingSpin";
 // const currentDate = new Date();
 const { Text } = Typography;
 const UsersList = () => {
-    const [users, setUsers] = useState();
     const [loading, setLoading] = useState(false);
+    const [data, setData] = useState({
+        totalItems: 0,
+        totalPages: 0,
+        page: 1,
+        pageSize: 10,
+        hasPrevious: false,
+        hasNext: true,
+        data: [],
+    });
+    const handlePaginationChange = (page, pageSize) => {
+        setParam(
+            (prev) =>
+            (prev = {
+                ...param,
+                page: page,
+                pageSize: pageSize,
+            })
+        );
+    };
+    const [param, setParam] = useState({
+        page: 1,
+        pageSize: 10,
+        search: "",
+    });
     useEffect(() => {
         const getUsers = async () => {
             try {
                 setLoading(true);
-                const { data } = await UserApi.getAllUsers();
-                setUsers(data);
+                const { data } = await UserApi.getAllUsers(param);
+                setData(data);
                 setLoading(false);
             } catch (error) {
                 console.log(error);
@@ -27,15 +50,20 @@ const UsersList = () => {
             }
         };
         getUsers();
-    }, []);
-    console.log(users);
-    const dataSource = users?.data?.map((item, index) => {
+    }, [param]);
+    console.log(data);
+    const dataSource = data?.data?.map((item, index) => {
         return {
             key: index + 1,
             accountId: item.accountId,
             userName: item.userName,
             email: item.email,
-            decentralizationId: item.decentralizationId,
+            // decentralizationId: item.decentralizationId,
+            role: <Tag
+                color={item.decentralization.authorityName == "Admin" ? "cyan" : "green"}>
+                {item.decentralization.authorityName}
+            </Tag>,
+
             // phone: item.phone,
             // address: item.address,
             avartar: item.avartar,
@@ -98,6 +126,12 @@ const UsersList = () => {
             ),
         },
         {
+            title: "Role",
+            dataIndex: "role",
+            key: "role",
+            align: "center",
+        },
+        {
             title: "Ngày tạo",
             dataIndex: "createdAt",
             key: "createdAt",
@@ -141,7 +175,19 @@ const UsersList = () => {
             </Breadcrumb>
             <div>
                 {loading && (<div><LoadingSpin /></div>)}
-                <Table dataSource={dataSource} columns={columns} />
+                <Table dataSource={dataSource} columns={columns} pagination={false} />
+                <Pagination
+                    style={{
+                        textAlign: "right",
+                        padding: "10px 20px",
+                    }}
+                    current={data.page}
+                    pageSize={data.pageSize}
+                    total={data.totalItems}
+                    onChange={handlePaginationChange}
+                    showSizeChanger
+                    showTotal={(total) => `Total ${total} items`}
+                />
             </div>
         </>
     );
