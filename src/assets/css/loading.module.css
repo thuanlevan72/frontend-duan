@@ -8,6 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    backdrop-filter: blur(10px);
 }
 .spinner {
     width: 200px;

@@ -40,12 +40,11 @@ const UsersList = () => {
             // address: item.address,
             avartar: item.avartar,
             createdAt: item.createdAt,
-            updatedAt: item.updatedAt,
             status:
                 item.status === 1 ? (
                     <Tag color="cyan">Hoạt động</Tag>
                 ) : (
-                    <Tag color="red">Vô hiệu</Tag>
+                    <Tag color="red">Vô hiệu hóa</Tag>
                 ),
         };
     });
@@ -105,15 +104,6 @@ const UsersList = () => {
             align: "center",
             render: (createdAt) => (
                 <>{format(new Date(createdAt), "HH:mm:ss dd/MM/yyyy")}</>
-            ),
-        },
-        {
-            title: "Ngày cập nhật",
-            dataIndex: "updatedAt",
-            key: "updatedAt",
-            align: "center",
-            render: (updatedAt) => (
-                <>{format(new Date(updatedAt), "HH:mm:ss dd/MM/yyyy")}</>
             ),
         },
         {

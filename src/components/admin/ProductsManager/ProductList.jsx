@@ -55,6 +55,7 @@ const ProductList = () => {
         };
         getProducts();
     }, [param]);
+    console.log(data.data);
     const dataSource = data.data?.map((item, index) => {
         return {
             key: index + 1,
@@ -80,12 +81,6 @@ const ProductList = () => {
             key: "key",
             align: "center",
         },
-        // {
-        //     title: "ID",
-        //     dataIndex: "id",
-        //     key: "id",
-        //     align: "center",
-        // },
         {
             title: "Tên món",
             dataIndex: "name",
@@ -130,6 +125,7 @@ const ProductList = () => {
             dataIndex: "categoryName",
             key: "categoryName",
             align: "center",
+            render: (categoryName) => (<Tag color="#f50">{categoryName}</Tag>)
         },
         {
             title: "Trạng thái",
