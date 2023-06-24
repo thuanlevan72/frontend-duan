@@ -1,6 +1,20 @@
 import axiosClient from "../AxiosClient";
 
 const UserApi = {
+    getAllNoPagition: (params = null) => {
+        const url = "/User";
+        return axiosClient.get(url, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")
+                        ? JSON.parse(localStorage.getItem("token"))
+                        : ""
+                    }`,
+            },
+            params: {
+                ...params,
+            },
+        });
+    },
     Register: (body) => {
         const url = "/Login/register-user";
         return axiosClient.post(url, body, {
@@ -17,7 +31,7 @@ const UserApi = {
             }
         });
     },
-    ChangePass: (body)=>{
+    ChangePass: (body) => {
         const url = `/Login/change-pass`;
         return axiosClient.post(url, body, {
             headers: {
@@ -26,8 +40,8 @@ const UserApi = {
         });
     }
     ,
-    ChangeInfo: (id,body)=>{
-        const url =`/User/updateUser/${id}`;
+    ChangeInfo: (id, body) => {
+        const url = `/User/updateUser/${id}`;
         return axiosClient.post(url, body, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : ""}`
@@ -35,8 +49,8 @@ const UserApi = {
         });
     }
     ,
-    ChangeAvartar: (id,body) =>{
-        const url =`/User/update_avatar/${id}`;
+    ChangeAvartar: (id, body) => {
+        const url = `/User/update_avatar/${id}`;
         return axiosClient.post(url, body, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : ""}`
