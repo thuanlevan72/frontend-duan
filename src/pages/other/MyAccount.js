@@ -30,70 +30,78 @@ const MyAccount = ({ location }) => {
       [e.target.name]: e.target.value,
     });
   };
-  
-  const changeDataUser = (e)=>{
 
-    if(e.target.name === "phone"){
-      if (!/^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/.test(user.phone) && user.phone.length == 9) {
+  const changeDataUser = (e) => {
+    if (e.target.name === "phone") {
+      if (
+        !/^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/.test(
+          user.phone
+        ) &&
+        user.phone.length == 9
+      ) {
         messageApi.open({
-          type: 'error',
+          type: "error",
           content: "số điện thoại nhận vào không hợp lệ",
         });
-    }
+      }
     }
     setUser({
       ...user,
       [e.target.name]: e.target.value,
     });
-  }
-  const chnagePassSubmit = async ()=>{
-    if(!dataPass.password || !dataPass.confirmPass){
+  };
+  const chnagePassSubmit = async () => {
+    if (!dataPass.password || !dataPass.confirmPass) {
       messageApi.open({
-        type: 'error',
+        type: "error",
         content: "vui lòng nhập đầy đủ các trường của mật khẩu",
       });
-      return
+      return;
     }
-      if(dataPass.password != dataPass.confirmPass){
-        messageApi.open({
-          type: 'error',
-          content: "mật khẩu nhập lại không giống nhau",
-        });
-        return
-      }
-      try{
-        setLoading(true);
-        messageApi.open({
-          type: 'success',
-          content: "thay đổi mật khẩu thành công",
-        });
-        const data = dataPass;
-        delete data.confirmPass;
-        console.log(data);
-        const res = await UserApi.ChangePass(data);
-        setLoading(false);
-      }catch(error){
-        messageApi.open({
-          type: 'error',
-          content: "thay đổi mật khẩu thất bại",
-        });
-        setLoading(false);
-      }
-  }
+    if (dataPass.password != dataPass.confirmPass) {
+      messageApi.open({
+        type: "error",
+        content: "mật khẩu nhập lại không giống nhau",
+      });
+      return;
+    }
+    try {
+      setLoading(true);
+      messageApi.open({
+        type: "success",
+        content: "thay đổi mật khẩu thành công",
+      });
+      const data = dataPass;
+      delete data.confirmPass;
+      console.log(data);
+      const res = await UserApi.ChangePass(data);
+      setLoading(false);
+      setDataPass({
+        accountId: JSON.parse(localStorage.getItem("user")).accountId,
+        password: "",
+        confirmPass: "",
+      });
+    } catch (error) {
+      messageApi.open({
+        type: "error",
+        content: "thay đổi mật khẩu thất bại",
+      });
+      setLoading(false);
+    }
+  };
   const [user, setUser] = useState({
     phone: oldData.user.phone,
     email: oldData.user.email,
     address: oldData.user.address,
     userName: oldData.user.userName,
-    avartar: oldData.avartar
-  }
-  );
+    avartar: oldData.avartar,
+  });
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
 
     if (file.size > 2 * 1024 * 1024) {
       messageApi.open({
-        type: 'error',
+        type: "error",
         content: "Tệp tin quá lớn. Vui lòng chọn một tệp tin nhỏ hơn 2MB.",
       });
       return;
@@ -102,7 +110,7 @@ const MyAccount = ({ location }) => {
     if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
       // Định dạng tệp tin không phải là hình ảnh
       messageApi.open({
-        type: 'error',
+        type: "error",
         content: "Vui lòng chọn một tệp tin hình ảnh (jpg, png, webp).",
       });
       return;
@@ -120,7 +128,7 @@ const MyAccount = ({ location }) => {
       users.avartar = res.data;
       localStorage.setItem("user", JSON.stringify(users));
       messageApi.open({
-        type: 'success',
+        type: "success",
         content: "update avatar thành công",
       });
       setLoading(false);
@@ -132,7 +140,7 @@ const MyAccount = ({ location }) => {
   };
   //
   const onChageSubmitInfo = async () => {
-    try{
+    try {
       setLoading(true);
       const data = user;
       const formData = new FormData();
@@ -140,11 +148,11 @@ const MyAccount = ({ location }) => {
       formData.append("email", user.email);
       formData.append("address", user.address);
       formData.append("userName", user.userName);
-      const res = await UserApi.ChangeInfo(oldData.accountId,formData);
+      const res = await UserApi.ChangeInfo(oldData.accountId, formData);
       const usersUpdate = JSON.parse(localStorage.getItem("user"));
-   
+
       messageApi.open({
-        type: 'success',
+        type: "success",
         content: "thay đổi thông tin thành công",
       });
 
@@ -156,14 +164,14 @@ const MyAccount = ({ location }) => {
       setTimeout(() => {
         history.go(0);
       }, 1000);
-    }catch(error){
+    } catch (error) {
       setLoading(false);
       messageApi.open({
-        type: 'success',
+        type: "success",
         content: "thay đổi thông tin thất bại",
       });
     }
-  }
+  };
   return (
     <Fragment>
       <MetaTags>
@@ -189,10 +197,10 @@ const MyAccount = ({ location }) => {
                 <div className="myaccount-wrapper">
                   {contextHolder}
                   {loading && (
-                                <div>
-                                  <LoadingSpin />
-                                </div>
-                              )}
+                    <div>
+                      <LoadingSpin />
+                    </div>
+                  )}
                   <Accordion defaultActiveKey="0">
                     <Card className="single-my-account mb-20">
                       <Card.Header className="panel-heading">
@@ -246,7 +254,12 @@ const MyAccount = ({ location }) => {
                               <div className="col-lg-6 col-md-6">
                                 <div className="billing-info">
                                   <label>Telephone</label>
-                                  <input type="text"  name="phone" value={user.phone} onChange={changeDataUser} />
+                                  <input
+                                    type="text"
+                                    name="phone"
+                                    value={user.phone}
+                                    onChange={changeDataUser}
+                                  />
                                 </div>
                               </div>
                               <div className="col-lg-6 col-md-6">
@@ -273,8 +286,7 @@ const MyAccount = ({ location }) => {
                                     style={{
                                       padding: "10px 20px",
                                       fontWeight: "bolder",
-                                    }}
-                                  >
+                                    }}>
                                     thay avatar{" "}
                                   </h4>
                                   <input
@@ -286,10 +298,18 @@ const MyAccount = ({ location }) => {
                             </div>
                             <div className="billing-back-btn">
                               <div className="billing-btn">
-                                {((user.phone !== oldData.user.phone) 
-                                || (user.address !== oldData.user.address
-                                || (user.userName !== oldData.user.userName))
-                                )&& (/^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/.test(user.phone)) && <button type="button" onClick={onChageSubmitInfo}>Continue</button>}
+                                {(user.phone !== oldData.user.phone ||
+                                  user.address !== oldData.user.address ||
+                                  user.userName !== oldData.user.userName) &&
+                                  /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/.test(
+                                    user.phone
+                                  ) && (
+                                    <button
+                                      type="button"
+                                      onClick={onChageSubmitInfo}>
+                                      Continue
+                                    </button>
+                                  )}
                               </div>
                             </div>
                           </div>
@@ -337,7 +357,14 @@ const MyAccount = ({ location }) => {
                             </div>
                             <div className="billing-back-btn">
                               <div className="billing-btn">
-                               {(dataPass.confirmPass || dataPass.password) && <button type="click" onClick={chnagePassSubmit}>Continue</button>} 
+                                {(dataPass.confirmPass ||
+                                  dataPass.password) && (
+                                  <button
+                                    type="click"
+                                    onClick={chnagePassSubmit}>
+                                    Continue
+                                  </button>
+                                )}
                               </div>
                             </div>
                           </div>
