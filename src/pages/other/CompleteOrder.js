@@ -11,7 +11,7 @@ import {
   decreaseQuantity,
   deleteFromCart,
   cartItemStock,
-  deleteAllFromCart
+  deleteAllFromCart,
 } from "../../redux/actions/cartActions";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
@@ -23,7 +23,7 @@ const CompleteOrder = ({
   decreaseQuantity,
   addToCart,
   deleteFromCart,
-  deleteAllFromCart
+  deleteAllFromCart,
 }) => {
   const [quantityCount] = useState(1);
   const { addToast } = useToasts();
@@ -40,7 +40,9 @@ const CompleteOrder = ({
         />
       </MetaTags>
 
-      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Trang chủ</BreadcrumbsItem>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>
+        Trang chủ
+      </BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
         Hoàn Tất Đơn Hàng
       </BreadcrumbsItem>
@@ -50,22 +52,24 @@ const CompleteOrder = ({
         <Breadcrumb />
         <div className="cart-main-area pt-90 pb-100">
           <div className="container">
-          <div className="row">
-                <div className="col-lg-12">
-                  <div className="item-empty-area text-center">
-                    <div className="item-empty-area__icon mb-30">
-                      <i className="pe-7s-cart"></i>
-                    </div>
-                    <div className="item-empty-area__text">
-                      <h1>Đã Hoàn Tất đơn hàng</h1> <br />{" "}
-                      <h4>Chúng tôi sẽ gửi thông báo về đơn hàng sớm nhất cho bạn</h4>
-                      <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
-                        Tiếp tục mua sắm
-                      </Link>
-                    </div>
+            <div className="row">
+              <div className="col-lg-12">
+                <div className="item-empty-area text-center">
+                  <div className="item-empty-area__icon mb-30">
+                    <i className="pe-7s-cart"></i>
+                  </div>
+                  <div className="item-empty-area__text">
+                    <h1>Đã Hoàn Tất đơn hàng</h1> <br />{" "}
+                    <h4>
+                      Chúng tôi sẽ gửi thông báo về đơn hàng sớm nhất cho bạn
+                    </h4>
+                    <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
+                      Tiếp tục mua sắm
+                    </Link>
                   </div>
                 </div>
               </div>
+            </div>
           </div>
         </div>
       </LayoutOne>
@@ -80,17 +84,17 @@ CompleteOrder.propTypes = {
   decreaseQuantity: PropTypes.func,
   location: PropTypes.object,
   deleteAllFromCart: PropTypes.func,
-  deleteFromCart: PropTypes.func
+  deleteFromCart: PropTypes.func,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     cartItems: state.cartData,
-    currency: state.currencyData
+    currency: state.currencyData,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (item, addToast, quantityCount) => {
       dispatch(addToCart(item, addToast, quantityCount));
@@ -101,9 +105,9 @@ const mapDispatchToProps = dispatch => {
     deleteFromCart: (item, addToast) => {
       dispatch(deleteFromCart(item, addToast));
     },
-    deleteAllFromCart: addToast => {
+    deleteAllFromCart: (addToast) => {
       dispatch(deleteAllFromCart(addToast));
-    }
+    },
   };
 };
 

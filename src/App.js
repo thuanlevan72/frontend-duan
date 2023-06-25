@@ -14,6 +14,8 @@ import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic";
 import AdminLayout from "./layouts/AdminLayout";
 import { message } from "antd";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import CartHistory from "./pages/other/OrderHistory";
+import OrderHistory from "./pages/other/OrderHistory";
 
 const HomeOrganicFood = lazy(() => import("./pages/home/HomeOrganicFood"));
 // shop pages
@@ -64,8 +66,7 @@ const App = (props) => {
                     <span></span>
                   </div>
                 </div>
-              }
-            >
+              }>
               {contextHolder}
               <Switch>
                 <Route
@@ -119,6 +120,10 @@ const App = (props) => {
                 <Route
                   path={process.env.PUBLIC_URL + "/cart"}
                   component={Cart}
+                />
+                <Route
+                  path={process.env.PUBLIC_URL + "/order-history"}
+                  component={OrderHistory}
                 />
                 <Route
                   path={process.env.PUBLIC_URL + "/wishlist"}
