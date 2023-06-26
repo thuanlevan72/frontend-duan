@@ -10,6 +10,7 @@ import UserApi from "../../api/security/UserApi";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { message } from "antd";
 import LoadingSpin from "../../components/loading/LoadingSpin";
+
 const LoginRegister = ({ location }) => {
   const { pathname } = location;
   const [loading, setLoading] = useState(false);
@@ -114,8 +115,8 @@ const LoginRegister = ({ location }) => {
         localStorage.setItem("user", userJSON);
         localStorage.setItem("token", token);
         localStorage.setItem("expiration", expirationTime);
-      
-        setTimeout(function() {
+
+        setTimeout(function () {
           setLoading(false);
           history.push("/admin");
         }, 1000);
@@ -131,7 +132,7 @@ const LoginRegister = ({ location }) => {
         type: 'success',
         content: 'chào mừng bạn đã đến poly-food.',
       });
-      setTimeout(function() {
+      setTimeout(function () {
         setLoading(false);
         history.push("/");
       }, 1000);
@@ -189,7 +190,7 @@ const LoginRegister = ({ location }) => {
                     <Tab.Content>
                       <Tab.Pane eventKey="login">
                         <div className="login-form-container">
-                          {loading && (<div><LoadingSpin/></div>)}
+                          {loading && (<div><LoadingSpin /></div>)}
                           <div className="login-register-form">
                             <form>
                               <input
@@ -226,7 +227,7 @@ const LoginRegister = ({ location }) => {
                       </Tab.Pane>
                       <Tab.Pane eventKey="register">
                         <div className="login-form-container">
-                        {loading && (<div><LoadingSpin/></div>)}
+                          {loading && (<div><LoadingSpin /></div>)}
                           <div className="login-register-form">
                             <form>
                               <input

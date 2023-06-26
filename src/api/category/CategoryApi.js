@@ -6,8 +6,8 @@ const categoryAPI = {
         return axiosClient.get(url, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")
-                        ? JSON.parse(localStorage.getItem("token"))
-                        : ""
+                    ? JSON.parse(localStorage.getItem("token"))
+                    : ""
                     }`,
             },
             params: {
@@ -26,6 +26,17 @@ const categoryAPI = {
             },
             params: {
                 ...params,
+            },
+        });
+    },
+    CreateCategory: (body) => {
+        const url = "/ProductType";
+        return axiosClient.post(url, body, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")
+                        ? JSON.parse(localStorage.getItem("token"))
+                        : ""
+                    }`,
             },
         });
     },
