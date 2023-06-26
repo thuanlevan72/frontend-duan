@@ -116,7 +116,7 @@ const Cart = ({ location, cartItems }) => {
         {/* breadcrumb */}
         <Breadcrumb />
         <Modal
-          title="Basic Modal"
+          title="Thông tin Đơn Hàng"
           open={isModalOpen}
           onOk={handleOk}
           onCancel={handleCancel}
