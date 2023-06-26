@@ -23,14 +23,19 @@ import {
     LogoutOutlined,
 } from "@ant-design/icons";
 import { BsCart2, BsBoxSeam, BsClock, BsBagCheck } from "react-icons/bs";
+import {CiBoxList} from 'react-icons/ci'
 import {
     MdOutlineCategory,
     MdOutlineInfo,
     MdOutlineCancel,
 } from "react-icons/md";
-import { FiUsers, FiBookOpen } from "react-icons/fi";
+import { FiUsers } from "react-icons/fi";
 import { IoCreateOutline } from "react-icons/io5";
 import SubMenu from "antd/es/menu/SubMenu";
+import OrderList from "../components/admin/OrdersManager/OrderList";
+import OrderPending from "../components/admin/OrdersManager/OrderPending";
+import OrderCompleted from "../components/admin/OrdersManager/OrderCompleted";
+import OrderCanceled from "../components/admin/OrdersManager/OrderCanceled";
 const { Header, Content, Footer, Sider } = Layout;
 
 const AdminLayout = () => {
@@ -108,7 +113,7 @@ const AdminLayout = () => {
                         icon={<BsCart2 />}
                         title="Quản lý sản phẩm"
                     >
-                        <Menu.Item key="/admin/products" icon={<FiBookOpen />}>
+                        <Menu.Item key="/admin/products" icon={<CiBoxList />}>
                             <NavLink to="/admin/products">
                                 Danh sách sản phẩm
                             </NavLink>
@@ -130,7 +135,7 @@ const AdminLayout = () => {
                     >
                         <Menu.Item
                             key="/admin/categories"
-                            icon={<FiBookOpen />}
+                            icon={<CiBoxList />}
                         >
                             <NavLink to="/admin/categories">
                                 Danh sách danh mục
@@ -150,7 +155,7 @@ const AdminLayout = () => {
                         icon={<FiUsers />}
                         title="Quản lý người dùng"
                     >
-                        <Menu.Item key="/admin/account" icon={<FiBookOpen />}>
+                        <Menu.Item key="/admin/account" icon={<CiBoxList />}>
                             <NavLink to="/admin/account">
                                 Danh sách người dùng
                             </NavLink>
@@ -161,7 +166,7 @@ const AdminLayout = () => {
                         icon={<MdOutlineInfo />}
                         title="Quản lý thông tin"
                     >
-                        <Menu.Item key="/admin" icon={<FiBookOpen />}>
+                        <Menu.Item key="/admin" icon={<CiBoxList />}>
                             <NavLink to="/admin">Danh sách thông tin</NavLink>
                         </Menu.Item>
                         <Menu.Item key="/admin" icon={<IoCreateOutline />}>
@@ -173,17 +178,17 @@ const AdminLayout = () => {
                         icon={<BsBoxSeam />}
                         title="Quản lý đơn hàng"
                     >
-                        <Menu.Item key="/admin" icon={<FiBookOpen />}>
-                            <NavLink to="/admin">Danh sách đơn hàng</NavLink>
+                        <Menu.Item key="/admin/orders" icon={<CiBoxList />}>
+                            <NavLink to="/admin/orders">Danh sách đơn hàng</NavLink>
                         </Menu.Item>
-                        <Menu.Item key="/admin" icon={<BsClock />}>
-                            <NavLink to="/admin">Đơn hàng chờ</NavLink>
+                        <Menu.Item key="/admin/orders-pending" icon={<BsClock />}>
+                            <NavLink to="/admin/orders-pending">Đơn hàng đang chờ</NavLink>
                         </Menu.Item>
-                        <Menu.Item key="/admin" icon={<BsBagCheck />}>
-                            <NavLink to="/admin">Đơn hàng hoàn thành</NavLink>
+                        <Menu.Item key="/admin/orders-completed" icon={<BsBagCheck />}>
+                            <NavLink to="/admin/orders-completed">Đơn hàng hoàn thành</NavLink>
                         </Menu.Item>
-                        <Menu.Item key="/admin" icon={<MdOutlineCancel />}>
-                            <NavLink to="/admin">Đơn hàng đã hủy</NavLink>
+                        <Menu.Item key="/admin/orders-canceled" icon={<MdOutlineCancel />}>
+                            <NavLink to="/admin/orders-canceled">Đơn hàng đã hủy</NavLink>
                         </Menu.Item>
                     </SubMenu>
                 </Menu>
@@ -219,34 +224,22 @@ const AdminLayout = () => {
                         <Route path="/admin/dashboard" component={Dashboard} />
                         {/* Product router */}
                         <Route path="/admin/products" component={ProductList} />
-                        <Route
-                            path="/admin/products-add"
-                            component={ProductAdd}
-                        />
-                        <Route
-                            path="/admin/products-edit/:id"
-                            component={ProductEdit}
-                        />
+                        <Route path="/admin/products-add" component={ProductAdd}/>
+                        <Route path="/admin/products-edit/:id" component={ProductEdit}/>
                         {/* Category router */}
-                        <Route
-                            path="/admin/categories"
-                            component={CategoryList}
-                        />
-                        <Route
-                            path="/admin/categories-add"
-                            component={CategoryAdd}
-                        />
-                        <Route
-                            path="/admin/categories-edit/:id"
-                            component={CategoryEdit}
-                        />
+                        <Route path="/admin/categories" component={CategoryList}/>
+                        <Route path="/admin/categories-add" component={CategoryAdd}/>
+                        <Route path="/admin/categories-edit/:id" component={CategoryEdit}/>
                         {/* User router */}
                         <Route path="/admin/account" component={UsersList} />
                         <Route path="/admin/account-add" component={UsersAdd} />
-                        <Route
-                            path="/admin/account-edit/:id"
-                            component={UsersEdit}
-                        />
+                        <Route path="/admin/account-edit/:id"component={UsersEdit}/>
+                        {/* User router */}
+                        <Route path="/admin/orders" component={OrderList} />
+                        <Route path="/admin/orders-pending" component={OrderPending} />
+                        <Route path="/admin/orders-completed" component={OrderCompleted}/>
+                        <Route path="/admin/orders-canceled" component={OrderCanceled}/>
+                        {/* Redirect to Dashboard */}
                         <Redirect to="/admin/dashboard" />
                     </Switch>
                 </Content>
