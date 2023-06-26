@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { Breadcrumb, Pagination, Space, Table } from "antd";
+import React, { useState, useEffect } from "react";
+import { Breadcrumb, Pagination, Space, Table, Select, message } from "antd";
 import { NavLink } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
+import OrderApi from "../../../api/order/OrderApi.js";
+import { format } from 'date-fns';
 import LoadingSpin from "../../loading/LoadingSpin";
-// import OrderApi from "../../../api/order/OrderApi";
 
 const OrderList = () => {
     const [loading, setLoading] = useState(false);
+    const [messageApi, contextHolder] = message.useMessage();
     const [data, setData] = useState({
         totalItems: 0,
         totalPages: 0,
@@ -31,7 +33,83 @@ const OrderList = () => {
         pageSize: 10,
         search: "",
     });
-    const dataSource = []
+    useEffect(() => {
+        const getOrders = async () => {
+            try {
+                setLoading(true);
+                const { data } = await OrderApi.getAllOrders(param);
+                setData(data);
+                setLoading(false)
+            } catch (error) {
+                console.error(error);
+                setLoading(false)
+            }
+        };
+        getOrders();
+    }, [param]);
+    const dataSource = data.data?.map((item, index) => {
+        return {
+            key: index + 1,
+            orderId: item.orderId,
+            code: item.codeOrder,
+            fullName: item.fullName,
+            phone: item.phone,
+            email: item.email,
+            address: item.address,
+            note: item.noteOrder,
+            orderStatus: item.orderStatus,
+            createdAt: item.createdAt,
+        };
+    });
+    const [options, setOptions] = useState([]);
+    useEffect(() => {
+        getStatus();
+    }, []);
+    const getStatus = async () => {
+        try {
+            const data = await OrderApi.getOrderStatus();
+            setOptions(data)
+        } catch (error) {
+
+        }
+    };
+    const handleChangeStatus = (id) => async (orderId, newStatus) => {
+        try {
+            setLoading(true);
+            await OrderApi.updateOrderStatus({
+                id: id.orderId,
+                idStatus: newStatus.value
+            });
+            messageApi.open({
+                type: 'success',
+                content: "Thay đổi trạng thái thành công",
+            });
+            setLoading(false);
+            return
+        } catch (error) {
+            messageApi.open({
+                type: 'error',
+                content: "Thay đổi trạng thái thất bại",
+            });
+            return
+        }
+    };
+
+    const getStatusColor = (status) => {
+        switch (status) {
+            case 4:
+                return '#70a1ff';
+            case 5:
+                return '#2ed573';
+            case 7:
+                return '#ff4757';
+            case 9:
+                return '#ffa502';
+            case 10:
+                return 'green';
+        }
+        return "red"
+    };
     const columns = [
         {
             title: "STT",
@@ -41,8 +119,8 @@ const OrderList = () => {
         },
         {
             title: "Mã đơn hàng",
-            dataIndex: "codeOrder",
-            key: "codeOrder",
+            dataIndex: "code",
+            key: "code",
             align: "center",
         },
         {
@@ -64,16 +142,54 @@ const OrderList = () => {
             align: "center",
         },
         {
-            title: "Ngày đặt",
-            dataIndex: "categoryName",
-            key: "categoryName",
+            title: "Địa chỉ",
+            dataIndex: "address",
+            key: "address",
             align: "center",
         },
         {
-            title: "Trạng thái",
-            dataIndex: "status",
-            key: "status",
+            title: "Ghi chú",
+            dataIndex: "note",
+            key: "note",
             align: "center",
+        },
+        {
+            title: "Ngày đặt",
+            dataIndex: "createdAt",
+            key: "createdAt",
+            align: "center",
+            render: (createdAt) => (
+                <>
+                    {format(new Date(createdAt), 'HH:mm:ss dd/MM/yyyy')}
+                </>
+            ),
+        },
+        {
+            title: "Trạng Thái",
+            dataIndex: "orderStatus",
+            key: "orderStatus",
+            align: "center",
+            render: (orderStatus, orderId) => (
+                <Select defaultValue={orderStatus.orderStatusId}
+                    onChange={handleChangeStatus(orderId)}
+                >
+                    {options &&
+                        options.map((item) => {
+                            return (
+                                <Select.Option
+                                    key={item.orderStatusId}
+                                    value={item.orderStatusId}
+                                >
+                                    <p
+                                        style={{ color: getStatusColor(item.orderStatusId) }}
+                                    >
+                                        {item.name}
+                                    </p>
+                                </Select.Option>
+                            );
+                        })}
+                </Select >
+            )
         },
         {
             title: "Hành động",
@@ -99,6 +215,7 @@ const OrderList = () => {
                 <Breadcrumb.Item>Bảng điều khiển</Breadcrumb.Item>
                 <Breadcrumb.Item>Danh sách đơn hàng</Breadcrumb.Item>
             </Breadcrumb>
+            {contextHolder}
             <div>
                 {loading && (
                     <div>

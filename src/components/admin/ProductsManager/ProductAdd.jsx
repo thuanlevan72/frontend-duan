@@ -48,7 +48,7 @@ const ProductAdd = () => {
             formDataApi.append("Discount", formData.Discount);
             formDataApi.append("ProductTypeId", formData.ProductTypeId);
             formDataApi.append("Status", formData.Status);
-            formDataApi.append("AvartarImageProduct",formData.AvartarImageProduct);
+            formDataApi.append("AvartarImageProduct", formData.AvartarImageProduct);
             formDataApi.append("shortDescription", formData.shortDescription);
             formDataApi.append("fullDescription", formData.fullDescription);
             await ProductApi.CreateProduct(formDataApi);
@@ -69,7 +69,7 @@ const ProductAdd = () => {
             });
             setCategories(data.data);
             setLoading(false);
-        } catch (error) {}
+        } catch (error) { }
     };
     return (
         <>
