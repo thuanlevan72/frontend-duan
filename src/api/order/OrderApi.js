@@ -5,6 +5,10 @@ const OrderApi = {
     const url = "/Order";
     return axiosClient.post(url, data);
   },
+  GetOrderForCode: async (code) => {
+    const url = `/Order/${code}`;
+    return await axiosClient.get(url, {});
+  },
   GetOrderForEmail: (email) => {
     const url = `/Order/getDetailForEmail/${email}`;
     return axiosClient.get(url, {
