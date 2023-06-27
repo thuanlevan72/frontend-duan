@@ -49,7 +49,7 @@ const Cart = ({ location, cartItems }) => {
         const res = await OrderApi.GetOrderForEmail(email);
         setLoading(false);
         setDataOrderHistory(res);
-      } catch (error) {}
+      } catch (error) { }
     };
     getDataApi();
   }, []);
@@ -162,8 +162,8 @@ const Cart = ({ location, cartItems }) => {
                                   <Tag
                                     color={
                                       item.paymentOrder.paymentId === 1
-                                        ? "blue"
-                                        : "gold"
+                                        ? "cyan"
+                                        : "green"
                                     }>
                                     {item.paymentOrder.paymentMethod}
                                   </Tag>
@@ -172,14 +172,14 @@ const Cart = ({ location, cartItems }) => {
                                   <Tag
                                     color={
                                       item.orderStatus.orderStatusId === 4
-                                        ? "blue"
+                                        ? "#70a1ff"
                                         : item.orderStatus.orderStatusId === 5
-                                        ? "gold"
-                                        : item.orderStatus.orderStatusId === 7
-                                        ? "error"
-                                        : item.orderStatus.orderStatusId === 9
-                                        ? "green"
-                                        : "yellow"
+                                          ? "#2ed573"
+                                          : item.orderStatus.orderStatusId === 7
+                                            ? "#ff4757"
+                                            : item.orderStatus.orderStatusId === 9
+                                              ? "#ffa502"
+                                              : "white"
                                     }>
                                     {item.orderStatus.name}
                                   </Tag>
