@@ -28,6 +28,10 @@ const ProductApi = {
       },
     });
   },
+  IncreaseViews: async (id) => {
+    const url = `/Product/increaseviews/${id}`;
+    return await axiosClient.get(url);
+  },
   getAllProducts: (params = null) => {
     const url = "/Product";
     return axiosClient.get(url, {
