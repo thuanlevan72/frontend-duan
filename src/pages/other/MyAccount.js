@@ -10,7 +10,7 @@ import { useState } from "react";
 import UserApi from "../../api/security/UserApi";
 import LoadingSpin from "../../components/loading/LoadingSpin";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { message } from "antd";
+import { Avatar, Image, message } from "antd";
 
 const MyAccount = ({ location }) => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -269,19 +269,13 @@ const MyAccount = ({ location }) => {
                                     Ảnh đại diện{" "}
                                   </label>
 
-                                  <img
+                                  <Image
+                                    style={{ borderRadius: "50%" }}
+                                    width={130}
+                                    height={130}
                                     src={user.avartar}
-                                    alt="Avatar"
-                                    style={{
-                                      width: "120px",
-                                      height: "120px",
-                                      marginBottom: "10px",
-                                      objectFit: "cover",
-                                      borderRadius: "50%",
-                                      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-                                      border: "2px solid #fff",
-                                    }}
                                   />
+
                                   <br />
                                   <h4
                                     style={{

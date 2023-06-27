@@ -43,7 +43,7 @@ const Cart = ({ location, cartItems }) => {
           nameProduct: item.product.nameProduct,
           avartarImageProduct: item.product.avartarImageProduct,
           quantity: item.quantity,
-          price: item.price,
+          price: item.price.toLocaleString("vi-VN") + " " + "vnd",
         };
       })
     );
