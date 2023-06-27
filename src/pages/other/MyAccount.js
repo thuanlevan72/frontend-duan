@@ -90,6 +90,7 @@ const MyAccount = ({ location }) => {
     }
   };
   const [user, setUser] = useState({
+    accountId: oldData.accountId,
     phone: oldData.user.phone,
     email: oldData.user.email,
     address: oldData.user.address,
