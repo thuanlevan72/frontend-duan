@@ -8,7 +8,7 @@ import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import { useEffect } from "react";
 import OrderApi from "../../api/order/OrderApi";
-import { Button, Image, Modal, Space, Table, Tag } from "antd";
+import { Button, Descriptions, Image, Modal, Space, Table, Tag } from "antd";
 import LoadingSpin from "../../components/loading/LoadingSpin";
 import { format } from "date-fns";
 const Cart = ({ location, cartItems }) => {
@@ -18,10 +18,24 @@ const Cart = ({ location, cartItems }) => {
   const [currenOrderDeatail, setCurrenOrderDeatail] = useState([]);
   const [dataOrderHistory, setDataOrderHistory] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = (codeOrder) => {
+  const [curentInfo, setCurenInfo] = useState({});
+  const showModal = (codeOrder, data) => {
     const orderDetails = dataOrderHistory.filter(
       (x) => x.codeOrder === codeOrder
     )[0];
+    setCurenInfo({
+      address: data.address,
+      phone: data.phone,
+      paymentOrder: data.paymentOrder.paymentMethod,
+      noteOrder: data.noteOrder,
+      orderStatus: data.orderStatus.name,
+      actualPrice: data.actualPrice,
+      paymentId: data.paymentId,
+      fullName: data.fullName,
+      email: data.address,
+      createdAt: data.createdAt,
+      codeOrder: data.codeOrder,
+    });
     setCurrenOrderDeatail(
       orderDetails.orderDetails.map((item, index) => {
         return {
@@ -95,7 +109,7 @@ const Cart = ({ location, cartItems }) => {
       align: "center",
     },
   ];
-  console.log(dataOrderHistory);
+  console.log(curentInfo);
   return (
     <Fragment>
       <MetaTags>
@@ -112,7 +126,7 @@ const Cart = ({ location, cartItems }) => {
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
         Lịch sử đơn hàng
       </BreadcrumbsItem>
-
+      {console.log(currenOrderDeatail)}
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
         <Breadcrumb />
@@ -122,6 +136,35 @@ const Cart = ({ location, cartItems }) => {
           onOk={handleOk}
           onCancel={handleCancel}
           width={"1000"}>
+          <Descriptions title="Thông Tin Tiết người đặt">
+            <Descriptions.Item label="UserName">
+              {curentInfo && curentInfo.fullName}
+            </Descriptions.Item>
+            <Descriptions.Item label="Telephone">
+              {" "}
+              {curentInfo && curentInfo.phone}
+            </Descriptions.Item>
+            <Descriptions.Item label="address">
+              {curentInfo && curentInfo.address}
+            </Descriptions.Item>
+            <Descriptions.Item label="Tổng tiền">
+              {" "}
+              {curentInfo &&
+                curentInfo.actualPrice &&
+                curentInfo.actualPrice.toLocaleString("vi-VN")}{" "}
+              vnd
+            </Descriptions.Item>
+            <Descriptions.Item label="Phương thức thanh toán">
+              {curentInfo && (
+                <Tag color={curentInfo.paymentId === 1 ? "cyan" : "green"}>
+                  {curentInfo.paymentOrder}
+                </Tag>
+              )}
+            </Descriptions.Item>
+            <Descriptions.Item label="Mã hóa đơn">
+              {curentInfo && curentInfo.codeOrder}
+            </Descriptions.Item>
+          </Descriptions>
           <Table columns={columns} dataSource={currenOrderDeatail} />
         </Modal>
         <div className="cart-main-area pt-90 pb-100">
@@ -143,12 +186,8 @@ const Cart = ({ location, cartItems }) => {
                             <thead>
                               <tr>
                                 <th>Mã đơn hàng</th>
-                                <th>Phương thức thanh toán</th>
                                 <th>Trạng thái đơn hàng</th>
-                                <th>Giá trị đơn</th>
                                 <th>Ngày tạo đơn</th>
-                                <th>số điện thoại</th>
-                                <th>địa chỉ</th>
                                 <th>hoạt động</th>
                               </tr>
                             </thead>
@@ -159,17 +198,13 @@ const Cart = ({ location, cartItems }) => {
                                   style={{ color: "green" }}>
                                   {item.codeOrder}
                                 </td>
-                                <td className="product-name">
-                                  <Tag
-                                    color={
-                                      item.paymentOrder.paymentId === 1
-                                        ? "cyan"
-                                        : "green"
-                                    }>
-                                    {item.paymentOrder.paymentMethod}
-                                  </Tag>
-                                </td>
-                                <td className="product-name">
+
+                                <td
+                                  className="product-name"
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                  }}>
                                   <Tag
                                     color={
                                       item.orderStatus.orderStatusId === 4
@@ -185,17 +220,14 @@ const Cart = ({ location, cartItems }) => {
                                     {item.orderStatus.name}
                                   </Tag>
                                 </td>
-                                <td className="product-price-cart">
-                                  {item.actualPrice.toLocaleString("vi-VN")} vnd
-                                </td>
+
                                 <td className="product-name">
                                   {format(
                                     new Date(item.createdAt),
                                     "HH:mm:ss dd/MM/yyyy"
                                   )}
                                 </td>
-                                <td className="product-name">{item.phone}</td>
-                                <td className="product-name">{item.address}</td>
+
                                 <td className="product-quantity">
                                   <div
                                     style={{
@@ -221,7 +253,9 @@ const Cart = ({ location, cartItems }) => {
                                       )}
                                     <Button
                                       type="primary"
-                                      onClick={() => showModal(item.codeOrder)}>
+                                      onClick={() =>
+                                        showModal(item.codeOrder, item)
+                                      }>
                                       Chi tiết
                                     </Button>
                                   </div>
@@ -234,7 +268,7 @@ const Cart = ({ location, cartItems }) => {
                           style={{
                             width: "70%",
                             height: "1px",
-                            border: "2px inset #333",
+                            border: "2px inset #fff",
                             margin: "20px 15%",
                           }}></div>
                       </>
