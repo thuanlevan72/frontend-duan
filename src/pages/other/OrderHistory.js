@@ -44,6 +44,8 @@ const Cart = ({ location, cartItems }) => {
           avartarImageProduct: item.product.avartarImageProduct,
           quantity: item.quantity,
           price: item.price.toLocaleString("vi-VN") + " " + "vnd",
+          totalPrice:
+            (item.price * item.quantity).toLocaleString("vi-VN") + " " + "vnd",
         };
       })
     );
@@ -103,9 +105,15 @@ const Cart = ({ location, cartItems }) => {
       align: "center",
     },
     {
-      title: "Giá",
+      title: "Đơn giá",
       dataIndex: "price",
       key: "price",
+      align: "center",
+    },
+    {
+      title: "Tổng tiền",
+      dataIndex: "totalPrice",
+      key: "totalPrice",
       align: "center",
     },
   ];
