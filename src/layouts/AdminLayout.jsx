@@ -23,7 +23,7 @@ import {
     LogoutOutlined,
 } from "@ant-design/icons";
 import { BsCart2, BsBoxSeam, BsClock, BsBagCheck } from "react-icons/bs";
-import {CiBoxList} from 'react-icons/ci'
+import { CiBoxList } from 'react-icons/ci'
 import {
     MdOutlineCategory,
     MdOutlineInfo,
@@ -108,64 +108,31 @@ const AdminLayout = () => {
                         <NavLink to="/admin/dashboard">Bảng điều khiển</NavLink>
                     </Menu.Item>
                     {/* Product Manager */}
-                    <SubMenu
-                        key="subMenu-1"
-                        icon={<BsCart2 />}
-                        title="Quản lý sản phẩm"
-                    >
+                    <SubMenu key="subMenu-1" icon={<BsCart2 />} title="Quản lý sản phẩm">
                         <Menu.Item key="/admin/products" icon={<CiBoxList />}>
-                            <NavLink to="/admin/products">
-                                Danh sách sản phẩm
-                            </NavLink>
+                            <NavLink to="/admin/products">Danh sách sản phẩm</NavLink>
                         </Menu.Item>
-                        <Menu.Item
-                            key="/admin/products-add"
-                            icon={<IoCreateOutline />}
-                        >
-                            <NavLink to="/admin/products-add">
-                                Tạo sản phẩm
-                            </NavLink>
+                        <Menu.Item key="/admin/products-add" icon={<IoCreateOutline />}>
+                            <NavLink to="/admin/products-add">Tạo sản phẩm</NavLink>
                         </Menu.Item>
                     </SubMenu>
                     {/* Category Manager */}
-                    <SubMenu
-                        key="subMenu-2"
-                        icon={<MdOutlineCategory />}
-                        title="Quản lý danh mục"
-                    >
-                        <Menu.Item
-                            key="/admin/categories"
-                            icon={<CiBoxList />}
-                        >
-                            <NavLink to="/admin/categories">
-                                Danh sách danh mục
-                            </NavLink>
+                    <SubMenu key="subMenu-2" icon={<MdOutlineCategory />} title="Quản lý danh mục">
+                        <Menu.Item key="/admin/categories" icon={<CiBoxList />}>
+                            <NavLink to="/admin/categories">Danh sách danh mục</NavLink>
                         </Menu.Item>
-                        <Menu.Item
-                            key="/admin/categories-add"
-                            icon={<IoCreateOutline />}
-                        >
-                            <NavLink to="/admin/categories-add">
-                                Tạo danh mục
-                            </NavLink>
+                        <Menu.Item key="/admin/categories-add" icon={<IoCreateOutline />}>
+                            <NavLink to="/admin/categories-add">Tạo danh mục</NavLink>
                         </Menu.Item>
                     </SubMenu>
-                    <SubMenu
-                        key="subMenu-3"
-                        icon={<FiUsers />}
-                        title="Quản lý người dùng"
-                    >
+                    {/* User Manager */}
+                    <SubMenu key="subMenu-3" icon={<FiUsers />} title="Quản lý người dùng">
                         <Menu.Item key="/admin/account" icon={<CiBoxList />}>
-                            <NavLink to="/admin/account">
-                                Danh sách người dùng
-                            </NavLink>
+                            <NavLink to="/admin/account">Danh sách người dùng</NavLink>
                         </Menu.Item>
                     </SubMenu>
-                    <SubMenu
-                        key="subMenu-4"
-                        icon={<MdOutlineInfo />}
-                        title="Quản lý thông tin"
-                    >
+                    {/* Info Manager */}
+                    <SubMenu key="subMenu-4" icon={<MdOutlineInfo />} title="Quản lý thông tin">
                         <Menu.Item key="/admin" icon={<CiBoxList />}>
                             <NavLink to="/admin">Danh sách thông tin</NavLink>
                         </Menu.Item>
@@ -173,11 +140,8 @@ const AdminLayout = () => {
                             <NavLink to="/admin">Thêm thông tin trang</NavLink>
                         </Menu.Item>
                     </SubMenu>
-                    <SubMenu
-                        key="subMenu-5"
-                        icon={<BsBoxSeam />}
-                        title="Quản lý đơn hàng"
-                    >
+                    {/*Order Manager */}
+                    <SubMenu key="subMenu-5" icon={<BsBoxSeam />} title="Quản lý đơn hàng">
                         <Menu.Item key="/admin/orders" icon={<CiBoxList />}>
                             <NavLink to="/admin/orders">Danh sách đơn hàng</NavLink>
                         </Menu.Item>
@@ -224,21 +188,21 @@ const AdminLayout = () => {
                         <Route path="/admin/dashboard" component={Dashboard} />
                         {/* Product router */}
                         <Route path="/admin/products" component={ProductList} />
-                        <Route path="/admin/products-add" component={ProductAdd}/>
-                        <Route path="/admin/products-edit/:id" component={ProductEdit}/>
+                        <Route path="/admin/products-add" component={ProductAdd} />
+                        <Route path="/admin/products-edit/:id" component={ProductEdit} />
                         {/* Category router */}
-                        <Route path="/admin/categories" component={CategoryList}/>
-                        <Route path="/admin/categories-add" component={CategoryAdd}/>
-                        <Route path="/admin/categories-edit/:id" component={CategoryEdit}/>
+                        <Route path="/admin/categories" component={CategoryList} />
+                        <Route path="/admin/categories-add" component={CategoryAdd} />
+                        <Route path="/admin/categories-edit/:id" component={CategoryEdit} />
                         {/* User router */}
                         <Route path="/admin/account" component={UsersList} />
                         <Route path="/admin/account-add" component={UsersAdd} />
-                        <Route path="/admin/account-edit/:id"component={UsersEdit}/>
+                        <Route path="/admin/account-edit/:id" component={UsersEdit} />
                         {/* User router */}
                         <Route path="/admin/orders" component={OrderList} />
                         <Route path="/admin/orders-pending" component={OrderPending} />
-                        <Route path="/admin/orders-completed" component={OrderCompleted}/>
-                        <Route path="/admin/orders-canceled" component={OrderCanceled}/>
+                        <Route path="/admin/orders-completed" component={OrderCompleted} />
+                        <Route path="/admin/orders-canceled" component={OrderCanceled} />
                         {/* Redirect to Dashboard */}
                         <Redirect to="/admin/dashboard" />
                     </Switch>
@@ -251,7 +215,7 @@ const AdminLayout = () => {
                     Poly Food - &#169; FPT Polytechnic Hà Nội
                 </Footer>
             </Layout>
-        </Layout>
+        </Layout >
     );
 };
 export default AdminLayout;
