@@ -54,7 +54,7 @@ const ProductList = () => {
             id: item.productId,
             name: item.nameProduct,
             image: item.avartarImageProduct,
-            price: item.price,
+            price: item.price.toLocaleString("vi-VN"),
             discount: item.discount,
             quantity: item.quantity,
             categoryName: item.productType.nameProductType,
@@ -95,7 +95,7 @@ const ProductList = () => {
             ),
         },
         {
-            title: "Giá",
+            title: "Giá (VNĐ)",
             dataIndex: "price",
             key: "price",
             align: "center",
@@ -130,9 +130,9 @@ const ProductList = () => {
             dataIndex: "action",
             key: "action",
             align: "center",
-            render: () => (
+            render: (text, record) => (
                 <Space size="middle">
-                    <NavLink to={"/admin/products-edit"}>
+                    <NavLink to={`/admin/products-edit/${record.id}`}>
                         <BiEdit />
                     </NavLink>
                     <Text type="danger">
