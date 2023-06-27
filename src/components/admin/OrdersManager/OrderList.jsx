@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Breadcrumb, Pagination, Space, Table, Select, message } from "antd";
+import { Breadcrumb, Pagination, Space, Table, Select, Tag, Button, message } from "antd";
 import { NavLink } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import OrderApi from "../../../api/order/OrderApi.js";
@@ -53,12 +53,17 @@ const OrderList = () => {
             orderId: item.orderId,
             code: item.codeOrder,
             fullName: item.fullName,
-            phone: item.phone,
-            email: item.email,
-            address: item.address,
-            note: item.noteOrder,
-            orderStatus: item.orderStatus,
+            // phone: item.phone,
+            // email: item.email,
+            // address: item.address,
+            // note: item.noteOrder,
             createdAt: item.createdAt,
+            paymentOrder: item.paymentOrderPaymentId == 1 ? (
+                <Tag color="cyan">Thanh toàn khi nhận hàng</Tag>
+            ) : (
+                <Tag color="green">Thanh toán online</Tag>
+            ),
+            orderStatus: item.orderStatus,
         };
     });
     const [options, setOptions] = useState([]);
@@ -105,10 +110,7 @@ const OrderList = () => {
                 return '#ff4757';
             case 9:
                 return '#ffa502';
-            case 10:
-                return 'green';
         }
-        return "red"
     };
     const columns = [
         {
@@ -129,30 +131,30 @@ const OrderList = () => {
             key: "fullName",
             align: "center",
         },
-        {
-            title: "Số điện thoại",
-            dataIndex: "phone",
-            key: "phone",
-            align: "center",
-        },
-        {
-            title: "Email",
-            dataIndex: "email",
-            key: "email",
-            align: "center",
-        },
-        {
-            title: "Địa chỉ",
-            dataIndex: "address",
-            key: "address",
-            align: "center",
-        },
-        {
-            title: "Ghi chú",
-            dataIndex: "note",
-            key: "note",
-            align: "center",
-        },
+        // {
+        //     title: "Số điện thoại",
+        //     dataIndex: "phone",
+        //     key: "phone",
+        //     align: "center",
+        // },
+        // {
+        //     title: "Email",
+        //     dataIndex: "email",
+        //     key: "email",
+        //     align: "center",
+        // },
+        // {
+        //     title: "Địa chỉ",
+        //     dataIndex: "address",
+        //     key: "address",
+        //     align: "center",
+        // },
+        // {
+        //     title: "Ghi chú",
+        //     dataIndex: "note",
+        //     key: "note",
+        //     align: "center",
+        // },
         {
             title: "Ngày đặt",
             dataIndex: "createdAt",
@@ -165,12 +167,19 @@ const OrderList = () => {
             ),
         },
         {
+            title: "Phương thức thanh toàn",
+            dataIndex: "paymentOrder",
+            key: "paymentOrder",
+            align: "center",
+        },
+        {
             title: "Trạng Thái",
             dataIndex: "orderStatus",
             key: "orderStatus",
             align: "center",
             render: (orderStatus, orderId) => (
-                <Select defaultValue={orderStatus.orderStatusId}
+                <Select
+                    defaultValue={orderStatus.orderStatusId}
                     onChange={handleChangeStatus(orderId)}
                 >
                     {options &&
@@ -198,9 +207,14 @@ const OrderList = () => {
             align: "center",
             render: () => (
                 <Space size="middle">
-                    <NavLink to={"/admin/products-edit"}>
+                    {/* <NavLink to={"/admin/products-edit"}>
                         <BiEdit />
-                    </NavLink>
+                    </NavLink> */}
+                    <Button
+                        type="primary"
+                    >
+                        Chi tiết
+                    </Button>
                 </Space>
             ),
         },
