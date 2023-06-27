@@ -12,6 +12,7 @@ import { Button, Image, Modal, Space, Table, Tag } from "antd";
 import LoadingSpin from "../../components/loading/LoadingSpin";
 import { format } from "date-fns";
 const Cart = ({ location, cartItems }) => {
+  const twoDaysInMillis = 2 * 24 * 60 * 60 * 1000;
   const { pathname } = location;
   const [loading, setLoading] = useState(false);
   const [currenOrderDeatail, setCurrenOrderDeatail] = useState([]);
@@ -49,7 +50,7 @@ const Cart = ({ location, cartItems }) => {
         const res = await OrderApi.GetOrderForEmail(email);
         setLoading(false);
         setDataOrderHistory(res);
-      } catch (error) { }
+      } catch (error) {}
     };
     getDataApi();
   }, []);
@@ -174,12 +175,12 @@ const Cart = ({ location, cartItems }) => {
                                       item.orderStatus.orderStatusId === 4
                                         ? "#70a1ff"
                                         : item.orderStatus.orderStatusId === 5
-                                          ? "#2ed573"
-                                          : item.orderStatus.orderStatusId === 7
-                                            ? "#ff4757"
-                                            : item.orderStatus.orderStatusId === 9
-                                              ? "#ffa502"
-                                              : "white"
+                                        ? "#2ed573"
+                                        : item.orderStatus.orderStatusId === 7
+                                        ? "#ff4757"
+                                        : item.orderStatus.orderStatusId === 9
+                                        ? "#ffa502"
+                                        : "white"
                                     }>
                                     {item.orderStatus.name}
                                   </Tag>
@@ -199,12 +200,25 @@ const Cart = ({ location, cartItems }) => {
                                   <div
                                     style={{
                                       display: "flex",
-                                      justifyContent: "space-between",
+                                      justifyContent:
+                                        item.orderStatus.orderStatusId == 4 &&
+                                        new Date() - new Date(item.createdAt) <
+                                          twoDaysInMillis
+                                          ? "center"
+                                          : "space-around",
                                     }}>
-                                    <Button type="dashed" danger>
-                                      Hủy đơn
-                                    </Button>
-                                    <div style={{ width: "5px" }}> </div>
+                                    {item.orderStatus.orderStatusId == 4 &&
+                                      new Date() - new Date(item.createdAt) <
+                                        twoDaysInMillis && (
+                                        <Button type="dashed" danger>
+                                          Hủy đơn
+                                        </Button>
+                                      )}
+                                    {item.orderStatus.orderStatusId == 4 &&
+                                      new Date() - new Date(item.createdAt) <
+                                        twoDaysInMillis && (
+                                        <div style={{ width: "5px" }}> </div>
+                                      )}
                                     <Button
                                       type="primary"
                                       onClick={() => showModal(item.codeOrder)}>
