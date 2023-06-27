@@ -57,7 +57,7 @@ const Cart = ({ location, cartItems }) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  console.log(currenOrderDeatail);
+
   useEffect(() => {
     const getDataApi = async () => {
       try {
@@ -117,7 +117,7 @@ const Cart = ({ location, cartItems }) => {
       align: "center",
     },
   ];
-  console.log(curentInfo);
+
   return (
     <Fragment>
       <MetaTags>
@@ -134,7 +134,7 @@ const Cart = ({ location, cartItems }) => {
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
         Lịch sử đơn hàng
       </BreadcrumbsItem>
-      {console.log(currenOrderDeatail)}
+
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
         <Breadcrumb />
