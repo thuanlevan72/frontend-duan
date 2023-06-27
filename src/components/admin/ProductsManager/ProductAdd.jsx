@@ -1,11 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { Breadcrumb, Button, Form, Input, Select, Upload } from "antd";
+import {
+    Breadcrumb,
+    Button,
+    Col,
+    Form,
+    Input,
+    Row,
+    Select,
+    Upload,
+} from "antd";
 import Title from "antd/es/typography/Title";
 import categoryAPI from "../../../api/category/CategoryApi";
 import LoadingSpin from "../../loading/LoadingSpin";
 import ProductApi from "../../../api/product/ProductApi";
 const { TextArea } = Input;
 
+/* eslint-disable no-template-curly-in-string */
+const validateMessages = {
+    required: "* ${label} không được để trống",
+    types: {
+        number: "* ${label} không đúng định dạng số",
+    },
+};
 const ProductAdd = () => {
     const [form] = Form.useForm();
     // upload image
@@ -48,7 +64,10 @@ const ProductAdd = () => {
             formDataApi.append("Discount", formData.Discount);
             formDataApi.append("ProductTypeId", formData.ProductTypeId);
             formDataApi.append("Status", formData.Status);
-            formDataApi.append("AvartarImageProduct", formData.AvartarImageProduct);
+            formDataApi.append(
+                "AvartarImageProduct",
+                formData.AvartarImageProduct
+            );
             formDataApi.append("shortDescription", formData.shortDescription);
             formDataApi.append("fullDescription", formData.fullDescription);
             await ProductApi.CreateProduct(formDataApi);
@@ -69,7 +88,7 @@ const ProductAdd = () => {
             });
             setCategories(data.data);
             setLoading(false);
-        } catch (error) { }
+        } catch (error) {}
     };
     return (
         <>
@@ -94,52 +113,109 @@ const ProductAdd = () => {
                     name="basic"
                     labelCol={{ span: 8 }}
                     wrapperCol={{ span: 16 }}
-                    style={{ maxWidth: 1000 }}
                     initialValues={{ remember: true }}
                     autoComplete="off"
                     form={form}
+                    validateMessages={validateMessages}
                 >
-                    <Form.Item label="Tên sản phẩm" name="NameProduct">
-                        <Input style={{ height: 30 }} />
+                    <Form.Item
+                        label="Tên sản phẩm"
+                        name="NameProduct"
+                        labelCol={{ span: 3, offset: 1 }}
+                        tooltip="Tên sản phẩm"
+                        rules={[{ required: true }]}
+                    >
+                        <Input
+                            style={{ height: 30 }}
+                            placeholder="Nhập tên sản phẩm..."
+                        />
                     </Form.Item>
-                    <Form.Item label="Giá sản phẩm" name="Price">
-                        <Input style={{ height: 30 }} />
+                    <Form.Item
+                        label="Giá sản phẩm"
+                        name="Price"
+                        labelCol={{ span: 3, offset: 1 }}
+                        tooltip="Giá gốc sản phẩm"
+                        rules={[{ required: true }]}
+                    >
+                        <Input
+                            style={{ height: 30 }}
+                            placeholder="Nhập giá sản phẩm..."
+                            type="number"
+                        />
                     </Form.Item>
-                    <Form.Item label="Số lượng" name="Quantity">
-                        <Input style={{ height: 30 }} />
+                    <Form.Item
+                        label="Số lượng"
+                        name="Quantity"
+                        labelCol={{ span: 3, offset: 1 }}
+                        tooltip="Tổng số lượng sản phẩm"
+                        rules={[{ required: true }]}
+                    >
+                        <Input
+                            style={{ height: 30 }}
+                            placeholder="Nhập số lượng sản phẩm..."
+                            type="number"
+                        />
                     </Form.Item>
-                    <Form.Item label="Giảm giá" name="Discount">
-                        <Input style={{ height: 30 }} />
+                    <Form.Item
+                        label="Giảm giá"
+                        name="Discount"
+                        labelCol={{ span: 3, offset: 1 }}
+                        tooltip="% Giảm giá sản phẩm"
+                        rules={[{ required: true }]}
+                    >
+                        <Input
+                            style={{ height: 30 }}
+                            placeholder="Nhập giảm giá..."
+                        />
                     </Form.Item>
-                    <Form.Item label="Danh mục" name="Category">
-                        <Select placeholder="Chọn danh mục">
-                            {categories &&
-                                categories.map((item) => {
-                                    return (
-                                        <Select.Option
-                                            key={item.productTypeId}
-                                            value={item.productTypeId}
-                                        >
-                                            {item.nameProductType}
-                                        </Select.Option>
-                                    );
-                                })}
-                        </Select>
-                    </Form.Item>
-                    <Form.Item label="Trạng thái" name="Status">
-                        <Select placeholder="Chọn trạng thái">
-                            <Select.Option key="1" value="1">
-                                Hiển thị
-                            </Select.Option>
-                            <Select.Option key="0" value="0">
-                                Ẩn
-                            </Select.Option>
-                        </Select>
-                    </Form.Item>
+                    <Row gutter={16}>
+                        <Col span={12}>
+                            <Form.Item
+                                label="Danh mục"
+                                name="Category"
+                                labelCol={{ span: 4, offset: 4 }}
+                                rules={[{ required: true }]}
+                            >
+                                <Select placeholder="Chọn danh mục">
+                                    {categories &&
+                                        categories.map((item) => {
+                                            return (
+                                                <Select.Option
+                                                    key={item.productTypeId}
+                                                    value={item.productTypeId}
+                                                >
+                                                    {item.nameProductType}
+                                                </Select.Option>
+                                            );
+                                        })}
+                                </Select>
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item
+                                label="Trạng thái"
+                                name="Status"
+                                style={{ width: "calc(100% - 131px)" }}
+                                labelCol={{ span: 0, offset: 0 }}
+                                rules={[{ required: true }]}
+                            >
+                                <Select placeholder="Chọn trạng thái">
+                                    <Select.Option key="1" value="1">
+                                        Hiển thị
+                                    </Select.Option>
+                                    <Select.Option key="0" value="0">
+                                        Ẩn
+                                    </Select.Option>
+                                </Select>
+                            </Form.Item>
+                        </Col>
+                    </Row>
                     <Form.Item
                         label="Hình ảnh"
                         tooltip="Ảnh sản phẩm xem trước"
                         name="AvartarImageProduct"
+                        labelCol={{ span: 3, offset: 1 }}
+                        rules={[{ required: true }]}
                     >
                         <Upload
                             listType="picture-card"
@@ -168,23 +244,34 @@ const ProductAdd = () => {
                             )}
                         </Upload>
                     </Form.Item>
-                    <Form.Item label="Mô tả ngắn" name="shortDescription">
+                    <Form.Item
+                        label="Mô tả ngắn"
+                        name="shortDescription"
+                        labelCol={{ span: 3, offset: 1 }}
+                        rules={[{ required: true }]}
+                    >
                         <TextArea
                             rows={2}
                             placeholder="Mô tả ngắn sản phẩm..."
                         />
                     </Form.Item>
-                    <Form.Item label="Mô tả dài" name="fullDescription">
+                    <Form.Item
+                        label="Mô tả dài"
+                        name="fullDescription"
+                        labelCol={{ span: 3, offset: 1 }}
+                        rules={[{ required: true }]}
+                    >
                         <TextArea
                             rows={4}
                             placeholder="Mô tả chi tiết sản phẩm..."
                         />
                     </Form.Item>
-                    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                    <Form.Item wrapperCol={{ span: 16, offset: 4 }}>
                         <Button
                             type="primary"
                             htmlType="submit"
                             onClick={onHandleSubmit}
+                            block
                         >
                             Tạo mới
                         </Button>
