@@ -9,11 +9,10 @@ const OrderApi = {
     const url = `/Order/getDetail/${id}`;
     return axiosClient.get(url, {
       headers: {
-        Authorization: `Bearer ${
-          localStorage.getItem("token")
-            ? JSON.parse(localStorage.getItem("token"))
-            : ""
-        }`,
+        Authorization: `Bearer ${localStorage.getItem("token")
+          ? JSON.parse(localStorage.getItem("token"))
+          : ""
+          }`,
       },
     });
   },
@@ -24,11 +23,10 @@ const OrderApi = {
       {},
       {
         headers: {
-          Authorization: `Bearer ${
-            localStorage.getItem("token")
-              ? JSON.parse(localStorage.getItem("token"))
-              : ""
-          }`,
+          Authorization: `Bearer ${localStorage.getItem("token")
+            ? JSON.parse(localStorage.getItem("token"))
+            : ""
+            }`,
         },
         params,
       }
@@ -38,11 +36,10 @@ const OrderApi = {
     const url = "/Order";
     return axiosClient.get(url, {
       headers: {
-        Authorization: `Bearer ${
-          localStorage.getItem("token")
-            ? JSON.parse(localStorage.getItem("token"))
-            : ""
-        }`,
+        Authorization: `Bearer ${localStorage.getItem("token")
+          ? JSON.parse(localStorage.getItem("token"))
+          : ""
+          }`,
       },
       params: {
         ...params,
@@ -53,11 +50,38 @@ const OrderApi = {
     const url = "/Order/getwaitingorder";
     return axiosClient.get(url, {
       headers: {
-        Authorization: `Bearer ${
-          localStorage.getItem("token")
-            ? JSON.parse(localStorage.getItem("token"))
-            : ""
-        }`,
+        Authorization: `Bearer ${localStorage.getItem("token")
+          ? JSON.parse(localStorage.getItem("token"))
+          : ""
+          }`,
+      },
+      params: {
+        ...params,
+      },
+    });
+  },
+  GetCanceled: (params = null) => {
+    const url = "Order/orderIsCanceled";
+    return axiosClient.get(url, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")
+          ? JSON.parse(localStorage.getItem("token"))
+          : ""
+          }`,
+      },
+      params: {
+        ...params,
+      },
+    });
+  },
+  GetCompelete: (params = null) => {
+    const url = "Order/getcomplete";
+    return axiosClient.get(url, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")
+          ? JSON.parse(localStorage.getItem("token"))
+          : ""
+          }`,
       },
       params: {
         ...params,
@@ -68,11 +92,10 @@ const OrderApi = {
     const url = "/OrderStatus";
     return axiosClient.get(url, {
       headers: {
-        Authorization: `Bearer ${
-          localStorage.getItem("token")
-            ? JSON.parse(localStorage.getItem("token"))
-            : ""
-        }`,
+        Authorization: `Bearer ${localStorage.getItem("token")
+          ? JSON.parse(localStorage.getItem("token"))
+          : ""
+          }`,
       },
     });
   },
@@ -84,11 +107,10 @@ const OrderApi = {
     const url = `/Order/getDetailForEmail/${email}`;
     return axiosClient.get(url, {
       headers: {
-        Authorization: `Bearer ${
-          localStorage.getItem("token")
-            ? JSON.parse(localStorage.getItem("token"))
-            : ""
-        }`,
+        Authorization: `Bearer ${localStorage.getItem("token")
+          ? JSON.parse(localStorage.getItem("token"))
+          : ""
+          }`,
       },
     });
   },

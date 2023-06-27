@@ -1,19 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Breadcrumb,
-  Pagination,
-  Space,
-  Table,
-  Select,
-  Tag,
-  Button,
-  message,
-  Modal,
-  Descriptions,
-  Image,
-} from "antd";
-import { NavLink } from "react-router-dom";
-import { BiEdit } from "react-icons/bi";
+import { Breadcrumb, Pagination, Space, Table, Select, Tag, Button, message, Modal, Descriptions, Image } from "antd";
 import OrderApi from "../../../api/order/OrderApi.js";
 import { format } from "date-fns";
 import LoadingSpin from "../../loading/LoadingSpin";
@@ -43,9 +29,9 @@ const OrderList = () => {
           nameProduct: item.product.nameProduct,
           avartarImageProduct: item.product.avartarImageProduct,
           quantity: item.quantity,
-          price: item.price.toLocaleString("vi-VN") + " " + "vnd",
+          price: item.price.toLocaleString("vi-VN") + " " + "VND",
           totalPrice:
-            (item.price * item.quantity).toLocaleString("vi-VN") + " " + "vnd",
+            (item.price * item.quantity).toLocaleString("vi-VN") + " " + "VND",
         };
       })
     );
@@ -60,11 +46,11 @@ const OrderList = () => {
   const handlePaginationChange = (page, pageSize) => {
     setParam(
       (prev) =>
-        (prev = {
-          ...param,
-          page: page,
-          pageSize: pageSize,
-        })
+      (prev = {
+        ...param,
+        page: page,
+        pageSize: pageSize,
+      })
     );
   };
   const [param, setParam] = useState({
@@ -91,10 +77,6 @@ const OrderList = () => {
       orderId: item.orderId,
       code: item.codeOrder,
       fullName: item.fullName,
-      // phone: item.phone,
-      // email: item.email,
-      // address: item.address,
-      // note: item.noteOrder,
       createdAt: item.createdAt,
       paymentOrder:
         item.paymentOrderPaymentId == 1 ? (
@@ -114,7 +96,7 @@ const OrderList = () => {
     try {
       const data = await OrderApi.getOrderStatus();
       setOptions(data);
-    } catch (error) {}
+    } catch (error) { }
   };
   const handleChangeStatus = (id) => async (orderId, newStatus) => {
     try {
@@ -186,7 +168,7 @@ const OrderList = () => {
       align: "center",
     },
     {
-      title: "Trạng Thái",
+      title: "Trạng thái đơn hàng",
       dataIndex: "orderStatus",
       key: "orderStatus",
       align: "center",
@@ -210,7 +192,7 @@ const OrderList = () => {
       ),
     },
     {
-      title: "Hành động",
+      title: "Xem chi tiết",
       dataIndex: "orderId",
       key: "orderId",
       align: "center",
@@ -281,32 +263,33 @@ const OrderList = () => {
       </Breadcrumb>
       {contextHolder}
       <Modal
-        title="Basic Modal"
+        // title="Basic Modal"
         open={isModalOpen}
         width={1100}
         onOk={handleOk}
         onCancel={handleCancel}>
-        <Descriptions title="Thông Tin Tiết người đặt">
+        <Descriptions title="Chi tiết đơn hàng">
           <Descriptions.Item label="Tên khách hàng">
             {dataCurrent && dataCurrent.fullName}
           </Descriptions.Item>
           <Descriptions.Item label="Số điện thoại">
-            {" "}
             {dataCurrent && dataCurrent.phone}
           </Descriptions.Item>
+          <Descriptions.Item label="Mã đơn hàng">
+            {dataCurrent && dataCurrent.codeOrder}
+          </Descriptions.Item>
           <Descriptions.Item label="Email">
-            {" "}
             {dataCurrent && dataCurrent.email}
           </Descriptions.Item>
           <Descriptions.Item label="Địa chỉ">
             {dataCurrent && dataCurrent.address}
           </Descriptions.Item>
-          <Descriptions.Item label="Tổng tiền">
+          <Descriptions.Item label="Tổng đơn hàng">
             {" "}
             {dataCurrent &&
               dataCurrent.actualPrice &&
               dataCurrent.actualPrice.toLocaleString("vi-VN")}{" "}
-            vnd
+            VND
           </Descriptions.Item>
           <Descriptions.Item label="Phương thức thanh toán">
             {dataCurrent && (
@@ -319,9 +302,6 @@ const OrderList = () => {
                   : "Thanh Toán Online"}
               </Tag>
             )}
-          </Descriptions.Item>
-          <Descriptions.Item label="Mã hóa đơn">
-            {dataCurrent && dataCurrent.codeOrder}
           </Descriptions.Item>
         </Descriptions>
         <Table columns={columnDeatail} dataSource={currenOrderDeatail} />
