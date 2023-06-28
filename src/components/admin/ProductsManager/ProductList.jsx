@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Breadcrumb, Image, Tag, Pagination, Space, Table, Typography } from "antd";
+import {
+    Breadcrumb,
+    Image,
+    Tag,
+    Pagination,
+    Space,
+    Table,
+    Popconfirm,
+    Button,
+} from "antd";
 import { NavLink } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import { ImBin } from "react-icons/im";
 import ProductApi from "../../../api/product/ProductApi";
 import LoadingSpin from "../../loading/LoadingSpin";
+import { useToasts } from "react-toast-notifications";
 
-const { Text } = Typography;
 const ProductList = () => {
+    const { addToast } = useToasts();
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState({
         totalItems: 0,
@@ -21,11 +31,11 @@ const ProductList = () => {
     const handlePaginationChange = (page, pageSize) => {
         setParam(
             (prev) =>
-            (prev = {
-                ...param,
-                page: page,
-                pageSize: pageSize,
-            })
+                (prev = {
+                    ...param,
+                    page: page,
+                    pageSize: pageSize,
+                })
         );
     };
     const [param, setParam] = useState({
@@ -39,15 +49,34 @@ const ProductList = () => {
                 setLoading(true);
                 const { data } = await ProductApi.getAllProducts(param);
                 setData(data);
-                setLoading(false)
+                setLoading(false);
             } catch (error) {
                 console.error(error);
-                setLoading(false)
+                setLoading(false);
             }
         };
         getProducts();
     }, [param]);
-    // console.log(data.data);
+    // Remove product
+    const handleOk = async (id) => {
+        try {
+            await ProductApi.removeProduct(id);
+            const { data } = await ProductApi.getAllProducts(param);
+            setData(data);
+            addToast("Xóa sản phẩm thành công!", {
+                appearance: "success",
+            });
+        } catch (error) {
+            addToast("Xóa sản phẩm thất bại!", {
+                appearance: "error",
+            });
+        }
+    };
+    const handleCancel = () => {
+        addToast("Hủy xóa", {
+            appearance: "error",
+        });
+    };
     const dataSource = data.data?.map((item, index) => {
         return {
             key: index + 1,
@@ -117,7 +146,7 @@ const ProductList = () => {
             dataIndex: "categoryName",
             key: "categoryName",
             align: "center",
-            render: (categoryName) => (<Tag color="#f50">{categoryName}</Tag>)
+            render: (categoryName) => <Tag color="#f50">{categoryName}</Tag>,
         },
         {
             title: "Trạng thái",
@@ -132,12 +161,25 @@ const ProductList = () => {
             align: "center",
             render: (text, record) => (
                 <Space size="middle">
-                    <NavLink to={`/admin/products-edit/${record.id}`}>
-                        <BiEdit />
-                    </NavLink>
-                    <Text type="danger">
-                        <ImBin />
-                    </Text>
+                    <Button className="border border-white">
+                        <NavLink to={`/admin/products-edit/${record.id}`}>
+                            <BiEdit />
+                        </NavLink>
+                    </Button>
+                    <Popconfirm
+                        title="Bạn có chắc chắn xóa?"
+                        onConfirm={() => {
+                            handleOk(record.id);
+                        }}
+                        onCancel={handleCancel}
+                        className="border border-white"
+                        okText="Có"
+                        cancelText="Không"
+                    >
+                        <Button danger>
+                            <ImBin />
+                        </Button>
+                    </Popconfirm>
                 </Space>
             ),
         },
@@ -153,7 +195,11 @@ const ProductList = () => {
                 <Breadcrumb.Item>Danh sách sản phẩm</Breadcrumb.Item>
             </Breadcrumb>
             <div>
-                {loading && (<div><LoadingSpin /></div>)}
+                {loading && (
+                    <div>
+                        <LoadingSpin />
+                    </div>
+                )}
                 <Table
                     dataSource={dataSource}
                     columns={columns}

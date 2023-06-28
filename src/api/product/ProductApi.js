@@ -59,18 +59,18 @@ const ProductApi = {
             },
         });
     },
-    // removeProduct: (id) => {
-    //     const url = `/Product/${id}`;
-    //     return axiosClient.get(url, {
-    //         headers: {
-    //             Authorization: `Bearer ${
-    //                 localStorage.getItem("token")
-    //                     ? JSON.parse(localStorage.getItem("token"))
-    //                     : ""
-    //             }`,
-    //         },
-    //     });
-    // },
+    removeProduct: (id) => {
+        const url = `/Product/delete/${id}`;
+        return axiosClient.get(url, {
+            headers: {
+                Authorization: `Bearer ${
+                    localStorage.getItem("token")
+                        ? JSON.parse(localStorage.getItem("token"))
+                        : ""
+                }`,
+            },
+        });
+    },
     updateProduct: (id, body) => {
         const url = `/Product/update/${id}`;
         return axiosClient.post(url, body, {
