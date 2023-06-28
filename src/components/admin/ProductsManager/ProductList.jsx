@@ -47,7 +47,7 @@ const ProductList = () => {
         };
         getProducts();
     }, [param]);
-    console.log(data.data);
+    // console.log(data.data);
     const dataSource = data.data?.map((item, index) => {
         return {
             key: index + 1,
