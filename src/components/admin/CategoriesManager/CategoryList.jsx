@@ -1,11 +1,20 @@
 import React, { useEffect } from "react";
-import { Breadcrumb, Image, Space, Table, Typography, Pagination, Tag } from "antd";
+import {
+    Breadcrumb,
+    Image,
+    Space,
+    Table,
+    Typography,
+    Pagination,
+    Tag,
+    Button
+} from "antd";
 import { NavLink } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import { ImBin } from "react-icons/im";
 import categoryAPI from "../../../api/category/CategoryApi";
 import { useState } from "react";
-import { format } from 'date-fns';
+import { format } from "date-fns";
 import LoadingSpin from "../../loading/LoadingSpin";
 
 // const currentDate = new Date();
@@ -25,11 +34,11 @@ const CategoryList = () => {
     const handlePaginationChange = (page, pageSize) => {
         setParam(
             (prev) =>
-            (prev = {
-                ...param,
-                page: page,
-                pageSize: pageSize,
-            })
+                (prev = {
+                    ...param,
+                    page: page,
+                    pageSize: pageSize,
+                })
         );
     };
     const [param, setParam] = useState({
@@ -42,11 +51,11 @@ const CategoryList = () => {
             try {
                 setLoading(true);
                 const { data } = await categoryAPI.getAllCategories(param);
-                setLoading(false)
+                setLoading(false);
                 setData(data);
             } catch (error) {
                 console.log(error);
-                setLoading(false)
+                setLoading(false);
             }
         };
         getCategories();
@@ -74,7 +83,9 @@ const CategoryList = () => {
             dataIndex: "nameProductType",
             key: "nameProductType",
             align: "center",
-            render: (nameProductType) => (<Tag color="#f50">{nameProductType}</Tag>)
+            render: (nameProductType) => (
+                <Tag color="#f50">{nameProductType}</Tag>
+            ),
         },
         {
             title: "Hình ảnh",
@@ -97,9 +108,7 @@ const CategoryList = () => {
             key: "createdAt",
             align: "center",
             render: (createdAt) => (
-                <>
-                    {format(new Date(createdAt), 'HH:mm:ss dd/MM/yyyy')}
-                </>
+                <>{format(new Date(createdAt), "HH:mm:ss dd/MM/yyyy")}</>
             ),
         },
         {
@@ -108,9 +117,7 @@ const CategoryList = () => {
             key: "updatedAt",
             align: "center",
             render: (updatedAt) => (
-                <>
-                    {format(new Date(updatedAt), 'HH:mm:ss dd/MM/yyyy')}
-                </>
+                <>{format(new Date(updatedAt), "HH:mm:ss dd/MM/yyyy")}</>
             ),
         },
         {
@@ -118,11 +125,13 @@ const CategoryList = () => {
             dataIndex: "action",
             key: "action",
             align: "center",
-            render: () => (
+            render: (text, record) => (
                 <Space size="middle">
-                    <NavLink to={"/admin/products-edit"}>
-                        <BiEdit />
-                    </NavLink>
+                    <Button className="border border-white">
+                        <NavLink to={`/admin/categories-edit/${record.id}`}>
+                            <BiEdit />
+                        </NavLink>
+                    </Button>
                     <Text type="danger">
                         <ImBin />
                     </Text>
@@ -141,8 +150,16 @@ const CategoryList = () => {
                 <Breadcrumb.Item>Danh sách danh mục</Breadcrumb.Item>
             </Breadcrumb>
             <div>
-                {loading && (<div><LoadingSpin /></div>)}
-                <Table dataSource={dataSource} columns={columns} pagination={false} />
+                {loading && (
+                    <div>
+                        <LoadingSpin />
+                    </div>
+                )}
+                <Table
+                    dataSource={dataSource}
+                    columns={columns}
+                    pagination={false}
+                />
                 <Pagination
                     style={{
                         textAlign: "right",

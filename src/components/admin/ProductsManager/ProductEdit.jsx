@@ -30,6 +30,7 @@ const validateMessages = {
 const ProductEdit = () => {
     const { addToast } = useToasts();
     const history = useHistory();
+    const [loading, setLoading] = useState(false);
     const [preview, setPreview] = useState("");
     const [form] = Form.useForm();
     const { id } = useParams();
@@ -75,6 +76,7 @@ const ProductEdit = () => {
                 fullDescription: item.fullDescription,
             };
             const formDataApi = new FormData();
+            setLoading(true);
             formDataApi.append("nameProduct", formData.NameProduct);
             formDataApi.append("price", formData.Price);
             formDataApi.append("quantity", formData.Quantity);
@@ -89,6 +91,7 @@ const ProductEdit = () => {
             formDataApi.append("fullDescription", formData.fullDescription);
             try {
                 await ProductApi.updateProduct(id, formDataApi);
+                setLoading(false);
                 addToast("Cập nhật sản phẩm thành công!", {
                     appearance: "success",
                 });
@@ -101,7 +104,6 @@ const ProductEdit = () => {
         });
     };
     const [categories, setCategories] = useState();
-    const [loading, setLoading] = useState(false);
     useEffect(() => {
         getDataApiCategory();
     }, []);
