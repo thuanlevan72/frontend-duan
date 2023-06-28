@@ -273,7 +273,7 @@ const ProductAdd = () => {
                             onClick={onHandleSubmit}
                             block
                         >
-                            Tạo mới
+                            Thêm mới sản phẩm
                         </Button>
                     </Form.Item>
                 </Form>
