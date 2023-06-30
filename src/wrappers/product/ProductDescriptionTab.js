@@ -1,9 +1,35 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
+import OrderApi from "../../api/order/OrderApi";
+import { Spin } from "antd";
 
-const ProductDescriptionTab = ({ spaceBottomClass, productFullDesc }) => {
+const ProductDescriptionTab = ({
+  spaceBottomClass,
+  productFullDesc,
+  productId,
+}) => {
+  const [isPurchased, setIsPurchased] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(
+    localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : ""
+  );
+  useEffect(async () => {
+    if (user) {
+      try {
+        setLoading(true);
+        const res = await OrderApi.isPurchased(user.user.userId, productId);
+        console.log(res);
+        if (res.isPurchased) {
+          setIsPurchased(true);
+        }
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+      }
+    }
+  }, []);
   return (
     <div className={`description-review-area ${spaceBottomClass}`}>
       <div className="container">
@@ -129,42 +155,63 @@ const ProductDescriptionTab = ({ spaceBottomClass, productFullDesc }) => {
                   </div>
                   <div className="col-lg-5">
                     <div className="ratting-form-wrapper pl-50">
-                      <h3>Add a Review</h3>
+                      <h3>Gửi bình luận</h3>
                       <div className="ratting-form">
-                        <form action="#">
-                          <div className="star-box">
-                            <span>Your rating:</span>
+                        {isPurchased ? (
+                          <form action="#">
+                            <div className="star-box">
+                              {/* <span>Your rating:</span>
                             <div className="ratting-star">
                               <i className="fa fa-star" />
                               <i className="fa fa-star" />
                               <i className="fa fa-star" />
                               <i className="fa fa-star" />
                               <i className="fa fa-star" />
+                            </div> */}
                             </div>
+                            <div className="row">
+                              <div className="col-md-6">
+                                <div className="rating-form-style mb-10">
+                                  {/* <input placeholder="Name" type="text" /> */}
+                                </div>
+                              </div>
+                              <div className="col-md-6">
+                                <div className="rating-form-style mb-10">
+                                  {/* <input placeholder="Email" type="email" /> */}
+                                </div>
+                              </div>
+                              <div className="col-md-12">
+                                <div className="rating-form-style form-submit">
+                                  <textarea
+                                    name="Your Review"
+                                    placeholder="Message"
+                                    defaultValue={""}
+                                  />
+                                  <input type="submit" defaultValue="Submit" />
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        ) : (
+                          <h3
+                            style={{
+                              color: "#484747",
+                              padding: "20% 0",
+                              lineHeight: "30px",
+                            }}>
+                            bạn cần mua và trải nghiệm sản phẩm này để có thể
+                            đánh giá
+                          </h3>
+                        )}
+
+                        {loading && (
+                          <div style={{ width: "100%", textAlign: "center" }}>
+                            <Spin
+                              style={{ textAlign: "center" }}
+                              size="large"
+                            />
                           </div>
-                          <div className="row">
-                            <div className="col-md-6">
-                              <div className="rating-form-style mb-10">
-                                <input placeholder="Name" type="text" />
-                              </div>
-                            </div>
-                            <div className="col-md-6">
-                              <div className="rating-form-style mb-10">
-                                <input placeholder="Email" type="email" />
-                              </div>
-                            </div>
-                            <div className="col-md-12">
-                              <div className="rating-form-style form-submit">
-                                <textarea
-                                  name="Your Review"
-                                  placeholder="Message"
-                                  defaultValue={""}
-                                />
-                                <input type="submit" defaultValue="Submit" />
-                              </div>
-                            </div>
-                          </div>
-                        </form>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -180,7 +227,7 @@ const ProductDescriptionTab = ({ spaceBottomClass, productFullDesc }) => {
 
 ProductDescriptionTab.propTypes = {
   productFullDesc: PropTypes.string,
-  spaceBottomClass: PropTypes.string
+  spaceBottomClass: PropTypes.string,
 };
 
 export default ProductDescriptionTab;
