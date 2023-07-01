@@ -3,7 +3,6 @@ import MetaTags from "react-meta-tags";
 import LayoutThree from "../../layouts/LayoutThree";
 import HeroSliderFive from "../../wrappers/hero-slider/HeroSliderFive";
 import FeatureIconFour from "../../wrappers/feature-icon/FeatureIconFour";
-import TabProductFour from "../../wrappers/product/TabProductFour";
 import BannerFive from "../../wrappers/banner/BannerFive";
 import CountDownTwo from "../../wrappers/countdown/CountDownTwo";
 import TestimonialOne from "../../wrappers/testimonial/TestimonialOne";
@@ -35,12 +34,6 @@ const HomeOrganicFood = () => {
           containerClass="container-fluid"
           gutterClass="padding-10-row-col"
         />
-        {/* tab product */}
-        {/* <TabProductFour
-          spaceBottomClass="pb-100"
-          category="organic food"
-          productTabClass="product-tab-fruits"
-        /> */}
         {/* banner */}
         <BannerFive />
         {/* countdown */}
