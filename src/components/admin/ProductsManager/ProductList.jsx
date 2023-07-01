@@ -8,7 +8,9 @@ import {
     Table,
     Popconfirm,
     Button,
+    Input,
 } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import { ImBin } from "react-icons/im";
@@ -42,6 +44,92 @@ const ProductList = () => {
         page: 1,
         pageSize: 10,
         search: "",
+    });
+    const [searchText, setSearchText] = useState("");
+    const handleSearch = (value) => {
+        setSearchText(value);
+        setParam((prev) => ({
+            ...prev,
+            search: value,
+            page: 1,
+        }));
+    };
+    const getColumnSearchProps = (dataIndex) => ({
+        filterDropdown: ({
+            setSelectedKeys,
+            selectedKeys,
+            clearFilters,
+        }) => (
+            <div style={{ padding: 8 }}>
+                <Input
+                    placeholder={`Tìm kiếm tên món...`}
+                    value={selectedKeys[0]}
+                    onChange={(e) =>
+                        setSelectedKeys(e.target.value ? [e.target.value] : [])
+                    }
+                    onPressEnter={() => handleSearch(selectedKeys[0])}
+                    style={{ marginBottom: 8, display: "block", height: 30 }}
+                />
+                <Space>
+                    <Button
+                        type="primary"
+                        size="small"
+                        onClick={() => handleSearch(selectedKeys[0])}
+                        style={{ width: 90 }}
+                    >
+                        Tìm
+                    </Button>
+                    <Button
+                        type="primary"
+                        size="small"
+                        onClick={() => {
+                            clearFilters();
+                            setSearchText("");
+                            handleSearch("");
+                        }}
+                        danger
+                        style={{ width: 90 }}
+                    >
+                        Xóa
+                    </Button>
+                </Space>
+            </div>
+        ),
+        filterIcon: (filtered) => (
+            <SearchOutlined
+                style={{ color: filtered ? "#1890ff" : undefined }}
+            />
+        ),
+        onFilter: (value, record) =>
+            record[dataIndex]
+                ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
+                : "",
+        render: (text) => {
+            return dataIndex === "name" ? (
+                <span>
+                    {searchText && text.toLowerCase().includes(searchText.toLowerCase()) ? (
+                        <span>
+                            {text
+                                .split(new RegExp(`(${searchText})`, "gi"))
+                                .map((fragment, i) =>
+                                    fragment.toLowerCase() ===
+                                    searchText.toLowerCase() ? (
+                                        <span key={i} className="bg-warning">
+                                            {fragment}
+                                        </span>
+                                    ) : (
+                                        fragment
+                                    )
+                                )}
+                        </span>
+                    ) : (
+                        text
+                    )}
+                </span>
+            ) : (
+                text
+            );
+        },
     });
     useEffect(() => {
         const getProducts = async () => {
@@ -77,24 +165,25 @@ const ProductList = () => {
             appearance: "error",
         });
     };
-    const dataSource = data.data?.map((item, index) => {
-        return {
-            key: index + 1,
-            id: item.productId,
-            name: item.nameProduct,
-            image: item.avartarImageProduct,
-            price: item.price.toLocaleString("vi-VN"),
-            discount: item.discount,
-            quantity: item.quantity,
-            categoryName: item.productType.nameProductType,
-            status:
-                item.status === 1 ? (
-                    <Tag color="geekblue">Hiển thị</Tag>
-                ) : (
-                    <Tag color="volcano">Ẩn</Tag>
-                ),
-        };
-    });
+    const dataSource = data.data
+        ?.map((item, index) => {
+            return {
+                key: index + 1,
+                id: item.productId,
+                name: item.nameProduct,
+                image: item.avartarImageProduct,
+                price: item.price.toLocaleString("vi-VN"),
+                discount: item.discount,
+                quantity: item.quantity,
+                categoryName: item.productType.nameProductType,
+                status:
+                    item.status === 1 ? (
+                        <Tag color="geekblue">Hiển thị</Tag>
+                    ) : (
+                        <Tag color="volcano">Ẩn</Tag>
+                    ),
+            };
+        })
     const columns = [
         {
             title: "STT",
@@ -107,6 +196,7 @@ const ProductList = () => {
             dataIndex: "name",
             key: "name",
             align: "center",
+            ...getColumnSearchProps("name"),
         },
         {
             title: "Hình ảnh",

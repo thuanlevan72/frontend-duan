@@ -91,7 +91,7 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
           </li>
           <li>
             <Link to={process.env.PUBLIC_URL + "/blog-standard"}>
-              {strings["blog"]}yy
+              {strings["blog"]}
             </Link>
           </li>
           <li>

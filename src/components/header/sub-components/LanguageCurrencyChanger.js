@@ -58,32 +58,8 @@ const LanguageCurrencyChanger = ({
           </ul>
         </div>
       </div>
-      {/* <div className="same-language-currency use-style">
-        <span>
-          {currency.currencyName} <i className="fa fa-angle-down" />
-        </span>
-        <div className="lang-car-dropdown">
-          <ul>
-            <li>
-              <button value="USD" onClick={e => setCurrencyTrigger(e)}>
-                USD
-              </button>
-            </li>
-            <li>
-              <button value="EUR" onClick={e => setCurrencyTrigger(e)}>
-                EUR
-              </button>
-            </li>
-            <li>
-              <button value="GBP" onClick={e => setCurrencyTrigger(e)}>
-                GBP
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div> */}
       <div className="same-language-currency">
-        <p>Call Us 3965410</p>
+        <p><i class="fa fa-phone"></i> 0906077598</p>
       </div>
     </div>
   );
