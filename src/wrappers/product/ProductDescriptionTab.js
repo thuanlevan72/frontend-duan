@@ -3,18 +3,86 @@ import React, { useEffect, useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
 import OrderApi from "../../api/order/OrderApi";
-import { Spin } from "antd";
+import { Pagination, Spin, message } from "antd";
+import ProductReviewApi from "../../api/product/ProductReviewApi";
+import { useHistory } from "react-router-dom";
 
 const ProductDescriptionTab = ({
   spaceBottomClass,
   productFullDesc,
   productId,
 }) => {
+  const [messageApi, contextHolder] = message.useMessage();
+  const history = useHistory();
+  const [dataMess, setDataMess] = useState();
   const [isPurchased, setIsPurchased] = useState(false);
+  const [ContentRated, setContentRated] = useState({
+    productId: productId,
+    userId: localStorage.getItem("user")
+      ? JSON.parse(localStorage.getItem("user")).user.userId
+      : -1,
+    contentRated: "",
+    pointEvaluation: 5,
+    status: 1,
+  });
+  const [param, setParam] = useState({
+    ProductId: productId,
+    page: 1,
+    pageSize: 5,
+  });
+  useEffect(async () => {
+    try {
+      setLoading(true);
+      const res = await ProductReviewApi.getReviewForproduct(param);
+      setDataMess(res.data);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
+  }, [param]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(
     localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : ""
   );
+  const handlePaginationChange = (page, pageSize) => {
+    console.log(page, pageSize);
+    setParam(
+      (prev) =>
+        (prev = {
+          ...param,
+          page: page,
+          pageSize: pageSize,
+        })
+    );
+  };
+  const subMitMess = async (e) => {
+    e.preventDefault();
+    if (
+      ContentRated.contentRated.length <= 0 ||
+      ContentRated.contentRated.length > 255
+    ) {
+      messageApi.open({
+        type: "warning",
+        content: "Bình luận quá ngắn hoặc quá dài",
+      });
+      return;
+    }
+    try {
+      setLoading(true);
+      await ProductReviewApi.SeenMess(ContentRated);
+
+      messageApi.open({
+        type: "success",
+        content: "cảm ơn bạn đã bình luận về sản phẩm này.",
+      });
+      setLoading(false);
+      setTimeout(() => {
+        history.go(0);
+      }, 500);
+    } catch (error) {
+      setLoading(false);
+    }
+  };
   useEffect(async () => {
     if (user) {
       try {
@@ -73,89 +141,110 @@ const ProductDescriptionTab = ({
               </Tab.Pane>
               <Tab.Pane eventKey="productReviews">
                 <div className="row">
-                  <div className="col-lg-7">
-                    <div className="review-wrapper">
-                      <div className="single-review">
-                        <div className="review-img">
-                          <img
-                            src={
-                              process.env.PUBLIC_URL +
-                              "/assets/img/testimonial/1.jpg"
-                            }
-                            alt=""
-                          />
-                        </div>
-                        <div className="review-content">
-                          <div className="review-top-wrap">
-                            <div className="review-left">
-                              <div className="review-name">
-                                <h4>White Lewis</h4>
-                              </div>
-                              <div className="review-rating">
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                              </div>
-                            </div>
-                            <div className="review-left">
-                              <button>Reply</button>
-                            </div>
-                          </div>
-                          <div className="review-bottom">
-                            <p>
-                              Vestibulum ante ipsum primis aucibus orci
-                              luctustrices posuere cubilia Curae Suspendisse
-                              viverra ed viverra. Mauris ullarper euismod
-                              vehicula. Phasellus quam nisi, congue id nulla.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="single-review child-review">
-                        <div className="review-img">
-                          <img
-                            src={
-                              process.env.PUBLIC_URL +
-                              "/assets/img/testimonial/2.jpg"
-                            }
-                            alt=""
-                          />
-                        </div>
-                        <div className="review-content">
-                          <div className="review-top-wrap">
-                            <div className="review-left">
-                              <div className="review-name">
-                                <h4>White Lewis</h4>
-                              </div>
-                              <div className="review-rating">
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                              </div>
-                            </div>
-                            <div className="review-left">
-                              <button>Reply</button>
-                            </div>
-                          </div>
-                          <div className="review-bottom">
-                            <p>
-                              Vestibulum ante ipsum primis aucibus orci
-                              luctustrices posuere cubilia Curae Suspendisse
-                              viverra ed viverra. Mauris ullarper euismod
-                              vehicula. Phasellus quam nisi, congue id nulla.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
+                  {loading && (
+                    <div style={{ width: "100%", textAlign: "center" }}>
+                      <Spin style={{ textAlign: "center" }} size="large" />
                     </div>
+                  )}
+                  <div className="col-lg-7">
+                    {dataMess && dataMess.totalItems > 0 ? (
+                      dataMess.data.map((item, index) => (
+                        <div className="review-wrapper">
+                          <div className="single-review">
+                            <div className="review-img">
+                              <img
+                                style={{ width: 80, height: 90 }}
+                                src={item.user.account.avartar}
+                                alt=""
+                              />
+                            </div>
+                            <div className="review-content">
+                              <div className="review-top-wrap">
+                                <div className="review-left">
+                                  <div className="review-name">
+                                    <h4>
+                                      {item.user.userName
+                                        ? item.user.userName
+                                        : item.user.account.userName}
+                                    </h4>
+                                  </div>
+                                  <div className="review-rating">
+                                    {Array.from(
+                                      { length: item.pointEvaluation },
+                                      (_, index) => index + 1
+                                    ).map((number) => {
+                                      return <i className="fa fa-star" />;
+                                    })}
+                                  </div>
+                                </div>
+                                <div className="review-left">
+                                  {/* <button>Reply</button> */}
+                                </div>
+                              </div>
+                              <div className="review-bottom">
+                                <p>{item.contentRated}.</p>
+                              </div>
+                            </div>
+                          </div>
+                          {item.contentSeen && (
+                            <div className="single-review child-review">
+                              <div className="review-img">
+                                <img
+                                  style={{ width: 80, height: 90 }}
+                                  src="https://cdn-icons-png.flaticon.com/512/186/186037.png"
+                                  alt=""
+                                />
+                              </div>
+                              <div className="review-content">
+                                <div className="review-top-wrap">
+                                  <div className="review-left">
+                                    <div className="review-name">
+                                      <h4>Đội ngũ Poly -food</h4>
+                                    </div>
+                                    {/* <div className="review-rating">
+                                      <i className="fa fa-star" />
+                                      <i className="fa fa-star" />
+                                      <i className="fa fa-star" />
+                                      <i className="fa fa-star" />
+                                      <i className="fa fa-star" />
+                                    </div> */}
+                                  </div>
+                                  <div className="review-left">
+                                    {/* <button>Reply</button> */}
+                                  </div>
+                                </div>
+                                <div className="review-bottom">
+                                  <p>{item.contentSeen}.</p>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+
+                          <br />
+                        </div>
+                      ))
+                    ) : (
+                      <p>Sản phẩm chưa được bình luận</p>
+                    )}{" "}
+                    {dataMess && dataMess.totalItems > 0 && (
+                      <Pagination
+                        style={{
+                          textAlign: "center",
+                          padding: "10px 20px",
+                        }}
+                        current={dataMess ? dataMess.page : 1}
+                        pageSize={dataMess ? dataMess.pageSize : 1}
+                        total={dataMess ? dataMess.totalItems : 1}
+                        onChange={handlePaginationChange}
+                        showSizeChanger
+                        showTotal={(total) => `Tổng ${total} bình lu`}
+                      />
+                    )}
                   </div>
                   <div className="col-lg-5">
                     <div className="ratting-form-wrapper pl-50">
                       <h3>Gửi bình luận</h3>
+                      {contextHolder}
                       <div className="ratting-form">
                         {isPurchased ? (
                           <form action="#">
@@ -183,11 +272,21 @@ const ProductDescriptionTab = ({
                               <div className="col-md-12">
                                 <div className="rating-form-style form-submit">
                                   <textarea
-                                    name="Your Review"
+                                    name="ContentRated"
                                     placeholder="Message"
-                                    defaultValue={""}
+                                    value={ContentRated.contentRated}
+                                    onChange={(e) =>
+                                      setContentRated({
+                                        ...ContentRated,
+                                        contentRated: e.target.value,
+                                      })
+                                    }
                                   />
-                                  <input type="submit" defaultValue="Submit" />
+                                  <input
+                                    type="submit"
+                                    defaultValue="Submit"
+                                    onClick={subMitMess}
+                                  />
                                 </div>
                               </div>
                             </div>
@@ -202,15 +301,6 @@ const ProductDescriptionTab = ({
                             bạn cần mua và trải nghiệm sản phẩm này để có thể
                             đánh giá
                           </h3>
-                        )}
-
-                        {loading && (
-                          <div style={{ width: "100%", textAlign: "center" }}>
-                            <Spin
-                              style={{ textAlign: "center" }}
-                              size="large"
-                            />
-                          </div>
                         )}
                       </div>
                     </div>
