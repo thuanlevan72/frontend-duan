@@ -62,8 +62,8 @@ const Cart = ({ location, cartItems }) => {
     const getDataApi = async () => {
       try {
         setLoading(true);
-        const email = JSON.parse(localStorage.getItem("user")).email;
-        const res = await OrderApi.GetOrderForEmail(email);
+        const accountId = JSON.parse(localStorage.getItem("user")).accountId;
+        const res = await OrderApi.GetOrderForUserId(accountId);
         setLoading(false);
         setDataOrderHistory(res);
       } catch (error) {}
