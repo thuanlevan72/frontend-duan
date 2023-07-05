@@ -11,7 +11,7 @@ import {
   decreaseQuantity,
   deleteFromCart,
   cartItemStock,
-  deleteAllFromCart
+  deleteAllFromCart,
 } from "../../redux/actions/cartActions";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
@@ -23,12 +23,13 @@ const Cart = ({
   decreaseQuantity,
   addToCart,
   deleteFromCart,
-  deleteAllFromCart
+  deleteAllFromCart,
 }) => {
   const [quantityCount] = useState(1);
   const { addToast } = useToasts();
   const { pathname } = location;
   let cartTotalPrice = 0;
+  let cartTotalPriceOld = 0;
 
   return (
     <Fragment>
@@ -40,7 +41,9 @@ const Cart = ({
         />
       </MetaTags>
 
-      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Trang chủ</BreadcrumbsItem>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>
+        Trang chủ
+      </BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
         Cart
       </BreadcrumbsItem>
@@ -52,7 +55,9 @@ const Cart = ({
           <div className="container">
             {cartItems && cartItems.length >= 1 ? (
               <Fragment>
-                <h3 className="cart-page-title">Các mặt hàng trong giỏ hàng của bạn.</h3>
+                <h3 className="cart-page-title">
+                  Các mặt hàng trong giỏ hàng của bạn.
+                </h3>
                 <div className="row">
                   <div className="col-12">
                     <div className="table-content table-responsive cart-table-content">
@@ -73,19 +78,20 @@ const Cart = ({
                               cartItem.price,
                               cartItem.discount
                             );
+
                             const finalProductPrice = (
                               cartItem.price * currency.currencyRate
                             ).toFixed(2);
                             const finalDiscountedPrice = (
                               discountedPrice * currency.currencyRate
                             ).toFixed(2);
-
+                            cartTotalPriceOld +=
+                              finalProductPrice * cartItem.quantity;
                             discountedPrice != null
                               ? (cartTotalPrice +=
-                                finalDiscountedPrice * cartItem.quantity)
-
+                                  finalDiscountedPrice * cartItem.quantity)
                               : (cartTotalPrice +=
-                                finalProductPrice * cartItem.quantity);
+                                  finalProductPrice * cartItem.quantity);
                             return (
                               <tr key={key}>
                                 <td className="product-thumbnail">
@@ -94,8 +100,7 @@ const Cart = ({
                                       process.env.PUBLIC_URL +
                                       "/product/" +
                                       cartItem.id
-                                    }
-                                  >
+                                    }>
                                     <img
                                       className="img-fluid"
                                       src={
@@ -113,12 +118,11 @@ const Cart = ({
                                       process.env.PUBLIC_URL +
                                       "/product/" +
                                       cartItem.id
-                                    }
-                                  >
+                                    }>
                                     {cartItem.name}
                                   </Link>
                                   {cartItem.selectedProductColor &&
-                                    cartItem.selectedProductSize ? (
+                                  cartItem.selectedProductSize ? (
                                     <div className="cart-item-variation">
                                       <span>
                                         Color: {cartItem.selectedProductColor}
@@ -136,18 +140,30 @@ const Cart = ({
                                   {discountedPrice !== null ? (
                                     <Fragment>
                                       <span className="amount old">
-                                        {parseInt((currency.currencySymbol +
-                                          finalProductPrice).replace("$", "")).toLocaleString("en-US") + " VND"}
+                                        {parseInt(
+                                          (
+                                            currency.currencySymbol +
+                                            finalProductPrice
+                                          ).replace("$", "")
+                                        ).toLocaleString("en-US") + " VND"}
                                       </span>
                                       <span className="amount">
-                                        {parseInt((currency.currencySymbol +
-                                          finalDiscountedPrice).replace("$", "")).toLocaleString("en-US") + " VND"}
+                                        {parseInt(
+                                          (
+                                            currency.currencySymbol +
+                                            finalDiscountedPrice
+                                          ).replace("$", "")
+                                        ).toLocaleString("en-US") + " VND"}
                                       </span>
                                     </Fragment>
                                   ) : (
                                     <span className="amount">
-                                      {parseInt((currency.currencySymbol +
-                                        finalProductPrice).replace("$", "")).toLocaleString("en-US") + " VND"}
+                                      {parseInt(
+                                        (
+                                          currency.currencySymbol +
+                                          finalProductPrice
+                                        ).replace("$", "")
+                                      ).toLocaleString("en-US") + " VND"}
                                     </span>
                                   )}
                                 </td>
@@ -158,8 +174,7 @@ const Cart = ({
                                       className="dec qtybutton"
                                       onClick={() =>
                                         decreaseQuantity(cartItem, addToast)
-                                      }
-                                    >
+                                      }>
                                       -
                                     </button>
                                     <input
@@ -181,35 +196,43 @@ const Cart = ({
                                         cartItem !== undefined &&
                                         cartItem.quantity &&
                                         cartItem.quantity >=
-                                        cartItemStock(
-                                          cartItem,
-                                          cartItem.selectedProductColor,
-                                          cartItem.selectedProductSize
-                                        )
-                                      }
-                                    >
+                                          cartItemStock(
+                                            cartItem,
+                                            cartItem.selectedProductColor,
+                                            cartItem.selectedProductSize
+                                          )
+                                      }>
                                       +
                                     </button>
                                   </div>
                                 </td>
                                 <td className="product-subtotal">
                                   {discountedPrice !== null
-                                    ? parseInt((currency.currencySymbol +
-                                      (
-                                        finalDiscountedPrice * cartItem.quantity
-                                      ).toFixed(2)).replace("$", "")).toLocaleString("en-US") + " VND"
-                                    : parseInt((currency.currencySymbol +
-                                      (
-                                        finalProductPrice * cartItem.quantity
-                                      ).toFixed(2)).replace("$", "")).toLocaleString("en-US") + " VND"}
+                                    ? parseInt(
+                                        (
+                                          currency.currencySymbol +
+                                          (
+                                            finalDiscountedPrice *
+                                            cartItem.quantity
+                                          ).toFixed(2)
+                                        ).replace("$", "")
+                                      ).toLocaleString("en-US") + " VND"
+                                    : parseInt(
+                                        (
+                                          currency.currencySymbol +
+                                          (
+                                            finalProductPrice *
+                                            cartItem.quantity
+                                          ).toFixed(2)
+                                        ).replace("$", "")
+                                      ).toLocaleString("en-US") + " VND"}
                                 </td>
 
                                 <td className="product-remove">
                                   <button
                                     onClick={() =>
                                       deleteFromCart(cartItem, addToast)
-                                    }
-                                  >
+                                    }>
                                     <i className="fa fa-times"></i>
                                   </button>
                                 </td>
@@ -226,8 +249,7 @@ const Cart = ({
                     <div className="cart-shiping-update-wrapper">
                       <div className="cart-shiping-update">
                         <Link
-                          to={process.env.PUBLIC_URL + "/shop-grid-standard"}
-                        >
+                          to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
                           Tiếp tục mua sắm
                         </Link>
                       </div>
@@ -260,9 +282,7 @@ const Cart = ({
                       </div>
                     </div> */}
                   </div>
-                  <div className="col-lg-6 col-md-6">
-
-                  </div>
+                  <div className="col-lg-6 col-md-6"></div>
                   <div className="col-lg-4 col-md-12">
                     <div className="grand-totall">
                       <div className="title-wrap">
@@ -271,16 +291,31 @@ const Cart = ({
                         </h4>
                       </div>
                       <h5>
-                        Tổng sản phẩm{" "}
-                        <span>
-                          {parseInt((currency.currencySymbol + cartTotalPrice.toFixed(2)).replace("$", "")).toLocaleString("en-US") + " VND"}
+                        Giá Gốc{" "}
+                        <span
+                          style={{
+                            textDecoration: "line-through",
+                            fontWeight: "normal",
+                            color: "#ccc",
+                          }}>
+                          {parseInt(
+                            (
+                              currency.currencySymbol +
+                              cartTotalPriceOld.toFixed(2)
+                            ).replace("$", "")
+                          ).toLocaleString("en-US") + " VND"}
                         </span>
                       </h5>
 
                       <h4 className="grand-totall-title">
                         Tổng cộng{" "}
                         <span>
-                          {parseInt((currency.currencySymbol + cartTotalPrice.toFixed(2)).replace("$", "")).toLocaleString("en-US") + " VND"}
+                          {parseInt(
+                            (
+                              currency.currencySymbol +
+                              cartTotalPrice.toFixed(2)
+                            ).replace("$", "")
+                          ).toLocaleString("en-US") + " VND"}
                         </span>
                       </h4>
                       <Link to={process.env.PUBLIC_URL + "/checkout"}>
@@ -321,17 +356,17 @@ Cart.propTypes = {
   decreaseQuantity: PropTypes.func,
   location: PropTypes.object,
   deleteAllFromCart: PropTypes.func,
-  deleteFromCart: PropTypes.func
+  deleteFromCart: PropTypes.func,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     cartItems: state.cartData,
-    currency: state.currencyData
+    currency: state.currencyData,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (item, addToast, quantityCount) => {
       dispatch(addToCart(item, addToast, quantityCount));
@@ -342,9 +377,9 @@ const mapDispatchToProps = dispatch => {
     deleteFromCart: (item, addToast) => {
       dispatch(deleteFromCart(item, addToast));
     },
-    deleteAllFromCart: addToast => {
+    deleteAllFromCart: (addToast) => {
       dispatch(deleteAllFromCart(addToast));
-    }
+    },
   };
 };
 
