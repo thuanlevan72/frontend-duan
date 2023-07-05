@@ -16,6 +16,7 @@ import { message } from "antd";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import CartHistory from "./pages/other/OrderHistory";
 import OrderHistory from "./pages/other/OrderHistory";
+import ResVnPay from "./components/vnPay/ResVnPay";
 
 const HomeOrganicFood = lazy(() => import("./pages/home/HomeOrganicFood"));
 // shop pages
@@ -144,6 +145,10 @@ const App = (props) => {
                 <Route
                   path={process.env.PUBLIC_URL + "/not-found"}
                   component={NotFound}
+                />
+                <Route
+                  path={process.env.PUBLIC_URL + "/vnpay_return"}
+                  component={ResVnPay}
                 />
                 {/* Router Admin Manager */}
                 <Route
