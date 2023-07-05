@@ -17,6 +17,18 @@ const OrderApi = {
       },
     });
   },
+  CreateUrlVnPay: (amount) => {
+    const url = "/Order/orderPayVn";
+    return axiosClient.post(
+      url,
+      {},
+      {
+        params: {
+          amount,
+        },
+      }
+    );
+  },
   updateOrderStatus: (params = null) => {
     const url = "/Order/updateStatusOrder";
     return axiosClient.post(

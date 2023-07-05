@@ -14,69 +14,124 @@ import { Spin, message } from "antd";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
+  const validateUserOrder = (userOrder) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^\d{10}$/;
+
+    const isValidEmail = emailRegex.test(userOrder.email);
+    const isValidAddress = userOrder.address.trim() !== "";
+    const isValidFullName = userOrder.fullName.trim() !== "";
+    const isValidPhone = phoneRegex.test(userOrder.phone);
+
+    return isValidEmail && isValidAddress && isValidFullName && isValidPhone;
+  };
   const [loading, setLoading] = useState(false);
-  const totalPriceOld = cartItems?.reduce((total, item) => total + (item.price * item.quantity), 0);
-  const totalPriceNew = cartItems?.reduce((total, item) => total + ((item.price - ((item.price / 100) * item.discount)) * item.quantity), 0);
-  const localUser  =  localStorage.getItem('user');
+  const totalPriceOld = cartItems?.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+  const totalPriceNew = cartItems?.reduce(
+    (total, item) =>
+      total + (item.price - (item.price / 100) * item.discount) * item.quantity,
+    0
+  );
+  const localUser = localStorage.getItem("user");
   const [messageApi, contextHolder] = message.useMessage();
   const history = useHistory();
   const [userOrder, setUserOrder] = useState({
     paymentId: 1,
-    userId: localUser ??  localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).user.userId : null,
+    userId:
+      localUser ?? localStorage.getItem("user")
+        ? JSON.parse(localStorage.getItem("user")).user.userId
+        : null,
     orderStatusId: 4,
-    originalPrice: 0,
     noteOrder: "",
-    actualPrice: 0,
-    fullName: localUser ? JSON.parse(localStorage.getItem('user')).user.userName : "",
-    phone: localUser ? JSON.parse(localStorage.getItem('user')).user.phone : "",
-    address:  localUser ? JSON.parse(localStorage.getItem('user')).user.address : "",
-    email: localUser ? JSON.parse(localStorage.getItem('user')).user.email : "",
+    fullName: localUser
+      ? JSON.parse(localStorage.getItem("user")).user.userName
+      : "",
+    phone: localUser ? JSON.parse(localStorage.getItem("user")).user.phone : "",
+    address: localUser
+      ? JSON.parse(localStorage.getItem("user")).user.address
+      : "",
+    email: localUser ? JSON.parse(localStorage.getItem("user")).user.email : "",
     originalPrice: totalPriceOld,
     actualPrice: totalPriceNew,
-    orderDetailDtos: cartItems?.map(item => {
+    orderDetailDtos: cartItems?.map((item) => {
       return {
         productId: Number(item.id),
         quantity: item.quantity,
-        price: (item.price - ((item.price / 100) * item.discount))
+        price: item.price - (item.price / 100) * item.discount,
       };
-    })
+    }),
   });
   const { pathname } = location;
   let cartTotalPrice = 0;
 
   const confirmOrderShipCode = async () => {
     const data = userOrder;
-    // validate trang thanh toán 
-    try{
-      setLoading(true)
+    if (!validateUserOrder(data)) {
+      /// viết tiếp vào đây nha mấy con vợ
+      return false;
+    }
+    // validate trang thanh toán
+    try {
+      data.paymentId = 1;
+      setLoading(true);
       const response = await OrderApi.CreateOrder(data);
       messageApi.open({
-        type: 'success',
+        type: "success",
         content: "Cảm ơn bạn đã mua sản phẩm của chúng tôi",
       });
-      setLoading(false)
-      setTimeout(function() {
+      setLoading(false);
+      setTimeout(function () {
         confirmOrders();
         history.push("/Complete");
       }, 1500);
-   
-    }catch(error){
-      console.log(error.response)
+    } catch (error) {
+      console.log(error.response);
       messageApi.open({
-        type: 'error',
+        type: "error",
         content: "thanh toán thất bại",
       });
-      setLoading(false)
+      setLoading(false);
     }
-   
   };
-  const onChanginput = (e)=>{
+  const confirmOrderPayOnline = async () => {
+    const data = userOrder;
+    data.paymentId = 3;
+    validateUserOrder(data);
+    if (!validateUserOrder(data)) {
+      /// viết tiếp vào đây nha mấy con vợ
+      return false;
+    }
+    try {
+      setLoading(true);
+      const response = await OrderApi.CreateUrlVnPay(data.actualPrice);
+      messageApi.open({
+        type: "success",
+        content: "Đang tạo liên kết đến VnPay",
+      });
+      setLoading(false);
+      localStorage.setItem("dataOrderOnline", JSON.stringify(data));
+      setTimeout(function () {
+        window.location.href = response;
+      }, 500);
+    } catch (error) {
+      messageApi.open({
+        type: "error",
+        content: "Tạo link thanh toán thất bại",
+      });
+      setLoading(false);
+    }
+    // const response = await OrderApi.CreateOrder(data);
+  };
+  const onChanginput = (e) => {
     setUserOrder({
       ...userOrder,
-      [e.target.name]: e.target.value
-    })
-  }
-  console.log(userOrder)
+      [e.target.name]: e.target.value,
+    });
+  };
+  console.log(userOrder);
   return (
     <Fragment>
       <MetaTags>
@@ -119,7 +174,12 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
                       <div className="col-lg-12">
                         <div className="billing-info mb-20">
                           <label>Họ và Tên</label>
-                          <input   onChange={onChanginput} name="fullName" value={userOrder.fullName} type="text" />
+                          <input
+                            onChange={onChanginput}
+                            name="fullName"
+                            value={userOrder.fullName}
+                            type="text"
+                          />
                         </div>
                       </div>
                       {/* <div className="col-lg-12">
@@ -173,13 +233,23 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
                       <div className="col-lg-6 col-md-6">
                         <div className="billing-info mb-20">
                           <label>Điện thoại</label>
-                          <input type="text"   onChange={onChanginput}  name="phone" value={userOrder.phone}/>
+                          <input
+                            type="text"
+                            onChange={onChanginput}
+                            name="phone"
+                            value={userOrder.phone}
+                          />
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6">
                         <div className="billing-info mb-20">
                           <label>Email</label>
-                          <input  name="email"   onChange={onChanginput} type="text" value={userOrder.email} />
+                          <input
+                            name="email"
+                            onChange={onChanginput}
+                            type="text"
+                            value={userOrder.email}
+                          />
                         </div>
                       </div>
                     </div>
@@ -211,10 +281,13 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
                         </div>
                         {contextHolder}
                         {loading && (
-                            <div style={{ width: "100%", textAlign: "center" }}>
-                              <Spin style={{ textAlign: "center" }} size="large" />
-                            </div>
-                          )}
+                          <div style={{ width: "100%", textAlign: "center" }}>
+                            <Spin
+                              style={{ textAlign: "center" }}
+                              size="large"
+                            />
+                          </div>
+                        )}
                         <div className="your-order-middle">
                           <ul>
                             {cartItems.map((cartItem, key) => {
@@ -290,12 +363,18 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
                       <div className="payment-method"></div>
                     </div>
                     <div className="place-order mt-25">
-                      <button className="btn-hover" onClick={confirmOrderShipCode}>
+                      <button
+                        className="btn-hover"
+                        onClick={confirmOrderShipCode}>
                         Thanh Toán khi nhận hàng
                       </button>
                     </div>
                     <div className="place-order mt-25">
-                      <button className="btn-hover">Thanh Toán online</button>
+                      <button
+                        className="btn-hover"
+                        onClick={confirmOrderPayOnline}>
+                        Thanh Toán online
+                      </button>
                     </div>
                   </div>
                   <br />
