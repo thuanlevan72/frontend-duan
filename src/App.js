@@ -111,20 +111,12 @@ const App = (props) => {
                   component={Contact}
                 />
                 <Route
-                  path={process.env.PUBLIC_URL + "/my-account"}
-                  component={MyAccount}
-                />
-                <Route
                   path={process.env.PUBLIC_URL + "/login-register"}
                   component={LoginRegister}
                 />
                 <Route
                   path={process.env.PUBLIC_URL + "/cart"}
                   component={Cart}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + "/order-history"}
-                  component={OrderHistory}
                 />
                 <Route
                   path={process.env.PUBLIC_URL + "/wishlist"}
@@ -150,6 +142,18 @@ const App = (props) => {
                   path={process.env.PUBLIC_URL + "/vnpay_return"}
                   component={ResVnPay}
                 />
+                {localStorage.getItem("user") && (
+                  <>
+                    <Route
+                      path={process.env.PUBLIC_URL + "/my-account"}
+                      component={MyAccount}
+                    />
+                    <Route
+                      path={process.env.PUBLIC_URL + "/order-history"}
+                      component={OrderHistory}
+                    />
+                  </>
+                )}
                 {/* Router Admin Manager */}
                 <Route
                   path="/admin"

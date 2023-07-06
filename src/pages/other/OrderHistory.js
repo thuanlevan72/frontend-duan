@@ -8,7 +8,16 @@ import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import { useEffect } from "react";
 import OrderApi from "../../api/order/OrderApi";
-import { Button, Descriptions, Image, Modal, Space, Table, Tag } from "antd";
+import {
+  Button,
+  Descriptions,
+  Image,
+  Modal,
+  Pagination,
+  Space,
+  Table,
+  Tag,
+} from "antd";
 import LoadingSpin from "../../components/loading/LoadingSpin";
 import { format } from "date-fns";
 const Cart = ({ location, cartItems }) => {
@@ -20,7 +29,7 @@ const Cart = ({ location, cartItems }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [curentInfo, setCurenInfo] = useState({});
   const showModal = (codeOrder, data) => {
-    const orderDetails = dataOrderHistory.filter(
+    const orderDetails = dataOrderHistory.data.data.filter(
       (x) => x.codeOrder === codeOrder
     )[0];
     setCurenInfo({
@@ -57,19 +66,32 @@ const Cart = ({ location, cartItems }) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
+  const handlePaginationChange = (page, pageSize) => {
+    setParam(
+      (prev) =>
+        (prev = {
+          ...param,
+          page: page,
+          pageSize: pageSize,
+        })
+    );
+  };
+  const [param, setParam] = useState({
+    page: 1,
+    pageSize: 6,
+  });
   useEffect(() => {
     const getDataApi = async () => {
       try {
         setLoading(true);
         const accountId = JSON.parse(localStorage.getItem("user")).accountId;
-        const res = await OrderApi.GetOrderForUserId(accountId);
+        const res = await OrderApi.GetOrderForUserId(accountId, param);
         setLoading(false);
         setDataOrderHistory(res);
       } catch (error) {}
     };
     getDataApi();
-  }, []);
+  }, [param]);
   const columns = [
     {
       title: "STT",
@@ -117,7 +139,6 @@ const Cart = ({ location, cartItems }) => {
       align: "center",
     },
   ];
-
   return (
     <Fragment>
       <MetaTags>
@@ -182,12 +203,15 @@ const Cart = ({ location, cartItems }) => {
                 <LoadingSpin />
               </div>
             )}
-            {dataOrderHistory && dataOrderHistory.length > 0 ? (
+            {console.log(dataOrderHistory)}
+            {dataOrderHistory &&
+            dataOrderHistory.data &&
+            dataOrderHistory?.data?.data?.length > 0 ? (
               <>
                 <h3 className="cart-page-title">Lịch sử đơn hàng.</h3>
                 <div className="row">
                   <div className="col-12">
-                    {dataOrderHistory.map((item) => (
+                    {dataOrderHistory.data.data.map((item) => (
                       <>
                         <div className="table-content table-responsive cart-table-content">
                           <table>
@@ -281,6 +305,18 @@ const Cart = ({ location, cartItems }) => {
                           }}></div>
                       </>
                     ))}
+                    <Pagination
+                      style={{
+                        textAlign: "right",
+                        padding: "10px 20px",
+                      }}
+                      current={dataOrderHistory.data.page}
+                      pageSize={dataOrderHistory.data.pageSize}
+                      total={dataOrderHistory.data.totalItems}
+                      onChange={handlePaginationChange}
+                      showSizeChanger
+                      showTotal={(total) => `Total ${total} items`}
+                    />
                     {/* <div className="table-content table-responsive cart-table-content">
                       <div style={{ display: "flex", margin: "20 auto" }}>
                         <table>

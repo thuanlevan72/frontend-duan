@@ -70,7 +70,10 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
   const confirmOrderShipCode = async () => {
     const data = userOrder;
     if (!validateUserOrder(data)) {
-      /// viết tiếp vào đây nha mấy con vợ
+      messageApi.open({
+        type: "warning",
+        content: "vui lòng kiểm tra các trường thông tin cần nhập",
+      });
       return false;
     }
     // validate trang thanh toán
@@ -101,7 +104,10 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
     data.paymentId = 3;
     validateUserOrder(data);
     if (!validateUserOrder(data)) {
-      /// viết tiếp vào đây nha mấy con vợ
+      messageApi.open({
+        type: "warning",
+        content: "vui lòng kiểm tra các trường thông tin cần nhập",
+      });
       return false;
     }
     try {

@@ -134,8 +134,8 @@ const OrderApi = {
     const url = `/Order/${code}`;
     return await axiosClient.get(url, {});
   },
-  GetOrderForUserId: (id) => {
-    const url = `/Order/getDetailForEmail/${id}`;
+  GetOrderForUserId: (id, param) => {
+    const url = `/Order/getDetailForEmail/${id}?page=${param.page}&pageSize=${param.pageSize}`;
     return axiosClient.get(url, {
       headers: {
         Authorization: `Bearer ${
