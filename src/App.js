@@ -142,6 +142,13 @@ const App = (props) => {
                   path={process.env.PUBLIC_URL + "/vnpay_return"}
                   component={ResVnPay}
                 />
+
+                {/* Router Admin Manager */}
+                <Route
+                  path="/admin"
+                  component={AdminLayout}
+                  render={() => <Redirect to="/admin/dashboard" />}
+                />
                 {localStorage.getItem("user") && (
                   <>
                     <Route
@@ -154,12 +161,6 @@ const App = (props) => {
                     />
                   </>
                 )}
-                {/* Router Admin Manager */}
-                <Route
-                  path="/admin"
-                  component={AdminLayout}
-                  render={() => <Redirect to="/admin/dashboard" />}
-                />
                 <Route exact component={NotFound} />
               </Switch>
             </Suspense>
