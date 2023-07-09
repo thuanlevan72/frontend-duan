@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Breadcrumb, Space, Table, Typography, Avatar, Tag, Pagination } from "antd";
+import { Breadcrumb, Space, Table, Typography, Avatar, Tag, Pagination, Button, Descriptions, Modal, message, Image, Input } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import { NavLink } from "react-router-dom";
-import { BiEdit } from "react-icons/bi";
-import { ImBin } from "react-icons/im";
 import UserApi from "../../../api/security/UserApi";
 import { format } from "date-fns";
 import LoadingSpin from "../../loading/LoadingSpin";
 
-// const currentDate = new Date();
 const { Text } = Typography;
 const UsersList = () => {
     const [loading, setLoading] = useState(false);
+    const [messageApi, contextHolder] = message.useMessage();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [dataCurrent, setDataCurrent] = useState([]);
     const [data, setData] = useState({
         totalItems: 0,
         totalPages: 0,
@@ -22,6 +21,29 @@ const UsersList = () => {
         hasNext: true,
         data: [],
     });
+    const showModal = (id) => {
+        const dataOrderCurrent = data?.data?.find((x) => x.accountId === id);
+        const user = dataOrderCurrent?.user;
+        console.log(user);
+        if (user) {
+            setDataCurrent([
+                {
+                    userId: 1,
+                    name: user.userName,
+                    email: user.email,
+                    phone: user.phone,
+                    address: user.address,
+                },
+            ]);
+        }
+        setIsModalOpen(true);
+    };
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
     const handlePaginationChange = (page, pageSize) => {
         setParam(
             (prev) =>
@@ -51,21 +73,16 @@ const UsersList = () => {
         };
         getUsers();
     }, [param]);
-    console.log(data);
     const dataSource = data?.data?.map((item, index) => {
         return {
             key: index + 1,
             accountId: item.accountId,
             userName: item.userName,
             email: item.email,
-            // decentralizationId: item.decentralizationId,
             role: <Tag
                 color={item.decentralization.authorityName == "Admin" ? "cyan" : "green"}>
                 {item.decentralization.authorityName}
             </Tag>,
-
-            // phone: item.phone,
-            // address: item.address,
             avartar: item.avartar,
             createdAt: item.createdAt,
             status:
@@ -83,11 +100,6 @@ const UsersList = () => {
             key: "key",
             align: "center",
         },
-        // {
-        //     title: "ID",
-        //     dataIndex: "accountId",
-        //     key: "accountId",
-        // },
         {
             title: "Họ Tên",
             dataIndex: "userName",
@@ -100,18 +112,6 @@ const UsersList = () => {
             key: "email",
             align: "center",
         },
-        // {
-        //   title: "Phone",
-        //   dataIndex: "phone",
-        //   key: "phone",
-        //   align: "center",
-        // },
-        // {
-        //   title: "Address",
-        //   dataIndex: "address",
-        //   key: "address",
-        //   align: "center",
-        // },
         {
             title: "Ảnh đại diện",
             dataIndex: "avartar",
@@ -126,7 +126,7 @@ const UsersList = () => {
             ),
         },
         {
-            title: "Role",
+            title: "Vai trò",
             dataIndex: "role",
             key: "role",
             align: "center",
@@ -148,17 +148,14 @@ const UsersList = () => {
         },
         {
             title: "Hành động",
-            dataIndex: "action",
-            key: "action",
+            dataIndex: "accountId",
+            key: "accountId",
             align: "center",
-            render: () => (
+            render: (accountId) => (
                 <Space size="middle">
-                    <NavLink to={"/admin/products-edit"}>
-                        <BiEdit />
-                    </NavLink>
-                    <Text type="danger">
-                        <ImBin />
-                    </Text>
+                    <Button type="primary" onClick={(e) => showModal(accountId)}>
+                        Chi tiết
+                    </Button>
                 </Space>
             ),
         },
@@ -173,6 +170,45 @@ const UsersList = () => {
                 <Breadcrumb.Item>Bảng điều khiển</Breadcrumb.Item>
                 <Breadcrumb.Item>Danh sách người dùng</Breadcrumb.Item>
             </Breadcrumb>
+            {contextHolder}
+            <Modal
+                open={isModalOpen}
+                width={1100}
+                onOk={handleOk}
+                onCancel={handleCancel}>
+                <Descriptions title="Chi tiết đơn hàng">
+                    <Descriptions.Item label="Tên khách hàng">
+                        {dataCurrent.length > 0 && dataCurrent[0].name}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Số điện thoại">
+                        {dataCurrent.length > 0 && dataCurrent[0].phone}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Email">
+                        {dataCurrent.length > 0 && dataCurrent[0].email}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Địa chỉ">
+                        {dataCurrent.length > 0 && dataCurrent[0].address}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Vai trò">
+                        {dataSource.length > 0 && dataSource[0].role}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Trạng thái">
+                        {dataSource.length > 0 && dataSource[0].status}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Ngày tạo">
+                        {format(new Date(dataSource.length > 0 && dataSource[0].createdAt), "HH:mm:ss dd/MM/yyyy")}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Ảnh">
+                        <Image
+                            src={dataSource.length > 0 && dataSource[0].avartar}
+                            alt="avatar"
+                            width={100}
+                            height={100}
+                            className="object-fit-cover border rounded-circle border border-success"
+                        />
+                    </Descriptions.Item>
+                </Descriptions>
+            </Modal>
             <div>
                 {loading && (<div><LoadingSpin /></div>)}
                 <Table dataSource={dataSource} columns={columns} pagination={false} />
