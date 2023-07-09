@@ -29,6 +29,7 @@ const UsersList = () => {
             setDataCurrent([
                 {
                     userId: 1,
+                    avartar: dataOrderCurrent.avartar,
                     name: user.userName,
                     email: user.email,
                     phone: user.phone,
@@ -200,7 +201,7 @@ const UsersList = () => {
                     </Descriptions.Item>
                     <Descriptions.Item label="Ảnh">
                         <Image
-                            src={dataSource.length > 0 && dataSource[0].avartar}
+                            src={dataCurrent.length > 0 && dataCurrent[0].avartar}
                             alt="avatar"
                             width={100}
                             height={100}
