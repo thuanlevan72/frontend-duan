@@ -35,41 +35,34 @@ const FooterTwo = ({
   };
   return (
     <footer
-      className={`footer-area ${
-        backgroundColorClass ? backgroundColorClass : ""
-      } ${spaceLeftClass ? spaceLeftClass : ""} ${
-        spaceRightClass ? spaceRightClass : ""
-      } ${backgroundImage ? "bg-img" : ""}`}
+      className={`footer-area ${backgroundColorClass ? backgroundColorClass : ""
+        } ${spaceLeftClass ? spaceLeftClass : ""} ${spaceRightClass ? spaceRightClass : ""
+        } ${backgroundImage ? "bg-img" : ""}`}
       style={{
-        backgroundImage: ` ${
-          backgroundImage
-            ? `url(${process.env.PUBLIC_URL + backgroundImage})`
-            : `url()`
-        }`
+        backgroundImage: ` ${backgroundImage
+          ? `url(${process.env.PUBLIC_URL + backgroundImage})`
+          : `url()`
+          }`
       }}
     >
       <div
-        className={`footer-top text-center ${
-          footerTopBackgroundColorClass ? footerTopBackgroundColorClass : ""
-        } ${footerTopSpaceTopClass ? footerTopSpaceTopClass : ""}  ${
-          footerTopSpaceBottomClass ? footerTopSpaceBottomClass : ""
-        }`}
+        className={`footer-top text-center ${footerTopBackgroundColorClass ? footerTopBackgroundColorClass : ""
+          } ${footerTopSpaceTopClass ? footerTopSpaceTopClass : ""}  ${footerTopSpaceBottomClass ? footerTopSpaceBottomClass : ""
+          }`}
       >
         <div className="container">
           <div className="footer-logo">
             <Link to={process.env.PUBLIC_URL}>
               <img
                 alt=""
-                style={{maxWidth:"250px"}}
+                style={{ maxWidth: "250px" }}
                 src={"/assets/img/logo/GSlogo.png"}
               />
-  
+
             </Link>
           </div>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim
+            Chúng tôi tự hào là doanh nghiệp đi đầu trong sản xuất thực phẩm chay an toàn, tinh khiết, kinh doanh nhà hàng chay hơn 15 năm qua, các sản phẩm của chúng tôi được làm bởi đầu bếp và đội ngũ nhân viên trường chay lâu năm, am hiểu về dinh dưỡng, thực dưỡng, thẩm mỹ và kinh nghiệm nghề bếp.
           </p>
           <div className="footer-social">
             <ul>
@@ -105,9 +98,8 @@ const FooterTwo = ({
       <div className="footer-bottom text-center">
         <div className="container">
           <div
-            className={`copyright-2 ${
-              copyrightColorClass ? copyrightColorClass : ""
-            }`}
+            className={`copyright-2 ${copyrightColorClass ? copyrightColorClass : ""
+              }`}
           >
             <p>
               © 2020{" "}

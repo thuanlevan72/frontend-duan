@@ -36,6 +36,8 @@ import OrderList from "../components/admin/OrdersManager/OrderList";
 import OrderPending from "../components/admin/OrdersManager/OrderPending";
 import OrderCompleted from "../components/admin/OrdersManager/OrderCompleted";
 import OrderCanceled from "../components/admin/OrdersManager/OrderCanceled";
+import CommentList from "../components/admin/CommentsManager/CommentList";
+import StatList from "../components/admin/StatsManager/StatList";
 const { Header, Content, Footer, Sider } = Layout;
 
 const AdminLayout = () => {
@@ -54,12 +56,12 @@ const AdminLayout = () => {
             // Truy cập vào giá trị "role"
             const role = payloadObject.role;
             if (role !== "admin") {
-                alert("bạn không có quyền để vào dây chơi");
+                alert("Bạn không có quyền để vào dây chơi");
                 history.push("/login-register");
             }
             console.log(role); // Kết quả: "admin"
         } else {
-            alert("vui lòng đăng nhập để có thể vào đây chơi");
+            alert("Vui lòng đăng nhập để có thể vào đây chơi");
             history.push("/login-register");
         }
     }, [history]);
@@ -155,6 +157,18 @@ const AdminLayout = () => {
                             <NavLink to="/admin/orders-canceled">Đơn hàng đã hủy</NavLink>
                         </Menu.Item>
                     </SubMenu>
+                    {/*Comment Manager */}
+                    <SubMenu key="subMenu-6" icon={<BsBoxSeam />} title="Quản lý bình luận">
+                        <Menu.Item key="/admin/comments" icon={<CiBoxList />}>
+                            <NavLink to="/admin/comments">Danh sách bình luận</NavLink>
+                        </Menu.Item>
+                    </SubMenu>
+                    {/*Comment Manager */}
+                    <SubMenu key="subMenu-7" icon={<BsBoxSeam />} title="Thống kê">
+                        <Menu.Item key="/admin/stats" icon={<CiBoxList />}>
+                            <NavLink to="/admin/stats">Danh sách thống kê</NavLink>
+                        </Menu.Item>
+                    </SubMenu>
                 </Menu>
             </Sider>
             <Layout>
@@ -203,6 +217,10 @@ const AdminLayout = () => {
                         <Route path="/admin/orders-pending" component={OrderPending} />
                         <Route path="/admin/orders-completed" component={OrderCompleted} />
                         <Route path="/admin/orders-canceled" component={OrderCanceled} />
+                        {/* Comment router */}
+                        <Route path="/admin/comments" component={CommentList} />
+                        {/* Stat router */}
+                        <Route path="/admin/stats" component={StatList} />
                         {/* Redirect to Dashboard */}
                         <Redirect to="/admin/dashboard" />
                     </Switch>

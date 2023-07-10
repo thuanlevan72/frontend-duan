@@ -86,7 +86,7 @@ const IconGroup = ({
               type="text"
               value={inputCode}
               onChange={(e) => setInputCode(e.target.value)}
-              placeholder="Nhập mã đơn hàng cần truy vấn"
+              placeholder="Tìm kiếm"
             />
             <button className="button-search" onClick={(e) => submitForCode(e)}>
               <i className="pe-7s-search" />
@@ -125,6 +125,9 @@ const IconGroup = ({
                 <Link to={process.env.PUBLIC_URL + "/my-account"}>
                   Tài Khoản
                 </Link>
+                <Link to={process.env.PUBLIC_URL + "/admin"}>
+                  Quản trị Web
+                </Link>
                 <Link to={process.env.PUBLIC_URL + "/"} onClick={handleLogout}>
                   Đăng Xuất
                 </Link>
@@ -140,14 +143,6 @@ const IconGroup = ({
             )}
           </ul>
         </div>
-      </div>
-      <div className="same-style header-compare">
-        <Link to={process.env.PUBLIC_URL + "/compare"}>
-          <i className="pe-7s-shuffle" />
-          <span className="count-style">
-            {compareData && compareData.length ? compareData.length : 0}
-          </span>
-        </Link>
       </div>
       <div className="same-style header-wishlist">
         <Link to={process.env.PUBLIC_URL + "/wishlist"}>

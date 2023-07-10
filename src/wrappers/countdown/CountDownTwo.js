@@ -21,7 +21,7 @@ const CountDownTwo = ({ spaceTopClass, spaceBottomClass, dateTime }) => {
               </div>
               <div className="funfact-btn funfact-btn-green btn-hover">
                 <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
-                  SHOP NOW
+                  ĐẶT HÀNG
                 </Link>
               </div>
             </div>

@@ -298,7 +298,7 @@ const ProductDescriptionTab = ({
                               padding: "20% 0",
                               lineHeight: "30px",
                             }}>
-                            bạn cần mua và trải nghiệm sản phẩm này để có thể
+                            Bạn cần mua và trải nghiệm sản phẩm này để có thể
                             đánh giá
                           </h3>
                         )}

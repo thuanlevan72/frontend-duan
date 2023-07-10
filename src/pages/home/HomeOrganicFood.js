@@ -3,10 +3,7 @@ import MetaTags from "react-meta-tags";
 import LayoutThree from "../../layouts/LayoutThree";
 import HeroSliderFive from "../../wrappers/hero-slider/HeroSliderFive";
 import FeatureIconFour from "../../wrappers/feature-icon/FeatureIconFour";
-import BannerFive from "../../wrappers/banner/BannerFive";
 import CountDownTwo from "../../wrappers/countdown/CountDownTwo";
-import TestimonialOne from "../../wrappers/testimonial/TestimonialOne";
-import NewsletterTwo from "../../wrappers/newsletter/NewsletterTwo";
 
 
 const HomeOrganicFood = () => {
@@ -34,33 +31,11 @@ const HomeOrganicFood = () => {
           containerClass="container-fluid"
           gutterClass="padding-10-row-col"
         />
-        {/* banner */}
-        <BannerFive />
         {/* countdown */}
         <CountDownTwo
           spaceTopClass="pt-80"
           spaceBottomClass="pb-95"
           dateTime="November 13, 2020 12:12:00"
-        />
-        {/* testimonial */}
-        <TestimonialOne
-          spaceTopClass="pt-100"
-          spaceBottomClass="pb-95"
-          spaceLeftClass="ml-70"
-          spaceRightClass="mr-70"
-          bgColorClass="bg-gray-3"
-        />
-        <FeatureIconFour
-          spaceTopClass="pt-10"
-          spaceBottomClass="pb-90"
-          containerClass="container-fluid"
-          gutterClass="padding-10-row-col"
-        />
-        {/* newsletter */}
-        <NewsletterTwo
-          spaceTopClass="pt-100"
-          spaceBottomClass="pb-100"
-          subscribeBtnClass="green-subscribe"
         />
       </LayoutThree>
     </Fragment>

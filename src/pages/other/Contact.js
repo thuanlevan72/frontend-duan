@@ -164,7 +164,7 @@ const Contact = ({ location }) => {
                       <div className="col-lg-12">
                         <input
                           name="phone"
-                          placeholder="phone*"
+                          placeholder="Phone*"
                           type="text"
                           onChange={changeInputData}
                           value={dataContact.phone}
@@ -175,7 +175,7 @@ const Contact = ({ location }) => {
                       <div className="col-lg-12">
                         <textarea
                           name="subject"
-                          placeholder="subject"
+                          placeholder="Subject*"
                           value={dataContact.subject}
                           onChange={changeInputData}
                           required
