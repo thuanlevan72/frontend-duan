@@ -4,8 +4,10 @@ import Title from "antd/es/typography/Title";
 import categoryAPI from "../../../api/category/CategoryApi";
 import LoadingSpin from "../../loading/LoadingSpin";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useToasts } from "react-toast-notifications";
 
 const CategoryAdd = () => {
+    const { addToast } = useToasts();
     const [form] = Form.useForm();
     // upload image
     const history = useHistory();
@@ -20,11 +22,18 @@ const CategoryAdd = () => {
     const handleUpload = () => {
         const file = fileList[0];
         if (file.size > 2 * 1024 * 1024) {
-            alert("Tệp tin quá lớn. Vui lòng chọn một tệp tin nhỏ hơn 2MB.");
+            messageApi.open({
+                type: "error",
+                content:
+                    "Tệp tin quá lớn. Vui lòng chọn một tệp tin nhỏ hơn 2MB.",
+            });
             return;
         }
         if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
-            alert("Vui lòng chọn một tệp tin hình ảnh (jpg, png, webp).");
+            messageApi.open({
+                type: "error",
+                content: "Vui lòng chọn một tệp tin hình ảnh (jpg, png, webp).",
+            });
             return;
         }
         const filePreview = URL.createObjectURL(file);
@@ -39,27 +48,27 @@ const CategoryAdd = () => {
         };
         if (!formData.nameProductType || !formData.imageTypeProduct) {
             messageApi.open({
-                type: 'error',
+                type: "error",
                 content: "Không để trống các trường",
             });
             return;
         }
         e.preventDefault();
         try {
-            setLoading(true);
             // Proceed with API call
-            formDataApi.append('nameProductType', formData.nameProductType);
-            formDataApi.append('imageTypeProduct', formData.imageTypeProduct);
+            formDataApi.append("nameProductType", formData.nameProductType);
+            formDataApi.append("imageTypeProduct", formData.imageTypeProduct);
             await categoryAPI.CreateCategory(formDataApi);
-
-            setTimeout(function () {
-                setLoading(false);
-                history.push("/admin/categories");
-            }, 500);
+            addToast("Thêm mới danh mục thành công!", {
+                appearance: "success",
+                autoDismiss: true,
+                autoDismissTimeout: 1500,
+            });
+            history.push(`/admin/categories`);
             return;
         } catch (error) {
             messageApi.open({
-                type: 'error',
+                type: "error",
                 content: "Tạo mới thất bại",
             });
             setLoading(false);
@@ -77,7 +86,9 @@ const CategoryAdd = () => {
             </Breadcrumb>
             {contextHolder}
             <div className="mt-3">
-                <Title level={4} className="text-uppercase text-center">Thêm danh mục</Title>
+                <Title level={4} className="text-uppercase text-center">
+                    Thêm danh mục
+                </Title>
                 {loading && (
                     <div>
                         <LoadingSpin />
@@ -87,18 +98,22 @@ const CategoryAdd = () => {
                     name="basic"
                     labelCol={{ span: 8 }}
                     wrapperCol={{ span: 16 }}
-                    style={{ maxWidth: 1000 }}
                     initialValues={{ remember: true }}
                     autoComplete="off"
                     form={form}
                 >
-                    <Form.Item label="Tên danh mục" name="nameProductType">
+                    <Form.Item
+                        label="Tên danh mục"
+                        name="nameProductType"
+                        labelCol={{ span: 3, offset: 1 }}
+                    >
                         <Input style={{ height: 30 }} />
                     </Form.Item>
                     <Form.Item
                         label="Hình ảnh"
-                        tooltip="Ảnh sản phẩm xem trước"
+                        tooltip="Ảnh danh mục xem trước"
                         name="imageTypeProduct"
+                        labelCol={{ span: 3, offset: 1 }}
                     >
                         <Upload
                             listType="picture-card"
@@ -127,9 +142,14 @@ const CategoryAdd = () => {
                             )}
                         </Upload>
                     </Form.Item>
-                    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                        <Button type="primary" htmlType="submit" onClick={onHandleSubmit}>
-                            Tạo mới
+                    <Form.Item wrapperCol={{ span: 16, offset: 4 }}>
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                            onClick={onHandleSubmit}
+                            block
+                        >
+                            Thêm mới danh mục
                         </Button>
                     </Form.Item>
                 </Form>

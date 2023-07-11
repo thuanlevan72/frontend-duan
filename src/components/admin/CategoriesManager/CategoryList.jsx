@@ -20,7 +20,6 @@ import LoadingSpin from "../../loading/LoadingSpin";
 // const currentDate = new Date();
 const { Text } = Typography;
 const CategoryList = () => {
-    // const [categories, setCategories] = useState();
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState({
         totalItems: 0,
@@ -54,13 +53,11 @@ const CategoryList = () => {
                 setLoading(false);
                 setData(data);
             } catch (error) {
-                console.log(error);
                 setLoading(false);
             }
         };
         getCategories();
     }, [param]);
-    console.log(data);
     const dataSource = data?.data?.map((item, index) => {
         return {
             key: index + 1,
