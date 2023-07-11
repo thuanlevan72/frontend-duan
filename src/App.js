@@ -16,6 +16,7 @@ import { message } from "antd";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import CartHistory from "./pages/other/OrderHistory";
 import OrderHistory from "./pages/other/OrderHistory";
+import ResVnPay from "./components/vnPay/ResVnPay";
 
 const HomeOrganicFood = lazy(() => import("./pages/home/HomeOrganicFood"));
 // shop pages
@@ -110,20 +111,12 @@ const App = (props) => {
                   component={Contact}
                 />
                 <Route
-                  path={process.env.PUBLIC_URL + "/my-account"}
-                  component={MyAccount}
-                />
-                <Route
                   path={process.env.PUBLIC_URL + "/login-register"}
                   component={LoginRegister}
                 />
                 <Route
                   path={process.env.PUBLIC_URL + "/cart"}
                   component={Cart}
-                />
-                <Route
-                  path={process.env.PUBLIC_URL + "/order-history"}
-                  component={OrderHistory}
                 />
                 <Route
                   path={process.env.PUBLIC_URL + "/wishlist"}
@@ -145,12 +138,29 @@ const App = (props) => {
                   path={process.env.PUBLIC_URL + "/not-found"}
                   component={NotFound}
                 />
+                <Route
+                  path={process.env.PUBLIC_URL + "/vnpay_return"}
+                  component={ResVnPay}
+                />
+
                 {/* Router Admin Manager */}
                 <Route
                   path="/admin"
                   component={AdminLayout}
                   render={() => <Redirect to="/admin/dashboard" />}
                 />
+                {localStorage.getItem("user") && (
+                  <>
+                    <Route
+                      path={process.env.PUBLIC_URL + "/my-account"}
+                      component={MyAccount}
+                    />
+                    <Route
+                      path={process.env.PUBLIC_URL + "/order-history"}
+                      component={OrderHistory}
+                    />
+                  </>
+                )}
                 <Route exact component={NotFound} />
               </Switch>
             </Suspense>

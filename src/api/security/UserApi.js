@@ -6,8 +6,8 @@ const UserApi = {
         return axiosClient.get(url, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")
-                        ? JSON.parse(localStorage.getItem("token"))
-                        : ""
+                    ? JSON.parse(localStorage.getItem("token"))
+                    : ""
                     }`,
             },
             params: {
@@ -56,8 +56,7 @@ const UserApi = {
                 Authorization: `Bearer ${localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : ""}`
             }
         });
-    }
-    ,
+    },
     getAllUsers: (params = null) => {
         const url = "/User";
         return axiosClient.get(url, {
@@ -69,7 +68,18 @@ const UserApi = {
             }
 
         });
-    }
+    },
+    getUser: (id) => {
+        const url = `/User/${id}`;
+        return axiosClient.get(url, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")
+                        ? JSON.parse(localStorage.getItem("token"))
+                        : ""
+                    }`,
+            },
+        });
+    },
 };
 
 export default UserApi;

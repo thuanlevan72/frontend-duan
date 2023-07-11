@@ -17,6 +17,18 @@ const OrderApi = {
       },
     });
   },
+  CreateUrlVnPay: (amount) => {
+    const url = "/Order/orderPayVn";
+    return axiosClient.post(
+      url,
+      {},
+      {
+        params: {
+          amount,
+        },
+      }
+    );
+  },
   updateOrderStatus: (params = null) => {
     const url = "/Order/updateStatusOrder";
     return axiosClient.post(
@@ -122,8 +134,8 @@ const OrderApi = {
     const url = `/Order/${code}`;
     return await axiosClient.get(url, {});
   },
-  GetOrderForUserId: (id) => {
-    const url = `/Order/getDetailForEmail/${id}`;
+  GetOrderForUserId: (id, param) => {
+    const url = `/Order/getDetailForEmail/${id}?page=${param.page}&pageSize=${param.pageSize}`;
     return axiosClient.get(url, {
       headers: {
         Authorization: `Bearer ${
