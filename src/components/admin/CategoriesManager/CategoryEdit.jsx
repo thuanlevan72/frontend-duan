@@ -35,11 +35,18 @@ const CategoryEdit = () => {
     const handleUpload = () => {
         const file = fileList[0];
         if (file.size > 2 * 1024 * 1024) {
-            alert("Tệp tin quá lớn. Vui lòng chọn một tệp tin nhỏ hơn 2MB.");
+            messageApi.open({
+                type: "error",
+                content:
+                    "Tệp tin quá lớn. Vui lòng chọn một tệp tin nhỏ hơn 2MB.",
+            });
             return;
         }
         if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
-            alert("Vui lòng chọn một tệp tin hình ảnh (jpg, png, webp).");
+            messageApi.open({
+                type: "error",
+                content: "Vui lòng chọn một tệp tin hình ảnh (jpg, png, webp).",
+            });
             return;
         }
         const filePreview = URL.createObjectURL(file);
@@ -61,24 +68,24 @@ const CategoryEdit = () => {
         }
         e.preventDefault();
         try {
-            setLoading(true);
             formDataApi.append("nameProductType", formData.nameProductType);
             formDataApi.append("imageTypeProduct", formData.imageTypeProduct);
             try {
                 await categoryAPI.updateCategory(id, formDataApi);
+                setLoading(false);
                 addToast("Cập nhật danh mục thành công!", {
                     appearance: "success",
+                    autoDismiss: true,
+                    autoDismissTimeout: 1500,
                 });
-                history.push(`/admin/products`);
+                history.push(`/admin/categories`);
             } catch (error) {
                 addToast("Cập nhật danh mục thất bại!", {
                     appearance: "error",
+                    autoDismiss: true,
+                    autoDismissTimeout: 1500,
                 });
             }
-            setTimeout(function () {
-                setLoading(false);
-                history.push("/admin/categories");
-            }, 500);
             return;
         } catch (error) {
             messageApi.open({
@@ -158,7 +165,7 @@ const CategoryEdit = () => {
                             htmlType="submit"
                             onClick={onHandleSubmit}
                         >
-                            Tạo mới
+                            Cập nhật danh mục
                         </Button>
                     </Form.Item>
                 </Form>

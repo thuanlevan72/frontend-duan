@@ -94,11 +94,15 @@ const ProductEdit = () => {
                 setLoading(false);
                 addToast("Cập nhật sản phẩm thành công!", {
                     appearance: "success",
+                    autoDismiss: true,
+                    autoDismissTimeout: 1500,
                 });
                 history.push(`/admin/products`);
             } catch (error) {
                 addToast("Cập nhật sản phẩm thất bại!", {
                     appearance: "error",
+                    autoDismiss: true,
+                    autoDismissTimeout: 1500,
                 });
             }
         });

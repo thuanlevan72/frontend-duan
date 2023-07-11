@@ -55,11 +55,7 @@ const ProductList = () => {
         }));
     };
     const getColumnSearchProps = (dataIndex) => ({
-        filterDropdown: ({
-            setSelectedKeys,
-            selectedKeys,
-            clearFilters,
-        }) => (
+        filterDropdown: ({ setSelectedKeys, selectedKeys, clearFilters }) => (
             <div style={{ padding: 8 }}>
                 <Input
                     placeholder={`Tìm kiếm tên món...`}
@@ -102,12 +98,16 @@ const ProductList = () => {
         ),
         onFilter: (value, record) =>
             record[dataIndex]
-                ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
+                ? record[dataIndex]
+                      .toString()
+                      .toLowerCase()
+                      .includes(value.toLowerCase())
                 : "",
         render: (text) => {
             return dataIndex === "name" ? (
                 <span>
-                    {searchText && text.toLowerCase().includes(searchText.toLowerCase()) ? (
+                    {searchText &&
+                    text.toLowerCase().includes(searchText.toLowerCase()) ? (
                         <span>
                             {text
                                 .split(new RegExp(`(${searchText})`, "gi"))
@@ -139,7 +139,6 @@ const ProductList = () => {
                 setData(data);
                 setLoading(false);
             } catch (error) {
-                console.error(error);
                 setLoading(false);
             }
         };
@@ -153,37 +152,38 @@ const ProductList = () => {
             setData(data);
             addToast("Xóa sản phẩm thành công!", {
                 appearance: "success",
+                autoDismiss: true,
+                autoDismissTimeout: 1500,
             });
         } catch (error) {
-            addToast("Xóa sản phẩm thất bại!", {
-                appearance: "error",
-            });
+            console.log(error);
         }
     };
     const handleCancel = () => {
         addToast("Hủy xóa", {
             appearance: "error",
+            autoDismiss: true,
+            autoDismissTimeout: 1000,
         });
     };
-    const dataSource = data.data
-        ?.map((item, index) => {
-            return {
-                key: index + 1,
-                id: item.productId,
-                name: item.nameProduct,
-                image: item.avartarImageProduct,
-                price: item.price.toLocaleString("vi-VN"),
-                discount: item.discount,
-                quantity: item.quantity,
-                categoryName: item.productType.nameProductType,
-                status:
-                    item.status === 1 ? (
-                        <Tag color="geekblue">Hiển thị</Tag>
-                    ) : (
-                        <Tag color="volcano">Ẩn</Tag>
-                    ),
-            };
-        })
+    const dataSource = data.data?.map((item, index) => {
+        return {
+            key: index + 1,
+            id: item.productId,
+            name: item.nameProduct,
+            image: item.avartarImageProduct,
+            price: item.price.toLocaleString("vi-VN"),
+            discount: item.discount,
+            quantity: item.quantity,
+            categoryName: item.productType.nameProductType,
+            status:
+                item.status === 1 ? (
+                    <Tag color="geekblue">Hiển thị</Tag>
+                ) : (
+                    <Tag color="volcano">Ẩn</Tag>
+                ),
+        };
+    });
     const columns = [
         {
             title: "STT",

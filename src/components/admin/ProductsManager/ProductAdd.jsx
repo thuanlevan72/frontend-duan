@@ -13,6 +13,8 @@ import Title from "antd/es/typography/Title";
 import categoryAPI from "../../../api/category/CategoryApi";
 import LoadingSpin from "../../loading/LoadingSpin";
 import ProductApi from "../../../api/product/ProductApi";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useToasts } from "react-toast-notifications";
 const { TextArea } = Input;
 
 /* eslint-disable no-template-curly-in-string */
@@ -23,6 +25,8 @@ const validateMessages = {
     },
 };
 const ProductAdd = () => {
+    const { addToast } = useToasts();
+    const history = useHistory();
     const [form] = Form.useForm();
     // upload image
     const [fileList, setFileList] = useState([]);
@@ -71,6 +75,12 @@ const ProductAdd = () => {
             formDataApi.append("shortDescription", formData.shortDescription);
             formDataApi.append("fullDescription", formData.fullDescription);
             await ProductApi.CreateProduct(formDataApi);
+            addToast("Thêm mới sản phẩm thành công!", {
+                appearance: "success",
+                autoDismiss: true,
+                autoDismissTimeout: 1000,
+            });
+            history.push(`/admin/products`);
         });
     };
     const [categories, setCategories] = useState();
