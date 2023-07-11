@@ -90,12 +90,12 @@ const Dashboard = () => {
                 </Col>
             </Row>
 
-            <Row gutter={[12, 12]} style={{ marginTop: '16px', padding: '24px 0' }}>
-                <Col flex={1} style={{ backgroundColor: '#F9FCFD', borderRadius: 20, marginRight: 36, padding: '12px 0' }}>
+            <Row wrap={false} style={{ marginTop: '16px', padding: '24px 0' }}>
+                <Col flex={5} style={{ backgroundColor: '#F9FCFD', borderRadius: 20, marginRight: 36, padding: '12px 0' }}>
                     <Divider orientation="left" style={{ fontSize: 24 }}>Biểu đồ đơn đặt hàng</Divider>
                     <CalculateOrder />
                 </Col>
-                <Col flex={1} style={{ backgroundColor: '#F9FCFD', borderRadius: 20, padding: '12px 0' }}>
+                <Col flex={6} style={{ backgroundColor: '#F9FCFD', borderRadius: 20, padding: '12px 0' }}>
                     <Divider orientation="left" style={{ fontSize: 24 }}>Biểu đồ sản phẩm</Divider>
                     <TopSelling />
                 </Col>
