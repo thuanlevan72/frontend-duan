@@ -38,6 +38,8 @@ const CalculateMonthly = () => {
     if (Array.isArray(dates) && dates.length === 2) {
       const startDate = dates[0].format("YYYY/MM/DD");
       const endDate = dates[1].format("YYYY/MM/DD");
+      setStartDate(dates[0]);
+      setEndDate(dates[1]);
       setSelectedDate({
         startDate,
         endDate,
@@ -85,25 +87,35 @@ const CalculateMonthly = () => {
 
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
-          paddingRight: "10px",
-        }}>
-        {" "}
-        <RangePicker
-          value={[startDate, endDate]}
-          onChange={handleDateChange}
-          allowClear={false}
-        />
+      <div style={{
+        backgroundColor: '#F9FCFD',
+        padding: 36
+      }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
+            paddingRight: "10px",
+          }}>
+          {" "}
+          <RangePicker
+            value={[startDate, endDate]}
+            onChange={handleDateChange}
+            allowClear={false}
+          />
+        </div>
+        {data && data.length > 0 ? (
+          <DualAxes {...config} />
+        ) : (
+          <div style={{
+            marginTop: 24,
+            textAlign: 'center'
+          }}>
+            <Alert message="Warning" type="warning" showIcon />
+          </div>
+        )}
       </div>
-      {data && data.length > 0 ? (
-        <DualAxes {...config} />
-      ) : (
-        <Alert message="DỮ liệu không tồn tại" type="warning" />
-      )}
     </>
   );
 };

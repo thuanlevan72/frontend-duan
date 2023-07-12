@@ -100,25 +100,36 @@ const CalculateOrder = () => {
     };
     return (
         <>
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    alignItems: "center",
-                    paddingRight: "10px",
-                }}>
-                {" "}
-                <RangePicker
-                    value={[startDate, endDate]}
-                    onChange={handleDateChange}
-                    allowClear={false}
-                />
-            </div>
-            {data && data.length > 0 ? (
-                <Pie {...config} />
-            ) : (
-                <Alert message="DỮ liệu không tồn tại" type="warning" />
-            )}
+            <div style={{
+                backgroundColor: '#F9FCFD',
+                padding: 36
+            }}>
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        alignItems: "center",
+                        paddingRight: "10px",
+                    }}>
+                    {" "}
+                    <RangePicker
+                        value={[startDate, endDate]}
+                        onChange={handleDateChange}
+                        allowClear={false}
+                    />
+                </div >
+                {data && data.length > 0 ? (
+                    <Pie {...config} />
+                ) : (
+                    <div style={{
+                        marginTop: 24,
+                        textAlign: 'center'
+                    }}>
+                        <Alert message="Dữ liệu rỗng" type="warning" showIcon />
+                    </div>
+                )
+                }
+            </div >
         </>
     );
 };

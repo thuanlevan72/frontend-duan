@@ -25,9 +25,9 @@ const Dashboard = () => {
       setLoading(false);
     }
   }, []);
-  const DashboardCard = ({ title, value, icon }) => {
+  const DashboardCard = ({ title, value, icon, cardBackgroundColor, cardBorderRadius }) => {
     return (
-      <Card>
+      <Card style={{ backgroundColor: cardBackgroundColor, borderRadius: cardBorderRadius }}>
         <Space direction="horizontal">
           {icon}
           <Statistic title={title} value={value} />
@@ -43,7 +43,7 @@ const Dashboard = () => {
         <Breadcrumb.Item>Thống kê</Breadcrumb.Item>
       </Breadcrumb>
 
-      <Row gutter={16} justify="space-between">
+      <Row wrap={false} justify="center" style={{ marginBottom: 24 }}>
         <Col
           span={5}
           style={{
@@ -65,6 +65,8 @@ const Dashboard = () => {
             }
             title="Đơn hàng"
             value={data.orderCount || 100}
+            cardBackgroundColor='#DDFFD1'
+            cardBorderRadius='20px'
           />
         </Col>
         <Col
@@ -79,7 +81,7 @@ const Dashboard = () => {
               <ShoppingOutlined
                 style={{
                   color: "blue",
-                  backgroundColor: "rgba(0, 0, 255, 0.25)",
+                  backgroundColor: "rgba(0, 0, 255, 0.1)",
                   borderRadius: 20,
                   fontSize: 24,
                   padding: 12,
@@ -88,12 +90,14 @@ const Dashboard = () => {
             }
             title="Sản phẩm"
             value={data.productCount || 100}
+            cardBackgroundColor='#C2DCFF'
+            cardBorderRadius='20px'
           />
         </Col>
         <Col
           span={5}
           style={{
-            backgroundColor: "rgba(148, 0, 211, 0.25)",
+            backgroundColor: "rgba(148, 0, 211, 0.1)",
             borderRadius: 20,
             marginRight: 24,
           }}>
@@ -102,7 +106,7 @@ const Dashboard = () => {
               <UserOutlined
                 style={{
                   color: "darkviolet",
-                  backgroundColor: "rgba(148,0,211, 0.25)",
+                  backgroundColor: "rgba(148,0,211, 0.1)",
                   borderRadius: 20,
                   fontSize: 24,
                   padding: 12,
@@ -111,12 +115,14 @@ const Dashboard = () => {
             }
             title="Khách hàng"
             value={data.userCount || 100}
+            cardBackgroundColor='#F3DBFF'
+            cardBorderRadius='20px'
           />
         </Col>
         <Col
           span={5}
           style={{
-            backgroundColor: "rgba(255, 0, 0, 0.25)",
+            backgroundColor: "rgba(255, 0, 0, 0.1)",
             borderRadius: 20,
           }}>
           <DashboardCard
@@ -124,7 +130,7 @@ const Dashboard = () => {
               <DollarOutlined
                 style={{
                   color: "red",
-                  backgroundColor: "rgba(255, 0, 0, 0.25)",
+                  backgroundColor: "rgba(255, 0, 0, 0.1)",
                   borderRadius: 20,
                   fontSize: 24,
                   padding: 12,
@@ -133,6 +139,8 @@ const Dashboard = () => {
             }
             title="Doanh thu"
             value={data.revenue || 100}
+            cardBackgroundColor='#FEDFC3'
+            cardBorderRadius='20px'
           />
         </Col>
       </Row>
@@ -141,44 +149,46 @@ const Dashboard = () => {
           <LoadingSpin />
         </div>
       )}
-      <Row style={{ marginTop: "16px", padding: "24px 0" }}>
+      <Row wrap={false} justify="space-between" style={{ marginTop: "16px" }}>
         <Col
-          span={12}
+          span={11}
           style={{
             backgroundColor: "#F9FCFD",
+            border: '1px solid #ccc',
             borderRadius: 20,
-            padding: "12px 0",
+            padding: 12
           }}>
-          <Divider orientation="left" style={{ fontSize: 24 }}>
-            Biểu đồ đơn đặt hàng
+          <Divider orientation="center" style={{ fontSize: 24 }}>
+            Đơn đặt hàng
           </Divider>
           <CalculateOrder />
         </Col>
         <Col
-          span={12}
+          span={11}
           style={{
             backgroundColor: "#F9FCFD",
+            border: '1px solid #ccc',
             borderRadius: 20,
-            padding: "12px 0",
+            padding: 12
           }}>
-          <Divider orientation="left" style={{ fontSize: 24 }}>
-            Biểu đồ sản phẩm
+          <Divider orientation="center" style={{ fontSize: 24 }}>
+            Sản phẩm
           </Divider>
           <TopSelling SetLoading={setLoading} />
         </Col>
       </Row>
 
-      <Row style={{ padding: "24px 0" }}>
+      <Row wrap={false} style={{ padding: "24px 0" }}>
         <Col
           span={24}
           style={{
             backgroundColor: "#F9FCFD",
-            marginBottom: "16px ",
+            border: '1px solid #ccc',
             borderRadius: 20,
-            padding: "12px 0",
+            padding: 12
           }}>
-          <Divider orientation="left" style={{ fontSize: 24 }}>
-            Biểu đồ doanh thu
+          <Divider orientation="center" style={{ fontSize: 24 }}>
+            Doanh thu
           </Divider>
           <CalculateMonthly />
         </Col>
