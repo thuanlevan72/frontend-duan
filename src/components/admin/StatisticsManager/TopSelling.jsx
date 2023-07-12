@@ -1,55 +1,109 @@
-import React from 'react'
-import { Pie } from '@ant-design/plots';
+import React, { useEffect, useState } from "react";
+import { Pie } from "@ant-design/plots";
+import { Alert, DatePicker } from "antd";
+import StatisticsApi from "../../../api/statistic/StatisticsApi";
+import dayjs from "dayjs";
+import "dayjs/locale/vi"; // Import locale for Vietnamese language
 
-const TopSelling = () => {
-    const data = [
-        {
-            type: '分类一',
-            value: 27,
-        },
-        {
-            type: '分类二',
-            value: 25,
-        },
-        {
-            type: '分类三',
-            value: 18,
-        },
-        {
-            type: '分类四',
-            value: 15,
-        },
-        {
-            type: '分类五',
-            value: 10,
-        },
-        {
-            type: '其他',
-            value: 5,
-        },
-    ];
-    const config = {
-        appendPadding: 10,
-        data,
-        angleField: 'value',
-        colorField: 'type',
-        radius: 0.9,
-        label: {
-            type: 'inner',
-            offset: '-30%',
-            content: ({ percent }) => `${(percent * 100).toFixed(0)}%`,
-            style: {
-                fontSize: 14,
-                textAlign: 'center',
-            },
-        },
-        interactions: [
-            {
-                type: 'element-active',
-            },
-        ],
-    };
-    return <Pie {...config} />;
+const { RangePicker } = DatePicker;
+
+const TopSelling = ({ SetLoading }) => {
+  const [startDate, setStartDate] = useState(dayjs().subtract(1, "month"));
+  const [endDate, setEndDate] = useState(dayjs());
+  const [data, setData] = useState([
+    {
+      type: "Sản phẩm 2",
+      value: 25,
+    },
+    {
+      type: "Sản phẩm 3",
+      value: 18,
+    },
+    {
+      type: "Sản phẩm 4",
+      value: 15,
+    },
+    {
+      type: "Sản phẩm 5",
+      value: 10,
+    },
+    {
+      type: "Sản phẩm 6",
+      value: 5,
+    },
+  ]);
+  const [selectedDate, setSelectedDate] = useState(null);
+  useEffect(async () => {
+    try {
+      SetLoading(true);
+      const res = await StatisticsApi.GetTopSellingProducts(selectedDate);
+      console.log(res);
+      const mappedData = res.map((item) => ({
+        type: item.product.nameProduct,
+        value: item.totalQuantity,
+      }));
+      SetLoading(false);
+      setData(mappedData);
+    } catch (error) {
+      SetLoading(false);
+    }
+  }, [selectedDate]);
+  const handleDateChange = (dates) => {
+    if (Array.isArray(dates) && dates.length === 2) {
+      const startDate = dates[0].format("YYYY/MM/DD");
+      const endDate = dates[1].format("YYYY/MM/DD");
+      setSelectedDate({
+        startDate,
+        endDate,
+      });
+      // Thực hiện các xử lý khác với khoảng ngày đã chọn
+    }
+  };
+  console.log(selectedDate);
+  const config = {
+    appendPadding: 10,
+    data,
+    angleField: "value",
+    colorField: "type",
+    radius: 0.9,
+    label: {
+      type: "inner",
+      offset: "-30%",
+      content: ({ percent }) => `${(percent * 100).toFixed(0)}%`,
+      style: {
+        fontSize: 14,
+        textAlign: "center",
+      },
+    },
+    interactions: [
+      {
+        type: "element-active",
+      },
+    ],
+  };
+  return (
+    <>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          alignItems: "center",
+          paddingRight: "10px",
+        }}>
+        {" "}
+        <RangePicker
+          value={[startDate, endDate]}
+          onChange={handleDateChange}
+          allowClear={false}
+        />
+      </div>
+      {data && data.length > 0 ? (
+        <Pie {...config} />
+      ) : (
+        <Alert message="DỮ liệu không tồn tại" type="warning" />
+      )}
+    </>
+  );
 };
 
-export default TopSelling
+export default TopSelling;
