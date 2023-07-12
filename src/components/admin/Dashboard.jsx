@@ -71,29 +71,6 @@ const Dashboard = () => {
           span={5}
           style={{
             marginRight: 24,
-            backgroundColor: "rgba(255, 0, 0, 0.25)",
-            borderRadius: 20,
-          }}>
-          <DashboardCard
-            icon={
-              <DollarOutlined
-                style={{
-                  color: "red",
-                  backgroundColor: "rgba(255, 0, 0, 0.25)",
-                  borderRadius: 20,
-                  fontSize: 24,
-                  padding: 12,
-                }}
-              />
-            }
-            title="Doanh thu"
-            value={data.revenue || 100}
-          />
-        </Col>
-        <Col
-          span={5}
-          style={{
-            marginRight: 24,
             backgroundColor: "rgba(0, 0, 255, 0.25)",
             borderRadius: 20,
           }}>
@@ -118,6 +95,7 @@ const Dashboard = () => {
           style={{
             backgroundColor: "rgba(148, 0, 211, 0.25)",
             borderRadius: 20,
+            marginRight: 24,
           }}>
           <DashboardCard
             icon={
@@ -135,19 +113,40 @@ const Dashboard = () => {
             value={data.userCount || 100}
           />
         </Col>
+        <Col
+          span={5}
+          style={{
+            backgroundColor: "rgba(255, 0, 0, 0.25)",
+            borderRadius: 20,
+          }}>
+          <DashboardCard
+            icon={
+              <DollarOutlined
+                style={{
+                  color: "red",
+                  backgroundColor: "rgba(255, 0, 0, 0.25)",
+                  borderRadius: 20,
+                  fontSize: 24,
+                  padding: 12,
+                }}
+              />
+            }
+            title="Doanh thu"
+            value={data.revenue || 100}
+          />
+        </Col>
       </Row>
       {loading && (
         <div>
           <LoadingSpin />
         </div>
       )}
-      <Row wrap={false} style={{ marginTop: "16px", padding: "24px 0" }}>
+      <Row style={{ marginTop: "16px", padding: "24px 0" }}>
         <Col
-          flex={5}
+          span={12}
           style={{
             backgroundColor: "#F9FCFD",
             borderRadius: 20,
-            marginRight: 36,
             padding: "12px 0",
           }}>
           <Divider orientation="left" style={{ fontSize: 24 }}>
@@ -156,7 +155,7 @@ const Dashboard = () => {
           <CalculateOrder />
         </Col>
         <Col
-          flex={6}
+          span={12}
           style={{
             backgroundColor: "#F9FCFD",
             borderRadius: 20,
