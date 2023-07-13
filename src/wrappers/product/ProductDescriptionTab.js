@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
 import OrderApi from "../../api/order/OrderApi";
-import { Pagination, Spin, message } from "antd";
+import { Pagination, Rate, Spin, message } from "antd";
 import ProductReviewApi from "../../api/product/ProductReviewApi";
 import { useHistory } from "react-router-dom";
 
@@ -25,6 +25,15 @@ const ProductDescriptionTab = ({
     pointEvaluation: 5,
     status: 1,
   });
+  const [rating, setRating] = useState(0); // Trạng thái để lưu giá trị điểm
+
+  const handleRateChange = (value) => {
+    setRating(value); // Cập nhật giá trị điểm trong trạng thái
+    setContentRated({
+      ...ContentRated,
+      pointEvaluation: value,
+    });
+  };
   const [param, setParam] = useState({
     ProductId: productId,
     page: 1,
@@ -271,6 +280,15 @@ const ProductDescriptionTab = ({
                               </div>
                               <div className="col-md-12">
                                 <div className="rating-form-style form-submit">
+                                  <div>
+                                    <h5>Điểm Đánh Giá</h5>
+                                    <Rate
+                                      onChange={handleRateChange}
+                                      value={rating}
+                                    />{" "}
+                                  </div>
+                                  <br />
+                                  <h5>Nội dung đánh giá</h5>
                                   <textarea
                                     name="ContentRated"
                                     placeholder="Message"
