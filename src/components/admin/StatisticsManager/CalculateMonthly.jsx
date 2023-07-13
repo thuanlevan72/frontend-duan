@@ -59,7 +59,7 @@ const CalculateMonthly = () => {
   const config = {
     data: [data, data],
     xField: "MonthYear",
-    yField: ["OrderCount", "Revenue"],
+    yField: ["Revenue", "OrderCount"],
     geometryOptions: [
       {
         geometry: "column",
@@ -87,10 +87,11 @@ const CalculateMonthly = () => {
 
   return (
     <>
-      <div style={{
-        backgroundColor: '#F9FCFD',
-        padding: 36
-      }}>
+      <div
+        style={{
+          backgroundColor: "#F9FCFD",
+          padding: 36,
+        }}>
         <div
           style={{
             display: "flex",
@@ -108,10 +109,11 @@ const CalculateMonthly = () => {
         {data && data.length > 0 ? (
           <DualAxes {...config} />
         ) : (
-          <div style={{
-            marginTop: 24,
-            textAlign: 'center'
-          }}>
+          <div
+            style={{
+              marginTop: 24,
+              textAlign: "center",
+            }}>
             <Alert message="Warning" type="warning" showIcon />
           </div>
         )}
