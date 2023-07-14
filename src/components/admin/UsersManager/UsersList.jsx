@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Breadcrumb, Space, Table, Typography, Avatar, Tag, Pagination, Button, Descriptions, Modal, message, Image, Input } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import { NavLink } from "react-router-dom";
 import { UserOutlined } from "@ant-design/icons";
 import UserApi from "../../../api/security/UserApi";
 import { format } from "date-fns";
 import LoadingSpin from "../../loading/LoadingSpin";
+import { BiEdit } from "react-icons/bi";
 
 const { Text } = Typography;
 const UsersList = () => {
@@ -60,6 +63,92 @@ const UsersList = () => {
         pageSize: 10,
         search: "",
     });
+    const [searchText, setSearchText] = useState("");
+    const handleSearch = (value) => {
+        setSearchText(value);
+        setParam((prev) => ({
+            ...prev,
+            searchName: value,
+            page: 1,
+        }));
+    };
+    const getColumnSearchProps = (dataIndex) => ({
+        filterDropdown: ({ setSelectedKeys, selectedKeys, clearFilters }) => (
+            <div style={{ padding: 8 }}>
+                <Input
+                    placeholder={`Tìm kiếm tên món...`}
+                    value={selectedKeys[0]}
+                    onChange={(e) =>
+                        setSelectedKeys(e.target.value ? [e.target.value] : [])
+                    }
+                    onPressEnter={() => handleSearch(selectedKeys[0])}
+                    style={{ marginBottom: 8, display: "block", height: 30 }}
+                />
+                <Space>
+                    <Button
+                        type="primary"
+                        size="small"
+                        onClick={() => handleSearch(selectedKeys[0])}
+                        style={{ width: 90 }}
+                    >
+                        Tìm
+                    </Button>
+                    <Button
+                        type="primary"
+                        size="small"
+                        onClick={() => {
+                            clearFilters();
+                            setSearchText("");
+                            handleSearch("");
+                        }}
+                        danger
+                        style={{ width: 90 }}
+                    >
+                        Xóa
+                    </Button>
+                </Space>
+            </div>
+        ),
+        filterIcon: (filtered) => (
+            <SearchOutlined
+                style={{ color: filtered ? "#1890ff" : undefined }}
+            />
+        ),
+        onFilter: (value, record) =>
+            record[dataIndex]
+                ? record[dataIndex]
+                    .toString()
+                    .toLowerCase()
+                    .includes(value.toLowerCase())
+                : "",
+        render: (text) => {
+            return dataIndex === "userName" ? (
+                <span>
+                    {searchText &&
+                        text.toLowerCase().includes(searchText.toLowerCase()) ? (
+                        <span>
+                            {text
+                                .split(new RegExp(`(${searchText})`, "gi"))
+                                .map((fragment, i) =>
+                                    fragment.toLowerCase() ===
+                                        searchText.toLowerCase() ? (
+                                        <span key={i} className="bg-warning">
+                                            {fragment}
+                                        </span>
+                                    ) : (
+                                        fragment
+                                    )
+                                )}
+                        </span>
+                    ) : (
+                        text
+                    )}
+                </span>
+            ) : (
+                text
+            );
+        },
+    });
     useEffect(() => {
         const getUsers = async () => {
             try {
@@ -106,6 +195,7 @@ const UsersList = () => {
             dataIndex: "userName",
             key: "userName",
             align: "center",
+            ...getColumnSearchProps("userName"),
         },
         {
             title: "Email",
@@ -154,6 +244,11 @@ const UsersList = () => {
             align: "center",
             render: (accountId) => (
                 <Space size="middle">
+                    <Button className="border border-white">
+                        <NavLink to={`/admin/account-edit/${accountId}`}>
+                            <BiEdit />
+                        </NavLink>
+                    </Button>
                     <Button type="primary" onClick={(e) => showModal(accountId)}>
                         Chi tiết
                     </Button>
