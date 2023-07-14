@@ -10,11 +10,16 @@ const fetchProductsSuccess = (products) => ({
 // fetch products
 export const fetchProducts = (products) => {
   return async (dispatch) => {
-    try {
-      const response = await ProductApi.getAllNoPagition();
-      dispatch(fetchProductsSuccess(response));
-    } catch (error) {
-      dispatch(fetchProductsSuccess(products));
+    const currentTime = Date.now();
+    const lastFetchTime = localStorage.getItem("lastFetchTime");
+    if (!lastFetchTime || currentTime - lastFetchTime >= 3600000) {
+      try {
+        const response = await ProductApi.getAllNoPagition();
+        dispatch(fetchProductsSuccess(response));
+        localStorage.setItem("lastFetchTime", currentTime.toString());
+      } catch (error) {
+        dispatch(fetchProductsSuccess(products));
+      }
     }
   };
 };
