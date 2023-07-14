@@ -74,8 +74,19 @@ const UserApi = {
         return axiosClient.get(url, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")
-                        ? JSON.parse(localStorage.getItem("token"))
-                        : ""
+                    ? JSON.parse(localStorage.getItem("token"))
+                    : ""
+                    }`,
+            },
+        });
+    },
+    updateUser: (id, body) => {
+        const url = `/User/updateUser/${id}`;
+        return axiosClient.post(url, body, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")
+                    ? JSON.parse(localStorage.getItem("token"))
+                    : ""
                     }`,
             },
         });
