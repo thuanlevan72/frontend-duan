@@ -157,7 +157,7 @@ const App = (props) => {
                 <Route
                   path="/admin"
                   component={AdminLayout}
-                  render={() => <Redirect to="/admin/dashboard" />}
+                  // render={() => <Redirect to="/admin/dashboard" />}
                 />
                 {localStorage.getItem("user") && (
                   <>
