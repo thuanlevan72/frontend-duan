@@ -39,19 +39,24 @@ const LoginRegister = ({ location }) => {
     });
   };
   const handleSubmitRegister = async (e) => {
-    if (!dataRegister.email || !dataRegister.password || !dataRegister.username || !dataRegister.confirmpassword) {
+    if (
+      !dataRegister.email ||
+      !dataRegister.password ||
+      !dataRegister.username ||
+      !dataRegister.confirmpassword
+    ) {
       messageApi.open({
-        type: 'error',
+        type: "error",
         content: "Không để trống các trường",
       });
-      return
+      return;
     }
     if (dataRegister.password !== dataRegister.confirmpassword) {
       messageApi.open({
-        type: 'error',
+        type: "error",
         content: "Mật khẩu không khớp",
       });
-      return
+      return;
     }
     e.preventDefault();
     const formData = new FormData();
@@ -64,25 +69,25 @@ const LoginRegister = ({ location }) => {
       setLoading(true);
       const response = await UserApi.Register(formData); // đưa dữ liệu lên đăng ký
       messageApi.open({
-        type: 'success',
+        type: "success",
         content: "Bạn đã đăng ký thành công",
       });
       setLoading(false);
       setDataRegister(
         (prev) =>
-        (prev = {
-          email: "",
-          password: "",
-          confirmpassword: "",
-          username: "",
-        })
+          (prev = {
+            email: "",
+            password: "",
+            confirmpassword: "",
+            username: "",
+          })
       );
       setActiveKey("login");
       // Xử lý phản hồi từ API tại đây (ví dụ: hiển thị thông báo thành công, điều hướng đến trang khác, vv)
     } catch (error) {
       console.error(error);
       messageApi.open({
-        type: 'error',
+        type: "error",
         content: "Đăng ký thất bại",
       });
       setLoading(false);
@@ -93,21 +98,21 @@ const LoginRegister = ({ location }) => {
   const handleSubmit = async (e) => {
     if (!dataLogin.email || !dataLogin.password) {
       messageApi.open({
-        type: 'error',
+        type: "error",
         content: "Không để trống các trường",
       });
-      return
+      return;
     }
     e.preventDefault();
     try {
-      const expirationTime = new Date().getTime() + (4 * 60 * 60 * 1000);
+      const expirationTime = new Date().getTime() + 4 * 60 * 60 * 1000;
       // const expirationTime = new Date().getTime() + (1 * 60 * 1000);
       setLoading(true);
       const response = await UserApi.Login(dataLogin); // đưa dữ liệu lên đăng ký
       if (response?.data?.decentralizationId !== 3) {
         messageApi.open({
-          type: 'success',
-          content: 'Đăng nhập Admin',
+          type: "success",
+          content: "Đăng nhập Admin",
         });
         //nếu đi vào đây thì người đó không phải là người dùng nên phải đưa về admin
         const userJSON = JSON.stringify(response.data); // lưu dữ liệu người dùng
@@ -129,8 +134,8 @@ const LoginRegister = ({ location }) => {
       localStorage.setItem("token", token);
       localStorage.setItem("expiration", expirationTime);
       messageApi.open({
-        type: 'success',
-        content: 'chào mừng bạn đã đến poly-food.',
+        type: "success",
+        content: "chào mừng bạn đã đến poly-food.",
       });
       setTimeout(function () {
         setLoading(false);
@@ -139,7 +144,7 @@ const LoginRegister = ({ location }) => {
       // Xử lý phản hồi từ API tại đây (ví dụ: hiển thị thông báo thành công, điều hướng đến trang khác, vv)
     } catch (error) {
       messageApi.open({
-        type: 'error',
+        type: "error",
         content: error.response.data,
       });
       setLoading(false);
@@ -155,7 +160,9 @@ const LoginRegister = ({ location }) => {
           content="Compare page of flone react minimalist eCommerce template."
         />
       </MetaTags>
-      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Trang chủ</BreadcrumbsItem>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>
+        Trang chủ
+      </BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
         Đăng nhập - Đăng ký
       </BreadcrumbsItem>
@@ -173,16 +180,14 @@ const LoginRegister = ({ location }) => {
                       <Nav.Item>
                         <Nav.Link
                           eventKey="login"
-                          onClick={() => setActiveKey("login")}
-                        >
+                          onClick={() => setActiveKey("login")}>
                           <h4>Đăng nhập</h4>
                         </Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
                         <Nav.Link
                           eventKey="register"
-                          onClick={() => setActiveKey("register")}
-                        >
+                          onClick={() => setActiveKey("register")}>
                           <h4>Đăng ký</h4>
                         </Nav.Link>
                       </Nav.Item>
@@ -190,7 +195,11 @@ const LoginRegister = ({ location }) => {
                     <Tab.Content>
                       <Tab.Pane eventKey="login">
                         <div className="login-form-container">
-                          {loading && (<div><LoadingSpin /></div>)}
+                          {loading && (
+                            <div>
+                              <LoadingSpin />
+                            </div>
+                          )}
                           <div className="login-register-form">
                             <form>
                               <input
@@ -227,7 +236,11 @@ const LoginRegister = ({ location }) => {
                       </Tab.Pane>
                       <Tab.Pane eventKey="register">
                         <div className="login-form-container">
-                          {loading && (<div><LoadingSpin /></div>)}
+                          {loading && (
+                            <div>
+                              <LoadingSpin />
+                            </div>
+                          )}
                           <div className="login-register-form">
                             <form>
                               <input
@@ -265,8 +278,7 @@ const LoginRegister = ({ location }) => {
                               <div className="button-box">
                                 <button
                                   type="button"
-                                  onClick={handleSubmitRegister}
-                                >
+                                  onClick={handleSubmitRegister}>
                                   <span>Đăng ký</span>
                                 </button>
                               </div>

@@ -30,6 +30,8 @@ const BlogDetailsStandard = lazy(() =>
 );
 // other pages
 const About = lazy(() => import("./pages/other/About"));
+const ForgotPassword = lazy(() => import("./pages/other/ForgotPassword"));
+const ResetPassword = lazy(() => import("./pages/other/ResetPassword"));
 const Contact = lazy(() => import("./pages/other/Contact"));
 const MyAccount = lazy(() => import("./pages/other/MyAccount"));
 const LoginRegister = lazy(() => import("./pages/other/LoginRegister"));
@@ -141,6 +143,14 @@ const App = (props) => {
                 <Route
                   path={process.env.PUBLIC_URL + "/vnpay_return"}
                   component={ResVnPay}
+                />
+                <Route
+                  path={process.env.PUBLIC_URL + "/forgot-password"}
+                  component={ForgotPassword}
+                />
+                <Route
+                  path={process.env.PUBLIC_URL + "/reset-password"}
+                  component={ResetPassword}
                 />
 
                 {/* Router Admin Manager */}
