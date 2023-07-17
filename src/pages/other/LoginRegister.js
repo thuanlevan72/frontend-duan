@@ -10,6 +10,7 @@ import UserApi from "../../api/security/UserApi";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { message } from "antd";
 import LoadingSpin from "../../components/loading/LoadingSpin";
+import { Link } from "react-router-dom";
 
 const LoginRegister = ({ location }) => {
   const { pathname } = location;
@@ -218,7 +219,12 @@ const LoginRegister = ({ location }) => {
                                 onChange={changeInputValue}
                                 required
                               />
-                              <div className="button-box">
+                              <div
+                                className="button-box"
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "space-between",
+                                }}>
                                 {/* <div className="login-toggle-btn">
                                     <input type="checkbox" />
                                     <label className="ml-10">Remember me</label>
@@ -229,6 +235,13 @@ const LoginRegister = ({ location }) => {
                                 <button type="submit" onClick={handleSubmit}>
                                   <span>Đăng nhập</span>
                                 </button>
+
+                                <Link
+                                  to={
+                                    process.env.PUBLIC_URL + "/forgot-password"
+                                  }>
+                                  {"Quên mật khẩu"}
+                                </Link>
                               </div>
                             </form>
                           </div>

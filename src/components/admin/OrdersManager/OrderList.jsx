@@ -1,5 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Breadcrumb, Pagination, Space, Table, Select, Tag, Button, message, Modal, Descriptions, Image } from "antd";
+import {
+  Breadcrumb,
+  Pagination,
+  Space,
+  Table,
+  Select,
+  Tag,
+  Button,
+  message,
+  Modal,
+  Descriptions,
+  Image,
+} from "antd";
 import OrderApi from "../../../api/order/OrderApi.js";
 import { format } from "date-fns";
 import LoadingSpin from "../../loading/LoadingSpin";
@@ -29,6 +41,7 @@ const OrderList = () => {
           nameProduct: item.product.nameProduct,
           avartarImageProduct: item.product.avartarImageProduct,
           quantity: item.quantity,
+          priceOld: item.product.price.toLocaleString("vi-VN") + " " + "vnd",
           price: item.price.toLocaleString("vi-VN") + " " + "VND",
           totalPrice:
             (item.price * item.quantity).toLocaleString("vi-VN") + " " + "VND",
@@ -46,11 +59,11 @@ const OrderList = () => {
   const handlePaginationChange = (page, pageSize) => {
     setParam(
       (prev) =>
-      (prev = {
-        ...param,
-        page: page,
-        pageSize: pageSize,
-      })
+        (prev = {
+          ...param,
+          page: page,
+          pageSize: pageSize,
+        })
     );
   };
   const [param, setParam] = useState({
@@ -96,7 +109,7 @@ const OrderList = () => {
     try {
       const data = await OrderApi.getOrderStatus();
       setOptions(data);
-    } catch (error) { }
+    } catch (error) {}
   };
   const handleChangeStatus = (id) => async (orderId, newStatus) => {
     try {
@@ -244,6 +257,13 @@ const OrderList = () => {
       dataIndex: "price",
       key: "price",
       align: "center",
+      render: (price, record) => (
+        <span>
+          <del style={{ color: "#535c68" }}>{record.priceOld}</del>
+          <br />
+          {price}
+        </span>
+      ),
     },
     {
       title: "Tổng tiền",

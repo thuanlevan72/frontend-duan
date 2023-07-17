@@ -152,25 +152,20 @@ const App = (props) => {
                   path={process.env.PUBLIC_URL + "/reset-password"}
                   component={ResetPassword}
                 />
-
                 {/* Router Admin Manager */}
                 <Route
                   path="/admin"
                   component={AdminLayout}
                   // render={() => <Redirect to="/admin/dashboard" />}
                 />
-                {localStorage.getItem("user") && (
-                  <>
-                    <Route
-                      path={process.env.PUBLIC_URL + "/my-account"}
-                      component={MyAccount}
-                    />
-                    <Route
-                      path={process.env.PUBLIC_URL + "/order-history"}
-                      component={OrderHistory}
-                    />
-                  </>
-                )}
+                <Route
+                  path={process.env.PUBLIC_URL + "/my-account"}
+                  component={MyAccount}
+                />
+                <Route
+                  path={process.env.PUBLIC_URL + "/order-history"}
+                  component={OrderHistory}
+                />
                 <Route exact component={NotFound} />
               </Switch>
             </Suspense>

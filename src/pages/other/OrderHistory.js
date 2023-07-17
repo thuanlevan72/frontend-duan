@@ -51,6 +51,7 @@ const Cart = ({ location, cartItems }) => {
           productId: index + 1,
           nameProduct: item.product.nameProduct,
           avartarImageProduct: item.product.avartarImageProduct,
+          priceOld: item.product.price.toLocaleString("vi-VN") + " " + "vnd",
           quantity: item.quantity,
           price: item.price.toLocaleString("vi-VN") + " " + "vnd",
           totalPrice:
@@ -131,6 +132,13 @@ const Cart = ({ location, cartItems }) => {
       dataIndex: "price",
       key: "price",
       align: "center",
+      render: (price, record) => (
+        <span>
+          <del style={{ color: "#535c68" }}>{record.priceOld}</del>
+          <br />
+          {price}
+        </span>
+      ),
     },
     {
       title: "Tổng tiền",
@@ -203,7 +211,7 @@ const Cart = ({ location, cartItems }) => {
                 <LoadingSpin />
               </div>
             )}
-            {console.log(dataOrderHistory)}
+
             {dataOrderHistory &&
             dataOrderHistory.data &&
             dataOrderHistory?.data?.data?.length > 0 ? (
