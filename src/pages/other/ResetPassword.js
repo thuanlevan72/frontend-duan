@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import MetaTags from "react-meta-tags";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import Tab from "react-bootstrap/Tab";
@@ -17,6 +17,7 @@ const ResetPassword = ({ location }) => {
   const history = useHistory();
   const [messageApi, contextHolder] = message.useMessage();
   const [activeKey, setActiveKey] = useState("login");
+  const [token, setToken] = useState("");
   const [dataLogin, setDataLogin] = useState({
     resetPasswordToken: "",
     NewPassword: "",
@@ -28,7 +29,22 @@ const ResetPassword = ({ location }) => {
       [val.target.name]: val.target.value,
     });
   };
-
+  useEffect(async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tokenParam = urlParams.get("token");
+    if (!tokenParam) {
+      history.push("/");
+    }
+    try {
+      const res = await UserApi.CheckToken(tokenParam);
+      setDataLogin({
+        ...dataLogin,
+        resetPasswordToken: tokenParam,
+      });
+    } catch (error) {
+      history.push("/");
+    }
+  }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (
@@ -59,6 +75,9 @@ const ResetPassword = ({ location }) => {
         content: "đã reset thành công mk",
       });
       setLoading(false);
+      setTimeout(() => {
+        history.push("/login-register");
+      }, 500);
 
       return;
     } catch (error) {
@@ -114,14 +133,6 @@ const ResetPassword = ({ location }) => {
                           )}
                           <div className="login-register-form">
                             <form>
-                              <input
-                                type="text"
-                                name="resetPasswordToken"
-                                value={dataLogin.resetPasswordToken}
-                                placeholder="resetPasswordToken"
-                                onChange={changeInputValue}
-                                required
-                              />
                               <input
                                 type="password"
                                 name="NewPassword"

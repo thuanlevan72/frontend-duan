@@ -115,6 +115,10 @@ const UserApi = {
     const url = "User/reset-password";
     return axiosClient.post(url, body);
   },
+  CheckToken: (token) => {
+    const url = `User/check-token?token=${token}`;
+    return axiosClient.post(url);
+  },
 };
 
 export default UserApi;
