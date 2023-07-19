@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Breadcrumb, Space, Table, Typography, Avatar, Tag, Pagination, Button, Descriptions, Modal, message, Image, Input } from "antd";
+import { Breadcrumb, Space, Table, Typography, Avatar, Tag, Pagination, Button, Descriptions, Modal, message, Image, Input, Popconfirm } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 import { UserOutlined } from "@ant-design/icons";
@@ -8,9 +8,13 @@ import UserApi from "../../../api/security/UserApi";
 import { format } from "date-fns";
 import LoadingSpin from "../../loading/LoadingSpin";
 import { BiEdit } from "react-icons/bi";
+import { ImBin } from "react-icons/im";
+import { LuEye } from "react-icons/lu";
+import { useToasts } from "react-toast-notifications";
 
 const { Text } = Typography;
 const UsersList = () => {
+    const { addToast } = useToasts();
     const [loading, setLoading] = useState(false);
     const [messageApi, contextHolder] = message.useMessage();
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -163,6 +167,27 @@ const UsersList = () => {
         };
         getUsers();
     }, [param]);
+    const handleRemove = async (id) => {
+        try {
+            await UserApi.removeUser(id);
+            const { data } = await UserApi.getAllUsers(param);
+            setData(data);
+            addToast("Xóa tài khoản thành công!", {
+                appearance: "success",
+                autoDismiss: true,
+                autoDismissTimeout: 1500,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const handleUnRemove = () => {
+        addToast("Hủy xóa", {
+            appearance: "error",
+            autoDismiss: true,
+            autoDismissTimeout: 1000,
+        });
+    };
     const dataSource = data?.data?.map((item, index) => {
         return {
             key: index + 1,
@@ -249,9 +274,23 @@ const UsersList = () => {
                             <BiEdit />
                         </NavLink>
                     </Button>
-                    <Button type="primary" onClick={(e) => showModal(accountId)}>
-                        Chi tiết
+                    <Button className="border border-white" onClick={(e) => showModal(accountId)}>
+                        <LuEye />
                     </Button>
+                    <Popconfirm
+                        title="Bạn có chắc chắn xóa?"
+                        onConfirm={() => {
+                            handleRemove(accountId);
+                        }}
+                        onCancel={handleUnRemove}
+                        className="border border-white"
+                        okText="Có"
+                        cancelText="Không"
+                    >
+                        <Button danger>
+                            <ImBin />
+                        </Button>
+                    </Popconfirm>
                 </Space>
             ),
         },
