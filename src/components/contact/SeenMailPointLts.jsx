@@ -12,6 +12,7 @@ import { Select, message, Form, Input, Button, DatePicker } from "antd";
 import LoadingSpin from "../../components/loading/LoadingSpin";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import '../../assets/css/seenEmail-override.css'
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -115,21 +116,26 @@ const SeenMailPointLts = ({ location }) => {
                           </div>
                         )}
                         <div className="login-register-form">
-                          <Form name="mailPointRequestForm" onFinish={onFinish}>
+                          <Form 
+                          name="mailPointRequestForm" 
+                          onFinish={onFinish} 
+                          >
                             <Form.Item
                               name="studentName"
-                              label="Họ và tên học sinh"
+                              className="my-0"
+                              label="Họ và tên"
                               rules={[
                                 {
                                   required: true,
                                   message: "Vui lòng nhập vào tên học sinh",
                                 },
                               ]}>
-                              <Input />
+                              <Input style={{ height: 30 }} />
                             </Form.Item>
                             <Form.Item
                               name="courseName"
-                              label="Môn Học"
+                              label="Môn học"
+                              className="optionSelect"
                               rules={[
                                 {
                                   required: true,
@@ -144,18 +150,20 @@ const SeenMailPointLts = ({ location }) => {
                             </Form.Item>
                             <Form.Item
                               name="phone"
-                              label="Số điện thoại"
+                              label="Điện thoại"
+                              className="my-0"
                               rules={[
                                 {
                                   required: true,
                                   message: "Vui lòng nhập vào số điện thoại",
                                 },
                               ]}>
-                              <Input />
+                              <Input style={{ height: 30 }} />
                             </Form.Item>
                             <Form.Item
                               name="email"
                               label="Email"
+                              className="my-0"
                               rules={[
                                 {
                                   required: true,
@@ -163,9 +171,9 @@ const SeenMailPointLts = ({ location }) => {
                                   message: "Vui lòng nhập vào email",
                                 },
                               ]}>
-                              <Input />
+                              <Input style={{ height: 30 }} />
                             </Form.Item>
-                            <Form.Item name="subjects" label="Học phần">
+                            <Form.Item name="subjects" className="subjects" label="Học phần">
                               <Form.List name="subjects">
                                 {(fields, { add, remove }) => (
                                   <>
@@ -174,7 +182,8 @@ const SeenMailPointLts = ({ location }) => {
                                         key={field.key}
                                         label={index === 0 ? "Subject" : ""}
                                         required={false}
-                                        style={{ marginBottom: 8 }}>
+                                        style={{ height: 30, marginBottom: 81 }}
+                                        >
                                         <Form.Item
                                           {...field}
                                           name={[field.name, "name"]}
@@ -183,7 +192,7 @@ const SeenMailPointLts = ({ location }) => {
                                             "onChange",
                                             "onBlur",
                                           ]}
-                                          noStyle
+                                          // noStyle
                                           rules={[
                                             {
                                               required: true,
@@ -194,7 +203,8 @@ const SeenMailPointLts = ({ location }) => {
                                           ]}>
                                           <Select
                                             placeholder="Các môn học"
-                                            style={{ width: "80%" }}>
+                                            style={{ height: 30 }}
+                                            >
                                             {SubjectName.map((x) => (
                                               <Option value={x.name}>
                                                 {x.name}
@@ -219,12 +229,9 @@ const SeenMailPointLts = ({ location }) => {
                                                 "Vui lòng nhập điểm hợp lệ (0-10).",
                                             },
                                           ]}>
-                                          <Input
+                                          <Input style={{ height: 30 }}
                                             placeholder="Điểm số"
-                                            style={{
-                                              width: "20%",
-                                              marginLeft: "8px",
-                                            }}
+                                            className="mb-0"
                                           />
                                         </Form.Item>
                                         {fields.length > 1 ? (
@@ -243,7 +250,7 @@ const SeenMailPointLts = ({ location }) => {
                                       <Button
                                         type="dashed"
                                         onClick={() => add()}
-                                        style={{ width: "60%" }}>
+                                        style={{ width: "100%" }}>
                                         Thêm 1 môn học
                                       </Button>
                                     </Form.Item>
@@ -251,9 +258,11 @@ const SeenMailPointLts = ({ location }) => {
                                 )}
                               </Form.List>
                             </Form.Item>
+                            <div className="d-flex justify-content-between">
                             <Form.Item
                               name="dayAdmission"
-                              label="Ngày Bắt đầu"
+                              label="Bắt đầu"
+                              className="my-0"
                               rules={[
                                 {
                                   required: true,
@@ -261,11 +270,11 @@ const SeenMailPointLts = ({ location }) => {
                                     "Vui lòng nhập vào ngày bắt đầu khóa học",
                                 },
                               ]}>
-                              <DatePicker />
+                              <DatePicker className="ovr-pickdate" style={{ height: 30 }}/>
                             </Form.Item>
                             <Form.Item
                               name="dayEndEstimatedEndDate"
-                              label="Ngày dự kiến kết thúc"
+                              label="Kết thúc (dự kiến)"
                               rules={[
                                 {
                                   required: true,
@@ -273,24 +282,25 @@ const SeenMailPointLts = ({ location }) => {
                                     "Vui lòng nhập vào ngày dự kiến kết thúc khóa học",
                                 },
                               ]}>
-                              <DatePicker />
+                              <DatePicker className="ovr-pickdate" style={{ height: 30 }}/>
                             </Form.Item>
+                            </div>
                             <Form.Item
                               name="totalRating"
-                              label="Nội dung cần chuyền đạt"
+                              label="Nội dung"
                               rules={[
                                 {
                                   required: true,
                                   message: "Vui lòng nhập vào nội dung cần gửi",
                                 },
                               ]}>
-                              <Input.TextArea
+                              <Input .TextArea
                                 placeholder="Nhập nội dung khác"
-                                style={{ height: "200px" }}
+                                style={{ height: "100px" }}
                               />
                             </Form.Item>
-                            <Form.Item>
-                              <Button type="primary" htmlType="submit">
+                            <Form.Item wrapperCol={{ span: 32 }}>
+                              <Button type="primary" htmlType="submit" block>
                                 Gửi điểm cho học viên
                               </Button>
                             </Form.Item>
