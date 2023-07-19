@@ -119,6 +119,11 @@ const UserApi = {
     const url = `User/check-token?token=${token}`;
     return axiosClient.post(url);
   },
+  // chức này không liên quan đừng đụng đến
+  MailPointRequestForm: (body) => {
+    const url = `User/sendMail`;
+    return axiosClient.post(url, body);
+  },
 };
 
 export default UserApi;
