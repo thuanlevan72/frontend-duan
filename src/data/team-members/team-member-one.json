@@ -1,38 +1,50 @@
 [
   {
     "id": "1",
-    "image": "/assets/img/team/team-1.jpg",
+    "image": "/assets/img/team/psyduck.jpg",
     "fbLink": "//www.facebook.com",
     "twitterLink": "//www.twitter.com",
     "instagramLink": "//www.instagram.com",
-    "name": "Mr.Mike Banding",
-    "position": "Manager"
+    "name": "Lê Thuận"
   },
   {
     "id": "2",
-    "image": "/assets/img/team/team-3.jpg",
+    "image": "/assets/img/team/psyduck.jpg",
     "fbLink": "//www.facebook.com",
     "twitterLink": "//www.twitter.com",
     "instagramLink": "//www.instagram.com",
-    "name": "Mr.Peter Pan",
-    "position": "Developer"
+    "name": "Trần Văn Giang"
   },
   {
     "id": "3",
-    "image": "/assets/img/team/team-2.jpg",
+    "image": "/assets/img/team/psyduck.jpg",
     "fbLink": "//www.facebook.com",
     "twitterLink": "//www.twitter.com",
     "instagramLink": "//www.instagram.com",
-    "name": "Ms.Sophia",
-    "position": "Designer"
+    "name": "Đồng Công Định"
   },
   {
     "id": "4",
-    "image": "/assets/img/team/team-4.jpg",
+    "image": "/assets/img/team/psyduck.jpg",
     "fbLink": "//www.facebook.com",
     "twitterLink": "//www.twitter.com",
     "instagramLink": "//www.instagram.com",
-    "name": "Mr.John Lee",
-    "position": "Chairman"
+    "name": "Nguyễn Đăng Huy"
+  },
+  {
+    "id": "5",
+    "image": "/assets/img/team/psyduck.jpg",
+    "fbLink": "//www.facebook.com",
+    "twitterLink": "//www.twitter.com",
+    "instagramLink": "//www.instagram.com",
+    "name": "Nguyễn Đức Duy"
+  },
+  {
+    "id": "6",
+    "image": "/assets/img/team/psyduck.jpg",
+    "fbLink": "//www.facebook.com",
+    "twitterLink": "//www.twitter.com",
+    "instagramLink": "//www.instagram.com",
+    "name": "Đinh Đức Hải"
   }
 ]
