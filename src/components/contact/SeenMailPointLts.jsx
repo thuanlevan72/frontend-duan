@@ -12,7 +12,7 @@ import { Select, message, Form, Input, Button, DatePicker } from "antd";
 import LoadingSpin from "../../components/loading/LoadingSpin";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import '../../assets/css/seenEmail-override.css'
+import "../../assets/css/seenEmail-override.css";
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -23,7 +23,8 @@ const courseName = [
   { name: "c++ and c" },
   { name: "Chưa quyết" },
   { name: "VueJS" },
-  { name: "React" },
+  { name: "C# on job" },
+  { name: "Frontend on job" },
   { name: "React" },
   { name: "BE .NET" },
   { name: "BE Java" },
@@ -76,7 +77,7 @@ const SeenMailPointLts = ({ location }) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Poly Food | Đăng nhập</title>
+        <title>LTS EDU | THÔNG BÁO ĐIỂM HỌC PHẦN</title>
         <meta
           name="description"
           content="Compare page of flone react minimalist eCommerce template."
@@ -116,10 +117,7 @@ const SeenMailPointLts = ({ location }) => {
                           </div>
                         )}
                         <div className="login-register-form">
-                          <Form 
-                          name="mailPointRequestForm" 
-                          onFinish={onFinish} 
-                          >
+                          <Form name="mailPointRequestForm" onFinish={onFinish}>
                             <Form.Item
                               name="studentName"
                               className="my-0"
@@ -173,17 +171,22 @@ const SeenMailPointLts = ({ location }) => {
                               ]}>
                               <Input style={{ height: 30 }} />
                             </Form.Item>
-                            <Form.Item name="subjects" className="subjects" label="Học phần">
+                            <Form.Item
+                              name="subjects"
+                              className="subjects"
+                              label="Học phần">
                               <Form.List name="subjects">
                                 {(fields, { add, remove }) => (
                                   <>
                                     {fields.map((field, index) => (
                                       <Form.Item
                                         key={field.key}
-                                        label={index === 0 ? "Subject" : ""}
+                                        label={""}
                                         required={false}
-                                        style={{ height: 30, marginBottom: 81 }}
-                                        >
+                                        style={{
+                                          height: 30,
+                                          marginBottom: 81,
+                                        }}>
                                         <Form.Item
                                           {...field}
                                           name={[field.name, "name"]}
@@ -203,8 +206,7 @@ const SeenMailPointLts = ({ location }) => {
                                           ]}>
                                           <Select
                                             placeholder="Các môn học"
-                                            style={{ height: 30 }}
-                                            >
+                                            style={{ height: 30 }}>
                                             {SubjectName.map((x) => (
                                               <Option value={x.name}>
                                                 {x.name}
@@ -224,12 +226,14 @@ const SeenMailPointLts = ({ location }) => {
                                           rules={[
                                             {
                                               required: true,
-                                              pattern: /^(10|[0-9](\.[0-9])?)$/,
+                                              pattern:
+                                                /^(10|[0-9](\.[0-9]+)?)$/, // Cập nhật mẫu
                                               message:
                                                 "Vui lòng nhập điểm hợp lệ (0-10).",
                                             },
                                           ]}>
-                                          <Input style={{ height: 30 }}
+                                          <Input
+                                            style={{ height: 30 }}
                                             placeholder="Điểm số"
                                             className="mb-0"
                                           />
@@ -259,31 +263,37 @@ const SeenMailPointLts = ({ location }) => {
                               </Form.List>
                             </Form.Item>
                             <div className="d-flex justify-content-between">
-                            <Form.Item
-                              name="dayAdmission"
-                              label="Bắt đầu"
-                              className="my-0"
-                              rules={[
-                                {
-                                  required: true,
-                                  message:
-                                    "Vui lòng nhập vào ngày bắt đầu khóa học",
-                                },
-                              ]}>
-                              <DatePicker className="ovr-pickdate" style={{ height: 30 }}/>
-                            </Form.Item>
-                            <Form.Item
-                              name="dayEndEstimatedEndDate"
-                              label="Kết thúc (dự kiến)"
-                              rules={[
-                                {
-                                  required: true,
-                                  message:
-                                    "Vui lòng nhập vào ngày dự kiến kết thúc khóa học",
-                                },
-                              ]}>
-                              <DatePicker className="ovr-pickdate" style={{ height: 30 }}/>
-                            </Form.Item>
+                              <Form.Item
+                                name="dayAdmission"
+                                label="Bắt đầu"
+                                className="my-0"
+                                rules={[
+                                  {
+                                    required: true,
+                                    message:
+                                      "Vui lòng nhập vào ngày bắt đầu khóa học",
+                                  },
+                                ]}>
+                                <DatePicker
+                                  className="ovr-pickdate"
+                                  style={{ height: 30 }}
+                                />
+                              </Form.Item>
+                              <Form.Item
+                                name="dayEndEstimatedEndDate"
+                                label="Kết thúc (dự kiến)"
+                                rules={[
+                                  {
+                                    required: true,
+                                    message:
+                                      "Vui lòng nhập vào ngày dự kiến kết thúc khóa học",
+                                  },
+                                ]}>
+                                <DatePicker
+                                  className="ovr-pickdate"
+                                  style={{ height: 30 }}
+                                />
+                              </Form.Item>
                             </div>
                             <Form.Item
                               name="totalRating"
@@ -294,7 +304,7 @@ const SeenMailPointLts = ({ location }) => {
                                   message: "Vui lòng nhập vào nội dung cần gửi",
                                 },
                               ]}>
-                              <Input .TextArea
+                              <Input.TextArea
                                 placeholder="Nhập nội dung khác"
                                 style={{ height: "100px" }}
                               />
