@@ -164,7 +164,7 @@ const UsersList = () => {
     }, [param]);
     const handleChangeStatus = async (accountId) => {
         try {
-            setLoading(true);
+            // setLoading(true);
             await UserApi.updateStatusUser(accountId.accountId);
             // Cập nhật trạng thái mới trong data
             setData(prevData => {
@@ -323,7 +323,7 @@ const UsersList = () => {
                         {dataSource.length > 0 && dataSource[0].role}
                     </Descriptions.Item>
                     <Descriptions.Item label="Trạng thái">
-                        {dataSource.length > 0 && dataSource[0].status}
+                        {dataSource.length > 0 && dataSource[0].status == 1 ? "Hoạt động" : "Vô hiệu hóa"}
                     </Descriptions.Item>
                     <Descriptions.Item label="Ngày tạo">
                         {format(new Date(dataSource.length > 0 && dataSource[0].createdAt), "HH:mm:ss dd/MM/yyyy")}

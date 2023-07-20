@@ -30,7 +30,6 @@ const StatisticsApi = {
     });
   },
   GetCalculateOrderStatusData: (params = null) => {
-    debugger
     const url = "/Statistics/CalculateOrderStatusData";
     return axiosClient.get(url, {
       headers: {

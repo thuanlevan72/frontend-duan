@@ -33,11 +33,11 @@ const CategoryList = () => {
     const handlePaginationChange = (page, pageSize) => {
         setParam(
             (prev) =>
-                (prev = {
-                    ...param,
-                    page: page,
-                    pageSize: pageSize,
-                })
+            (prev = {
+                ...param,
+                page: page,
+                pageSize: pageSize,
+            })
         );
     };
     const [param, setParam] = useState({
@@ -65,7 +65,7 @@ const CategoryList = () => {
             nameProductType: item.nameProductType,
             imageTypeProduct: item.imageTypeProduct,
             createdAt: item.createdAt,
-            updatedAt: item.updatedAt,
+            // updatedAt: item.updatedAt,
         };
     });
     const columns = [
@@ -108,15 +108,15 @@ const CategoryList = () => {
                 <>{format(new Date(createdAt), "HH:mm:ss dd/MM/yyyy")}</>
             ),
         },
-        {
-            title: "Ngày cập nhật",
-            dataIndex: "updatedAt",
-            key: "updatedAt",
-            align: "center",
-            render: (updatedAt) => (
-                <>{format(new Date(updatedAt), "HH:mm:ss dd/MM/yyyy")}</>
-            ),
-        },
+        // {
+        //     title: "Ngày cập nhật",
+        //     dataIndex: "updatedAt",
+        //     key: "updatedAt",
+        //     align: "center",
+        //     render: (updatedAt) => (
+        //         <>{format(new Date(updatedAt), "HH:mm:ss dd/MM/yyyy")}</>
+        //     ),
+        // },
         {
             title: "Hành động",
             dataIndex: "action",
