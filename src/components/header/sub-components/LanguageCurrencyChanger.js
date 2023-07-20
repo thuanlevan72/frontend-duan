@@ -23,7 +23,7 @@ const LanguageCurrencyChanger = ({
       <div className="same-language-currency language-style">
         <span>
           {currentLanguageCode === "vi"
-            ? "Vietnames"
+            ? "Vietnamese"
             : currentLanguageCode === "fn"
             ? "French"
             : currentLanguageCode === "de"
@@ -52,7 +52,7 @@ const LanguageCurrencyChanger = ({
             </li>
             <li>
               <button value="vi" onClick={e => changeLanguageTrigger(e)}>
-              Vietnames
+              Vietnamese
               </button>
             </li>
           </ul>

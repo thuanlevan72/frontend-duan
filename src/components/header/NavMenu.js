@@ -6,11 +6,10 @@ import { multilanguage } from "redux-multilanguage";
 const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
   return (
     <div
-      className={` ${
-        sidebarMenu
+      className={` ${sidebarMenu
           ? "sidebar-menu"
           : `main-menu ${menuWhiteClass ? menuWhiteClass : ""}`
-      } `}
+        } `}
     >
       <nav>
         <ul>
@@ -88,6 +87,11 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
                 </Link>
               </li>
             </ul>
+          </li>
+          <li>
+            <Link to={process.env.PUBLIC_URL + "/about"}>
+              {strings["about_us"]}
+            </Link>
           </li>
           <li>
             <Link to={process.env.PUBLIC_URL + "/blog-standard"}>

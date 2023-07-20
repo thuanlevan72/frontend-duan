@@ -1,26 +1,26 @@
 [
   {
     "id": "1",
-    "iconClass": "pe-7s-portfolio",
-    "countNum": 360,
-    "title": "project done"
+    "iconClass": "pe-7s-cup",
+    "countNum": 100,
+    "title": "được cấp chứng nhận cơ sở an toàn thực phẩm"
   },
   {
     "id": "2",
-    "iconClass": "pe-7s-cup",
-    "countNum": 690,
-    "title": "cups of coffee"
+    "iconClass": "pe-7s-light",
+    "countNum": 100,
+    "title": "đảm bảo tiêu chuẩn an toàn vệ sinh thực phẩm"
   },
   {
     "id": "3",
-    "iconClass": "pe-7s-light",
+    "iconClass": "pe-7s-portfolio",
     "countNum": 100,
-    "title": "branding"
+    "title": "tận tâm, trách nhiệm, nhiệt tình"
   },
   {
     "id": "4",
     "iconClass": "pe-7s-smile",
-    "countNum": 420,
-    "title": "happy clients"
+    "countNum": 1420,
+    "title": "khách hàng hài lòng"
   }
 ]

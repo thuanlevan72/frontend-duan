@@ -125,6 +125,9 @@ const IconGroup = ({
                 <Link to={process.env.PUBLIC_URL + "/my-account"}>
                   Tài Khoản
                 </Link>
+                <Link to={process.env.PUBLIC_URL + "/admin"}>
+                  Trang quản trị
+                </Link>
                 <Link to={process.env.PUBLIC_URL + "/"} onClick={handleLogout}>
                   Đăng Xuất
                 </Link>
