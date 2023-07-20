@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Breadcrumb, Space, Table, Typography, Avatar, Tag, Pagination, Button, Descriptions, Modal, message, Image, Input } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import { Breadcrumb, Space, Table, Typography, Avatar, Tag, Pagination, Button, Descriptions, Modal, message, Image, Input, Switch } from "antd";
+import { SearchOutlined, UserOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
-import { UserOutlined } from "@ant-design/icons";
 import UserApi from "../../../api/security/UserApi";
 import { format } from "date-fns";
 import LoadingSpin from "../../loading/LoadingSpin";
@@ -163,6 +162,40 @@ const UsersList = () => {
         };
         getUsers();
     }, [param]);
+    const handleChangeStatus = async (accountId) => {
+        try {
+            setLoading(true);
+            await UserApi.updateStatusUser(accountId.accountId);
+            // Cập nhật trạng thái mới trong data
+            setData(prevData => {
+                const newData = prevData.data.map(item => {
+                    if (item.accountId === accountId.accountId) {
+                        return {
+                            ...item,
+                            status: !item.status, // Đảo ngược trạng thái
+                        };
+                    }
+                    return item;
+                });
+                return {
+                    ...prevData,
+                    data: newData,
+                };
+            });
+            messageApi.open({
+                type: "success",
+                content: "Thay đổi trạng thái thành công",
+            });
+
+        } catch (error) {
+            messageApi.open({
+                type: "error",
+                content: "Thay đổi trạng thái thất bại",
+            });
+        } finally {
+            setLoading(false);
+        }
+    };
     const dataSource = data?.data?.map((item, index) => {
         return {
             key: index + 1,
@@ -175,12 +208,7 @@ const UsersList = () => {
             </Tag>,
             avartar: item.avartar,
             createdAt: item.createdAt,
-            status:
-                item.status === 1 ? (
-                    <Tag color="cyan">Hoạt động</Tag>
-                ) : (
-                    <Tag color="red">Vô hiệu hóa</Tag>
-                ),
+            status: item.status
         };
     });
     const columns = [
@@ -236,6 +264,12 @@ const UsersList = () => {
             dataIndex: "status",
             key: "status",
             align: "center",
+            render: (status, accountId) => (
+                <Switch
+                    checked={status}
+                    onChange={() => handleChangeStatus(accountId)}
+                />
+            ),
         },
         {
             title: "Hành động",
