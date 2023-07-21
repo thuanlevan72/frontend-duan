@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
+import classes from "./text.css";
 
 const SectionTitleWithText = ({ spaceTopClass, spaceBottomClass }) => {
   return (
