@@ -106,7 +106,7 @@ const ProductDescriptionTab = ({
         setLoading(false);
       }
     }
-  }, []);
+  }, [productId, user]);
   return (
     <div className={`description-review-area ${spaceBottomClass}`}>
       <div className="container">
@@ -119,11 +119,11 @@ const ProductDescriptionTab = ({
                 </Nav.Link>
               </Nav.Item> */}
               <Nav.Item>
-                <Nav.Link eventKey="productDescription">Description</Nav.Link>
+                <Nav.Link eventKey="productDescription">Mô tả chi tiết</Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="productReviews">
-                  Reviews(
+                  Đánh giá (
                   {dataMess && dataMess.totalItems > 0
                     ? dataMess.totalItems
                     : 0}
@@ -214,7 +214,7 @@ const ProductDescriptionTab = ({
                                 <div className="review-top-wrap">
                                   <div className="review-left">
                                     <div className="review-name">
-                                      <h4>Đội ngũ Poly -food</h4>
+                                      <h4>Đội ngũ Poly-food</h4>
                                     </div>
                                     {/* <div className="review-rating">
                                       <i className="fa fa-star" />

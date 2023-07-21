@@ -28,11 +28,11 @@ const Product = ({ location, product }) => {
       });
       localStorage.setItem("productView", JSON.stringify(productView));
     } catch (error) {}
-  }, []);
+  }, [product.id]);
   return (
     <Fragment>
       <MetaTags>
-        <title>Poly Food | Product Page</title>
+        <title>Poly Food | Chi tiết sản phẩm</title>
         <meta
           name="description"
           content="Product page of flone react minimalist eCommerce template."
@@ -43,7 +43,7 @@ const Product = ({ location, product }) => {
         Trang chủ
       </BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
-        Shop Product
+        Chi tiết sản phẩm
       </BreadcrumbsItem>
 
       <LayoutOne headerTop="visible">

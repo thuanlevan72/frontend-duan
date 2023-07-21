@@ -64,21 +64,17 @@ const ShopGridStandard = ({ location, products }) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Poly Food | Shop Page</title>
+        <title>Poly Food | Sản phẩm</title>
         <meta
           name="description"
           content="Shop page of flone react minimalist eCommerce template."
         />
       </MetaTags>
-      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
-      <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
-        Shop
-      </BreadcrumbsItem>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Trang chủ</BreadcrumbsItem>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>Sản phẩm</BreadcrumbsItem>
 
       <LayoutOne headerTop="visible">
-        {/* breadcrumb */}
         <Breadcrumb />
-
         <div className="shop-area pt-95 pb-100">
           <div className="container">
             <div className="row">
@@ -102,7 +98,6 @@ const ShopGridStandard = ({ location, products }) => {
 
                 {/* shop page content default */}
                 <ShopProducts layout={layout} products={currentData} />
-
                 {/* shop product pagination */}
                 <div className="pro-pagination-style text-center mt-30">
                   <Paginator
