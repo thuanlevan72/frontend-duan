@@ -15,7 +15,6 @@ const TeamMemberOne = ({ spaceTopClass, spaceBottomClass }) => {
         {/* section title */}
         <SectionTitleTwo
           titleText="Thành viên nhóm"
-          subTitleText="Các thành viên trong nhóm"
           positionClass="text-center"
           spaceClass="mb-60"
         />
