@@ -67,9 +67,7 @@ const FooterTwo = ({
             </Link>
           </div>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim
+          Hơn 10 năm hình thành và phát triển, thương hiệu thực phẩm chay “Poly Food” đã khẳng định được uy tín của mình trên thị trường với đa dạng mặt hàng, chất lượng dịch vụ, chất lượng sản phẩm. Chúng tôi luôn cố gắng để phục vụ tốt nhất đến quý khách hàng.
           </p>
           <div className="footer-social">
             <ul>

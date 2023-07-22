@@ -7,8 +7,8 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
   return (
     <div
       className={` ${sidebarMenu
-          ? "sidebar-menu"
-          : `main-menu ${menuWhiteClass ? menuWhiteClass : ""}`
+        ? "sidebar-menu"
+        : `main-menu ${menuWhiteClass ? menuWhiteClass : ""}`
         } `}
     >
       <nav>
@@ -25,8 +25,18 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
             </Link>
           </li>
           <li>
-            <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
-              {strings["collection"]}
+            <Link to={process.env.PUBLIC_URL + "/blog-standard"}>
+              {strings["blog"]}
+            </Link>
+          </li>
+          <li>
+            <Link to={process.env.PUBLIC_URL + "/about"}>
+              {strings["about_us"]}
+            </Link>
+          </li>
+          <li>
+            <Link to={process.env.PUBLIC_URL + "/contact"}>
+              {strings["contact_us"]}
             </Link>
           </li>
           <li>
@@ -87,21 +97,6 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
                 </Link>
               </li>
             </ul>
-          </li>
-          <li>
-            <Link to={process.env.PUBLIC_URL + "/about"}>
-              {strings["about_us"]}
-            </Link>
-          </li>
-          <li>
-            <Link to={process.env.PUBLIC_URL + "/blog-standard"}>
-              {strings["blog"]}
-            </Link>
-          </li>
-          <li>
-            <Link to={process.env.PUBLIC_URL + "/contact"}>
-              {strings["contact_us"]}
-            </Link>
           </li>
         </ul>
       </nav>
