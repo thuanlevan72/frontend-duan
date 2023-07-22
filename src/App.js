@@ -18,6 +18,7 @@ import CartHistory from "./pages/other/OrderHistory";
 import OrderHistory from "./pages/other/OrderHistory";
 import ResVnPay from "./components/vnPay/ResVnPay";
 import SeenMailPointLts from "./components/contact/SeenMailPointLts";
+import EmailAdmissionForm from "./components/contact/EmailAdmissionForm";
 
 const HomeOrganicFood = lazy(() => import("./pages/home/HomeOrganicFood"));
 // shop pages
@@ -150,8 +151,12 @@ const App = (props) => {
                   component={ForgotPassword}
                 />
                 <Route
-                  path={process.env.PUBLIC_URL + "/seen-mail-point-lts"}
+                  path={process.env.PUBLIC_URL + "/send-mail-point-lts"}
                   component={SeenMailPointLts}
+                />
+                <Route
+                  path={process.env.PUBLIC_URL + "/send-mail-admission-lts"}
+                  component={EmailAdmissionForm}
                 />
                 <Route
                   path={process.env.PUBLIC_URL + "/reset-password"}
