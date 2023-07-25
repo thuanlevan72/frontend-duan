@@ -25,6 +25,8 @@ const courseName = [
   { name: "React" },
   { name: "BE .NET" },
   { name: "BE Java" },
+  { name: "Back End" },
+  { name: "Frontend" },
 ];
 const AdminName = [
   { name: "AnhCTP" },
