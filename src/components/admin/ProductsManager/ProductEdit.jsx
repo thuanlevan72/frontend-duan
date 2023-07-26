@@ -34,11 +34,15 @@ const ProductEdit = () => {
     const [preview, setPreview] = useState("");
     const [form] = Form.useForm();
     const { id } = useParams();
+    // Lưu trạng thái bạn đầu của status
+    const [initialState, setInitialState] = useState();
     useEffect(() => {
         const getProductDetail = async (id) => {
             const { data } = await ProductApi.getProductDetail(id);
             setPreview(data.avartarImageProduct);
+            data.statusShow = data.status === 1 ? "Hiển thị" : "Ẩn";
             form.setFieldsValue(data);
+            setInitialState(data.status);
         };
         getProductDetail(id);
     }, [form, id]);
@@ -70,11 +74,14 @@ const ProductEdit = () => {
                 Quantity: item.quantity,
                 Discount: item.discount,
                 ProductTypeId: item.productTypeId,
-                Status: item.status,
+                Status: item.statusShow,
                 AvartarImageProduct: fileList[0] || preview,
                 shortDescription: item.shortDescription,
                 fullDescription: item.fullDescription,
             };
+            const statusToShow = isNaN(formData.Status)
+                ? initialState
+                : formData.Status;
             const formDataApi = new FormData();
             setLoading(true);
             formDataApi.append("nameProduct", formData.NameProduct);
@@ -82,7 +89,7 @@ const ProductEdit = () => {
             formDataApi.append("quantity", formData.Quantity);
             formDataApi.append("discount", formData.Discount);
             formDataApi.append("productTypeId", formData.ProductTypeId);
-            formDataApi.append("status", formData.Status);
+            formDataApi.append("status", statusToShow);
             formDataApi.append(
                 "avartarImageProduct",
                 formData.AvartarImageProduct
@@ -121,7 +128,9 @@ const ProductEdit = () => {
             });
             setCategories(data.data);
             setLoading(false);
-        } catch (error) {}
+        } catch (error) {
+            console.error(error);
+        }
     };
     return (
         <>
@@ -227,7 +236,7 @@ const ProductEdit = () => {
                         <Col span={12}>
                             <Form.Item
                                 label="Trạng thái"
-                                name="status"
+                                name="statusShow"
                                 style={{ width: "calc(100% - 131px)" }}
                                 labelCol={{ span: 0, offset: 0 }}
                                 rules={[{ required: true }]}
@@ -240,6 +249,12 @@ const ProductEdit = () => {
                                         Ẩn
                                     </Select.Option>
                                 </Select>
+                            </Form.Item>
+                            <Form.Item
+                                name="status"
+                                style={{ display: "none" }}
+                            >
+                                <Input type="hidden" />
                             </Form.Item>
                         </Col>
                     </Row>
