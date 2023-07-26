@@ -10,7 +10,7 @@ import { useState } from "react";
 import UserApi from "../../api/security/UserApi";
 import LoadingSpin from "../../components/loading/LoadingSpin";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { Avatar, Image, message } from "antd";
+import { Image, message } from "antd";
 
 const MyAccount = ({ location }) => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -207,21 +207,17 @@ const MyAccount = ({ location }) => {
                       <Card.Header className="panel-heading">
                         <Accordion.Toggle variant="link" eventKey="0">
                           <h3 className="panel-title">
-                            <span>1 .</span> Edit your account information{" "}
+                            <span>1 .</span> Cập nhật thông tin
                           </h3>
                         </Accordion.Toggle>
                       </Card.Header>
                       <Accordion.Collapse eventKey="0">
                         <Card.Body>
                           <div className="myaccount-info-wrapper">
-                            <div className="account-info-wrapper">
-                              <h4>My Account Information</h4>
-                              <h5>Your Personal Details</h5>
-                            </div>
                             <div className="row">
-                              <div className="col-lg-12 col-md-12">
+                              <div className="col-lg-6 col-md-6">
                                 <div className="billing-info">
-                                  <label>Name</label>
+                                  <label>Tên</label>
                                   <input
                                     type="text"
                                     value={user.userName}
@@ -229,8 +225,6 @@ const MyAccount = ({ location }) => {
                                     onChange={changeDataUser}
                                   />
                                 </div>
-                              </div>
-                              <div className="col-lg-12 col-md-12">
                                 <div className="billing-info">
                                   <label>Email</label>
                                   <input
@@ -241,9 +235,27 @@ const MyAccount = ({ location }) => {
                                   />
                                 </div>
                               </div>
-                              <div className="col-lg-12 col-md-12">
+                              <div className="col-lg-6 col-md-6">
                                 <div className="billing-info">
-                                  <label>Address</label>
+                                  <Image
+                                    style={{ borderRadius: "50%" }}
+                                    width={130}
+                                    height={130}
+                                    src={user.avartar}
+                                  />
+                                  <input
+                                    type="file"
+                                    id="avartarUser"
+                                    onChange={handleFileChange}
+                                    className="d-none"
+                                  />
+                                  <label htmlFor="avartarUser" 
+                                    className="d-flex align-items-center justify-content-center bg-warning position-absolute bottom-0 p-3 m-3 text-white" style={{height: "30px"}}>Chọn ảnh</label>
+                                </div>
+                              </div>
+                              <div className="col-lg-6 col-md-6">
+                                <div className="billing-info">
+                                  <label>Địa chỉ</label>
                                   <input
                                     type="text"
                                     value={user.address}
@@ -254,39 +266,12 @@ const MyAccount = ({ location }) => {
                               </div>
                               <div className="col-lg-6 col-md-6">
                                 <div className="billing-info">
-                                  <label>Telephone</label>
+                                  <label>Số điện thoại</label>
                                   <input
                                     type="text"
                                     name="phone"
                                     value={user.phone}
                                     onChange={changeDataUser}
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-lg-6 col-md-6">
-                                <div className="billing-info">
-                                  <label style={{ padding: "0 20px" }}>
-                                    Ảnh đại diện{" "}
-                                  </label>
-
-                                  <Image
-                                    style={{ borderRadius: "50%" }}
-                                    width={130}
-                                    height={130}
-                                    src={user.avartar}
-                                  />
-
-                                  <br />
-                                  <h4
-                                    style={{
-                                      padding: "10px 20px",
-                                      fontWeight: "bolder",
-                                    }}>
-                                    thay avatar{" "}
-                                  </h4>
-                                  <input
-                                    type="file"
-                                    onChange={handleFileChange}
                                   />
                                 </div>
                               </div>
@@ -302,7 +287,7 @@ const MyAccount = ({ location }) => {
                                     <button
                                       type="button"
                                       onClick={onChageSubmitInfo}>
-                                      Continue
+                                      Lưu thay đổi
                                     </button>
                                   )}
                               </div>
@@ -315,21 +300,17 @@ const MyAccount = ({ location }) => {
                       <Card.Header className="panel-heading">
                         <Accordion.Toggle variant="link" eventKey="1">
                           <h3 className="panel-title">
-                            <span>2 .</span> Change your password
+                            <span>2 .</span> Cập nhật mật khẩu
                           </h3>
                         </Accordion.Toggle>
                       </Card.Header>
                       <Accordion.Collapse eventKey="1">
                         <Card.Body>
                           <div className="myaccount-info-wrapper">
-                            <div className="account-info-wrapper">
-                              <h4>Change Password</h4>
-                              <h5>Your Password</h5>
-                            </div>
                             <div className="row">
                               <div className="col-lg-12 col-md-12">
                                 <div className="billing-info">
-                                  <label>Password</label>
+                                  <label>Mật khẩu mới</label>
                                   <input
                                     type="password"
                                     name="password"
@@ -340,7 +321,7 @@ const MyAccount = ({ location }) => {
                               </div>
                               <div className="col-lg-12 col-md-12">
                                 <div className="billing-info">
-                                  <label>Password Confirm</label>
+                                  <label>Xác nhận mật khẩu</label>
                                   <input
                                     type="password"
                                     name="confirmPass"
@@ -357,7 +338,7 @@ const MyAccount = ({ location }) => {
                                   <button
                                     type="click"
                                     onClick={chnagePassSubmit}>
-                                    Continue
+                                    Lưu thay đổi
                                   </button>
                                 )}
                               </div>
