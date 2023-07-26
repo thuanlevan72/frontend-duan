@@ -36,6 +36,7 @@ import OrderList from "../components/admin/OrdersManager/OrderList";
 import OrderPending from "../components/admin/OrdersManager/OrderPending";
 import OrderCompleted from "../components/admin/OrdersManager/OrderCompleted";
 import OrderCanceled from "../components/admin/OrdersManager/OrderCanceled";
+import ContactsList from "../components/admin/ContactsManager/ContactsList";
 const { Header, Content, Footer, Sider } = Layout;
 
 const AdminLayout = () => {
@@ -212,6 +213,8 @@ const AdminLayout = () => {
             <Route path="/admin/orders-pending" component={OrderPending} />
             <Route path="/admin/orders-completed" component={OrderCompleted} />
             <Route path="/admin/orders-canceled" component={OrderCanceled} />
+            {/* Contact router */}
+            <Route path="/admin/contacts" component={ContactsList} />
             {/* Redirect to Dashboard */}
             <Redirect to="/admin/dashboard" />
           </Switch>

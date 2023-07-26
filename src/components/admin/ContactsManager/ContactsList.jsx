@@ -15,6 +15,7 @@ import {
   Image,
   Input,
   Switch,
+  Form,
 } from "antd";
 import { SearchOutlined, UserOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
@@ -22,9 +23,12 @@ import UserApi from "../../../api/security/UserApi";
 import { format } from "date-fns";
 import LoadingSpin from "../../loading/LoadingSpin";
 import { BiEdit } from "react-icons/bi";
+import ContactApi from "../../../api/contact/ContactApi";
+import TextArea from "antd/es/input/TextArea";
 
-const { Text } = Typography;
-const UsersList = () => {
+const { Text, Paragraph } = Typography;
+const ContactsList = () => {
+  const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,22 +42,52 @@ const UsersList = () => {
     hasNext: true,
     data: [],
   });
+  const onFinish = async (values) => {
+    const dataMess = {
+      mess: values.username,
+      email: dataCurrent[0]?.email,
+    };
+    // console.log(dataMess);
+    try {
+      setLoading(true);
+      const res = await ContactApi.ReplyContact(dataMess);
+      setLoading(false);
+      setIsModalOpen(false);
+      form.resetFields();
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      setIsModalOpen(false);
+    }
+  };
   const showModal = (id) => {
-    const dataOrderCurrent = data?.data?.find((x) => x.accountId === id);
-    const user = dataOrderCurrent?.user;
-    console.log(user);
-    if (user) {
+    console.log(id);
+    const dataContact = data?.data?.find((x) => x.contactId === id);
+    console.log(dataContact);
+    if (dataContact) {
       setDataCurrent([
         {
-          userId: 1,
-          avartar: dataOrderCurrent.avartar,
-          name: user.userName,
-          email: user.email,
-          phone: user.phone,
-          address: user.address,
+          userId: dataContact.contactId,
+          name: dataContact.userName,
+          email: dataContact.email,
+          phone: dataContact.phone,
+          subject: dataContact.subject,
         },
       ]);
     }
+    // console.log(user);
+    // if (user) {
+    //   setDataCurrent([
+    //     {
+    //       userId: 1,
+    //       avartar: dataOrderCurrent.avartar,
+    //       name: user.userName,
+    //       email: user.email,
+    //       phone: user.phone,
+    //       address: user.address,
+    //     },
+    //   ]);
+    // }
     setIsModalOpen(true);
   };
   const handleOk = () => {
@@ -162,7 +196,7 @@ const UsersList = () => {
     const getUsers = async () => {
       try {
         setLoading(true);
-        const { data } = await UserApi.getAllUsers(param);
+        const { data } = await ContactApi.getApiContact(param);
         setData(data);
         setLoading(false);
       } catch (error) {
@@ -172,56 +206,15 @@ const UsersList = () => {
     };
     getUsers();
   }, [param]);
-  const handleChangeStatus = async (accountId) => {
-    try {
-      // setLoading(true);
-      await UserApi.updateStatusUser(accountId.accountId);
-      // Cập nhật trạng thái mới trong data
-      setData((prevData) => {
-        const newData = prevData.data.map((item) => {
-          if (item.accountId === accountId.accountId) {
-            return {
-              ...item,
-              status: !item.status, // Đảo ngược trạng thái
-            };
-          }
-          return item;
-        });
-        return {
-          ...prevData,
-          data: newData,
-        };
-      });
-      messageApi.open({
-        type: "success",
-        content: "Thay đổi trạng thái thành công",
-      });
-    } catch (error) {
-      messageApi.open({
-        type: "error",
-        content: "Thay đổi trạng thái thất bại",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
+
   const dataSource = data?.data?.map((item, index) => {
     return {
       key: index + 1,
-      accountId: item.accountId,
-      userName: item.userName,
+      contactId: item.contactId,
       email: item.email,
-      role: (
-        <Tag
-          color={
-            item.decentralization.authorityName == "Admin" ? "cyan" : "green"
-          }>
-          {item.decentralization.authorityName}
-        </Tag>
-      ),
-      avartar: item.avartar,
       createdAt: item.createdAt,
-      status: item.status,
+      answered: item.answered,
+      // status: item.status,
     };
   });
   const columns = [
@@ -232,39 +225,13 @@ const UsersList = () => {
       align: "center",
     },
     {
-      title: "Họ Tên",
-      dataIndex: "userName",
-      key: "userName",
-      align: "center",
-      ...getColumnSearchProps("userName"),
-    },
-    {
       title: "Email",
       dataIndex: "email",
       key: "email",
       align: "center",
     },
     {
-      title: "Ảnh đại diện",
-      dataIndex: "avartar",
-      key: "avartar",
-      align: "center",
-      render: (avartar) => (
-        <Avatar
-          size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
-          icon={<UserOutlined />}
-          src={avartar}
-        />
-      ),
-    },
-    {
-      title: "Vai trò",
-      dataIndex: "role",
-      key: "role",
-      align: "center",
-    },
-    {
-      title: "Ngày tạo",
+      title: "Ngày gửi",
       dataIndex: "createdAt",
       key: "createdAt",
       align: "center",
@@ -274,29 +241,27 @@ const UsersList = () => {
     },
     {
       title: "Trạng thái",
-      dataIndex: "status",
-      key: "status",
+      dataIndex: "answered",
+      key: "answered",
       align: "center",
-      render: (status, accountId) => (
-        <Switch
-          checked={status}
-          onChange={() => handleChangeStatus(accountId)}
-        />
+      render: (answered) => (
+        <>
+          {answered ? (
+            <Tag color="geekblue">Đã trả lời</Tag>
+          ) : (
+            <Tag color="volcano">Chưa trả lời</Tag>
+          )}
+        </>
       ),
     },
     {
       title: "Hành động",
-      dataIndex: "accountId",
-      key: "accountId",
+      dataIndex: "contactId",
+      key: "contactId",
       align: "center",
-      render: (accountId) => (
+      render: (contactId) => (
         <Space size="middle">
-          <Button className="border border-white">
-            <NavLink to={`/admin/account-edit/${accountId}`}>
-              <BiEdit />
-            </NavLink>
-          </Button>
-          <Button type="primary" onClick={(e) => showModal(accountId)}>
+          <Button type="primary" onClick={(e) => showModal(contactId)}>
             Chi tiết
           </Button>
         </Space>
@@ -310,7 +275,7 @@ const UsersList = () => {
           margin: "16px 0",
         }}>
         <Breadcrumb.Item>Bảng điều khiển</Breadcrumb.Item>
-        <Breadcrumb.Item>Danh sách người dùng</Breadcrumb.Item>
+        <Breadcrumb.Item>Danh sách Liên hệ</Breadcrumb.Item>
       </Breadcrumb>
       {contextHolder}
       <Modal
@@ -319,7 +284,7 @@ const UsersList = () => {
         onOk={handleOk}
         onCancel={handleCancel}>
         <Descriptions title="Chi tiết đơn hàng">
-          <Descriptions.Item label="Tên khách hàng">
+          <Descriptions.Item label="Tên Người gửi">
             {dataCurrent.length > 0 && dataCurrent[0].name}
           </Descriptions.Item>
           <Descriptions.Item label="Số điện thoại">
@@ -328,33 +293,48 @@ const UsersList = () => {
           <Descriptions.Item label="Email">
             {dataCurrent.length > 0 && dataCurrent[0].email}
           </Descriptions.Item>
-          <Descriptions.Item label="Địa chỉ">
-            {dataCurrent.length > 0 && dataCurrent[0].address}
-          </Descriptions.Item>
-          <Descriptions.Item label="Vai trò">
-            {dataSource.length > 0 && dataSource[0].role}
-          </Descriptions.Item>
-          <Descriptions.Item label="Trạng thái">
-            {dataSource.length > 0 && dataSource[0].status == 1
-              ? "Hoạt động"
-              : "Vô hiệu hóa"}
-          </Descriptions.Item>
-          <Descriptions.Item label="Ngày tạo">
+          <Descriptions.Item label="Ngày gửi">
             {format(
               new Date(dataSource.length > 0 && dataSource[0].createdAt),
               "HH:mm:ss dd/MM/yyyy"
             )}
           </Descriptions.Item>
-          <Descriptions.Item label="Ảnh">
-            <Image
-              src={dataCurrent.length > 0 && dataCurrent[0].avartar}
-              alt="avatar"
-              width={100}
-              height={100}
-              className="object-fit-cover border rounded-circle border border-success"
-            />
+          <Descriptions.Item label="Nội dung">
+            <Paragraph>
+              {dataCurrent.length > 0 && dataCurrent[0].subject}
+            </Paragraph>
           </Descriptions.Item>
         </Descriptions>
+        <Form
+          name="basic"
+          form={form}
+          style={{
+            maxWidth: 700,
+          }}
+          initialValues={{
+            remember: true,
+          }}
+          layout="vertical"
+          onFinish={onFinish}
+          autoComplete="off">
+          <Form.Item
+            label="Nội dung trả lời"
+            name="username"
+            rules={[
+              {
+                required: true,
+                message: "Please input your username!",
+              },
+            ]}>
+            <TextArea />
+          </Form.Item>
+
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              gửi phản hồi
+            </Button>
+          </Form.Item>
+        </Form>
       </Modal>
       <div>
         {loading && (
@@ -380,4 +360,4 @@ const UsersList = () => {
   );
 };
 
-export default UsersList;
+export default ContactsList;
