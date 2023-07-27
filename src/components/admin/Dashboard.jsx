@@ -11,6 +11,7 @@ import CalculateOrder from "./StatisticsManager/CalculateOrder";
 import TopSelling from "./StatisticsManager/TopSelling";
 import LoadingSpin from "../loading/LoadingSpin";
 import StatisticsApi from "../../api/statistic/StatisticsApi";
+import AccountCountsByMonth from "./StatisticsManager/AccountCountsByMonth";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);
@@ -25,9 +26,19 @@ const Dashboard = () => {
       setLoading(false);
     }
   }, []);
-  const DashboardCard = ({ title, value, icon, cardBackgroundColor, cardBorderRadius }) => {
+  const DashboardCard = ({
+    title,
+    value,
+    icon,
+    cardBackgroundColor,
+    cardBorderRadius,
+  }) => {
     return (
-      <Card style={{ backgroundColor: cardBackgroundColor, borderRadius: cardBorderRadius }}>
+      <Card
+        style={{
+          backgroundColor: cardBackgroundColor,
+          borderRadius: cardBorderRadius,
+        }}>
         <Space direction="horizontal">
           {icon}
           <Statistic title={title} value={value} />
@@ -65,8 +76,8 @@ const Dashboard = () => {
             }
             title="Đơn hàng"
             value={data.orderCount || 100}
-            cardBackgroundColor='#DDFFD1'
-            cardBorderRadius='20px'
+            cardBackgroundColor="#DDFFD1"
+            cardBorderRadius="20px"
           />
         </Col>
         <Col
@@ -90,8 +101,8 @@ const Dashboard = () => {
             }
             title="Sản phẩm"
             value={data.productCount || 100}
-            cardBackgroundColor='#C2DCFF'
-            cardBorderRadius='20px'
+            cardBackgroundColor="#C2DCFF"
+            cardBorderRadius="20px"
           />
         </Col>
         <Col
@@ -115,8 +126,8 @@ const Dashboard = () => {
             }
             title="Khách hàng"
             value={data.userCount || 100}
-            cardBackgroundColor='#F3DBFF'
-            cardBorderRadius='20px'
+            cardBackgroundColor="#F3DBFF"
+            cardBorderRadius="20px"
           />
         </Col>
         <Col
@@ -139,8 +150,8 @@ const Dashboard = () => {
             }
             title="Doanh thu"
             value={data.revenue || 100}
-            cardBackgroundColor='#FEDFC3'
-            cardBorderRadius='20px'
+            cardBackgroundColor="#FEDFC3"
+            cardBorderRadius="20px"
           />
         </Col>
       </Row>
@@ -154,9 +165,9 @@ const Dashboard = () => {
           span={11}
           style={{
             backgroundColor: "#F9FCFD",
-            border: '1px solid #ccc',
+            border: "1px solid #ccc",
             borderRadius: 20,
-            padding: 12
+            padding: 12,
           }}>
           <Divider orientation="center" style={{ fontSize: 24 }}>
             Đơn đặt hàng
@@ -167,12 +178,12 @@ const Dashboard = () => {
           span={11}
           style={{
             backgroundColor: "#F9FCFD",
-            border: '1px solid #ccc',
+            border: "1px solid #ccc",
             borderRadius: 20,
-            padding: 12
+            padding: 12,
           }}>
           <Divider orientation="center" style={{ fontSize: 24 }}>
-            Sản phẩm
+            Sản phẩm bán chạy
           </Divider>
           <TopSelling SetLoading={setLoading} />
         </Col>
@@ -183,14 +194,29 @@ const Dashboard = () => {
           span={24}
           style={{
             backgroundColor: "#F9FCFD",
-            border: '1px solid #ccc',
+            border: "1px solid #ccc",
             borderRadius: 20,
-            padding: 12
+            padding: 12,
           }}>
           <Divider orientation="center" style={{ fontSize: 24 }}>
             Doanh thu
           </Divider>
           <CalculateMonthly />
+        </Col>
+      </Row>
+      <Row wrap={false} style={{ padding: "24px 0" }}>
+        <Col
+          span={24}
+          style={{
+            backgroundColor: "#F9FCFD",
+            border: "1px solid #ccc",
+            borderRadius: 20,
+            padding: 12,
+          }}>
+          <Divider orientation="center" style={{ fontSize: 24 }}>
+            Người dùng mới trong tháng
+          </Divider>
+          <AccountCountsByMonth />
         </Col>
       </Row>
     </>
