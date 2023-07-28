@@ -28,6 +28,7 @@ import {
   MdOutlineCategory,
   MdOutlineInfo,
   MdOutlineCancel,
+  MdOutlineContactSupport,
 } from "react-icons/md";
 import { FiUsers } from "react-icons/fi";
 import { IoCreateOutline } from "react-icons/io5";
@@ -147,6 +148,14 @@ const AdminLayout = () => {
             </Menu.Item>
             <Menu.Item key="/admin" icon={<IoCreateOutline />}>
               <NavLink to="/admin">Thêm thông tin trang</NavLink>
+            </Menu.Item>
+          </SubMenu>
+          <SubMenu
+            key="subMenu-6"
+            icon={<MdOutlineContactSupport />}
+            title="Quản lý Liên hệ">
+            <Menu.Item key="/admin" icon={<CiBoxList />}>
+              <NavLink to="/admin/Contacts">Danh sách liên hệ</NavLink>
             </Menu.Item>
           </SubMenu>
           {/*Order Manager */}
