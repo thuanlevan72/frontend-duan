@@ -8,7 +8,7 @@ const BlogPosts = () => {
           <div className="blog-img-2">
             <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
               <img
-                src={process.env.PUBLIC_URL + "/assets/img/blog/blog-9.jpg"}
+                src={process.env.PUBLIC_URL + "/assets/img/blog/blog1.jpg"}
                 alt=""
               />
             </Link>
@@ -16,7 +16,7 @@ const BlogPosts = () => {
           <div className="blog-content-2">
             <div className="blog-meta-2">
               <ul>
-                <li>22 April, 2020</li>
+                <li>1 July, 2023</li>
                 <li>
                   <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
                     4 <i className="fa fa-comments-o" />
@@ -26,12 +26,11 @@ const BlogPosts = () => {
             </div>
             <h4>
               <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
-                Lorem ipsum blog post
+                TÌM HIỂU CÁCH ĂN CHAY TRƯỜNG TỐT CHO SỨC KHỎE
               </Link>
             </h4>
-            <p>
-              Aenean sollicitudin, lorem quis on endum uctor nisi elitod the
-              cona sequat ipsum, necas sagittis sem natoque nibh id penatibus
+            <p className="text-justify">
+              Không thể phủ nhận lợi ích của việc ăn chay đối với sức khỏe con người. Nếu như bạn ăn chay trường đúng cách thì sẽ tăng sức khỏe cho bản thân
             </p>
             <div className="blog-share-comment">
               <div className="blog-btn-2">
@@ -70,7 +69,7 @@ const BlogPosts = () => {
           <div className="blog-img-2">
             <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
               <img
-                src={process.env.PUBLIC_URL + "/assets/img/blog/blog-8.jpg"}
+                src={process.env.PUBLIC_URL + "/assets/img/blog/blog2.jpg"}
                 alt=""
               />
             </Link>
@@ -78,7 +77,7 @@ const BlogPosts = () => {
           <div className="blog-content-2">
             <div className="blog-meta-2">
               <ul>
-                <li>22 April, 2020</li>
+                <li>1 July, 2023</li>
                 <li>
                   <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
                     4 <i className="fa fa-comments-o" />
@@ -88,12 +87,11 @@ const BlogPosts = () => {
             </div>
             <h4>
               <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
-                New collection of our shop
+                4 LÝ DO NÊN TÍCH CỰC ĂN CHAY ĐÚNG CÁCH KHOA HỌC
               </Link>
             </h4>
-            <p>
-              Aenean sollicitudin, lorem quis on endum uctor nisi elitod the
-              cona sequat ipsum, necas sagittis sem natoque nibh id penatibus
+            <p className="text-justify">
+              Ăn chay đúng cách, ăn chay khoa học đã dần trở thành một phong trào sống tích cực, sống khỏe an vui và đang được khuyến khích mạnh mẽ ở khắp quốc gia trên thế giới
             </p>
             <div className="blog-share-comment">
               <div className="blog-btn-2">
@@ -132,7 +130,7 @@ const BlogPosts = () => {
           <div className="blog-img-2">
             <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
               <img
-                src={process.env.PUBLIC_URL + "/assets/img/blog/blog-7.jpg"}
+                src={process.env.PUBLIC_URL + "/assets/img/blog/blog3.jpg"}
                 alt=""
               />
             </Link>
@@ -140,7 +138,7 @@ const BlogPosts = () => {
           <div className="blog-content-2">
             <div className="blog-meta-2">
               <ul>
-                <li>22 April, 2020</li>
+                <li>1 July, 2023</li>
                 <li>
                   <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
                     4 <i className="fa fa-comments-o" />
@@ -150,12 +148,11 @@ const BlogPosts = () => {
             </div>
             <h4>
               <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
-                Ipsum blog post two
+                ĂN CHAY THANH TỊNH – LỐI SỐNG THANH TỊNH, TỪ BI
               </Link>
             </h4>
-            <p>
-              Aenean sollicitudin, lorem quis on endum uctor nisi elitod the
-              cona sequat ipsum, necas sagittis sem natoque nibh id penatibus
+            <p className="text-justify">
+              Ăn chay thanh tịnh vì muốn có một lối sống lành mạnh, hay đơn giản là xuất phát từ lòng yêu mến động vật…..đều tốt
             </p>
             <div className="blog-share-comment">
               <div className="blog-btn-2">
@@ -194,7 +191,7 @@ const BlogPosts = () => {
           <div className="blog-img-2">
             <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
               <img
-                src={process.env.PUBLIC_URL + "/assets/img/blog/blog-6.jpg"}
+                src={process.env.PUBLIC_URL + "/assets/img/blog/blog4.jpg"}
                 alt=""
               />
             </Link>
@@ -202,7 +199,7 @@ const BlogPosts = () => {
           <div className="blog-content-2">
             <div className="blog-meta-2">
               <ul>
-                <li>22 April, 2020</li>
+                <li>1 July, 2023</li>
                 <li>
                   <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
                     4 <i className="fa fa-comments-o" />
@@ -212,12 +209,11 @@ const BlogPosts = () => {
             </div>
             <h4>
               <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
-                New shop collection
+                ĂN CHAY TRƯỜNG – CÁCH ĂN CHAY TRƯỜNG ĐÚNG CÁCH
               </Link>
             </h4>
-            <p>
-              Aenean sollicitudin, lorem quis on endum uctor nisi elitod the
-              cona sequat ipsum, necas sagittis sem natoque nibh id penatibus
+            <p className="text-justify">
+              Ăn chay trường là phương pháp loại bỏ hoàn toàn các thực phẩm từ động vật ra khỏi chế độ ăn uống hằng ngày
             </p>
             <div className="blog-share-comment">
               <div className="blog-btn-2">
@@ -256,7 +252,7 @@ const BlogPosts = () => {
           <div className="blog-img-2">
             <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
               <img
-                src={process.env.PUBLIC_URL + "/assets/img/blog/blog-5.jpg"}
+                src={process.env.PUBLIC_URL + "/assets/img/blog/blog5.jpg"}
                 alt=""
               />
             </Link>
@@ -264,7 +260,7 @@ const BlogPosts = () => {
           <div className="blog-content-2">
             <div className="blog-meta-2">
               <ul>
-                <li>22 April, 2020</li>
+                <li>1 July, 2023</li>
                 <li>
                   <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
                     4 <i className="fa fa-comments-o" />
@@ -274,12 +270,11 @@ const BlogPosts = () => {
             </div>
             <h4>
               <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
-                Lorem blog post four
+                ĂN CHAY - XU HƯỚNG MỚI CỦA LỐI SỐNG HIỆN ĐẠI
               </Link>
             </h4>
-            <p>
-              Aenean sollicitudin, lorem quis on endum uctor nisi elitod the
-              cona sequat ipsum, necas sagittis sem natoque nibh id penatibus
+            <p className="text-justify">
+              Ăn chay ngày nay không còn giới hạn trong tôn giáo hay với những người giảm béo, chữa bệnh nữa mà đã trở thành xu hướng của thời đại
             </p>
             <div className="blog-share-comment">
               <div className="blog-btn-2">
@@ -318,7 +313,7 @@ const BlogPosts = () => {
           <div className="blog-img-2">
             <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
               <img
-                src={process.env.PUBLIC_URL + "/assets/img/blog/blog-4.jpg"}
+                src={process.env.PUBLIC_URL + "/assets/img/blog/blog6.jpg"}
                 alt=""
               />
             </Link>
@@ -326,7 +321,7 @@ const BlogPosts = () => {
           <div className="blog-content-2">
             <div className="blog-meta-2">
               <ul>
-                <li>22 April, 2020</li>
+                <li>1 July, 2023</li>
                 <li>
                   <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
                     4 <i className="fa fa-comments-o" />
@@ -336,12 +331,11 @@ const BlogPosts = () => {
             </div>
             <h4>
               <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
-                Ipsum blog post five
+                ĂN CHAY KHÔNG NHẠT NHẼO NHƯ CHÚNG TA TƯỞNG
               </Link>
             </h4>
-            <p>
-              Aenean sollicitudin, lorem quis on endum uctor nisi elitod the
-              cona sequat ipsum, necas sagittis sem natoque nibh id penatibus
+            <p className="text-justify">
+              Giữa những bộ bề cuộc sống, ít người biết rằng ẩm thực cũng là một trong những yếu tố giúp chúng ta bình tâm trở lại
             </p>
             <div className="blog-share-comment">
               <div className="blog-btn-2">

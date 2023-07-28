@@ -124,7 +124,7 @@ const LoginRegister = ({ location }) => {
 
         setTimeout(function () {
           setLoading(false);
-          history.push("/admin");
+          history.push("/");
         }, 1000);
         return;
       }
@@ -136,7 +136,7 @@ const LoginRegister = ({ location }) => {
       localStorage.setItem("expiration", expirationTime);
       messageApi.open({
         type: "success",
-        content: "chào mừng bạn đã đến poly-food.",
+        content: "Chào mừng bạn đã đến poly-food.",
       });
       setTimeout(function () {
         setLoading(false);
