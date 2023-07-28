@@ -26,7 +26,7 @@ const HeaderTop = ({
             />
             <div className="header-offer">
                 <p>
-                  <i class="fa fa-money"></i> Giá cả ưu đãi hấp dẫn
+                  <i class="fa fa-money"></i> Giá cả ưu đãi & hấp dẫn
                 </p>
             </div>
             <div className="header-offer">
