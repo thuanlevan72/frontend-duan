@@ -35,39 +35,34 @@ const FooterTwo = ({
   };
   return (
     <footer
-      className={`footer-area ${
-        backgroundColorClass ? backgroundColorClass : ""
-      } ${spaceLeftClass ? spaceLeftClass : ""} ${
-        spaceRightClass ? spaceRightClass : ""
-      } ${backgroundImage ? "bg-img" : ""}`}
+      className={`footer-area ${backgroundColorClass ? backgroundColorClass : ""
+        } ${spaceLeftClass ? spaceLeftClass : ""} ${spaceRightClass ? spaceRightClass : ""
+        } ${backgroundImage ? "bg-img" : ""}`}
       style={{
-        backgroundImage: ` ${
-          backgroundImage
+        backgroundImage: ` ${backgroundImage
             ? `url(${process.env.PUBLIC_URL + backgroundImage})`
             : `url()`
-        }`
+          }`
       }}
     >
       <div
-        className={`footer-top text-center ${
-          footerTopBackgroundColorClass ? footerTopBackgroundColorClass : ""
-        } ${footerTopSpaceTopClass ? footerTopSpaceTopClass : ""}  ${
-          footerTopSpaceBottomClass ? footerTopSpaceBottomClass : ""
-        }`}
+        className={`footer-top text-center ${footerTopBackgroundColorClass ? footerTopBackgroundColorClass : ""
+          } ${footerTopSpaceTopClass ? footerTopSpaceTopClass : ""}  ${footerTopSpaceBottomClass ? footerTopSpaceBottomClass : ""
+          }`}
       >
         <div className="container">
           <div className="footer-logo">
             <Link to={process.env.PUBLIC_URL}>
               <img
                 alt=""
-                style={{maxWidth:"250px"}}
+                style={{ maxWidth: "250px" }}
                 src={"/assets/img/logo/GSlogo.png"}
               />
-  
+
             </Link>
           </div>
           <p>
-          Hơn 10 năm hình thành và phát triển, thương hiệu thực phẩm chay “Poly Food” đã khẳng định được uy tín của mình trên thị trường với đa dạng mặt hàng, chất lượng dịch vụ, chất lượng sản phẩm. Chúng tôi luôn cố gắng để phục vụ tốt nhất đến quý khách hàng.
+            Chúng tôi luôn cố gắng để phục vụ tốt nhất với khách hàng
           </p>
           <div className="footer-social">
             <ul>
@@ -103,9 +98,8 @@ const FooterTwo = ({
       <div className="footer-bottom text-center">
         <div className="container">
           <div
-            className={`copyright-2 ${
-              copyrightColorClass ? copyrightColorClass : ""
-            }`}
+            className={`copyright-2 ${copyrightColorClass ? copyrightColorClass : ""
+              }`}
           >
             <p>
               © 2020{" "}

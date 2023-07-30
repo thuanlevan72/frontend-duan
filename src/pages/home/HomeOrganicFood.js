@@ -50,12 +50,6 @@ const HomeOrganicFood = () => {
           spaceRightClass="mr-70"
           bgColorClass="bg-gray-3"
         />
-        <FeatureIconFour
-          spaceTopClass="pt-10"
-          spaceBottomClass="pb-90"
-          containerClass="container-fluid"
-          gutterClass="padding-10-row-col"
-        />
         {/* newsletter */}
         <NewsletterTwo
           spaceTopClass="pt-100"
