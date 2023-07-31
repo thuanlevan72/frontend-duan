@@ -1,16 +1,17 @@
 [
   {
     "id": 1,
-    "image": "/assets/img/banner/ut.jpg"
+    "image": "/assets/img/banner/ut.jpg",
+    "link": "/about"
   },
   {
     "id": 2,
     "image": "/assets/img/banner/dh.jpg",
-    "link": "/shop-grid-standard"
+    "link": "/about"
   },
   {
     "id": 3,
     "image": "/assets/img/banner/tn.jpg",
-    "link": "/shop-grid-standard"
+    "link": "/about"
   }
 ]

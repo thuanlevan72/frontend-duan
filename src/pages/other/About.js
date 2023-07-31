@@ -9,7 +9,6 @@ import BannerOne from "../../wrappers/banner/BannerOne";
 import TextGridOne from "../../wrappers/text-grid/TextGridOne";
 import FunFactOne from "../../wrappers/fun-fact/FunFactOne";
 import TeamMemberOne from "../../wrappers/team-member/TeamMemberOne";
-import BrandLogoSliderOne from "../../wrappers/brand-logo/BrandLogoSliderOne";
 
 const About = ({ location }) => {
   const { pathname } = location;
@@ -49,9 +48,6 @@ const About = ({ location }) => {
 
         {/* team member */}
         <TeamMemberOne spaceTopClass="pt-95" spaceBottomClass="pb-70" />
-
-        {/* brand logo slider */}
-        <BrandLogoSliderOne spaceBottomClass="pb-70" />
       </LayoutOne>
     </Fragment>
   );

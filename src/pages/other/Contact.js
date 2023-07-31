@@ -99,10 +99,10 @@ const Contact = ({ location }) => {
                     </div>
                     <div className="contact-info-dec">
                       <p>
-                        <a href="mailto:urname@email.com">urname@email.com</a>
+                        <a href="mailto:polyfood@email.com">polyfood@email.com</a>
                       </p>
                       <p>
-                        <a href="//urwebsitenaem.com">urwebsitenaem.com</a>
+                        <a href="//polyfood.store">polyfood.store</a>
                       </p>
                     </div>
                   </div>
@@ -111,8 +111,8 @@ const Contact = ({ location }) => {
                       <i className="fa fa-map-marker" />
                     </div>
                     <div className="contact-info-dec">
-                      <p>Address goes here, </p>
-                      <p>street, Crossroad 123.</p>
+                      <p>Địa chỉ</p>
+                      <p>Đội Cấn, Ba Đình, Hà Nội</p>
                     </div>
                   </div>
                   <div className="contact-social text-center">
@@ -164,7 +164,7 @@ const Contact = ({ location }) => {
                       <div className="col-lg-12">
                         <input
                           name="phone"
-                          placeholder="phone*"
+                          placeholder="Phone*"
                           type="text"
                           onChange={changeInputData}
                           value={dataContact.phone}
@@ -175,7 +175,7 @@ const Contact = ({ location }) => {
                       <div className="col-lg-12">
                         <textarea
                           name="subject"
-                          placeholder="subject"
+                          placeholder="Subject*"
                           value={dataContact.subject}
                           onChange={changeInputData}
                           required
