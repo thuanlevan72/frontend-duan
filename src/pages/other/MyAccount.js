@@ -99,7 +99,6 @@ const MyAccount = ({ location }) => {
   });
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
-
     if (file.size > 2 * 1024 * 1024) {
       messageApi.open({
         type: "error",
@@ -130,7 +129,7 @@ const MyAccount = ({ location }) => {
       localStorage.setItem("user", JSON.stringify(users));
       messageApi.open({
         type: "success",
-        content: "update avatar thành công",
+        content: "Tải ảnh đại diện thành công",
       });
       setLoading(false);
       history.go(0);
@@ -139,7 +138,6 @@ const MyAccount = ({ location }) => {
       setLoading(false);
     }
   };
-  //
   const onChageSubmitInfo = async () => {
     try {
       setLoading(true);
@@ -154,9 +152,8 @@ const MyAccount = ({ location }) => {
 
       messageApi.open({
         type: "success",
-        content: "thay đổi thông tin thành công",
+        content: "Thay đổi thông tin thành công",
       });
-
       usersUpdate.user.phone = user.phone;
       usersUpdate.user.address = user.address;
       usersUpdate.user.userName = user.userName;
@@ -169,14 +166,14 @@ const MyAccount = ({ location }) => {
       setLoading(false);
       messageApi.open({
         type: "success",
-        content: "thay đổi thông tin thất bại",
+        content: "Thay đổi thông tin thất bại",
       });
     }
   };
   return (
     <Fragment>
       <MetaTags>
-        <title>Poly Food | My Account</title>
+        <title>Poly Food | Tài khoản của tôi</title>
         <meta
           name="description"
           content="Compare page of flone react minimalist eCommerce template."
@@ -186,7 +183,7 @@ const MyAccount = ({ location }) => {
         Trang chủ
       </BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
-        My Account
+        Tài khoản của tôi
       </BreadcrumbsItem>
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
@@ -217,7 +214,7 @@ const MyAccount = ({ location }) => {
                             <div className="row">
                               <div className="col-lg-6 col-md-6">
                                 <div className="billing-info">
-                                  <label>Tên</label>
+                                  <label className="text-secondary">Tên người dùng</label>
                                   <input
                                     type="text"
                                     value={user.userName}
@@ -226,7 +223,7 @@ const MyAccount = ({ location }) => {
                                   />
                                 </div>
                                 <div className="billing-info">
-                                  <label>Email</label>
+                                  <label className="text-secondary">Email</label>
                                   <input
                                     type="email"
                                     value={user.email}
@@ -236,7 +233,7 @@ const MyAccount = ({ location }) => {
                                 </div>
                               </div>
                               <div className="col-lg-6 col-md-6">
-                                <div className="billing-info">
+                                <div className="billing-info text-center">
                                   <Image
                                     style={{ borderRadius: "50%" }}
                                     width={130}
@@ -250,12 +247,16 @@ const MyAccount = ({ location }) => {
                                     className="d-none"
                                   />
                                   <label htmlFor="avartarUser" 
-                                    className="d-flex align-items-center justify-content-center bg-warning position-absolute bottom-0 p-3 m-3 text-white" style={{height: "30px"}}>Chọn ảnh</label>
+                                    className="d-flex align-items-center justify-content-center border border-1 position-absolute bottom-0 p-3 mt-3 text-dark" style={{height: "30px", width:"130px", right: "34%"}}>Chọn ảnh</label>
+                                    <div className="format-image position-absolute" style={{bottom: "-30%", left: "28%"}}>
+                                      <p className="mb-0 text-secondary">Dung lượng file tối đa 2 MB</p>
+                                      <p className="text-secondary">Định dạng PNG, JPG, WEBP</p>
+                                    </div>
                                 </div>
                               </div>
                               <div className="col-lg-6 col-md-6">
                                 <div className="billing-info">
-                                  <label>Địa chỉ</label>
+                                  <label className="text-secondary">Địa chỉ</label>
                                   <input
                                     type="text"
                                     value={user.address}
@@ -264,9 +265,10 @@ const MyAccount = ({ location }) => {
                                   />
                                 </div>
                               </div>
+                              <div className="col-lg-6 col-md-6" style={{visibility: "hidden"}}></div>
                               <div className="col-lg-6 col-md-6">
                                 <div className="billing-info">
-                                  <label>Số điện thoại</label>
+                                  <label className="text-secondary">Số điện thoại</label>
                                   <input
                                     type="text"
                                     name="phone"

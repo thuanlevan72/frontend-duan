@@ -4,7 +4,6 @@ import {
   Breadcrumb,
   Space,
   Table,
-  Typography,
   Avatar,
   Tag,
   Pagination,
@@ -22,8 +21,8 @@ import UserApi from "../../../api/security/UserApi";
 import { format } from "date-fns";
 import LoadingSpin from "../../loading/LoadingSpin";
 import { BiEdit } from "react-icons/bi";
+import { ImEye } from "react-icons/im";
 
-const { Text } = Typography;
 const UsersList = () => {
   const [loading, setLoading] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
@@ -41,7 +40,6 @@ const UsersList = () => {
   const showModal = (id) => {
     const dataOrderCurrent = data?.data?.find((x) => x.accountId === id);
     const user = dataOrderCurrent?.user;
-    console.log(user);
     if (user) {
       setDataCurrent([
         {
@@ -214,7 +212,7 @@ const UsersList = () => {
       role: (
         <Tag
           color={
-            item.decentralization.authorityName == "Admin" ? "cyan" : "green"
+            item.decentralization.authorityName === "Admin" ? "cyan" : "green"
           }>
           {item.decentralization.authorityName}
         </Tag>
@@ -291,14 +289,10 @@ const UsersList = () => {
       align: "center",
       render: (accountId) => (
         <Space size="middle">
-          <Button className="border border-white">
             <NavLink to={`/admin/account-edit/${accountId}`}>
-              <BiEdit />
+              <BiEdit className="text-info"/>
             </NavLink>
-          </Button>
-          <Button type="primary" onClick={(e) => showModal(accountId)}>
-            Chi tiết
-          </Button>
+            <ImEye onClick={() => showModal(accountId)}/>
         </Space>
       ),
     },
@@ -335,7 +329,7 @@ const UsersList = () => {
             {dataSource.length > 0 && dataSource[0].role}
           </Descriptions.Item>
           <Descriptions.Item label="Trạng thái">
-            {dataSource.length > 0 && dataSource[0].status == 1
+            {dataSource.length > 0 && dataSource[0].status === 1
               ? "Hoạt động"
               : "Vô hiệu hóa"}
           </Descriptions.Item>
