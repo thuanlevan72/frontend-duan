@@ -251,11 +251,9 @@ const ProductList = () => {
             align: "center",
             render: (text, record) => (
                 <Space size="middle">
-                    <Button className="border border-white">
                         <NavLink to={`/admin/products-edit/${record.id}`}>
-                            <BiEdit />
+                            <BiEdit className="text-info"/>
                         </NavLink>
-                    </Button>
                     <Popconfirm
                         title="Bạn có chắc chắn xóa?"
                         onConfirm={() => {
@@ -264,11 +262,9 @@ const ProductList = () => {
                         onCancel={handleCancel}
                         className="border border-white"
                         okText="Có"
-                        cancelText="Không"
+                        cancelText="Hủy"
                     >
-                        <Button danger>
-                            <ImBin />
-                        </Button>
+                            <ImBin className="text-danger"/>
                     </Popconfirm>
                 </Space>
             ),
