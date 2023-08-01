@@ -38,10 +38,8 @@ const MobileLangCurrChange = ({
             closeMobileMenu();
           }}
         >
-          <option value="vi">Vietnamese</option>
+          <option value="vi">Tiếng Việt</option>
           <option value="en">English</option>
-          <option value="fn">French</option>
-          <option value="de">Germany</option>
         </select>
       </div>
     </div>

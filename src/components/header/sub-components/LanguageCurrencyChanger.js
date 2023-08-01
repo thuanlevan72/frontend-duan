@@ -23,36 +23,22 @@ const LanguageCurrencyChanger = ({
       <div className="same-language-currency language-style">
         <span>
           {currentLanguageCode === "vi"
-            ? "Vietnamese"
-            : currentLanguageCode === "fn"
-            ? "French"
-            : currentLanguageCode === "de"
-            ? "Germany"
+            ? "Tiếng Việt"
             : currentLanguageCode === "en"
-            ? "English"
-            : ""}{" "}
+              ? "English"
+              : ""}{" "}
           <i className="fa fa-angle-down" />
         </span>
         <div className="lang-car-dropdown">
           <ul>
             <li>
+              <button value="vi" onClick={e => changeLanguageTrigger(e)}>
+                Tiếng Việt
+              </button>
+            </li>
+            <li>
               <button value="en" onClick={e => changeLanguageTrigger(e)}>
                 English
-              </button>
-            </li>
-            <li>
-              <button value="fn" onClick={e => changeLanguageTrigger(e)}>
-                French
-              </button>
-            </li>
-            <li>
-              <button value="de" onClick={e => changeLanguageTrigger(e)}>
-                Germany
-              </button>
-            </li>
-            <li>
-              <button value="vi" onClick={e => changeLanguageTrigger(e)}>
-              Vietnamese
               </button>
             </li>
           </ul>
