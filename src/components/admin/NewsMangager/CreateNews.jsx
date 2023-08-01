@@ -87,8 +87,7 @@ const CreateNews = () => {
           margin: "16px 0",
         }}>
         <Breadcrumb.Item>Bảng điều khiển</Breadcrumb.Item>
-        <Breadcrumb.Item>Bài viết</Breadcrumb.Item>
-        <Breadcrumb.Item>Thêm mới</Breadcrumb.Item>
+        <Breadcrumb.Item>Thêm mới bài viết</Breadcrumb.Item>
       </Breadcrumb>
       <form onSubmit={handleSubmit}>
         {contextHolder}
@@ -97,6 +96,7 @@ const CreateNews = () => {
             <LoadingSpin />
           </div>
         )}
+        <h3 className="text-center">THÊM BÀI VIẾT</h3>
         <div style={{ padding: "10px" }}>
           <button type="submit" sty>
             Thêm tin tức
@@ -123,7 +123,7 @@ const CreateNews = () => {
           <ReactQuill
             value={content}
             onChange={handleContentChange}
-            style={{ height: "30vh" }}
+            style={{ height: "15vh" }}
           />
         </div>
         {/* <button type="submit">Thêm tin tức</button> */}

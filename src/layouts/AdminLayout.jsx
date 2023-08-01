@@ -38,6 +38,7 @@ import OrderPending from "../components/admin/OrdersManager/OrderPending";
 import OrderCompleted from "../components/admin/OrdersManager/OrderCompleted";
 import OrderCanceled from "../components/admin/OrdersManager/OrderCanceled";
 import ContactsList from "../components/admin/ContactsManager/ContactsList";
+import NewList from "../components/admin/NewsMangager/NewList";
 import CreateNews from "../components/admin/NewsMangager/CreateNews";
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -152,7 +153,7 @@ const AdminLayout = () => {
             </Menu.Item>
           </SubMenu>
           <SubMenu
-            key="subMenu-6"
+            key="subMenu-5"
             icon={<MdOutlineContactSupport />}
             title="Quản lý Liên hệ">
             <Menu.Item key="/admin" icon={<CiBoxList />}>
@@ -160,19 +161,19 @@ const AdminLayout = () => {
             </Menu.Item>
           </SubMenu>
           <SubMenu
-            key="subMenu-7"
+            key="subMenu-6"
             icon={<MdOutlineContactSupport />}
             title="Quản lý bài viết">
             <Menu.Item key="/news" icon={<CiBoxList />}>
-              <NavLink to="/admin/news">Danh sách Bài viết</NavLink>
+              <NavLink to="/admin/news">Danh sách bài viết</NavLink>
             </Menu.Item>
             <Menu.Item key="/create-news" icon={<IoCreateOutline />}>
-              <NavLink to="/admin/news">Thêm mới bài viết</NavLink>
+              <NavLink to="/admin/news-add">Thêm mới bài viết</NavLink>
             </Menu.Item>
           </SubMenu>
           {/*Order Manager */}
           <SubMenu
-            key="subMenu-5"
+            key="subMenu-7"
             icon={<BsBoxSeam />}
             title="Quản lý đơn hàng">
             <Menu.Item key="/admin/orders" icon={<CiBoxList />}>
@@ -237,7 +238,8 @@ const AdminLayout = () => {
             {/* Contact router */}
             <Route path="/admin/contacts" component={ContactsList} />
             {/* News router */}
-            <Route path="/admin/add-news" component={CreateNews} />
+            <Route path="/admin/news" component={NewList} />
+            <Route path="/admin/news-add" component={CreateNews} />
             {/* Redirect to Dashboard */}
             <Redirect to="/admin/dashboard" />
           </Switch>

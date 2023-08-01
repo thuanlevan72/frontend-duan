@@ -15,7 +15,7 @@ const BlogStandard = ({ location }) => {
   const [loading, setLoading] = useState(false);
   const [params, setParams] = useState({
     page: 1,
-    pageSize: 5,
+    pageSize: 6,
   });
   useEffect(async () => {
     try {
