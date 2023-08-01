@@ -12,7 +12,7 @@ const Pagination = ({ SetParams, data }) => {
             onClick={() => {
               if (page != 1) {
                 SetParams({
-                  pageSize: 5,
+                  pageSize: 6,
                   page: page - 1,
                 });
               }
@@ -34,7 +34,7 @@ const Pagination = ({ SetParams, data }) => {
                 }}
                 onClick={() => {
                   SetParams({
-                    pageSize: 5,
+                    pageSize: 6,
                     page: pageNumber,
                   });
                 }}>
@@ -51,7 +51,7 @@ const Pagination = ({ SetParams, data }) => {
             onClick={() => {
               if (page != totalPages) {
                 SetParams({
-                  pageSize: 5,
+                  pageSize: 6,
                   page: page + 1,
                 });
               }

@@ -35,7 +35,7 @@ const BlogPosts = ({ data }) => {
                       "/blog-details-standard/" +
                       item.newsId
                     }>
-                    <img src={item.image} alt="" />
+                    <img src={item.image} alt="" height={350} />
                   </Link>
                 </div>
                 <div className="blog-content-2">
@@ -69,11 +69,10 @@ const BlogPosts = ({ data }) => {
                       {item.title}
                     </Link>
                   </h4>
-                  <p className="text-justify">{item.shortDescription}</p>
                   <div className="blog-share-comment">
                     <div className="blog-btn-2">
                       <Link
-                        to={process.env.PUBLIC_URL + "/blog-details-standard/"}>
+                        to={process.env.PUBLIC_URL + "/blog-details-standard/" + item.newsId}>
                         read more
                       </Link>
                     </div>
