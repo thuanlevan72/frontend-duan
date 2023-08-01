@@ -38,6 +38,7 @@ import OrderPending from "../components/admin/OrdersManager/OrderPending";
 import OrderCompleted from "../components/admin/OrdersManager/OrderCompleted";
 import OrderCanceled from "../components/admin/OrdersManager/OrderCanceled";
 import ContactsList from "../components/admin/ContactsManager/ContactsList";
+import CreateNews from "../components/admin/NewsMangager/CreateNews";
 const { Header, Content, Footer, Sider } = Layout;
 
 const AdminLayout = () => {
@@ -158,6 +159,17 @@ const AdminLayout = () => {
               <NavLink to="/admin/Contacts">Danh sách liên hệ</NavLink>
             </Menu.Item>
           </SubMenu>
+          <SubMenu
+            key="subMenu-7"
+            icon={<MdOutlineContactSupport />}
+            title="Quản lý bài viết">
+            <Menu.Item key="/news" icon={<CiBoxList />}>
+              <NavLink to="/admin/news">Danh sách Bài viết</NavLink>
+            </Menu.Item>
+            <Menu.Item key="/create-news" icon={<IoCreateOutline />}>
+              <NavLink to="/admin/news">Thêm mới bài viết</NavLink>
+            </Menu.Item>
+          </SubMenu>
           {/*Order Manager */}
           <SubMenu
             key="subMenu-5"
@@ -224,6 +236,8 @@ const AdminLayout = () => {
             <Route path="/admin/orders-canceled" component={OrderCanceled} />
             {/* Contact router */}
             <Route path="/admin/contacts" component={ContactsList} />
+            {/* News router */}
+            <Route path="/admin/add-news" component={CreateNews} />
             {/* Redirect to Dashboard */}
             <Redirect to="/admin/dashboard" />
           </Switch>

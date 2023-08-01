@@ -78,10 +78,7 @@ const SeenMailPointLts = ({ location }) => {
     <Fragment>
       <MetaTags>
         <title>LTS EDU | THÔNG BÁO ĐIỂM HỌC PHẦN</title>
-        <meta
-          name="description"
-          content="Compare page of flone react minimalist eCommerce template."
-        />
+        <meta name="description" content="Compare page of PolyFood." />
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>
         Trang chủ

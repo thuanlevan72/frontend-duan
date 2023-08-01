@@ -17,12 +17,11 @@ const About = ({ location }) => {
     <Fragment>
       <MetaTags>
         <title>Poly Food | About us</title>
-        <meta
-          name="description"
-          content="About page of flone react minimalist eCommerce template."
-        />
+        <meta name="description" content="About page of PolyFood." />
       </MetaTags>
-      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Trang chủ</BreadcrumbsItem>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>
+        Trang chủ
+      </BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
         About us
       </BreadcrumbsItem>
@@ -54,7 +53,7 @@ const About = ({ location }) => {
 };
 
 About.propTypes = {
-  location: PropTypes.object
+  location: PropTypes.object,
 };
 
 export default About;

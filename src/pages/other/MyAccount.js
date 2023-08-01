@@ -174,10 +174,7 @@ const MyAccount = ({ location }) => {
     <Fragment>
       <MetaTags>
         <title>Poly Food | Tài khoản của tôi</title>
-        <meta
-          name="description"
-          content="Compare page of flone react minimalist eCommerce template."
-        />
+        <meta name="description" content="Compare page of PolyFood." />
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>
         Trang chủ
@@ -214,7 +211,9 @@ const MyAccount = ({ location }) => {
                             <div className="row">
                               <div className="col-lg-6 col-md-6">
                                 <div className="billing-info">
-                                  <label className="text-secondary">Tên người dùng</label>
+                                  <label className="text-secondary">
+                                    Tên người dùng
+                                  </label>
                                   <input
                                     type="text"
                                     value={user.userName}
@@ -223,7 +222,9 @@ const MyAccount = ({ location }) => {
                                   />
                                 </div>
                                 <div className="billing-info">
-                                  <label className="text-secondary">Email</label>
+                                  <label className="text-secondary">
+                                    Email
+                                  </label>
                                   <input
                                     type="email"
                                     value={user.email}
@@ -246,17 +247,33 @@ const MyAccount = ({ location }) => {
                                     onChange={handleFileChange}
                                     className="d-none"
                                   />
-                                  <label htmlFor="avartarUser" 
-                                    className="d-flex align-items-center justify-content-center border border-1 position-absolute bottom-0 p-3 mt-3 text-dark" style={{height: "30px", width:"130px", right: "34%"}}>Chọn ảnh</label>
-                                    <div className="format-image position-absolute" style={{bottom: "-30%", left: "28%"}}>
-                                      <p className="mb-0 text-secondary">Dung lượng file tối đa 2 MB</p>
-                                      <p className="text-secondary">Định dạng PNG, JPG, WEBP</p>
-                                    </div>
+                                  <label
+                                    htmlFor="avartarUser"
+                                    className="d-flex align-items-center justify-content-center border border-1 position-absolute bottom-0 p-3 mt-3 text-dark"
+                                    style={{
+                                      height: "30px",
+                                      width: "130px",
+                                      right: "34%",
+                                    }}>
+                                    Chọn ảnh
+                                  </label>
+                                  <div
+                                    className="format-image position-absolute"
+                                    style={{ bottom: "-30%", left: "28%" }}>
+                                    <p className="mb-0 text-secondary">
+                                      Dung lượng file tối đa 2 MB
+                                    </p>
+                                    <p className="text-secondary">
+                                      Định dạng PNG, JPG, WEBP
+                                    </p>
+                                  </div>
                                 </div>
                               </div>
                               <div className="col-lg-6 col-md-6">
                                 <div className="billing-info">
-                                  <label className="text-secondary">Địa chỉ</label>
+                                  <label className="text-secondary">
+                                    Địa chỉ
+                                  </label>
                                   <input
                                     type="text"
                                     value={user.address}
@@ -265,10 +282,14 @@ const MyAccount = ({ location }) => {
                                   />
                                 </div>
                               </div>
-                              <div className="col-lg-6 col-md-6" style={{visibility: "hidden"}}></div>
+                              <div
+                                className="col-lg-6 col-md-6"
+                                style={{ visibility: "hidden" }}></div>
                               <div className="col-lg-6 col-md-6">
                                 <div className="billing-info">
-                                  <label className="text-secondary">Số điện thoại</label>
+                                  <label className="text-secondary">
+                                    Số điện thoại
+                                  </label>
                                   <input
                                     type="text"
                                     name="phone"

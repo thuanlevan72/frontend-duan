@@ -151,10 +151,7 @@ const Cart = ({ location, cartItems }) => {
     <Fragment>
       <MetaTags>
         <title>Poly Food | Lịch sử đơn hàng</title>
-        <meta
-          name="description"
-          content="Cart page of flone react minimalist eCommerce template."
-        />
+        <meta name="description" content="Cart page of PolyFood." />
       </MetaTags>
 
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>

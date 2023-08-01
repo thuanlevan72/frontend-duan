@@ -33,10 +33,7 @@ const Product = ({ location, product }) => {
     <Fragment>
       <MetaTags>
         <title>Poly Food | Chi tiết sản phẩm</title>
-        <meta
-          name="description"
-          content="Product page of flone react minimalist eCommerce template."
-        />
+        <meta name="description" content="Product page of PolyFood." />
       </MetaTags>
 
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>

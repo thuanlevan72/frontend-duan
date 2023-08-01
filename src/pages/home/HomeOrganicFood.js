@@ -13,17 +13,13 @@ const HomeOrganicFood = () => {
     <Fragment>
       <MetaTags>
         <title>Poly Food | Organic Food Home</title>
-        <meta
-          name="description"
-          content="Organic food home of flone react minimalist eCommerce template."
-        />
+        <meta name="description" content="Organic food home of PolyFood." />
       </MetaTags>
       <LayoutThree
         headerTop="visible"
         headerContainerClass="container-fluid"
         headerBorderStyle="fluid-border"
-        headerPaddingClass="header-padding-2"
-      >
+        headerPaddingClass="header-padding-2">
         {/* hero slider */}
         <HeroSliderFive spaceLeftClass="ml-70" spaceRightClass="mr-70" />
         {/* feature icon */}

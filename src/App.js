@@ -102,8 +102,13 @@ const App = (props) => {
                   component={BlogStandard}
                 />
                 <Route
-                  path={process.env.PUBLIC_URL + "/blog-details-standard"}
-                  component={BlogDetailsStandard}
+                  path={process.env.PUBLIC_URL + "/blog-details-standard/:id"}
+                  render={(routeProps) => (
+                    <BlogDetailsStandard
+                      {...routeProps}
+                      key={routeProps.match.params.id}
+                    />
+                  )}
                 />
                 {/* Other pages */}
                 <Route

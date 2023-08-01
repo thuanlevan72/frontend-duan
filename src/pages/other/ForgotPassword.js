@@ -65,10 +65,7 @@ const ForgotPassword = ({ location }) => {
     <Fragment>
       <MetaTags>
         <title>Poly Food | Đăng nhập</title>
-        <meta
-          name="description"
-          content="Compare page of flone react minimalist eCommerce template."
-        />
+        <meta name="description" content="Compare page of PolyFood." />
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>
         Trang chủ

@@ -142,10 +142,7 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
     <Fragment>
       <MetaTags>
         <title>Poly Food | Checkout</title>
-        <meta
-          name="description"
-          content="Checkout page of flone react minimalist eCommerce template."
-        />
+        <meta name="description" content="Checkout page of PolyFood." />
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>
         Trang chủ

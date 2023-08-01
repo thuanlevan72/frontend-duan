@@ -34,10 +34,7 @@ const CompleteOrder = ({
     <Fragment>
       <MetaTags>
         <title>Poly Food | Cart</title>
-        <meta
-          name="description"
-          content="Cart page of flone react minimalist eCommerce template."
-        />
+        <meta name="description" content="Cart page of PolyFood." />
       </MetaTags>
 
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>

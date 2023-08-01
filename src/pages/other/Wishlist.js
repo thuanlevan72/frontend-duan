@@ -9,7 +9,7 @@ import { getDiscountPrice } from "../../helpers/product";
 import {
   addToWishlist,
   deleteFromWishlist,
-  deleteAllFromWishlist
+  deleteAllFromWishlist,
 } from "../../redux/actions/wishlistActions";
 import { addToCart } from "../../redux/actions/cartActions";
 import LayoutOne from "../../layouts/LayoutOne";
@@ -22,7 +22,7 @@ const Wishlist = ({
   addToCart,
   wishlistItems,
   deleteFromWishlist,
-  deleteAllFromWishlist
+  deleteAllFromWishlist,
 }) => {
   const { addToast } = useToasts();
   const { pathname } = location;
@@ -31,13 +31,12 @@ const Wishlist = ({
     <Fragment>
       <MetaTags>
         <title>Poly Food | Wishlist</title>
-        <meta
-          name="description"
-          content="Wishlist page of flone react minimalist eCommerce template."
-        />
+        <meta name="description" content="Wishlist page of PolyFood." />
       </MetaTags>
 
-      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Trang chủ</BreadcrumbsItem>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>
+        Trang chủ
+      </BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
         Wishlist
       </BreadcrumbsItem>
@@ -76,7 +75,7 @@ const Wishlist = ({
                               discountedPrice * currency.currencyRate
                             ).toFixed(2);
                             const cartItem = cartItems.filter(
-                              item => item.id === wishlistItem.id
+                              (item) => item.id === wishlistItem.id
                             )[0];
                             return (
                               <tr key={key}>
@@ -86,8 +85,7 @@ const Wishlist = ({
                                       process.env.PUBLIC_URL +
                                       "/product/" +
                                       wishlistItem.id
-                                    }
-                                  >
+                                    }>
                                     <img
                                       className="img-fluid"
                                       src={
@@ -105,8 +103,7 @@ const Wishlist = ({
                                       process.env.PUBLIC_URL +
                                       "/product/" +
                                       wishlistItem.id
-                                    }
-                                  >
+                                    }>
                                     {wishlistItem.name}
                                   </Link>
                                 </td>
@@ -136,16 +133,14 @@ const Wishlist = ({
                                     <a
                                       href={wishlistItem.affiliateLink}
                                       rel="noopener noreferrer"
-                                      target="_blank"
-                                    >
+                                      target="_blank">
                                       {" "}
                                       Buy now{" "}
                                     </a>
                                   ) : wishlistItem.variation &&
                                     wishlistItem.variation.length >= 1 ? (
                                     <Link
-                                      to={`${process.env.PUBLIC_URL}/product/${wishlistItem.id}`}
-                                    >
+                                      to={`${process.env.PUBLIC_URL}/product/${wishlistItem.id}`}>
                                       Select option
                                     </Link>
                                   ) : wishlistItem.stock &&
@@ -156,7 +151,7 @@ const Wishlist = ({
                                       }
                                       className={
                                         cartItem !== undefined &&
-                                          cartItem.quantity > 0
+                                        cartItem.quantity > 0
                                           ? "active"
                                           : ""
                                       }
@@ -168,10 +163,9 @@ const Wishlist = ({
                                         wishlistItem !== undefined
                                           ? "Added to cart"
                                           : "Add to cart"
-                                      }
-                                    >
+                                      }>
                                       {cartItem !== undefined &&
-                                        cartItem.quantity > 0
+                                      cartItem.quantity > 0
                                         ? "Added"
                                         : "Add to cart"}
                                     </button>
@@ -186,8 +180,7 @@ const Wishlist = ({
                                   <button
                                     onClick={() =>
                                       deleteFromWishlist(wishlistItem, addToast)
-                                    }
-                                  >
+                                    }>
                                     <i className="fa fa-times"></i>
                                   </button>
                                 </td>
@@ -205,8 +198,7 @@ const Wishlist = ({
                     <div className="cart-shiping-update-wrapper">
                       <div className="cart-shiping-update">
                         <Link
-                          to={process.env.PUBLIC_URL + "/shop-grid-standard"}
-                        >
+                          to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
                           Continue Shopping
                         </Link>
                       </div>
@@ -250,18 +242,18 @@ Wishlist.propTypes = {
   location: PropTypes.object,
   deleteAllFromWishlist: PropTypes.func,
   deleteFromWishlist: PropTypes.func,
-  wishlistItems: PropTypes.array
+  wishlistItems: PropTypes.array,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     cartItems: state.cartData,
     wishlistItems: state.wishlistData,
-    currency: state.currencyData
+    currency: state.currencyData,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (item, addToast, quantityCount) => {
       dispatch(addToCart(item, addToast, quantityCount));
@@ -272,9 +264,9 @@ const mapDispatchToProps = dispatch => {
     deleteFromWishlist: (item, addToast, quantityCount) => {
       dispatch(deleteFromWishlist(item, addToast, quantityCount));
     },
-    deleteAllFromWishlist: addToast => {
+    deleteAllFromWishlist: (addToast) => {
       dispatch(deleteAllFromWishlist(addToast));
-    }
+    },
   };
 };
 
