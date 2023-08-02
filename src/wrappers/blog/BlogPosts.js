@@ -35,7 +35,7 @@ const BlogPosts = ({ data }) => {
                       "/blog-details-standard/" +
                       item.newsId
                     }>
-                    <img src={item.image} alt="" height={350} />
+                    <img src={item.image} alt="" height={350} width={350} />
                   </Link>
                 </div>
                 <div className="blog-content-2">

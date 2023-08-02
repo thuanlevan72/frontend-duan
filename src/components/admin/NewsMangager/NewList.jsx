@@ -90,8 +90,8 @@ const NewList = () => {
                 <Image
                     src={image}
                     alt={image}
-                    width={100}
-                    height={100}
+                    width={180}
+                    height={180}
                 />
             ),
         },
