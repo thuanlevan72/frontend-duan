@@ -9,7 +9,6 @@ import BlogComment from "../../wrappers/blog/BlogComment";
 import BlogPosts from "../../wrappers/blog/BlogPosts";
 import NewsApi from "../../api/news/NewsApi";
 import LoadingSpin from "../../components/loading/LoadingSpin";
-
 const BlogDetailsStandard = ({ location, match }) => {
   const { pathname } = location;
   const newsId = match.params.id;
@@ -53,13 +52,17 @@ const BlogDetailsStandard = ({ location, match }) => {
                   <div className="welcome-content text-center">
                     <h5>Tin tức</h5>
                     <h1>{data && data.title}</h1>
-                    <div className="text-center">
+                    <h5 style={{ textAlign: "center" }}>
+                      {data &&
+                        (data.account.user.userName || data.account.email)}
+                    </h5>
+                    <div className="text-center" style={{ margin: "10px 0" }}>
                       <img src={data && data.image} alt="" height={500} />
                     </div>
                   </div>
                   {data && (
                     <div
-                      className="text-center welcome-content"
+                      className="text-center text-justify"
                       // style={{ tẽ: "left !impt" }}
                       dangerouslySetInnerHTML={{ __html: data.content }}
                     />

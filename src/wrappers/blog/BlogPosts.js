@@ -21,6 +21,7 @@ const BlogPosts = ({ data }) => {
   //     setLoading(false);
   //   }
   // }, []);
+  console.log(data);
   return (
     <Fragment>
       {data &&
@@ -48,6 +49,9 @@ const BlogPosts = ({ data }) => {
                         )}
                       </li>
                       <li>
+                        {item.account.user.userName || item.account.email}
+                      </li>
+                      <li>
                         <Link
                           to={
                             process.env.PUBLIC_URL +
@@ -72,7 +76,11 @@ const BlogPosts = ({ data }) => {
                   <div className="blog-share-comment">
                     <div className="blog-btn-2">
                       <Link
-                        to={process.env.PUBLIC_URL + "/blog-details-standard/" + item.newsId}>
+                        to={
+                          process.env.PUBLIC_URL +
+                          "/blog-details-standard/" +
+                          item.newsId
+                        }>
                         read more
                       </Link>
                     </div>
