@@ -92,7 +92,6 @@ const NewList = () => {
                     alt={image}
                     width={100}
                     height={100}
-                    className="object-fit-cover border rounded-circle border border-success"
                 />
             ),
         },
