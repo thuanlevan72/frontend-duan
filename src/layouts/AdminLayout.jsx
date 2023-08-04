@@ -16,6 +16,7 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 // Icons
 import { RxDashboard } from "react-icons/rx";
+import { AiFillRead } from "react-icons/ai";
 import {
   UserOutlined,
   BellOutlined,
@@ -162,7 +163,7 @@ const AdminLayout = () => {
           </SubMenu>
           <SubMenu
             key="subMenu-6"
-            icon={<MdOutlineContactSupport />}
+            icon={<AiFillRead />}
             title="Quản lý bài viết">
             <Menu.Item key="/news" icon={<CiBoxList />}>
               <NavLink to="/admin/news">Danh sách bài viết</NavLink>
