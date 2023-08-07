@@ -108,15 +108,6 @@ const CategoryList = () => {
                 <>{format(new Date(createdAt), "HH:mm:ss dd/MM/yyyy")}</>
             ),
         },
-        // {
-        //     title: "Ngày cập nhật",
-        //     dataIndex: "updatedAt",
-        //     key: "updatedAt",
-        //     align: "center",
-        //     render: (updatedAt) => (
-        //         <>{format(new Date(updatedAt), "HH:mm:ss dd/MM/yyyy")}</>
-        //     ),
-        // },
         {
             title: "Hành động",
             dataIndex: "action",
@@ -124,11 +115,9 @@ const CategoryList = () => {
             align: "center",
             render: (text, record) => (
                 <Space size="middle">
-                    <Button className="border border-white">
-                        <NavLink to={`/admin/categories-edit/${record.id}`}>
-                            <BiEdit />
-                        </NavLink>
-                    </Button>
+                    <NavLink to={`/admin/categories-edit/${record.id}`}>
+                        <BiEdit className="text-info"/>
+                    </NavLink>
                     <Text type="danger">
                         <ImBin />
                     </Text>
