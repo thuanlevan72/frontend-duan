@@ -6,7 +6,6 @@ import {
     Table,
     Typography,
     Pagination,
-    Tag,
     Button
 } from "antd";
 import { NavLink } from "react-router-dom";
@@ -120,11 +119,9 @@ const NewList = () => {
             align: "center",
             render: (text, record) => (
                 <Space size="middle">
-                    <Button className="border border-white">
-                        <NavLink to={`/admin/news-edit/${record.id}`}>
-                            <BiEdit />
-                        </NavLink>
-                    </Button>
+                    <NavLink to={`/admin/news-edit/${record.id}`}>
+                        <BiEdit className="text-info"/>
+                    </NavLink>
                     <Text type="danger">
                         <ImBin />
                     </Text>

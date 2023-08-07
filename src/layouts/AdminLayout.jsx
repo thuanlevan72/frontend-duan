@@ -157,7 +157,7 @@ const AdminLayout = () => {
             key="subMenu-5"
             icon={<MdOutlineContactSupport />}
             title="Quản lý Liên hệ">
-            <Menu.Item key="/admin" icon={<CiBoxList />}>
+            <Menu.Item key="/admin/Contacts" icon={<CiBoxList />}>
               <NavLink to="/admin/Contacts">Danh sách liên hệ</NavLink>
             </Menu.Item>
           </SubMenu>

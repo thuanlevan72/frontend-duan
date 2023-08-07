@@ -172,7 +172,6 @@ const UsersList = () => {
   }, [param]);
   const handleChangeStatus = async (accountId) => {
     try {
-      // setLoading(true);
       await UserApi.updateStatusUser(accountId.accountId);
       // Cập nhật trạng thái mới trong data
       setData((prevData) => {
@@ -271,7 +270,7 @@ const UsersList = () => {
       ),
     },
     {
-      title: "Trạng thái",
+      title: "Trạng thái hoạt động",
       dataIndex: "status",
       key: "status",
       align: "center",
