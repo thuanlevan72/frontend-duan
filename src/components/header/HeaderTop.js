@@ -26,17 +26,7 @@ const HeaderTop = ({
             />
             <div className="header-offer">
                 <p>
-                  <i class="fa fa-money"></i> Giá cả ưu đãi & hấp dẫn
-                </p>
-            </div>
-            <div className="header-offer">
-                <p>
-                  <i class="fa fa-star"></i> Sản phẩm đa dạng đạt tiêu chuẩn có kiểm định
-                </p>
-            </div>
-            <div className="header-offer">
-                <p>
-                  <i class="fa fa-plane"></i> Giao hàng toàn quốc & nhanh chóng
+                    <i class="fa fa-plane"></i> Giao hàng toàn quốc & nhanh chóng
                 </p>
             </div>
         </div>

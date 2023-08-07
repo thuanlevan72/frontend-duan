@@ -219,6 +219,7 @@ const MyAccount = ({ location }) => {
                                     value={user.userName}
                                     name="userName"
                                     onChange={changeDataUser}
+                                    autoComplete="off"
                                   />
                                 </div>
                                 <div className="billing-info">
@@ -279,6 +280,7 @@ const MyAccount = ({ location }) => {
                                     value={user.address}
                                     name="address"
                                     onChange={changeDataUser}
+                                    autoComplete="off"
                                   />
                                 </div>
                               </div>
@@ -295,6 +297,7 @@ const MyAccount = ({ location }) => {
                                     name="phone"
                                     value={user.phone}
                                     onChange={changeDataUser}
+                                    autoComplete="off"
                                   />
                                 </div>
                               </div>
