@@ -171,7 +171,6 @@ const App = (props) => {
                 <Route
                   path="/admin"
                   component={AdminLayout}
-                  // render={() => <Redirect to="/admin/dashboard" />}
                 />
                 <Route
                   path={process.env.PUBLIC_URL + "/my-account"}
