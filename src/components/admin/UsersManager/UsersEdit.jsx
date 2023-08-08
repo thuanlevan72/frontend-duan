@@ -5,6 +5,7 @@ import { useToasts } from "react-toast-notifications";
 import Title from "antd/es/typography/Title";
 import UserApi from "../../../api/security/UserApi";
 import LoadingSpin from "../../loading/LoadingSpin";
+
 /* eslint-disable no-template-curly-in-string */
 const validateMessages = {
     required: "${label} không được để trống",
@@ -12,7 +13,6 @@ const validateMessages = {
         number: "${label} không đúng định dạng số",
     },
 };
-
 const UsersEdit = () => {
     const { addToast } = useToasts();
     const history = useHistory();

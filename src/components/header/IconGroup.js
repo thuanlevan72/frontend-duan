@@ -104,7 +104,7 @@ const IconGroup = ({
                             type="text"
                             value={inputCode}
                             onChange={(e) => setInputCode(e.target.value)}
-                            placeholder="Nhập mã đơn hàng cần truy vấn"
+                            placeholder="Nhập mã đơn hàng..."
                         />
                         <button
                             className="button-search"
@@ -150,7 +150,7 @@ const IconGroup = ({
                                 <Link
                                     to={process.env.PUBLIC_URL + "/my-account"}
                                 >
-                                    Tài Khoản
+                                    Tài Khoản của tôi
                                 </Link>
                                 <Link
                                     to={process.env.PUBLIC_URL + "/"}
@@ -168,7 +168,15 @@ const IconGroup = ({
                                             "/my-account"
                                         }
                                     >
-                                        Tài Khoản
+                                        Tài Khoản của tôi
+                                    </Link>
+                                    <Link
+                                        to={
+                                            process.env.PUBLIC_URL +
+                                            "/order-history"
+                                        }
+                                    >
+                                        Lịch sử đơn hàng
                                     </Link>
                                     <Link
                                         to={process.env.PUBLIC_URL + "/"}
