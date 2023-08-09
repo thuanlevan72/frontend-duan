@@ -30,24 +30,21 @@ const ProductGridListSingle = ({
   return (
     <Fragment>
       <div
-        className={`col-xl-4 col-sm-6 ${
-          sliderClassName ? sliderClassName : ""
-        }`}
+        className={`col-xl-4 col-sm-6 ${sliderClassName ? sliderClassName : ""
+          }`}
       >
         <div
           className={`product-wrap ${spaceBottomClass ? spaceBottomClass : ""}`}
         >
-          <div className="product-img"  style={{width: "auto", height:"280px", objectFit:"contain" , display: "flex", alignItems:"center"}}>
+          <div className="product-img" style={{ width: "auto", height: "200px", objectFit: "contain", display: "flex", alignItems: "center" }}>
             <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
               <img
-               
                 className="default-img"
                 src={process.env.PUBLIC_URL + product.image[0]}
                 alt=""
               />
               {product.image.length > 1 ? (
                 <img
-               
                   className="hover-img"
                   src={process.env.PUBLIC_URL + product.image[1]}
                   alt=""
@@ -68,7 +65,6 @@ const ProductGridListSingle = ({
             ) : (
               ""
             )}
-
             <div className="product-action">
               <div className="pro-same-action pro-wishlist">
                 <button
@@ -131,22 +127,16 @@ const ProductGridListSingle = ({
             </div>
           </div>
           <div className="product-content text-center">
-            <h3>
-              <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
+            <h3 style={{ fontSize: "20px", textTransform: "uppercase", marginBottom: "10px" }}>
+              <Link
+                to={process.env.PUBLIC_URL + "/product/" + product.id}
+              >
                 {product.name}
               </Link>
             </h3>
-            {product.rating && product.rating > 0 ? (
-              <div className="product-rating">
-                <Rating ratingValue={product.rating} />
-              </div>
-            ) : (
-              ""
-            )}
             <div className="product-price">
               {discountedPrice !== null ? (
                 <Fragment>
-                  {console.log(parseInt((currency.currencySymbol + finalDiscountedPrice).replace("$", "")).toLocaleString("en-US") + " VND")}
                   <span>{parseInt((currency.currencySymbol + finalDiscountedPrice).replace("$", "")).toLocaleString("en-US") + " VND"}</span>{" "}
                   <span className="old">
                     {parseInt((currency.currencySymbol + finalProductPrice).replace("$", "")).toLocaleString("en-US") + " VND"}
@@ -154,6 +144,13 @@ const ProductGridListSingle = ({
                 </Fragment>
               ) : (
                 <span>{parseInt((currency.currencySymbol + finalProductPrice).replace("$", "")).toLocaleString("en-US") + " VND"} </span>
+              )}
+            </div>
+            <div className="product-rating">
+              {product.rating && product.rating > 0 ? (
+                <Rating ratingValue={product.rating} />
+              ) : (
+                <Rating ratingValue={product.rating} />
               )}
             </div>
           </div>
@@ -201,6 +198,20 @@ const ProductGridListSingle = ({
                     {product.name}
                   </Link>
                 </h3>
+                {product.rating && product.rating > 0 ? (
+                  <div className="rating-review">
+                    <div className="product-list-rating">
+                      <Rating ratingValue={product.rating} />
+                    </div>
+                  </div>
+                ) : (
+                  <Rating ratingValue={product.rating} />
+                )}
+                {product.shortDescription ? (
+                  <p>{product.shortDescription}</p>
+                ) : (
+                  ""
+                )}
                 <div className="product-list-price">
                   {discountedPrice !== null ? (
                     <Fragment>
@@ -215,21 +226,6 @@ const ProductGridListSingle = ({
                     <span>{parseInt((currency.currencySymbol + finalProductPrice).replace("$", "")).toLocaleString("en-US") + " VND"} </span>
                   )}
                 </div>
-                {product.rating && product.rating > 0 ? (
-                  <div className="rating-review">
-                    <div className="product-list-rating">
-                      <Rating ratingValue={product.rating} />
-                    </div>
-                  </div>
-                ) : (
-                  ""
-                )}
-                {product.shortDescription ? (
-                  <p>{product.shortDescription}</p>
-                ) : (
-                  ""
-                )}
-
                 <div className="shop-list-actions d-flex align-items-center">
                   <div className="shop-list-btn btn-hover">
                     {product.affiliateLink ? (
@@ -276,7 +272,6 @@ const ProductGridListSingle = ({
                       </button>
                     )}
                   </div>
-
                   <div className="shop-list-wishlist ml-10">
                     <button
                       className={wishlistItem !== undefined ? "active" : ""}

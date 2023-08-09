@@ -30,14 +30,14 @@ const BlogStandard = ({ location }) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Poly Food | Bài viết</title>
+        <title>Poly Food | Tin tức</title>
         <meta name="description" content="Blog of PolyFood." />
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>
         Trang chủ
       </BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
-        Blog
+        Tin tức
       </BreadcrumbsItem>
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}

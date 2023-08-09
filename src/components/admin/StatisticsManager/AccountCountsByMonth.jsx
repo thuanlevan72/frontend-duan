@@ -43,9 +43,8 @@ const AccountCountsByMonth = () => {
         };
       });
       setData(outputArray);
-      // console.log(outputArray);
     } catch (error) {
-      //   SetLoading(false);
+      console.log(error);
     }
   };
   const config = {
@@ -54,7 +53,6 @@ const AccountCountsByMonth = () => {
     xField: "Date",
     yField: "scales",
     xAxis: {
-      // type: 'timeCat',
       tickCount: 5,
     },
   };

@@ -16,14 +16,14 @@ const About = ({ location }) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Poly Food | About us</title>
+        <title>Poly Food | Giói thiệu</title>
         <meta name="description" content="About page of PolyFood." />
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>
         Trang chủ
       </BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
-        About us
+        Giới thiệu
       </BreadcrumbsItem>
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}

@@ -35,7 +35,7 @@ const Contact = ({ location }) => {
     ) {
       messageApi.open({
         type: "error",
-        content: "có trường chưa được nhập đầy đủ thông tin",
+        content: "Có trường chưa được nhập đầy đủ thông tin",
       });
       return;
     }
@@ -45,7 +45,7 @@ const Contact = ({ location }) => {
       messageApi.open({
         type: "success",
         content:
-          "cảm ơn bạn đã liên hệ với chúng tôi chúng tôi sẽ trả lời phản hồi của bạn bằng mail trong thời gian nhanh nhất.",
+          "Cảm ơn bạn đã liên hệ với chúng tôi chúng tôi sẽ trả lời phản hồi của bạn bằng mail trong thời gian nhanh nhất.",
       });
       setDataContact({
         username: "",
@@ -58,7 +58,7 @@ const Contact = ({ location }) => {
     } catch (error) {
       messageApi.open({
         type: "error",
-        content: "gửi liên hệ thất bại",
+        content: "Gửi liên hệ thất bại",
       });
       setLoading(false);
       // Xử lý lỗi tại đây (ví dụ: hiển thị thông báo lỗi)
@@ -75,7 +75,7 @@ const Contact = ({ location }) => {
         Trang chủ
       </BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
-        Contact
+        Liên hệ
       </BreadcrumbsItem>
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
@@ -104,7 +104,7 @@ const Contact = ({ location }) => {
                     <div className="contact-info-dec">
                       <p>
                         <a href="mailto:polyfood@email.com">
-                          polyfood@email.com
+                          polyfood@store.com
                         </a>
                       </p>
                       <p>
@@ -122,7 +122,7 @@ const Contact = ({ location }) => {
                     </div>
                   </div>
                   <div className="contact-social text-center">
-                    <h3>Follow Us</h3>
+                    <h3>Theo dõi chúng tôi</h3>
                     <ul>
                       <li>
                         <a href="//facebook.com">
@@ -156,14 +156,14 @@ const Contact = ({ location }) => {
               <div className="col-lg-8 col-md-7">
                 <div className="contact-form">
                   <div className="contact-title mb-30">
-                    <h2>Get In Touch</h2>
+                    <h2>Liên hệ</h2>
                   </div>
                   <form className="contact-form-style">
                     <div className="row">
                       <div className="col-lg-6">
                         <input
                           name="username"
-                          placeholder="Name*"
+                          placeholder="Họ & Tên*"
                           type="text"
                           onChange={changeInputData}
                           value={dataContact.username}
@@ -183,7 +183,7 @@ const Contact = ({ location }) => {
                       <div className="col-lg-12">
                         <input
                           name="phone"
-                          placeholder="Phone*"
+                          placeholder="Số điện thoại*"
                           type="text"
                           onChange={changeInputData}
                           value={dataContact.phone}
@@ -194,7 +194,7 @@ const Contact = ({ location }) => {
                       <div className="col-lg-12">
                         <textarea
                           name="subject"
-                          placeholder="Subject*"
+                          placeholder="Nội dung*"
                           value={dataContact.subject}
                           onChange={changeInputData}
                           required
@@ -203,7 +203,7 @@ const Contact = ({ location }) => {
                           className="submit"
                           type="submit"
                           onClick={handlerSubmit}>
-                          SEND
+                          Gửi
                         </button>
                       </div>
                     </div>

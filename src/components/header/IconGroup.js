@@ -45,7 +45,6 @@ const IconGroup = ({
                 type: "error",
                 content: "mã hóa đơn không tồn tại",
             });
-            console.log(error.data);
         }
     };
     const handleLogout = () => {
@@ -87,9 +86,8 @@ const IconGroup = ({
     }
     return (
         <div
-            className={`header-right-wrap ${
-                iconWhiteClass ? iconWhiteClass : ""
-            }`}
+            className={`header-right-wrap ${iconWhiteClass ? iconWhiteClass : ""
+                }`}
         >
             <div className="same-style header-search d-none d-lg-block">
                 <button
@@ -151,6 +149,14 @@ const IconGroup = ({
                                     to={process.env.PUBLIC_URL + "/my-account"}
                                 >
                                     Tài Khoản của tôi
+                                </Link>
+                                <Link
+                                    to={
+                                        process.env.PUBLIC_URL +
+                                        "/order-history"
+                                    }
+                                >
+                                    Lịch sử đơn hàng
                                 </Link>
                                 <Link
                                     to={process.env.PUBLIC_URL + "/"}

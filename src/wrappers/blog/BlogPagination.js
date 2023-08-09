@@ -25,7 +25,6 @@ const Pagination = ({ SetParams, data }) => {
         {Array.from({ length: totalPages }, (_, index) => index + 1).map(
           (pageNumber) => (
             <li key={pageNumber}>
-              {console.log(pageNumber, " ", page)}
               <button
                 className={pageNumber === page ? "active" : ""}
                 style={{

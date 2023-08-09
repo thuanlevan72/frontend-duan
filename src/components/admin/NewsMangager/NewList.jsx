@@ -120,7 +120,7 @@ const NewList = () => {
             render: (text, record) => (
                 <Space size="middle">
                     <NavLink to={`/admin/news-edit/${record.id}`}>
-                        <BiEdit className="text-info"/>
+                        <BiEdit className="text-info" />
                     </NavLink>
                     <Text type="danger">
                         <ImBin />
@@ -160,7 +160,7 @@ const NewList = () => {
                     total={data.totalItems}
                     onChange={handlePaginationChange}
                     showSizeChanger
-                    showTotal={(total) => `Total ${total} items`}
+                    showTotal={(total) => `Tổng ${total} sản phẩm`}
                 />
             </div>
         </>

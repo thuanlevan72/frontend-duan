@@ -12,7 +12,6 @@ import ProductApi from "../../api/product/ProductApi";
 
 const Product = ({ location, product }) => {
   const { pathname } = location;
-  console.log(product.id);
   useEffect(async () => {
     try {
       let productView = [];
@@ -27,7 +26,7 @@ const Product = ({ location, product }) => {
         id: Number(product.id),
       });
       localStorage.setItem("productView", JSON.stringify(productView));
-    } catch (error) {}
+    } catch (error) { }
   }, [product.id]);
   return (
     <Fragment>

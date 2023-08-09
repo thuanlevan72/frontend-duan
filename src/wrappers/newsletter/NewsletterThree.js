@@ -11,20 +11,18 @@ const NewsletterThree = ({
 }) => {
   return (
     <div
-      className={`subscribe-area-3 ${bgColorClass ? bgColorClass : ""} ${
-        spaceTopClass ? spaceTopClass : ""
-      } ${spaceBottomClass ? spaceBottomClass : ""} `}
+      className={`subscribe-area-3 ${bgColorClass ? bgColorClass : ""} ${spaceTopClass ? spaceTopClass : ""
+        } ${spaceBottomClass ? spaceBottomClass : ""} `}
     >
       <div className="container-fluid">
         <div className="row">
           <div className="col-xl-5 col-lg-7 col-md-10 ml-auto mr-auto">
             <div
-              className={`subscribe-style-3 text-center ${
-                subscribeColorClass ? subscribeColorClass : ""
-              }`}
+              className={`subscribe-style-3 text-center ${subscribeColorClass ? subscribeColorClass : ""
+                }`}
             >
-              <h2>Join With Us! </h2>
-              <p>Subscribe to our newsletter to receive news on update</p>
+              <h2>Đăng ký</h2>
+              <p>Đăng ký để nhận những thông báo mới nhất của chúng tôi</p>
               {/* subscription form */}
               <SubscribeEmailTwo
                 mailchimpUrl="//devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef"

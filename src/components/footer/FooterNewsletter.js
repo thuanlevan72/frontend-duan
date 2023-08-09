@@ -11,15 +11,14 @@ const FooterNewsletter = ({
 }) => {
   return (
     <div
-      className={`footer-widget ${spaceBottomClass ? spaceBottomClass : ""} ${
-        sideMenu ? "ml-ntv5" : spaceLeftClass ? spaceLeftClass : ""
-      } ${widgetColorClass ? widgetColorClass : ""}`}
+      className={`footer-widget ${spaceBottomClass ? spaceBottomClass : ""} ${sideMenu ? "ml-ntv5" : spaceLeftClass ? spaceLeftClass : ""
+        } ${widgetColorClass ? widgetColorClass : ""}`}
     >
       <div className="footer-title">
-        <h3>SUBSCRIBE</h3>
+        <h3>Đăng ký</h3>
       </div>
       <div className={`subscribe-style ${colorClass ? colorClass : ""}`}>
-        <p>Get E-mail updates about our latest shop and special offers.</p>
+        <p>Nhận thông báo mới nhất qua email về những tin tức của chúng tôi</p>
         {/* subscribe email */}
         <SubscribeEmail mailchimpUrl="//devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef" />
       </div>

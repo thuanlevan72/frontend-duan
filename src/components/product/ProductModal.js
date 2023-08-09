@@ -206,34 +206,34 @@ function ProductModal(props) {
                           product.variation.map(single => {
                             return single.color === selectedProductColor
                               ? single.size.map((singleSize, key) => {
-                                  return (
-                                    <label
-                                      className={`pro-details-size-content--single`}
-                                      key={key}
-                                    >
-                                      <input
-                                        type="radio"
-                                        value={singleSize.name}
-                                        checked={
-                                          singleSize.name ===
+                                return (
+                                  <label
+                                    className={`pro-details-size-content--single`}
+                                    key={key}
+                                  >
+                                    <input
+                                      type="radio"
+                                      value={singleSize.name}
+                                      checked={
+                                        singleSize.name ===
                                           selectedProductSize
-                                            ? "checked"
-                                            : ""
-                                        }
-                                        onChange={() => {
-                                          setSelectedProductSize(
-                                            singleSize.name
-                                          );
-                                          setProductStock(singleSize.stock);
-                                          setQuantityCount(1);
-                                        }}
-                                      />
-                                      <span className="size-name">
-                                        {singleSize.name}
-                                      </span>
-                                    </label>
-                                  );
-                                })
+                                          ? "checked"
+                                          : ""
+                                      }
+                                      onChange={() => {
+                                        setSelectedProductSize(
+                                          singleSize.name
+                                        );
+                                        setProductStock(singleSize.stock);
+                                        setQuantityCount(1);
+                                      }}
+                                    />
+                                    <span className="size-name">
+                                      {singleSize.name}
+                                    </span>
+                                  </label>
+                                );
+                              })
                               : "";
                           })}
                       </div>
@@ -301,7 +301,7 @@ function ProductModal(props) {
                           disabled={productCartQty >= productStock}
                         >
                           {" "}
-                          Add To Cart{" "}
+                          Thêm{" "}
                         </button>
                       ) : (
                         <button disabled>Out of Stock</button>
@@ -313,8 +313,8 @@ function ProductModal(props) {
                         disabled={wishlistItem !== undefined}
                         title={
                           wishlistItem !== undefined
-                            ? "Added to wishlist"
-                            : "Add to wishlist"
+                            ? "Đã thêm"
+                            : "Thêm"
                         }
                         onClick={() => addToWishlist(product, addToast)}
                       >
@@ -327,8 +327,8 @@ function ProductModal(props) {
                         disabled={compareItem !== undefined}
                         title={
                           compareItem !== undefined
-                            ? "Added to compare"
-                            : "Add to compare"
+                            ? "Đã thêm"
+                            : "Thêm"
                         }
                         onClick={() => addToCompare(product, addToast)}
                       >

@@ -63,11 +63,11 @@ const UsersList = () => {
   const handlePaginationChange = (page, pageSize) => {
     setParam(
       (prev) =>
-        (prev = {
-          ...param,
-          page: page,
-          pageSize: pageSize,
-        })
+      (prev = {
+        ...param,
+        page: page,
+        pageSize: pageSize,
+      })
     );
   };
   const [param, setParam] = useState({
@@ -125,15 +125,15 @@ const UsersList = () => {
     onFilter: (value, record) =>
       record[dataIndex]
         ? record[dataIndex]
-            .toString()
-            .toLowerCase()
-            .includes(value.toLowerCase())
+          .toString()
+          .toLowerCase()
+          .includes(value.toLowerCase())
         : "",
     render: (text) => {
       return dataIndex === "userName" ? (
         <span>
           {searchText &&
-          text.toLowerCase().includes(searchText.toLowerCase()) ? (
+            text.toLowerCase().includes(searchText.toLowerCase()) ? (
             <span>
               {text
                 .split(new RegExp(`(${searchText})`, "gi"))
@@ -164,7 +164,6 @@ const UsersList = () => {
         setData(data);
         setLoading(false);
       } catch (error) {
-        console.log(error);
         setLoading(false);
       }
     };
@@ -288,10 +287,10 @@ const UsersList = () => {
       align: "center",
       render: (accountId) => (
         <Space size="middle">
-            <NavLink to={`/admin/account-edit/${accountId}`}>
-              <BiEdit className="text-info"/>
-            </NavLink>
-            <ImEye onClick={() => showModal(accountId)}/>
+          <NavLink to={`/admin/account-edit/${accountId}`}>
+            <BiEdit className="text-info" />
+          </NavLink>
+          <ImEye onClick={() => showModal(accountId)} />
         </Space>
       ),
     },
@@ -366,7 +365,7 @@ const UsersList = () => {
           total={data.totalItems}
           onChange={handlePaginationChange}
           showSizeChanger
-          showTotal={(total) => `Total ${total} items`}
+          showTotal={(total) => `Tổng ${total} sản phẩm`}
         />
       </div>
     </>

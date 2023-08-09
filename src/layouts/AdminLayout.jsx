@@ -62,7 +62,6 @@ const AdminLayout = () => {
         alert("bạn không có quyền để vào dây chơi");
         history.push("/login-register");
       }
-      console.log(role); // Kết quả: "admin"
     } else {
       alert("vui lòng đăng nhập để có thể vào đây chơi");
       history.push("/login-register");

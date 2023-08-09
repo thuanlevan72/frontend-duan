@@ -1,27 +1,7 @@
-import React, { Fragment, useEffect } from "react";
-import { useState } from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import LoadingSpin from "../../components/loading/LoadingSpin";
-import NewsApi from "../../api/news/NewsApi";
 import { format } from "date-fns";
 const BlogPosts = ({ data }) => {
-  // const [data, setData] = useState([]);
-  // const [loading, setLoading] = useState(false);
-  // const [params, setParams] = useState({
-  //   page: 1,
-  //   pageSize: 10,
-  // });
-  // useEffect(async () => {
-  //   try {
-  //     setLoading(true);
-  //     const res = await NewsApi.GetNews(params);
-  //     setData(res);
-  //     setLoading(false);
-  //   } catch (error) {
-  //     setLoading(false);
-  //   }
-  // }, []);
-  console.log(data);
   return (
     <Fragment>
       {data &&
@@ -36,7 +16,7 @@ const BlogPosts = ({ data }) => {
                       "/blog-details-standard/" +
                       item.newsId
                     }>
-                    <img src={item.image} alt="" height={350} width={350} />
+                    <img src={item.image} alt="" width={"auto"} height={440} />
                   </Link>
                 </div>
                 <div className="blog-content-2">
@@ -81,11 +61,11 @@ const BlogPosts = ({ data }) => {
                           "/blog-details-standard/" +
                           item.newsId
                         }>
-                        read more
+                        Đọc ngay
                       </Link>
                     </div>
                     <div className="blog-share">
-                      <span>share :</span>
+                      <span>Chia sẻ :</span>
                       <div className="share-social">
                         <ul>
                           <li>

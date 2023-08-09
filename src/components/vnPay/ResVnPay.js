@@ -36,11 +36,9 @@ const ResVnPay = ({ location, confirmOrders }) => {
         const storedData = JSON.parse(localStorage.getItem("dataOrderOnline"));
         localStorage.removeItem("dataOrderOnline");
         setLoading(true);
-        console.log(storedData);
         const response = await OrderApi.CreateOrder(storedData);
         setLoading(false);
       } catch (error) {
-        console.log(error);
         setLoading(false);
       }
       return;

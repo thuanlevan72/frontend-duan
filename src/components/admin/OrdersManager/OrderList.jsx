@@ -59,11 +59,11 @@ const OrderList = () => {
   const handlePaginationChange = (page, pageSize) => {
     setParam(
       (prev) =>
-        (prev = {
-          ...param,
-          page: page,
-          pageSize: pageSize,
-        })
+      (prev = {
+        ...param,
+        page: page,
+        pageSize: pageSize,
+      })
     );
   };
   const [param, setParam] = useState({
@@ -109,7 +109,7 @@ const OrderList = () => {
     try {
       const data = await OrderApi.getOrderStatus();
       setOptions(data);
-    } catch (error) {}
+    } catch (error) { }
   };
   const handleChangeStatus = (id) => async (orderId, newStatus) => {
     try {
@@ -343,7 +343,7 @@ const OrderList = () => {
           total={data.totalItems}
           onChange={handlePaginationChange}
           showSizeChanger
-          showTotal={(total) => `Total ${total} items`}
+          showTotal={(total) => `Tổng ${total} sản phẩm`}
         />
       </div>
     </>

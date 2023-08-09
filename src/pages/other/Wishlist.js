@@ -30,7 +30,7 @@ const Wishlist = ({
   return (
     <Fragment>
       <MetaTags>
-        <title>Poly Food | Wishlist</title>
+        <title>Poly Food | Yêu thích</title>
         <meta name="description" content="Wishlist page of PolyFood." />
       </MetaTags>
 
@@ -38,7 +38,7 @@ const Wishlist = ({
         Trang chủ
       </BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
-        Wishlist
+        Yêu thích
       </BreadcrumbsItem>
 
       <LayoutOne headerTop="visible">
@@ -48,18 +48,18 @@ const Wishlist = ({
           <div className="container">
             {wishlistItems && wishlistItems.length >= 1 ? (
               <Fragment>
-                <h3 className="cart-page-title">Your wishlist items</h3>
+                <h3 className="cart-page-title">Sản phẩm yêu thích của bạn</h3>
                 <div className="row">
                   <div className="col-12">
                     <div className="table-content table-responsive cart-table-content">
                       <table>
                         <thead>
                           <tr>
-                            <th>Image</th>
-                            <th>Product Name</th>
-                            <th>Unit Price</th>
-                            <th>Add To Cart</th>
-                            <th>action</th>
+                            <th>Hình ảnh</th>
+                            <th>Tên</th>
+                            <th>Giá</th>
+                            <th>Mua hàng</th>
+                            <th>Hành động</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -151,7 +151,7 @@ const Wishlist = ({
                                       }
                                       className={
                                         cartItem !== undefined &&
-                                        cartItem.quantity > 0
+                                          cartItem.quantity > 0
                                           ? "active"
                                           : ""
                                       }
@@ -161,13 +161,13 @@ const Wishlist = ({
                                       }
                                       title={
                                         wishlistItem !== undefined
-                                          ? "Added to cart"
-                                          : "Add to cart"
+                                          ? "Đã thêm"
+                                          : "Thêm"
                                       }>
                                       {cartItem !== undefined &&
-                                      cartItem.quantity > 0
-                                        ? "Added"
-                                        : "Add to cart"}
+                                        cartItem.quantity > 0
+                                        ? "Đã thêm"
+                                        : "Thêm"}
                                     </button>
                                   ) : (
                                     <button disabled className="active">
@@ -199,12 +199,12 @@ const Wishlist = ({
                       <div className="cart-shiping-update">
                         <Link
                           to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
-                          Continue Shopping
+                          Tiếp tục mua hàng
                         </Link>
                       </div>
                       <div className="cart-clear">
                         <button onClick={() => deleteAllFromWishlist(addToast)}>
-                          Clear Wishlist
+                          Xóa hết
                         </button>
                       </div>
                     </div>
@@ -219,9 +219,9 @@ const Wishlist = ({
                       <i className="pe-7s-like"></i>
                     </div>
                     <div className="item-empty-area__text">
-                      No items found in wishlist <br />{" "}
+                      Không có sản phẩm yêu thích<br />{" "}
                       <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
-                        Add Items
+                        Thêm sản phẩm yêu thích
                       </Link>
                     </div>
                   </div>

@@ -31,16 +31,14 @@ const ProductGridSingleEight = ({
   return (
     <Fragment>
       <div
-        className={`col-xl-4 col-md-6 ${
-          sliderClassName ? sliderClassName : ""
-        }`}
+        className={`col-xl-4 col-md-6 ${sliderClassName ? sliderClassName : ""
+          }`}
       >
         <div
-          className={`product-wrap-8 ${
-            spaceBottomClass ? spaceBottomClass : ""
-          } ${colorClass ? colorClass : ""}`}
+          className={`product-wrap-8 ${spaceBottomClass ? spaceBottomClass : ""
+            } ${colorClass ? colorClass : ""}`}
         >
-          <div className="product-img">
+          <div className="product-img" style={{ width: "auto", height: "200px", objectFit: "contain", display: "flex", alignItems: "center" }}>
             <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
               <img
                 className="default-img img-fluid"
@@ -62,12 +60,14 @@ const ProductGridSingleEight = ({
             )}
           </div>
           <div className="product-content">
-            <h3>
-              <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
+            <h3 style={{ fontSize: "20px", fontWeight: "bold", marginBottom: "10px" }}>
+              <Link
+                to={process.env.PUBLIC_URL + "/product/" + product.id}
+                style={{ textDecoration: "none", color: "#333", borderBottom: "2px solid #333" }}
+              >
                 {product.name}
               </Link>
             </h3>
-
             <div className="product-price">
               {discountedPrice !== null ? (
                 <Fragment>
@@ -80,15 +80,13 @@ const ProductGridSingleEight = ({
                 <span>{currency.currencySymbol + finalProductPrice} </span>
               )}
             </div>
-
-            {product.rating && product.rating > 0 ? (
-              <div className="product-rating">
+            <div className="product-rating">
+              {product.rating && product.rating > 0 ? (
                 <Rating ratingValue={product.rating} />
-              </div>
-            ) : (
-              ""
-            )}
-
+              ) : (
+                <Rating ratingValue={product.rating} />
+              )}
+            </div>
             <div className="product-action">
               <div className="pro-same-action pro-wishlist">
                 <button
