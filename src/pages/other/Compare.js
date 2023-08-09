@@ -26,14 +26,14 @@ const Compare = ({
   return (
     <Fragment>
       <MetaTags>
-        <title>Poly Food | Compare</title>
+        <title>Poly Food | So sánh</title>
         <meta name="description" content="Compare page of PolyFood." />
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>
         Trang chủ
       </BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
-        Compare
+        So sánh
       </BreadcrumbsItem>
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
@@ -48,7 +48,7 @@ const Compare = ({
                       <table className="table table-bordered mb-0">
                         <tbody>
                           <tr>
-                            <th className="title-column">Product Info</th>
+                            <th className="title-column">Thông tin sản phẩm</th>
                             {compareItems.map((compareItem, key) => {
                               const cartItem = cartItems.filter(
                                 (item) => item.id === compareItem.id
@@ -112,7 +112,7 @@ const Compare = ({
                                         }
                                         className={
                                           cartItem !== undefined &&
-                                          cartItem.quantity > 0
+                                            cartItem.quantity > 0
                                             ? "active"
                                             : ""
                                         }
@@ -126,9 +126,9 @@ const Compare = ({
                                             : "Add to cart"
                                         }>
                                         {cartItem !== undefined &&
-                                        cartItem.quantity > 0
-                                          ? "Added"
-                                          : "Add to cart"}
+                                          cartItem.quantity > 0
+                                          ? "Đã thêm"
+                                          : "Thêm"}
                                       </button>
                                     ) : (
                                       <button disabled className="active">
@@ -141,7 +141,7 @@ const Compare = ({
                             })}
                           </tr>
                           <tr>
-                            <th className="title-column">Price</th>
+                            <th className="title-column">Giá</th>
                             {compareItems.map((compareItem, key) => {
                               const discountedPrice = getDiscountPrice(
                                 compareItem.price,
@@ -178,7 +178,7 @@ const Compare = ({
                           </tr>
 
                           <tr>
-                            <th className="title-column">Description</th>
+                            <th className="title-column">Mô tả sản phẩm</th>
                             {compareItems.map((compareItem, key) => {
                               return (
                                 <td className="product-desc" key={key}>
@@ -193,7 +193,7 @@ const Compare = ({
                           </tr>
 
                           <tr>
-                            <th className="title-column">Rating</th>
+                            <th className="title-column">Đánh giá sao</th>
                             {compareItems.map((compareItem, key) => {
                               return (
                                 <td className="product-rating" key={key}>
@@ -216,9 +216,9 @@ const Compare = ({
                       <i className="pe-7s-shuffle"></i>
                     </div>
                     <div className="item-empty-area__text">
-                      No items found in compare <br />{" "}
+                      Không có sản phẩm so sánh<br />{" "}
                       <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
-                        Add Items
+                        Thêm sản phẩm
                       </Link>
                     </div>
                   </div>

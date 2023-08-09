@@ -103,7 +103,7 @@ const ProductDescriptionInfo = ({
                                             name="product-color"
                                             checked={
                                                 single.color ===
-                                                selectedProductColor
+                                                    selectedProductColor
                                                     ? "checked"
                                                     : ""
                                             }
@@ -133,40 +133,40 @@ const ProductDescriptionInfo = ({
                                 product.variation.map((single) => {
                                     return single.color === selectedProductColor
                                         ? single.size.map((singleSize, key) => {
-                                              return (
-                                                  <label
-                                                      className={`pro-details-size-content--single`}
-                                                      key={key}
-                                                  >
-                                                      <input
-                                                          type="radio"
-                                                          value={
-                                                              singleSize.name
-                                                          }
-                                                          checked={
-                                                              singleSize.name ===
-                                                              selectedProductSize
-                                                                  ? "checked"
-                                                                  : ""
-                                                          }
-                                                          onChange={() => {
-                                                              setSelectedProductSize(
-                                                                  singleSize.name
-                                                              );
-                                                              setProductStock(
-                                                                  singleSize.stock
-                                                              );
-                                                              setQuantityCount(
-                                                                  1
-                                                              );
-                                                          }}
-                                                      />
-                                                      <span className="size-name">
-                                                          {singleSize.name}
-                                                      </span>
-                                                  </label>
-                                              );
-                                          })
+                                            return (
+                                                <label
+                                                    className={`pro-details-size-content--single`}
+                                                    key={key}
+                                                >
+                                                    <input
+                                                        type="radio"
+                                                        value={
+                                                            singleSize.name
+                                                        }
+                                                        checked={
+                                                            singleSize.name ===
+                                                                selectedProductSize
+                                                                ? "checked"
+                                                                : ""
+                                                        }
+                                                        onChange={() => {
+                                                            setSelectedProductSize(
+                                                                singleSize.name
+                                                            );
+                                                            setProductStock(
+                                                                singleSize.stock
+                                                            );
+                                                            setQuantityCount(
+                                                                1
+                                                            );
+                                                        }}
+                                                    />
+                                                    <span className="size-name">
+                                                        {singleSize.name}
+                                                    </span>
+                                                </label>
+                                            );
+                                        })
                                         : "";
                                 })}
                         </div>
@@ -234,7 +234,7 @@ const ProductDescriptionInfo = ({
                                 }
                                 disabled={productCartQty >= productStock}
                             >
-                                Thêm vào giỏ hàng
+                                Thêm
                             </button>
                         ) : (
                             <button disabled>Out of Stock</button>
@@ -248,8 +248,8 @@ const ProductDescriptionInfo = ({
                             disabled={wishlistItem !== undefined}
                             title={
                                 wishlistItem !== undefined
-                                    ? "Đã thêm vào mục ưa thích"
-                                    : "Thêm vào mục ưa thích"
+                                    ? "Đã thêm vào mục yêu thích"
+                                    : "Thêm vào mục yêu thích"
                             }
                             onClick={() => addToWishlist(product, addToast)}
                         >
@@ -264,7 +264,7 @@ const ProductDescriptionInfo = ({
                             disabled={compareItem !== undefined}
                             title={
                                 compareItem !== undefined
-                                    ? "Đã thêm vaò mục so sánh"
+                                    ? "Đã thêm vào mục so sánh"
                                     : "Thêm vào mục so sánh"
                             }
                             onClick={() => addToCompare(product, addToast)}
@@ -299,7 +299,7 @@ const ProductDescriptionInfo = ({
             )}
             {product.tag ? (
                 <div className="pro-details-meta">
-                    <span>Tags :</span>
+                    <span>Nhãn :</span>
                     <ul>
                         {product.tag.map((single, key) => {
                             return (
@@ -323,7 +323,7 @@ const ProductDescriptionInfo = ({
                 ""
             )}
 
-            <div className="pro-details-social">
+            {/* <div className="pro-details-social">
                 <ul>
                     <li>
                         <a href="//facebook.com">
@@ -351,7 +351,7 @@ const ProductDescriptionInfo = ({
                         </a>
                     </li>
                 </ul>
-            </div>
+            </div> */}
         </div>
     );
 };

@@ -47,7 +47,6 @@ const ContactsList = () => {
       mess: values.username,
       email: dataCurrent[0]?.email,
     };
-    // console.log(dataMess);
     try {
       setLoading(true);
       const res = await ContactApi.ReplyContact(dataMess);
@@ -55,15 +54,12 @@ const ContactsList = () => {
       setIsModalOpen(false);
       form.resetFields();
     } catch (error) {
-      console.log(error);
       setLoading(false);
       setIsModalOpen(false);
     }
   };
   const showModal = (id) => {
-    console.log(id);
     const dataContact = data?.data?.find((x) => x.contactId === id);
-    console.log(dataContact);
     if (dataContact) {
       setDataCurrent([
         {
@@ -75,19 +71,6 @@ const ContactsList = () => {
         },
       ]);
     }
-    // console.log(user);
-    // if (user) {
-    //   setDataCurrent([
-    //     {
-    //       userId: 1,
-    //       avartar: dataOrderCurrent.avartar,
-    //       name: user.userName,
-    //       email: user.email,
-    //       phone: user.phone,
-    //       address: user.address,
-    //     },
-    //   ]);
-    // }
     setIsModalOpen(true);
   };
   const handleOk = () => {
@@ -99,11 +82,11 @@ const ContactsList = () => {
   const handlePaginationChange = (page, pageSize) => {
     setParam(
       (prev) =>
-        (prev = {
-          ...param,
-          page: page,
-          pageSize: pageSize,
-        })
+      (prev = {
+        ...param,
+        page: page,
+        pageSize: pageSize,
+      })
     );
   };
   const [param, setParam] = useState({
@@ -161,15 +144,15 @@ const ContactsList = () => {
     onFilter: (value, record) =>
       record[dataIndex]
         ? record[dataIndex]
-            .toString()
-            .toLowerCase()
-            .includes(value.toLowerCase())
+          .toString()
+          .toLowerCase()
+          .includes(value.toLowerCase())
         : "",
     render: (text) => {
       return dataIndex === "userName" ? (
         <span>
           {searchText &&
-          text.toLowerCase().includes(searchText.toLowerCase()) ? (
+            text.toLowerCase().includes(searchText.toLowerCase()) ? (
             <span>
               {text
                 .split(new RegExp(`(${searchText})`, "gi"))
@@ -200,7 +183,6 @@ const ContactsList = () => {
         setData(data);
         setLoading(false);
       } catch (error) {
-        console.log(error);
         setLoading(false);
       }
     };
@@ -214,7 +196,6 @@ const ContactsList = () => {
       email: item.email,
       createdAt: item.createdAt,
       answered: item.answered,
-      // status: item.status,
     };
   });
   const columns = [
@@ -353,7 +334,7 @@ const ContactsList = () => {
           total={data.totalItems}
           onChange={handlePaginationChange}
           showSizeChanger
-          showTotal={(total) => `Total ${total} items`}
+          showTotal={(total) => `Tổng ${total} sản phẩm`}
         />
       </div>
     </>

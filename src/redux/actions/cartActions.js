@@ -23,13 +23,13 @@ export const addToCart = (
         selectedProductColor: selectedProductColor
           ? selectedProductColor
           : item.selectedProductColor
-          ? item.selectedProductColor
-          : null,
+            ? item.selectedProductColor
+            : null,
         selectedProductSize: selectedProductSize
           ? selectedProductSize
           : item.selectedProductSize
-          ? item.selectedProductSize
-          : null
+            ? item.selectedProductSize
+            : null
       }
     });
   };
@@ -38,7 +38,7 @@ export const addToCart = (
 export const decreaseQuantity = (item, addToast) => {
   return dispatch => {
     if (addToast) {
-      addToast("đã xóa 1 sản phẩm khỏi giỏ hàng", {
+      addToast("Đã xóa khỏi giỏ hàng", {
         appearance: "warning",
         autoDismiss: true
       });

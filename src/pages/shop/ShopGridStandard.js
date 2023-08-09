@@ -60,7 +60,6 @@ const ShopGridStandard = ({ location, products }) => {
     filterSortValue,
     filterSortName,
   ]);
-  console.log(products);
   return (
     <Fragment>
       <MetaTags>

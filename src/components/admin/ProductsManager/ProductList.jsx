@@ -33,11 +33,11 @@ const ProductList = () => {
     const handlePaginationChange = (page, pageSize) => {
         setParam(
             (prev) =>
-                (prev = {
-                    ...param,
-                    page: page,
-                    pageSize: pageSize,
-                })
+            (prev = {
+                ...param,
+                page: page,
+                pageSize: pageSize,
+            })
         );
     };
     const [param, setParam] = useState({
@@ -99,21 +99,21 @@ const ProductList = () => {
         onFilter: (value, record) =>
             record[dataIndex]
                 ? record[dataIndex]
-                      .toString()
-                      .toLowerCase()
-                      .includes(value.toLowerCase())
+                    .toString()
+                    .toLowerCase()
+                    .includes(value.toLowerCase())
                 : "",
         render: (text) => {
             return dataIndex === "name" ? (
                 <span>
                     {searchText &&
-                    text.toLowerCase().includes(searchText.toLowerCase()) ? (
+                        text.toLowerCase().includes(searchText.toLowerCase()) ? (
                         <span>
                             {text
                                 .split(new RegExp(`(${searchText})`, "gi"))
                                 .map((fragment, i) =>
                                     fragment.toLowerCase() ===
-                                    searchText.toLowerCase() ? (
+                                        searchText.toLowerCase() ? (
                                         <span key={i} className="bg-warning">
                                             {fragment}
                                         </span>
@@ -251,9 +251,9 @@ const ProductList = () => {
             align: "center",
             render: (text, record) => (
                 <Space size="middle">
-                        <NavLink to={`/admin/products-edit/${record.id}`}>
-                            <BiEdit className="text-info"/>
-                        </NavLink>
+                    <NavLink to={`/admin/products-edit/${record.id}`}>
+                        <BiEdit className="text-info" />
+                    </NavLink>
                     <Popconfirm
                         title="Bạn có chắc chắn xóa?"
                         onConfirm={() => {
@@ -264,7 +264,7 @@ const ProductList = () => {
                         okText="Có"
                         cancelText="Hủy"
                     >
-                            <ImBin className="text-danger"/>
+                        <ImBin className="text-danger" />
                     </Popconfirm>
                 </Space>
             ),
@@ -301,7 +301,7 @@ const ProductList = () => {
                     total={data.totalItems}
                     onChange={handlePaginationChange}
                     showSizeChanger
-                    showTotal={(total) => `Total ${total} items`}
+                    showTotal={(total) => `Tổng ${total} sản phẩm`}
                 />
             </div>
         </>

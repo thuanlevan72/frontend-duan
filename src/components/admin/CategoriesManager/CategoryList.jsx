@@ -116,7 +116,7 @@ const CategoryList = () => {
             render: (text, record) => (
                 <Space size="middle">
                     <NavLink to={`/admin/categories-edit/${record.id}`}>
-                        <BiEdit className="text-info"/>
+                        <BiEdit className="text-info" />
                     </NavLink>
                     <Text type="danger">
                         <ImBin />
@@ -156,7 +156,7 @@ const CategoryList = () => {
                     total={data.totalItems}
                     onChange={handlePaginationChange}
                     showSizeChanger
-                    showTotal={(total) => `Total ${total} items`}
+                    showTotal={(total) => `Tổng ${total} sản phẩm`}
                 />
             </div>
         </>

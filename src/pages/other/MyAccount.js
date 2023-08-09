@@ -73,7 +73,6 @@ const MyAccount = ({ location }) => {
       });
       const data = dataPass;
       delete data.confirmPass;
-      console.log(data);
       const res = await UserApi.ChangePass(data);
       setLoading(false);
       setDataPass({
@@ -361,12 +360,12 @@ const MyAccount = ({ location }) => {
                               <div className="billing-btn">
                                 {(dataPass.confirmPass ||
                                   dataPass.password) && (
-                                  <button
-                                    type="click"
-                                    onClick={chnagePassSubmit}>
-                                    Lưu thay đổi
-                                  </button>
-                                )}
+                                    <button
+                                      type="click"
+                                      onClick={chnagePassSubmit}>
+                                      Lưu thay đổi
+                                    </button>
+                                  )}
                               </div>
                             </div>
                           </div>

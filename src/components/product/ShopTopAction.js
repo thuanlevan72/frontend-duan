@@ -21,19 +21,11 @@ const ShopTopAction = ({
           </select>
         </div>
         <p>
-          Tìm thấy {sortedProductCount} trên {productCount} sản phẩm
+          {sortedProductCount} / {productCount} sản phẩm
         </p>
       </div>
 
       <div className="shop-tab">
-        <button
-          onClick={e => {
-            getLayout("grid two-column");
-            setActiveLayout(e);
-          }}
-        >
-          <i className="fa fa-th-large" />
-        </button>
         <button
           onClick={e => {
             getLayout("grid three-column");
@@ -41,6 +33,14 @@ const ShopTopAction = ({
           }}
         >
           <i className="fa fa-th" />
+        </button>
+        <button
+          onClick={e => {
+            getLayout("grid two-column");
+            setActiveLayout(e);
+          }}
+        >
+          <i className="fa fa-th-large" />
         </button>
         <button
           onClick={e => {

@@ -31,7 +31,7 @@ const VideoPopup = ({ spaceBottomClass }) => {
               </p>
               <div className="link mb-30">
                 <Link to={process.env.PUBLIC_URL + "/about"}>
-                  More About Us
+                  Giới thiệu
                 </Link>
               </div>
               <ModalVideo

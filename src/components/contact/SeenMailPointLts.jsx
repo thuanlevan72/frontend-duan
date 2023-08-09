@@ -71,7 +71,6 @@ const SeenMailPointLts = ({ location }) => {
         content: "gửi mail bị lỗi",
       });
     }
-    console.log(values);
   };
 
   return (

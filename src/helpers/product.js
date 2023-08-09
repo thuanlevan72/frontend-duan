@@ -2,8 +2,8 @@
 export const getProducts = (products, category, type, limit) => {
   const finalProducts = category
     ? products.filter(
-        (product) => product.category.filter((single) => single === category)[0]
-      )
+      (product) => product.category.filter((single) => single === category)[0]
+    )
     : products;
 
   if (type && type === "new") {
@@ -105,12 +105,12 @@ export const getSortedProducts = (
       }
       if (sortValue === "priceHighToLow") {
         return sortProducts.sort((a, b) => {
-          return b.price - a.price;
+          return (b.price * (100 - b.discount)) / 100 - (a.price * (100 - a.discount)) / 100;
         });
       }
       if (sortValue === "priceLowToHigh") {
         return sortProducts.sort((a, b) => {
-          return a.price - b.price;
+          return (a.price * (100 - a.discount)) / 100 - (b.price * (100 - b.discount)) / 100;
         });
       }
     }

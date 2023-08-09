@@ -7,22 +7,21 @@ import Renderer from "../../components/countdown/Renderer";
 const CountDownOne = ({ spaceTopClass, spaceBottomClass, bgImg, dateTime }) => {
   return (
     <div
-      className={`funfact-area ${spaceTopClass ? spaceTopClass : ""} ${
-        spaceBottomClass ? spaceBottomClass : ""
-      }`}
+      className={`funfact-area ${spaceTopClass ? spaceTopClass : ""} ${spaceBottomClass ? spaceBottomClass : ""
+        }`}
       style={{ backgroundImage: `url(${process.env.PUBLIC_URL + bgImg})` }}
     >
       <div className="container">
         <div className="row">
           <div className="col-lg-6 ml-auto">
             <div className="funfact-content text-center">
-              <h2>Deal of the day</h2>
+              <h2>Giao dịch trong ngày</h2>
               <div className="timer">
                 <Countdown date={new Date(dateTime)} renderer={Renderer} />
               </div>
               <div className="funfact-btn btn-hover">
                 <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
-                  SHOP NOW
+                  Mua hàng ngay
                 </Link>
               </div>
             </div>

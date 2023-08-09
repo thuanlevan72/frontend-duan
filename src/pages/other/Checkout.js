@@ -91,7 +91,6 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
         history.push("/Complete");
       }, 1500);
     } catch (error) {
-      console.log(error.response);
       messageApi.open({
         type: "error",
         content: "thanh toán thất bại",
@@ -137,7 +136,6 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
       [e.target.name]: e.target.value,
     });
   };
-  console.log(userOrder);
   return (
     <Fragment>
       <MetaTags>
@@ -152,7 +150,6 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
       </BreadcrumbsItem>
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
-        {console.log(process.env.PUBLIC_URL)}
         <Breadcrumb />
         <div className="checkout-area pt-95 pb-100">
           <div className="container">
@@ -307,9 +304,9 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
 
                               discountedPrice != null
                                 ? (cartTotalPrice +=
-                                    finalDiscountedPrice * cartItem.quantity)
+                                  finalDiscountedPrice * cartItem.quantity)
                                 : (cartTotalPrice +=
-                                    finalProductPrice * cartItem.quantity);
+                                  finalProductPrice * cartItem.quantity);
                               return (
                                 <li key={key}>
                                   <span className="order-middle-left">
@@ -318,23 +315,23 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
                                   <span className="order-price">
                                     {discountedPrice !== null
                                       ? parseInt(
+                                        (
+                                          currency.currencySymbol +
                                           (
-                                            currency.currencySymbol +
-                                            (
-                                              finalDiscountedPrice *
-                                              cartItem.quantity
-                                            ).toFixed(2)
-                                          ).replace("$", "")
-                                        ).toLocaleString("en-US") + " VND"
+                                            finalDiscountedPrice *
+                                            cartItem.quantity
+                                          ).toFixed(2)
+                                        ).replace("$", "")
+                                      ).toLocaleString("en-US") + " VND"
                                       : parseInt(
+                                        (
+                                          currency.currencySymbol +
                                           (
-                                            currency.currencySymbol +
-                                            (
-                                              finalProductPrice *
-                                              cartItem.quantity
-                                            ).toFixed(2)
-                                          ).replace("$", "")
-                                        ).toLocaleString("en-US") + " VND"}
+                                            finalProductPrice *
+                                            cartItem.quantity
+                                          ).toFixed(2)
+                                        ).replace("$", "")
+                                      ).toLocaleString("en-US") + " VND"}
                                   </span>
                                 </li>
                               );

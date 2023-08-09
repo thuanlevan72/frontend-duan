@@ -50,7 +50,6 @@ const CreateNews = () => {
         "accountId",
         JSON.parse(localStorage.getItem("user")).accountId
       );
-      console.log(content);
       try {
         setLoading(true);
         const res = await NewsApi.Create(formData);
@@ -66,15 +65,6 @@ const CreateNews = () => {
           content: "Thêm bài viết thất bại",
         });
       }
-      // // Gửi request API để thêm tin tức
-      // const response = await axios.post("/api/news", formData, {
-      //   headers: {
-      //     "Content-Type": "multipart/form-data",
-      //   },
-      // });
-
-      // console.log("Tin tức đã được thêm thành công:", response.data);
-      // Xử lý sau khi thêm tin tức thành công (ví dụ: chuyển hướng về trang danh sách tin tức)
     } catch (error) {
       console.error("Lỗi khi thêm tin tức:", error);
     }

@@ -40,8 +40,8 @@ const FooterTwo = ({
         } ${backgroundImage ? "bg-img" : ""}`}
       style={{
         backgroundImage: ` ${backgroundImage
-            ? `url(${process.env.PUBLIC_URL + backgroundImage})`
-            : `url()`
+          ? `url(${process.env.PUBLIC_URL + backgroundImage})`
+          : `url()`
           }`
       }}
     >
@@ -102,15 +102,7 @@ const FooterTwo = ({
               }`}
           >
             <p>
-              © 2020{" "}
-              <a
-                href="//www.hasthemes.com"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                Flone
-              </a>
-              . All Rights Reserved.
+              Poly Food - © FPT Polytechnic Hà Nội
             </p>
           </div>
         </div>

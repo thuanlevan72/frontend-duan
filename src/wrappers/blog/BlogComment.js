@@ -43,7 +43,7 @@ const BlogComment = () => {
             <div className="col-md-12">
               <div className="text-leave">
                 <textarea placeholder="Nhập nội dung" defaultValue={""} />
-                <input type="submit" defaultValue="Nhập nội dung" />
+                <input type="submit" defaultValue="Gửi" />
               </div>
             </div>
           </div>

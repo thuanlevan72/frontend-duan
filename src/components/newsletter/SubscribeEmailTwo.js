@@ -28,12 +28,12 @@ const CustomForm = ({
             className="email"
             ref={node => (email = node)}
             type="email"
-            placeholder="Your Email Address"
+            placeholder="Địa chỉ email của bạn"
             required
           />
         </div>
         {status === "sending" && (
-          <div style={{ color: "#3498db", fontSize: "12px" }}>sending...</div>
+          <div style={{ color: "#3498db", fontSize: "12px" }}>Đang gửi...</div>
         )}
         {status === "error" && (
           <div
@@ -51,7 +51,7 @@ const CustomForm = ({
           className={`clear-3 ${subscribeBtnClass ? subscribeBtnClass : ""}`}
         >
           <button className="button" onClick={submit}>
-            SUBSCRIBE
+            Đăng ký
           </button>
         </div>
       </div>

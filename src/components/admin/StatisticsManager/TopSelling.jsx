@@ -34,7 +34,6 @@ const TopSelling = ({ SetLoading }) => {
     try {
       SetLoading(true);
       const res = await StatisticsApi.GetTopSellingProducts(selectedDate);
-      console.log(res);
       const mappedData = res.map((item) => ({
         type: item.product.nameProduct,
         value: item.totalQuantity,
@@ -58,7 +57,6 @@ const TopSelling = ({ SetLoading }) => {
       // Thực hiện các xử lý khác với khoảng ngày đã chọn
     }
   };
-  console.log(selectedDate);
   const config = {
     appendPadding: 10,
     data,

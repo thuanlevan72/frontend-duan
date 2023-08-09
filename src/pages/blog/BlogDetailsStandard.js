@@ -24,7 +24,6 @@ const BlogDetailsStandard = ({ location, match }) => {
       setLoading(false);
     }
   }, []);
-  console.log(data);
   return (
     <Fragment>
       <MetaTags>

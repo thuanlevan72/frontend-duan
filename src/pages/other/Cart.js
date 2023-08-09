@@ -251,7 +251,6 @@ const Cart = ({
                         </Link>
                       </div>
                       <div className="cart-clear">
-                        {console.log(addToast)}
                         <button onClick={() => deleteAllFromCart(addToast)}>
                           Xóa giỏ hàng
                         </button>

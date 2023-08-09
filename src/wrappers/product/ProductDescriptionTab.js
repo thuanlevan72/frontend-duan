@@ -54,14 +54,13 @@ const ProductDescriptionTab = ({
     localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : ""
   );
   const handlePaginationChange = (page, pageSize) => {
-    console.log(page, pageSize);
     setParam(
       (prev) =>
-        (prev = {
-          ...param,
-          page: page,
-          pageSize: pageSize,
-        })
+      (prev = {
+        ...param,
+        page: page,
+        pageSize: pageSize,
+      })
     );
   };
   const subMitMess = async (e) => {
@@ -97,7 +96,6 @@ const ProductDescriptionTab = ({
       try {
         setLoading(true);
         const res = await OrderApi.isPurchased(user.user.userId, productId);
-        console.log(res);
         if (res.isPurchased) {
           setIsPurchased(true);
         }
@@ -297,7 +295,7 @@ const ProductDescriptionTab = ({
                                   <h5>Nội dung đánh giá</h5>
                                   <textarea
                                     name="ContentRated"
-                                    placeholder="Message"
+                                    placeholder="Nội dung"
                                     value={ContentRated.contentRated}
                                     onChange={(e) =>
                                       setContentRated({
@@ -308,7 +306,7 @@ const ProductDescriptionTab = ({
                                   />
                                   <input
                                     type="submit"
-                                    defaultValue="Submit"
+                                    defaultValue="Gửi"
                                     onClick={subMitMess}
                                   />
                                 </div>
@@ -322,8 +320,7 @@ const ProductDescriptionTab = ({
                               padding: "20% 0",
                               lineHeight: "30px",
                             }}>
-                            bạn cần mua và trải nghiệm sản phẩm này để có thể
-                            đánh giá
+                            Bạn cần mua sản phẩm để có thể tham gia đánh giá
                           </h3>
                         )}
                       </div>

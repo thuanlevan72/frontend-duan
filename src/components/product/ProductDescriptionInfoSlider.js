@@ -106,29 +106,29 @@ const ProductDescriptionInfoSlider = ({
                 product.variation.map(single => {
                   return single.color === selectedProductColor
                     ? single.size.map((singleSize, key) => {
-                        return (
-                          <label
-                            className={`pro-details-size-content--single`}
-                            key={key}
-                          >
-                            <input
-                              type="radio"
-                              value={singleSize.name}
-                              checked={
-                                singleSize.name === selectedProductSize
-                                  ? "checked"
-                                  : ""
-                              }
-                              onChange={() => {
-                                setSelectedProductSize(singleSize.name);
-                                setProductStock(singleSize.stock);
-                                setQuantityCount(1);
-                              }}
-                            />
-                            <span className="size-name">{singleSize.name}</span>
-                          </label>
-                        );
-                      })
+                      return (
+                        <label
+                          className={`pro-details-size-content--single`}
+                          key={key}
+                        >
+                          <input
+                            type="radio"
+                            value={singleSize.name}
+                            checked={
+                              singleSize.name === selectedProductSize
+                                ? "checked"
+                                : ""
+                            }
+                            onChange={() => {
+                              setSelectedProductSize(singleSize.name);
+                              setProductStock(singleSize.stock);
+                              setQuantityCount(1);
+                            }}
+                          />
+                          <span className="size-name">{singleSize.name}</span>
+                        </label>
+                      );
+                    })
                     : "";
                 })}
             </div>
@@ -194,7 +194,7 @@ const ProductDescriptionInfoSlider = ({
                 disabled={productCartQty >= productStock}
               >
                 {" "}
-                Add To Cart{" "}
+                Thêm vào giỏ hàng{" "}
               </button>
             ) : (
               <button disabled>Out of Stock</button>
@@ -206,8 +206,8 @@ const ProductDescriptionInfoSlider = ({
               disabled={wishlistItem !== undefined}
               title={
                 wishlistItem !== undefined
-                  ? "Added to wishlist"
-                  : "Add to wishlist"
+                  ? "Đã thêm vào mục yêu thích"
+                  : "Thêm vào mục yêu thích"
               }
               onClick={() => addToWishlist(product, addToast)}
             >
@@ -220,8 +220,8 @@ const ProductDescriptionInfoSlider = ({
               disabled={compareItem !== undefined}
               title={
                 compareItem !== undefined
-                  ? "Added to compare"
-                  : "Add to compare"
+                  ? "Đã thêm để so sánh"
+                  : "Thêm để so sánh"
               }
               onClick={() => addToCompare(product, addToast)}
             >
@@ -232,7 +232,7 @@ const ProductDescriptionInfoSlider = ({
       )}
       {product.category ? (
         <div className="pro-details-meta justify-content-center">
-          <span>Categories :</span>
+          <span>Danh mục :</span>
           <ul>
             {product.category.map((single, key) => {
               return (
@@ -250,7 +250,7 @@ const ProductDescriptionInfoSlider = ({
       )}
       {product.tag ? (
         <div className="pro-details-meta justify-content-center">
-          <span>Tags :</span>
+          <span>Nhãn :</span>
           <ul>
             {product.tag.map((single, key) => {
               return (

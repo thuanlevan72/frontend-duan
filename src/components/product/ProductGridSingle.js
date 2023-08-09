@@ -30,14 +30,13 @@ const ProductGridSingle = ({
   return (
     <Fragment>
       <div
-        className={`col-xl-3 col-md-6 col-lg-4 col-sm-6 ${
-          sliderClassName ? sliderClassName : ""
-        }`}
+        className={`col-xl-3 col-md-6 col-lg-4 col-sm-6 ${sliderClassName ? sliderClassName : ""
+          }`}
       >
         <div
           className={`product-wrap ${spaceBottomClass ? spaceBottomClass : ""}`}
         >
-          <div className="product-img">
+          <div className="product-img" style={{ width: "auto", height: "200px", objectFit: "contain", display: "flex", alignItems: "center" }}>
             <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
               <img
                 className="default-img"
@@ -129,18 +128,14 @@ const ProductGridSingle = ({
             </div>
           </div>
           <div className="product-content text-center">
-            <h3>
-              <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
+            <h3 style={{ fontSize: "20px", fontWeight: "bold", marginBottom: "10px" }}>
+              <Link
+                to={process.env.PUBLIC_URL + "/product/" + product.id}
+                style={{ textDecoration: "none", color: "#333", borderBottom: "2px solid #333" }}
+              >
                 {product.name}
               </Link>
             </h3>
-            {product.rating && product.rating > 0 ? (
-              <div className="product-rating">
-                <Rating ratingValue={product.rating} />
-              </div>
-            ) : (
-              ""
-            )}
             <div className="product-price">
               {discountedPrice !== null ? (
                 <Fragment>
@@ -151,6 +146,13 @@ const ProductGridSingle = ({
                 </Fragment>
               ) : (
                 <span>{parseInt((currency.currencySymbol + finalProductPrice).replace("$", "")).toLocaleString("en-US") + " VND"} </span>
+              )}
+            </div>
+            <div className="product-rating">
+              {product.rating && product.rating > 0 ? (
+                <Rating ratingValue={product.rating} />
+              ) : (
+                <Rating ratingValue={product.rating} />
               )}
             </div>
           </div>

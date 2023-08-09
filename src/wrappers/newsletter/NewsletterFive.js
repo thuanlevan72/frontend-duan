@@ -12,11 +12,9 @@ const NewsletterFive = ({
 }) => {
   return (
     <div
-      className={`subscribe-area-3 bg-img ${
-        spaceTopClass ? spaceTopClass : ""
-      } ${spaceBottomClass ? spaceBottomClass : ""} ${
-        spaceLeftClass ? spaceLeftClass : ""
-      }  ${spaceRightClass ? spaceRightClass : ""}`}
+      className={`subscribe-area-3 bg-img ${spaceTopClass ? spaceTopClass : ""
+        } ${spaceBottomClass ? spaceBottomClass : ""} ${spaceLeftClass ? spaceLeftClass : ""
+        }  ${spaceRightClass ? spaceRightClass : ""}`}
       style={{
         backgroundImage: `url(${process.env.PUBLIC_URL + newsletterBg})`
       }}
@@ -25,8 +23,8 @@ const NewsletterFive = ({
         <div className="row">
           <div className="col-xl-5 col-lg-7 col-md-10 ml-auto mr-auto">
             <div className="subscribe-style-3 subscribe-style-3--blue text-center">
-              <h2>SUBSCRIBE NOW</h2>
-              <p>Subscribe to our newsletter to receive news on update</p>
+              <h2>Đăng ký ngay</h2>
+              <p>Đăng ký để nhận những thông báo mới nhất của chúng tôi</p>
               {/* subscription form */}
               <SubscribeEmailTwo
                 mailchimpUrl="//devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef"
