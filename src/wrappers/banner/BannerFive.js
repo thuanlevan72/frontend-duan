@@ -11,7 +11,7 @@ const BannerFive = () => {
         <div className="row">
           <div className="col-lg-3 col-md-6">
             <div className="single-banner mb-20">
-              <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
+              <Link to={process.env.PUBLIC_URL + "/product/2007"}>
                 <img src={"/assets/img/product/product3.webp"} alt="" width={400} height={400} />
               </Link>
               {/* <div className="banner-content-4 banner-position-hm15-2">
@@ -26,7 +26,7 @@ const BannerFive = () => {
           </div>
           <div className="col-lg-3 col-md-6">
             <div className="single-banner mb-20">
-              <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
+              <Link to={process.env.PUBLIC_URL + "/product/1002"}>
                 <img src={"/assets/img/product/product4.webp"} alt="" width={400} height={400} />
               </Link>
               {/* <div className="banner-content-3 banner-position-hm15-1">
@@ -42,7 +42,7 @@ const BannerFive = () => {
           </div>
           <div className="col-lg-3 col-md-6">
             <div className="single-banner mb-20">
-              <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
+              <Link to={process.env.PUBLIC_URL + "/product/2005"}>
                 <img src={"/assets/img/product/product5.webp"} alt="" width={400} height={400} />
               </Link>
               {/* <div className="banner-content-3 banner-position-hm15-2">
@@ -58,7 +58,7 @@ const BannerFive = () => {
           </div>
           <div className="col-lg-3 col-md-6">
             <div className="single-banner mb-20">
-              <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
+              <Link to={process.env.PUBLIC_URL + "/product/2021"}>
                 <img src={"/assets/img/product/product6.webp"} alt="" width={400} height={400} />
               </Link>
               {/* <div className="banner-content-3 banner-position-hm15-2">
