@@ -41,6 +41,7 @@ import OrderCanceled from "../components/admin/OrdersManager/OrderCanceled";
 import ContactsList from "../components/admin/ContactsManager/ContactsList";
 import NewList from "../components/admin/NewsMangager/NewList";
 import CreateNews from "../components/admin/NewsMangager/CreateNews";
+import ListCommentManager from "../components/admin/CommentManager/ListCommentManager";
 const { Header, Content, Footer, Sider } = Layout;
 
 const AdminLayout = () => {
@@ -240,6 +241,8 @@ const AdminLayout = () => {
             {/* News router */}
             <Route path="/admin/news" component={NewList} />
             <Route path="/admin/news-add" component={CreateNews} />
+            {/* comment router */}
+            <Route path={"/admin/comment/:id"} component={ListCommentManager} />
             {/* Redirect to Dashboard */}
             <Redirect to="/admin/dashboard" />
           </Switch>

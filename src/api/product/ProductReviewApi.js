@@ -21,6 +21,19 @@ const ProductReviewApi = {
       },
     });
   },
+  ReplyMess: (id, mess) => {
+    const requestBody = JSON.stringify(mess);
+    const url = `/ProductReview/phanhoi/${id}`;
+    return axiosClient.post(url, requestBody, {
+      headers: {
+        Authorization: `Bearer ${
+          localStorage.getItem("token")
+            ? JSON.parse(localStorage.getItem("token"))
+            : ""
+        }`,
+      },
+    });
+  },
 };
 
 export default ProductReviewApi;

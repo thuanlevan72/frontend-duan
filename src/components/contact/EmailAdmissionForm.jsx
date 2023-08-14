@@ -19,6 +19,7 @@ const courseName = [
   { name: "Java on job" },
   { name: "C++ and C" },
   { name: "Chưa quyết" },
+  { name: "Fullstack" },
   { name: "VueJS" },
   { name: "C# on job" },
   { name: "Frontend on job" },
