@@ -171,7 +171,7 @@ const Wishlist = ({
                                     </button>
                                   ) : (
                                     <button disabled className="active">
-                                      Out of stock
+                                      Hết hàng
                                     </button>
                                   )}
                                 </td>

@@ -47,7 +47,7 @@ const ForgotPassword = ({ location }) => {
 
       messageApi.open({
         type: "success",
-        content: "gửi về mail nha thằng đần",
+        content: "Đã gửi thông báo về email",
       });
       setLoading(false);
 
@@ -55,7 +55,7 @@ const ForgotPassword = ({ location }) => {
     } catch (error) {
       messageApi.open({
         type: "error",
-        content: "email không tồn tại",
+        content: "Email không tồn tại",
       });
       setLoading(false);
       // Xử lý lỗi tại đây (ví dụ: hiển thị thông báo lỗi)
@@ -71,7 +71,7 @@ const ForgotPassword = ({ location }) => {
         Trang chủ
       </BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
-        Đặt lại mật khẩu
+        Quên mật khẩu
       </BreadcrumbsItem>
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
@@ -88,7 +88,7 @@ const ForgotPassword = ({ location }) => {
                         <Nav.Link
                           eventKey="login"
                           onClick={() => setActiveKey("login")}>
-                          <h4>forgot-password</h4>
+                          <h4>Quên mật khẩu</h4>
                         </Nav.Link>
                       </Nav.Item>
                     </Nav>

@@ -11,27 +11,27 @@ const ScrollToTop = props => {
   useEffect(() => {
     window.scrollTo(0, 0);
   });
-  useEffect(()=>{
+  useEffect(() => {
     const expiration = localStorage.getItem("expiration") || "";
     const user = localStorage.getItem("user") || "";
 
-    if(userCheckToken && expiration && user){
-        const currentTime = new Date().getTime();
-        if (currentTime > expiration) {
-            localStorage.removeItem('token');
-            localStorage.removeItem('expiration');
-            localStorage.removeItem('user');
-            props.messageApi.open({
-                type: 'warning',
-                content: "hết hạn đăng nhập vui lòng đăng nhập lại",
-              });
-              setTimeout(() => {
-                history.push("/login-register")
-              }, 1000);
-          }
-          
+    if (userCheckToken && expiration && user) {
+      const currentTime = new Date().getTime();
+      if (currentTime > expiration) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('expiration');
+        localStorage.removeItem('user');
+        props.messageApi.open({
+          type: 'warning',
+          content: "Hết hạn đăng nhập",
+        });
+        setTimeout(() => {
+          history.push("/login-register")
+        }, 1000);
+      }
+
     }
-},[userCheckToken])
+  }, [userCheckToken])
   return props.children;
 };
 

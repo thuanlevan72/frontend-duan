@@ -29,14 +29,12 @@ const ProductGridSingleFive = ({
   return (
     <Fragment>
       <div
-        className={`col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 ${
-          sliderClassName ? sliderClassName : ""
-        }`}
+        className={`col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 ${sliderClassName ? sliderClassName : ""
+          }`}
       >
         <div
-          className={`product-wrap-3 scroll-zoom ${
-            spaceBottomClass ? spaceBottomClass : ""
-          }`}
+          className={`product-wrap-3 scroll-zoom ${spaceBottomClass ? spaceBottomClass : ""
+            }`}
         >
           <div className="product-img">
             <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
@@ -138,7 +136,7 @@ const ProductGridSingleFive = ({
                         <i className="fa fa-shopping-cart"></i>{" "}
                       </button>
                     ) : (
-                      <button disabled className="active" title="Out of stock">
+                      <button disabled className="active" title="Hết hàng">
                         <i className="fa fa-shopping-cart"></i>
                       </button>
                     )}

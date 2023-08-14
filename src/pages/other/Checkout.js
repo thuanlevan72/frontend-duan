@@ -72,7 +72,7 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
     if (!validateUserOrder(data)) {
       messageApi.open({
         type: "warning",
-        content: "vui lòng kiểm tra các trường thông tin cần nhập",
+        content: "Vui lòng kiểm tra các trường thông tin cần nhập",
       });
       return false;
     }
@@ -93,7 +93,7 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
     } catch (error) {
       messageApi.open({
         type: "error",
-        content: "thanh toán thất bại",
+        content: "Thanh toán thất bại",
       });
       setLoading(false);
     }
@@ -105,7 +105,7 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
     if (!validateUserOrder(data)) {
       messageApi.open({
         type: "warning",
-        content: "vui lòng kiểm tra các trường thông tin cần nhập",
+        content: "Vui lòng kiểm tra các trường thông tin cần nhập",
       });
       return false;
     }

@@ -37,13 +37,13 @@ const IconGroup = ({
             setLoading(false);
             messageApi.open({
                 type: "success",
-                content: "đang gửi thông báo đơn đến mail của bạn",
+                content: "Đang gửi thông báo đơn đến mail của bạn",
             });
         } catch (error) {
             setLoading(false);
             messageApi.open({
                 type: "error",
-                content: "mã hóa đơn không tồn tại",
+                content: "Mã hóa đơn không tồn tại",
             });
         }
     };

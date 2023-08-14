@@ -81,7 +81,7 @@ const ProductDescriptionTab = ({
 
       messageApi.open({
         type: "success",
-        content: "cảm ơn bạn đã bình luận về sản phẩm này.",
+        content: "Cảm ơn bạn đã bình luận về sản phẩm này.",
       });
       setLoading(false);
       setTimeout(() => {

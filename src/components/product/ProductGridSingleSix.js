@@ -134,7 +134,7 @@ const ProductGridSingleSix = ({
                     <i className="pe-7s-cart"></i>
                   </button>
                 ) : (
-                  <button disabled className="active" title="Out of stock">
+                  <button disabled className="active" title="Hết hàng">
                     <i className="pe-7s-cart"></i>
                   </button>
                 )}

@@ -32,9 +32,8 @@ const ProductGridSingleThree = ({
         className={`custom2-col-5 ${sliderClassName ? sliderClassName : ""}`}
       >
         <div
-          className={`product-wrap-2 pro-glaucous-color ${
-            spaceBottomClass ? spaceBottomClass : ""
-          }`}
+          className={`product-wrap-2 pro-glaucous-color ${spaceBottomClass ? spaceBottomClass : ""
+            }`}
         >
           <div className="product-img">
             <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
@@ -101,7 +100,7 @@ const ProductGridSingleThree = ({
                   <i className="fa fa-shopping-cart"></i>{" "}
                 </button>
               ) : (
-                <button disabled className="active" title="Out of stock">
+                <button disabled className="active" title="Hết hàng">
                   <i className="fa fa-shopping-cart"></i>
                 </button>
               )}

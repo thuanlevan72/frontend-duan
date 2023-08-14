@@ -304,7 +304,7 @@ function ProductModal(props) {
                           Thêm{" "}
                         </button>
                       ) : (
-                        <button disabled>Out of Stock</button>
+                        <button disabled>Hết hàng</button>
                       )}
                     </div>
                     <div className="pro-details-wishlist">

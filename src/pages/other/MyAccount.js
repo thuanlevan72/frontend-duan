@@ -41,7 +41,7 @@ const MyAccount = ({ location }) => {
       ) {
         messageApi.open({
           type: "error",
-          content: "số điện thoại nhận vào không hợp lệ",
+          content: "Số điện thoại không hợp lệ",
         });
       }
     }
@@ -54,14 +54,14 @@ const MyAccount = ({ location }) => {
     if (!dataPass.password || !dataPass.confirmPass) {
       messageApi.open({
         type: "error",
-        content: "vui lòng nhập đầy đủ các trường của mật khẩu",
+        content: "Vui lòng nhập đầy đủ các trường của mật khẩu",
       });
       return;
     }
     if (dataPass.password != dataPass.confirmPass) {
       messageApi.open({
         type: "error",
-        content: "mật khẩu nhập lại không giống nhau",
+        content: "Mật khẩu nhập lại không giống nhau",
       });
       return;
     }
@@ -69,7 +69,7 @@ const MyAccount = ({ location }) => {
       setLoading(true);
       messageApi.open({
         type: "success",
-        content: "thay đổi mật khẩu thành công",
+        content: "Thay đổi mật khẩu thành công",
       });
       const data = dataPass;
       delete data.confirmPass;
@@ -83,7 +83,7 @@ const MyAccount = ({ location }) => {
     } catch (error) {
       messageApi.open({
         type: "error",
-        content: "thay đổi mật khẩu thất bại",
+        content: "Thay đổi mật khẩu thất bại",
       });
       setLoading(false);
     }

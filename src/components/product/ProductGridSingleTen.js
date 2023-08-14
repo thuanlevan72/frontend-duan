@@ -31,16 +31,13 @@ const ProductGridSingleTen = ({
   return (
     <Fragment>
       <div
-        className={`col-md-6 col-lg-4 col-sm-6 ${
-          sliderClassName ? sliderClassName : ""
-        }`}
+        className={`col-md-6 col-lg-4 col-sm-6 ${sliderClassName ? sliderClassName : ""
+          }`}
       >
         <div
-          className={`product-wrap-10 ${
-            spaceBottomClass ? spaceBottomClass : ""
-          } ${colorClass ? colorClass : ""} ${
-            productGridStyleClass ? productGridStyleClass : ""
-          } `}
+          className={`product-wrap-10 ${spaceBottomClass ? spaceBottomClass : ""
+            } ${colorClass ? colorClass : ""} ${productGridStyleClass ? productGridStyleClass : ""
+            } `}
         >
           <div className="product-img">
             <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
@@ -103,7 +100,7 @@ const ProductGridSingleTen = ({
                   <i className="fa fa-shopping-cart"></i>{" "}
                 </button>
               ) : (
-                <button disabled className="active" title="Out of stock">
+                <button disabled className="active" title="Hết hàng">
                   <i className="fa fa-shopping-cart"></i>
                 </button>
               )}
