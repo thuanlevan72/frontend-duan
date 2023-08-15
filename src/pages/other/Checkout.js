@@ -12,6 +12,8 @@ import { useState } from "react";
 import OrderApi from "../../api/order/OrderApi";
 import { Spin, message } from "antd";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { typeOf } from "react-hooks-paginator";
+import VoucherApi from "../../api/voucher/VoucherApi";
 
 const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
   const validateUserOrder = (userOrder) => {
@@ -25,6 +27,21 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
 
     return isValidEmail && isValidAddress && isValidFullName && isValidPhone;
   };
+
+  const [discount, setDiscount] = useState({
+    voucherId: 1,
+    voucherName: "",
+    voucherCode: "",
+    valuevoucher: 0,
+    countVoucher: 0,
+    expirationDate: "0000-08-17T09:50:40.151",
+    createdAt: "2023-08-15T16:51:17.0633333",
+    updatedAt: "0001-01-01T00:00:00",
+    voucherUsers: null,
+  });
+  console.log(discount);
+  const [codeVoucher, setCodeVoucher] = useState("");
+
   const [loading, setLoading] = useState(false);
   const totalPriceOld = cartItems?.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -55,7 +72,7 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
       : "",
     email: localUser ? JSON.parse(localStorage.getItem("user")).user.email : "",
     originalPrice: totalPriceOld,
-    actualPrice: totalPriceNew,
+    actualPrice: totalPriceNew - (totalPriceNew / 100) * discount.valuevoucher,
     orderDetailDtos: cartItems?.map((item) => {
       return {
         productId: Number(item.id),
@@ -64,9 +81,43 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
       };
     }),
   });
+  useEffect(() => {
+    setUserOrder({
+      ...userOrder,
+      actualPrice:
+        totalPriceNew - (totalPriceNew / 100) * discount.valuevoucher,
+    });
+  }, [discount]);
   const { pathname } = location;
   let cartTotalPrice = 0;
-
+  let cartTotalPriceDiscount = 0;
+  const submitCodeVoucher = async (e) => {
+    e.preventDefault();
+    if (!JSON.parse(localStorage.getItem("user"))) {
+      messageApi.open({
+        type: "warning",
+        content: "Bạn cần đăng nhập để có thể sử dụng mã giảm giá",
+      });
+      return false;
+    }
+    try {
+      setLoading(true);
+      const res = await VoucherApi.UseVoucher(userOrder.userId, codeVoucher);
+      setLoading(false);
+      messageApi.open({
+        type: "success",
+        content: "Mã giảm giá đã được áp dụng",
+      });
+      setDiscount(res.data);
+    } catch (error) {
+      setLoading(false);
+      messageApi.open({
+        type: "error",
+        content: "Mã giảm giá không đúng hoặc không đã được sử dụng",
+      });
+    }
+  };
+  console.log(discount);
   const confirmOrderShipCode = async () => {
     const data = userOrder;
     if (!validateUserOrder(data)) {
@@ -81,6 +132,7 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
       data.paymentId = 1;
       setLoading(true);
       const response = await OrderApi.CreateOrder(data);
+      await VoucherApi.ApllyVoucher(userOrder.userId, codeVoucher);
       messageApi.open({
         type: "success",
         content: "Cảm ơn bạn đã mua sản phẩm của chúng tôi",
@@ -117,7 +169,10 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
         content: "Đang tạo liên kết đến VnPay",
       });
       setLoading(false);
-      localStorage.setItem("dataOrderOnline", JSON.stringify(data));
+      localStorage.setItem(
+        "dataOrderOnline",
+        JSON.stringify({ ...data, codeVoucher })
+      );
       setTimeout(function () {
         window.location.href = response;
       }, 500);
@@ -304,9 +359,9 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
 
                               discountedPrice != null
                                 ? (cartTotalPrice +=
-                                  finalDiscountedPrice * cartItem.quantity)
+                                    finalDiscountedPrice * cartItem.quantity)
                                 : (cartTotalPrice +=
-                                  finalProductPrice * cartItem.quantity);
+                                    finalProductPrice * cartItem.quantity);
                               return (
                                 <li key={key}>
                                   <span className="order-middle-left">
@@ -315,23 +370,23 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
                                   <span className="order-price">
                                     {discountedPrice !== null
                                       ? parseInt(
-                                        (
-                                          currency.currencySymbol +
                                           (
-                                            finalDiscountedPrice *
-                                            cartItem.quantity
-                                          ).toFixed(2)
-                                        ).replace("$", "")
-                                      ).toLocaleString("en-US") + " VND"
+                                            currency.currencySymbol +
+                                            (
+                                              finalDiscountedPrice *
+                                              cartItem.quantity
+                                            ).toFixed(2)
+                                          ).replace("$", "")
+                                        ).toLocaleString("en-US") + " VND"
                                       : parseInt(
-                                        (
-                                          currency.currencySymbol +
                                           (
-                                            finalProductPrice *
-                                            cartItem.quantity
-                                          ).toFixed(2)
-                                        ).replace("$", "")
-                                      ).toLocaleString("en-US") + " VND"}
+                                            currency.currencySymbol +
+                                            (
+                                              finalProductPrice *
+                                              cartItem.quantity
+                                            ).toFixed(2)
+                                          ).replace("$", "")
+                                        ).toLocaleString("en-US") + " VND"}
                                   </span>
                                 </li>
                               );
@@ -346,17 +401,55 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
                             <li>Miễn phí vận chuyển</li>
                           </ul>
                         </div>
+                        {discount && discount.valuevoucher > 0 && (
+                          <div className="your-order-total">
+                            <ul>
+                              <li style={{ color: "black" }}>
+                                Tên voucher: {discount.voucherName}
+                              </li>
+                              <li style={{ color: "black" }}>
+                                Giá trị giảm {discount.valuevoucher}%
+                              </li>
+                            </ul>
+                          </div>
+                        )}
                         <div className="your-order-total">
                           <ul>
                             <li className="order-total">Tổng cộng</li>
                             <li>
-                              {parseInt(
-                                (
-                                  currency.currencySymbol +
-                                  cartTotalPrice.toFixed(2)
-                                ).replace("$", "")
-                              ).toLocaleString("en-US") + " VND"}
+                              <div style={{ display: "none" }}>
+                                {
+                                  (cartTotalPriceDiscount =
+                                    cartTotalPrice -
+                                    (cartTotalPrice / 100) *
+                                      discount.valuevoucher)
+                                }
+                              </div>
+                              {discount.valuevoucher > 0 ? (
+                                <del className="text-dark">
+                                  {parseInt(
+                                    (
+                                      currency.currencySymbol +
+                                      cartTotalPrice.toFixed(2)
+                                    ).replace("$", "")
+                                  ).toLocaleString("en-US") + " VND"}
+                                </del>
+                              ) : (
+                                parseInt(
+                                  cartTotalPrice.toFixed(2).replace("$", "")
+                                ).toLocaleString("en-US") + " VND"
+                              )}
                             </li>
+                            {discount.valuevoucher > 0 && (
+                              <li>
+                                {parseInt(
+                                  (
+                                    currency.currencySymbol +
+                                    cartTotalPriceDiscount.toFixed(2)
+                                  ).replace("$", "")
+                                ).toLocaleString("en-US") + " VND"}
+                              </li>
+                            )}
                           </ul>
                         </div>
                       </div>
@@ -387,8 +480,17 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
                     <div className="discount-code">
                       <p>Nhập mã giảm giá của bạn (nếu có).</p>
                       <form>
-                        <input type="text" required name="name" />
-                        <button className="cart-btn-2" type="submit">
+                        <input
+                          type="text"
+                          required
+                          name="name"
+                          onChange={(e) => setCodeVoucher(e.target.value)}
+                        />
+
+                        <button
+                          className="cart-btn-2"
+                          type="submit"
+                          onClick={submitCodeVoucher}>
                           Áp dụng
                         </button>
                       </form>

@@ -7,7 +7,7 @@ const devConfig = "https://localhost:7064/api/";
 // Please have a look at here `https://github.com/axios/axios#request- config` for the full list of configs
 const config = process.env.NODE_ENV === "production" ? prodConfig : devConfig;
 const axiosClient = axios.create({
-  baseURL: prodConfig,
+  baseURL: config,
   // baseURL: "https://localhost:7064/api/",
   headers: {
     "content-type": "application/json",

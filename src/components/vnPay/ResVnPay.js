@@ -10,6 +10,7 @@ import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import OrderApi from "../../api/order/OrderApi";
 import LoadingSpin from "../loading/LoadingSpin";
+import VoucherApi from "../../api/voucher/VoucherApi";
 
 const ResVnPay = ({ location, confirmOrders }) => {
   const [paymentResult, setPaymentResult] = useState(null);
@@ -37,6 +38,10 @@ const ResVnPay = ({ location, confirmOrders }) => {
         localStorage.removeItem("dataOrderOnline");
         setLoading(true);
         const response = await OrderApi.CreateOrder(storedData);
+        if (response.codeVoucher) {
+          await VoucherApi.ApllyVoucher(response.userId, response.codeVoucher);
+        }
+
         setLoading(false);
       } catch (error) {
         setLoading(false);
