@@ -53,9 +53,15 @@ const ListCommentManager = () => {
   const onFinish = async (values) => {
     try {
       setLoading(true);
-      const res = await ProductReviewApi.ReplyMess(dataCurrent, values.mess);
+      const res = await ProductReviewApi.ReplyMess(
+        dataCurrent.productReviewId,
+        values.mess
+      );
       console.log(res);
       setLoading(false);
+      setParam({
+        ...param,
+      });
       form.resetFields();
       setIsModalOpen(false);
     } catch (error) {
@@ -63,9 +69,14 @@ const ListCommentManager = () => {
     }
   };
   const showModal = (id) => {
-    setDataCurrent(id);
+    setDataCurrent(data.data.filter((x) => x.productReviewId === id)[0]);
+    console.log(data?.data);
+    form.setFieldsValue({
+      mess: data.data.filter((x) => x.productReviewId === id)[0].contentSeen,
+    });
     setIsModalOpen(true);
   };
+  console.log(dataCurrent);
   const handleOk = () => {
     setIsModalOpen(false);
   };
@@ -83,6 +94,7 @@ const ListCommentManager = () => {
         setLoading(true);
         const { data } = await ProductReviewApi.getReviewForproduct(param);
         console.log(data);
+        // setDataCurrent({});
         setLoading(false);
         setData(data);
       } catch (error) {
@@ -196,7 +208,7 @@ const ListCommentManager = () => {
           margin: "16px 0",
         }}>
         <Breadcrumb.Item>Bảng điều khiển</Breadcrumb.Item>
-        <Breadcrumb.Item>Danh sách danh mục</Breadcrumb.Item>
+        <Breadcrumb.Item>danh sách bình luận</Breadcrumb.Item>
       </Breadcrumb>
       <div>
         <Modal
@@ -210,15 +222,16 @@ const ListCommentManager = () => {
             style={{
               maxWidth: 700,
             }}
-            initialValues={{
-              remember: true,
-            }}
+            // initialValues={{
+            //   mess: dataCurrent && dataCurrent.contentRated,
+            // }}
             layout="vertical"
             onFinish={onFinish}
             autoComplete="off">
             <Form.Item
               label="Nội dung trả lời"
               name="mess"
+              value={dataCurrent && dataCurrent.contentRated}
               rules={[
                 {
                   required: true,
