@@ -875,8 +875,28 @@
   }
 }
 
+// Card silde
+.banner-title {
+  text-align: center;
+  margin-top: 30px 0;
+  text-transform: uppercase;
+}
+.single-banner {
+  width: 270px;
+  margin: 7px;
+  border: 1px solid #ccc;
+  text-align: center;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  transition: transform 1s, opacity 0.5s;
+}
+.item-card {
+  max-width: 100%;
+  height: 270px;
+  object-fit: cover;
+}
 /* banner hm4 */
-
 .banner-area-2 {
   .container-fluid {
     padding-right: 10px;
@@ -1143,13 +1163,10 @@
     position: absolute;
     top: 20%;
     left: 50px;
-
     padding-right: 15px;
-
     &--right {
       left: 50%;
     }
-
     h4 {
       font-family: $josefin;
       font-size: 30px;
@@ -1161,11 +1178,9 @@
       @media #{$lg-layout} {
         font-size: 25px;
       }
-
       @media #{$xs-layout} {
         font-size: 25px;
       }
-
       @media #{$xxs-layout} {
         font-size: 15px;
       }
@@ -1174,13 +1189,9 @@
       font-family: $josefin;
       font-size: 18px;
       font-weight: 400;
-
       position: relative;
-
       padding-bottom: 7px;
-
       color: #000000;
-
       @media #{$xxs-layout} {
         font-size: 13px;
       }

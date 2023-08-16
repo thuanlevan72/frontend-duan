@@ -31,6 +31,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "react-scroll": "^1.7.14",
+    "react-slick": "^0.29.0",
     "react-sticky-el": "^1.1.0",
     "react-toast-notifications": "^2.2.5",
     "react-visibility-sensor": "^5.1.1",
@@ -38,6 +39,7 @@
     "redux-localstorage-simple": "^2.1.6",
     "redux-multilanguage": "^0.1.2",
     "redux-thunk": "^2.3.0",
+    "slick-carousel": "^1.8.1",
     "swiper": "^5.2.0",
     "uuid": "^3.3.3"
   },

@@ -12,8 +12,8 @@ const HomeOrganicFood = () => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Poly Food | Organic Food Home</title>
-        <meta name="description" content="Organic food home of PolyFood." />
+        <title>POLYFOOD | Đồ ăn thuần chay</title>
+        <meta name="description" content="Đồ ăn thuần chay của POLYFOOD" />
       </MetaTags>
       <LayoutThree
         headerTop="visible"
@@ -25,7 +25,6 @@ const HomeOrganicFood = () => {
         {/* feature icon */}
         <FeatureIconFour
           spaceTopClass="pt-10"
-          spaceBottomClass="pb-90"
           containerClass="container-fluid"
           gutterClass="padding-10-row-col"
         />

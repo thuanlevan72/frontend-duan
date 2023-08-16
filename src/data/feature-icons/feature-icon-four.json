@@ -2,21 +2,21 @@
   {
     "id": 1,
     "titleImage": "/assets/img/icon-img/support-8.png",
-    "title": "Miễn phí vận chuyển cho tất cả các đơn hàng",
+    "title": "Miễn phí vận chuyển",
     "iconImage": "/assets/img/icon-img/support-5.png",
     "backgroundColor": "#ccfbe9"
   },
   {
     "id": 2,
     "titleImage": "/assets/img/icon-img/support-9.png",
-    "title": "Đảm bảo hoàn tiền trong vòng 5 ngày",
+    "title": "Chính sách hoàn trả tiền",
     "iconImage": "/assets/img/icon-img/support-6.png",
     "backgroundColor": "#f2fbcc"
   },
   {
     "id": 3,
     "titleImage": "/assets/img/icon-img/support-10.png",
-    "title": "Trên mỗi đơn hàng trên 500k",
+    "title": "Giảm giá lên đến 70%",
     "iconImage": "/assets/img/icon-img/support-7.png",
     "backgroundColor": "#ddfbcc"
   }

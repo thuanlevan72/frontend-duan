@@ -14,13 +14,13 @@ const CountDownTwo = ({ spaceTopClass, spaceBottomClass, dateTime }) => {
         <div className="row align-items-center">
           <div className="col-md-6">
             <div className="funfact-content funfact-res text-center">
-              <h2>Giao dịch trong ngày</h2>
+              <h2>Đồng hồ sinh học</h2>
               <div className="timer">
                 <Countdown date={new Date('2023-10-30')} renderer={Renderer} />
               </div>
               <div className="funfact-btn funfact-btn-green btn-hover">
                 <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
-                  Mua hàng ngay
+                  Xem Thêm
                 </Link>
               </div>
             </div>
@@ -29,8 +29,8 @@ const CountDownTwo = ({ spaceTopClass, spaceBottomClass, dateTime }) => {
             <div className="fruits-deal-img">
               <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
                 <img
-                  src={"https://images.pexels.com/photos/552598/pexels-photo-552598.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"}
-                  alt=""
+                  src={"https://res.cloudinary.com/do9rcgv5s/image/upload/v1692143328/mboiuod7aispnimlunxd.jpg"}
+                  alt="Đồng hồ sinh học"
                 />
               </Link>
             </div>
