@@ -27,11 +27,11 @@ import { BsCart2, BsBoxSeam, BsClock, BsBagCheck } from "react-icons/bs";
 import { CiBoxList } from "react-icons/ci";
 import {
   MdOutlineCategory,
-  MdOutlineInfo,
   MdOutlineCancel,
   MdOutlineContactSupport,
 } from "react-icons/md";
 import { FiUsers } from "react-icons/fi";
+import { HiOutlineReceiptPercent } from "react-icons/hi2";
 import { IoCreateOutline } from "react-icons/io5";
 import SubMenu from "antd/es/menu/SubMenu";
 import OrderList from "../components/admin/OrdersManager/OrderList";
@@ -42,6 +42,8 @@ import ContactsList from "../components/admin/ContactsManager/ContactsList";
 import NewList from "../components/admin/NewsMangager/NewList";
 import CreateNews from "../components/admin/NewsMangager/CreateNews";
 import ListCommentManager from "../components/admin/CommentManager/ListCommentManager";
+import VoucherList from "../components/admin/VouchersManager/VoucherList";
+import VoucherAdd from "../components/admin/VouchersManager/VoucherAdd";
 const { Header, Content, Footer, Sider } = Layout;
 
 const AdminLayout = () => {
@@ -141,16 +143,16 @@ const AdminLayout = () => {
               <NavLink to="/admin/account">Danh sách người dùng</NavLink>
             </Menu.Item>
           </SubMenu>
-          {/* Info Manager */}
+          {/* Voucher Manager */}
           <SubMenu
             key="subMenu-4"
-            icon={<MdOutlineInfo />}
-            title="Quản lý thông tin">
-            <Menu.Item key="/admin" icon={<CiBoxList />}>
-              <NavLink to="/admin">Danh sách thông tin</NavLink>
+            icon={<HiOutlineReceiptPercent />}
+            title="Quản lý mã giảm giá">
+            <Menu.Item key="/admin/vouchers" icon={<CiBoxList />}>
+              <NavLink to="/admin/vouchers">Danh sách giảm giá</NavLink>
             </Menu.Item>
-            <Menu.Item key="/admin" icon={<IoCreateOutline />}>
-              <NavLink to="/admin">Thêm thông tin trang</NavLink>
+            <Menu.Item key="/admin/voucher-add" icon={<IoCreateOutline />}>
+              <NavLink to="/admin/voucher-add">Thêm mã giảm giá</NavLink>
             </Menu.Item>
           </SubMenu>
           <SubMenu
@@ -231,7 +233,7 @@ const AdminLayout = () => {
             <Route path="/admin/account" component={UsersList} />
             <Route path="/admin/account-add" component={UsersAdd} />
             <Route path="/admin/account-edit/:id" component={UsersEdit} />
-            {/* User router */}
+            {/* Order router */}
             <Route path="/admin/orders" component={OrderList} />
             <Route path="/admin/orders-pending" component={OrderPending} />
             <Route path="/admin/orders-completed" component={OrderCompleted} />
@@ -241,6 +243,9 @@ const AdminLayout = () => {
             {/* News router */}
             <Route path="/admin/news" component={NewList} />
             <Route path="/admin/news-add" component={CreateNews} />
+            {/* Voucher router */}
+            <Route path="/admin/vouchers" component={VoucherList} />
+            <Route path="/admin/voucher-add" component={VoucherAdd} />
             {/* comment router */}
             <Route path={"/admin/comment/:id"} component={ListCommentManager} />
             {/* Redirect to Dashboard */}
