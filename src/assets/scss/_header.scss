@@ -356,7 +356,7 @@
 }
 .stick .logo,
 .stick .header-right-wrap {
-    margin-top: 22px;
+    padding: 5px 0;
     @media #{$md-layout} {
         margin-top: 0;
     }
@@ -383,7 +383,7 @@
 .header-right-wrap {
     display: flex;
     justify-content: flex-end;
-    margin-top: 32px;
+    align-items: flex-end;
     @media #{$md-layout} {
         margin-top: 0;
     }
@@ -1097,7 +1097,6 @@
     }
     .header-right-wrap {
         justify-content: flex-start;
-
         margin-top: 46px;
         margin-bottom: 67px;
         padding: 0 0 0 108px;

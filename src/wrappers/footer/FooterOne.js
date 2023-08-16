@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import { animateScroll } from "react-scroll";
 import FooterCopyright from "../../components/footer/FooterCopyright";
 import FooterNewsletter from "../../components/footer/FooterNewsletter";
+import { BsFacebook, BsTwitter, BsInstagram, BsYoutube} from "react-icons/bs"
 
 const FooterOne = ({
-  backgroundColorClass,
   spaceTopClass,
   spaceBottomClass,
   spaceLeftClass,
@@ -36,20 +36,18 @@ const FooterOne = ({
 
   return (
     <footer
-      className={`footer-area ${backgroundColorClass ? backgroundColorClass : ""
-        } ${spaceTopClass ? spaceTopClass : ""} ${spaceBottomClass ? spaceBottomClass : ""
+      className={`footer-area ${spaceTopClass ? spaceTopClass : ""} ${spaceBottomClass ? spaceBottomClass : ""
         } ${extraFooterClass ? extraFooterClass : ""} ${spaceLeftClass ? spaceLeftClass : ""
         } ${spaceRightClass ? spaceRightClass : ""}`}
     >
       <div className={`${containerClass ? containerClass : "container"}`}>
         <div className="row">
           <div
-            className={`${sideMenu ? "col-xl-2 col-sm-4" : "col-lg-2 col-sm-4"
-              }`}
+            className={`${sideMenu ? "col-xl-3 col-sm-4" : "col-lg-3 col-sm-4"}`}
           >
             {/* footer copyright */}
             <FooterCopyright
-              footerLogo="/assets/img/logo/logo.png"
+              footerLogo="https://res.cloudinary.com/do9rcgv5s/image/upload/v1692137209/e2nw6oqvtlvpqmdwtmnh.png"
               spaceBottomClass="mb-30"
             />
           </div>
@@ -59,21 +57,26 @@ const FooterOne = ({
           >
             <div className="footer-widget mb-30 ml-30">
               <div className="footer-title">
-                <h3>Giới thiệu</h3>
+                <h3>Cửa hàng</h3>
               </div>
               <div className="footer-list">
                 <ul>
                   <li>
-                    <Link to={process.env.PUBLIC_URL + "/about"}>Giới thiệu</Link>
-                  </li>
-                  <li>
-                    <Link to={process.env.PUBLIC_URL + "/contact"}>
-                      Địa chỉ
-                    </Link>
+                    <Link to={process.env.PUBLIC_URL + "/about"}>Về chúng tôi</Link>
                   </li>
                   <li>
                     <Link to={process.env.PUBLIC_URL + "/contact"}>
                       Liên hệ
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to={process.env.PUBLIC_URL + "/blog-standard"}>
+                      Tin tức
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to={process.env.PUBLIC_URL + "/contact"}>
+                      Hỗ trợ
                     </Link>
                   </li>
                 </ul>
@@ -81,7 +84,7 @@ const FooterOne = ({
             </div>
           </div>
           <div
-            className={`${sideMenu ? "col-xl-2 col-sm-4" : "col-lg-2 col-sm-4"
+            className={`${sideMenu ? "col-xl-3 col-sm-3" : "col-lg-3 col-sm-3"
               }`}
           >
             <div
@@ -91,77 +94,61 @@ const FooterOne = ({
                 }`}
             >
               <div className="footer-title">
-                <h3>Liên kết</h3>
+                <h3>Chính sách mua hàng</h3>
               </div>
               <div className="footer-list">
                 <ul>
                   <li>
-                    <Link to={process.env.PUBLIC_URL + "#/"}>Returns</Link>
+                    <Link to={process.env.PUBLIC_URL + "#/"}>Điều khoản</Link>
                   </li>
                   <li>
-                    <Link to={process.env.PUBLIC_URL + "#/"}>
-                      Support Policy
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={process.env.PUBLIC_URL + "#/"}>Size guide</Link>
-                  </li>
-                  <li>
-                    <Link to={process.env.PUBLIC_URL + "#/"}>FAQs</Link>
+                    <Link to={process.env.PUBLIC_URL + "#/"}>Chính sách & Bảo mật</Link>
                   </li>
                 </ul>
               </div>
-            </div>
-          </div>
-          <div
-            className={`${sideMenu ? "col-xl-3 col-sm-4" : "col-lg-2 col-sm-6"
-              }`}
-          >
-            <div
-              className={`${sideMenu
-                ? "footer-widget mb-30 ml-145"
-                : "footer-widget mb-30 ml-75"
-                }`}
-            >
-              <div className="footer-title">
-                <h3>Theo dõi</h3>
+              <div className="footer-title mt-3">
+                <h3>Theo dõi chúng tôi</h3>
               </div>
               <div className="footer-list">
-                <ul>
-                  <li>
+                <ul className="d-flex justify-content-start">
+                  <li className="pr-3">
                     <a
                       href="//www.facebook.com"
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="text-primary"
                     >
-                      Facebook
+                      <BsFacebook/>
                     </a>
                   </li>
-                  <li>
-                    <a
-                      href="//www.twitter.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Twitter
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="//www.instagram.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Instagram
-                    </a>
-                  </li>
-                  <li>
+                  <li className="pr-3">
                     <a
                       href="//www.youtube.com"
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="text-danger"
                     >
-                      Youtube
+                      <BsYoutube/>
+                    </a>
+                  </li>
+                  <li className="pr-3">
+                    <a
+                      href="//www.twitter.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary"
+                    >
+                      <BsTwitter/>
+                    </a>
+                  </li>
+                  <li >
+                    <a
+                      href="//www.instagram.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-warning"
+                    >
+                      <BsInstagram/>
                     </a>
                   </li>
                 </ul>

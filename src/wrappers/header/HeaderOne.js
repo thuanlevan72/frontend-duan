@@ -57,10 +57,10 @@ const HeaderOne = ({
         }`}
       >
         <div className={layout === "container-fluid" ? layout : "container"}>
-          <div className="row">
+          <div className="row align-items-center">
             <div className="col-xl-2 col-lg-2 col-md-6 col-4">
               {/* header logo */}
-              <Logo imageUrl="/assets/img/logo/GSlogo.png" logoClass="logo mt-0" />
+              <Logo imageUrl="https://res.cloudinary.com/do9rcgv5s/image/upload/v1692137209/e2nw6oqvtlvpqmdwtmnh.png" logoClass="logo mt-0" />
             </div>
             <div className="col-xl-8 col-lg-8 d-none d-lg-block">
               {/* Nav menu */}
