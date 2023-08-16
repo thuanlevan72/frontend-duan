@@ -112,7 +112,7 @@ const Compare = ({
                                         }
                                         className={
                                           cartItem !== undefined &&
-                                            cartItem.quantity > 0
+                                          cartItem.quantity > 0
                                             ? "active"
                                             : ""
                                         }
@@ -126,7 +126,7 @@ const Compare = ({
                                             : "Add to cart"
                                         }>
                                         {cartItem !== undefined &&
-                                          cartItem.quantity > 0
+                                        cartItem.quantity > 0
                                           ? "Đã thêm"
                                           : "Thêm"}
                                       </button>
@@ -158,18 +158,32 @@ const Compare = ({
                                   {discountedPrice !== null ? (
                                     <Fragment>
                                       <span className="amount old">
-                                        {currency.currencySymbol +
-                                          finalProductPrice}
+                                        {parseInt(
+                                          (
+                                            currency.currencySymbol +
+                                            finalProductPrice
+                                          ).replace("$", "")
+                                        ).toLocaleString("en-US") + " VND"}
                                       </span>
                                       <span className="amount">
-                                        {currency.currencySymbol +
-                                          finalDiscountedPrice}
+                                        {parseInt(
+                                          (
+                                            currency.currencySymbol +
+                                            finalDiscountedPrice
+                                          ).replace("$", "")
+                                        ).toLocaleString("en-US") + " VND"}
+                                        {/* {currency.currencySymbol +
+                                          finalDiscountedPrice} */}
                                       </span>
                                     </Fragment>
                                   ) : (
                                     <span className="amount">
-                                      {currency.currencySymbol +
-                                        finalProductPrice}
+                                      {parseInt(
+                                        (
+                                          currency.currencySymbol +
+                                          finalProductPrice
+                                        ).replace("$", "")
+                                      ).toLocaleString("en-US") + " VND"}
                                     </span>
                                   )}
                                 </td>
@@ -216,7 +230,8 @@ const Compare = ({
                       <i className="pe-7s-shuffle"></i>
                     </div>
                     <div className="item-empty-area__text">
-                      Không có sản phẩm so sánh<br />{" "}
+                      Không có sản phẩm so sánh
+                      <br />{" "}
                       <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
                         Thêm sản phẩm
                       </Link>

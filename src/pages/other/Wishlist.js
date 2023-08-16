@@ -112,18 +112,30 @@ const Wishlist = ({
                                   {discountedPrice !== null ? (
                                     <Fragment>
                                       <span className="amount old">
-                                        {currency.currencySymbol +
-                                          finalProductPrice}
+                                        {parseInt(
+                                          (
+                                            currency.currencySymbol +
+                                            finalProductPrice
+                                          ).replace("$", "")
+                                        ).toLocaleString("en-US") + " VND"}
                                       </span>
                                       <span className="amount">
-                                        {currency.currencySymbol +
-                                          finalDiscountedPrice}
+                                        {parseInt(
+                                          (
+                                            currency.currencySymbol +
+                                            finalDiscountedPrice
+                                          ).replace("$", "")
+                                        ).toLocaleString("en-US") + " VND"}
                                       </span>
                                     </Fragment>
                                   ) : (
                                     <span className="amount">
-                                      {currency.currencySymbol +
-                                        finalProductPrice}
+                                      {parseInt(
+                                        (
+                                          currency.currencySymbol +
+                                          finalProductPrice
+                                        ).replace("$", "")
+                                      ).toLocaleString("en-US") + " VND"}
                                     </span>
                                   )}
                                 </td>
@@ -151,7 +163,7 @@ const Wishlist = ({
                                       }
                                       className={
                                         cartItem !== undefined &&
-                                          cartItem.quantity > 0
+                                        cartItem.quantity > 0
                                           ? "active"
                                           : ""
                                       }
@@ -165,7 +177,7 @@ const Wishlist = ({
                                           : "Thêm"
                                       }>
                                       {cartItem !== undefined &&
-                                        cartItem.quantity > 0
+                                      cartItem.quantity > 0
                                         ? "Đã thêm"
                                         : "Thêm"}
                                     </button>
@@ -219,7 +231,8 @@ const Wishlist = ({
                       <i className="pe-7s-like"></i>
                     </div>
                     <div className="item-empty-area__text">
-                      Không có sản phẩm yêu thích<br />{" "}
+                      Không có sản phẩm yêu thích
+                      <br />{" "}
                       <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
                         Thêm sản phẩm yêu thích
                       </Link>
