@@ -3,7 +3,7 @@ import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 import { getDiscountPrice } from "../../helpers/product";
-import Rating from "./sub-components/ProductRating";
+import { Rate } from 'antd';
 import ProductModal from "./ProductModal";
 
 const ProductGridListSingle = ({
@@ -26,7 +26,6 @@ const ProductGridListSingle = ({
   const finalDiscountedPrice = +(
     discountedPrice * currency.currencyRate
   ).toFixed(2);
-
   return (
     <Fragment>
       <div
@@ -56,11 +55,11 @@ const ProductGridListSingle = ({
             {product.discount || product.new_product ? (
               <div className="product-img-badges">
                 {product.discount ? (
-                  <span className="pink">-{product.discount}%</span>
+                  <span className="pink">- {product.discount}%</span>
                 ) : (
                   ""
                 )}
-                {product.new_product ? <span className="purple">New</span> : ""}
+                {product.new_product ? <span className="purple">Mới</span> : ""}
               </div>
             ) : (
               ""
@@ -72,8 +71,8 @@ const ProductGridListSingle = ({
                   disabled={wishlistItem !== undefined}
                   title={
                     wishlistItem !== undefined
-                      ? "Added to wishlist"
-                      : "Add to wishlist"
+                      ? "Đã thêm vào danh sách yêu thích"
+                      : "Thêm vào danh sách yêu thích"
                   }
                   onClick={() => addToWishlist(product, addToast)}
                 >
@@ -87,8 +86,7 @@ const ProductGridListSingle = ({
                     rel="noopener noreferrer"
                     target="_blank"
                   >
-                    {" "}
-                    Buy now{" "}
+                    Mua ngay
                   </a>
                 ) : product.variation && product.variation.length >= 1 ? (
                   <Link to={`${process.env.PUBLIC_URL}/product/${product.id}`}>
@@ -110,7 +108,7 @@ const ProductGridListSingle = ({
                     {" "}
                     <i className="pe-7s-cart"></i>{" "}
                     {cartItem !== undefined && cartItem.quantity > 0
-                      ? "đã thêm"
+                      ? "Đã thêm vào giỏ hàng"
                       : "Thêm vào giỏ hàng"}
                   </button>
                 ) : (
@@ -148,9 +146,9 @@ const ProductGridListSingle = ({
             </div>
             <div className="product-rating">
               {product.rating && product.rating > 0 ? (
-                <Rating ratingValue={product.rating} />
+                <Rate disabled defaultValue={product.rating} />
               ) : (
-                <Rating ratingValue={product.rating} />
+                <Rate disabled defaultValue={product.rating} />
               )}
             </div>
           </div>
@@ -201,11 +199,11 @@ const ProductGridListSingle = ({
                 {product.rating && product.rating > 0 ? (
                   <div className="rating-review">
                     <div className="product-list-rating">
-                      <Rating ratingValue={product.rating} />
+                      <Rate disabled defaultValue={product.rating} />
                     </div>
                   </div>
                 ) : (
-                  <Rating ratingValue={product.rating} />
+                  <Rate disabled defaultValue={product.rating} />
                 )}
                 {product.shortDescription ? (
                   <p>{product.shortDescription}</p>
@@ -234,8 +232,7 @@ const ProductGridListSingle = ({
                         rel="noopener noreferrer"
                         target="_blank"
                       >
-                        {" "}
-                        Buy now{" "}
+                        Mua ngay
                       </a>
                     ) : product.variation && product.variation.length >= 1 ? (
                       <Link
