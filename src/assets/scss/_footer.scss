@@ -2,7 +2,6 @@
 
 .copyright {
   .footer-logo {
-    margin-top: 41px;
     margin-bottom: 12px;
     @media #{$xs-layout} {
       margin-top: 0;
@@ -42,12 +41,10 @@
   .footer-title {
     h3 {
       font-size: 16px;
-      font-weight: 500;
+      font-weight: 600;
       line-height: 1;
-
       margin: 0 0 16px;
-
-      color: #313131;
+      color: #ffffff;
     }
   }
   .footer-list {
@@ -59,8 +56,7 @@
         }
         a {
           letter-spacing: 0.3px;
-
-          color: #5d5d5d;
+          color: #ffffff;
           &:hover {
             color: $theme-color;
           }
@@ -71,7 +67,6 @@
   .subscribe-style {
     p {
       margin: 0 0 20px;
-
       color: #7a7a7a;
     }
     .subscribe-form {
@@ -92,15 +87,12 @@
         button {
           font-size: 14px;
           line-height: 1;
-
           width: auto;
           height: auto;
           margin: 13px 0 0;
           padding: 0 0 1px;
-
           text-transform: uppercase;
-
-          color: #313131;
+          color: #c4c4c4;
           border: none;
           border-bottom: 2px solid #9b9b9c;
           background: none;
@@ -271,6 +263,8 @@
 }
 
 .footer-area {
+  background: url('https://res.cloudinary.com/do9rcgv5s/image/upload/v1692144184/qgbkcsydg2vwqcosx4ns.png') no-repeat top center;
+  background-size: cover;
   position: relative;
   &.ml-10 {
     margin-left: 0;

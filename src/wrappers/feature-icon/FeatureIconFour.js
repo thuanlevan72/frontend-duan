@@ -15,7 +15,7 @@ const FeatureIconFour = ({
     <div
       className={`support-area hm9-section-padding ${
         spaceTopClass ? spaceTopClass : ""
-      } ${spaceBottomClass ? spaceBottomClass : ""} ${
+      } ${
         responsiveClass ? responsiveClass : ""
       }`}
       style={

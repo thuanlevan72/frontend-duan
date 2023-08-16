@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { animateScroll } from "react-scroll";
-import Logo from "../../components/header/Logo";
 
 const FooterTwo = ({
   backgroundColorClass,
@@ -56,7 +55,7 @@ const FooterTwo = ({
               <img
                 alt=""
                 style={{ maxWidth: "250px" }}
-                src={"/assets/img/logo/GSlogo.png"}
+                src={"https://res.cloudinary.com/do9rcgv5s/image/upload/v1692137209/e2nw6oqvtlvpqmdwtmnh.png"}
               />
 
             </Link>

@@ -8,17 +8,17 @@ const FooterCopyright = ({ footerLogo, spaceBottomClass, colorClass }) => {
       className={`copyright ${spaceBottomClass ? spaceBottomClass : ""} ${colorClass ? colorClass : ""
         }`}
     >
-      <div className="footer-logo">
+      <div className="footer-logo text-center">
         <Link to={process.env.PUBLIC_URL + "/"}>
           <img
             alt=""
             style={{ maxWidth: "200px" }}
-            src={"/assets/img/logo/GSlogo.png"}
+            src={"https://res.cloudinary.com/do9rcgv5s/image/upload/v1692137209/e2nw6oqvtlvpqmdwtmnh.png"}
           />
         </Link>
       </div>
-      <p>
-        Poly Food - © FPT Polytechnic Hà Nội
+      <p className="text-center text-light">
+        Poly Food là nhà hàng Thuần chay và Cung cấp thực phẩm chay
       </p>
     </div>
   );
