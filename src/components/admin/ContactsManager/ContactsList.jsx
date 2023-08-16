@@ -5,28 +5,22 @@ import {
   Space,
   Table,
   Typography,
-  Avatar,
   Tag,
   Pagination,
   Button,
   Descriptions,
   Modal,
   message,
-  Image,
   Input,
-  Switch,
   Form,
 } from "antd";
-import { SearchOutlined, UserOutlined } from "@ant-design/icons";
-import { NavLink } from "react-router-dom";
-import UserApi from "../../../api/security/UserApi";
+import { SearchOutlined } from "@ant-design/icons";
 import { format } from "date-fns";
 import LoadingSpin from "../../loading/LoadingSpin";
-import { BiEdit } from "react-icons/bi";
 import ContactApi from "../../../api/contact/ContactApi";
 import TextArea from "antd/es/input/TextArea";
 
-const { Text, Paragraph } = Typography;
+const { Paragraph } = Typography;
 const ContactsList = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
