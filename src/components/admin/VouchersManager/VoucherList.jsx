@@ -111,7 +111,7 @@ const VoucherList = () => {
     { title: "Email", dataIndex: "email", key: "email" },
     { title: "Địa Chỉ", dataIndex: "address", key: "address" },
     {
-      title: "Hành động",
+      title: "Gửi khuyến mãi",
       dataIndex: "userId",
       key: "userId",
       align: "center",
@@ -257,6 +257,27 @@ const VoucherList = () => {
       ),
     },
     {
+      title: "Ngày kết thúc",
+      dataIndex: "expirationDate",
+      key: "expirationDate",
+      align: "center",
+      render: (expirationDate, record) => (
+        <>
+          {new Date(expirationDate) > new Date() && record.quantity > 0 ? (
+            format(new Date(expirationDate), "HH:mm:ss dd/MM/yyyy")
+          ) : (
+            <Text type="danger">
+              {format(new Date(expirationDate), "HH:mm:ss dd/MM/yyyy")} (
+              {record.quantity <= 0
+                ? "đã hết khuyến mãi"
+                : "kết thúc khuyến mãi"}
+              )
+            </Text>
+          )}
+        </>
+      ),
+    },
+    {
       title: "Hành động",
       dataIndex: "id",
       key: "id",
@@ -264,14 +285,15 @@ const VoucherList = () => {
       render: (id, record) => (
         <Space size="middle">
           <Text type="danger">
-            {new Date(record.expirationDate) > new Date() && (
-              <Text type="danger">
-                <GrSend
-                  className="text-info"
-                  onClick={() => ShowUsersWithoutPromotionUsage(id)}
-                />
-              </Text>
-            )}
+            {new Date(record.expirationDate) > new Date() &&
+              record.quantity > 0 && (
+                <Text type="danger">
+                  <GrSend
+                    className="text-info"
+                    onClick={() => ShowUsersWithoutPromotionUsage(id)}
+                  />
+                </Text>
+              )}
           </Text>
           <Text type="danger">
             <FaRegEye className="text-info" onClick={() => showModal(id)} />
