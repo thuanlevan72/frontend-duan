@@ -284,7 +284,7 @@ const OrderBeingDilivered = () => {
                     margin: "16px 0",
                 }}>
                 <Breadcrumb.Item>Bảng điều khiển</Breadcrumb.Item>
-                <Breadcrumb.Item>Đơn hàng đang chờ</Breadcrumb.Item>
+                <Breadcrumb.Item>Đơn hàng đang giao</Breadcrumb.Item>
             </Breadcrumb>
             {contextHolder}
             <Modal

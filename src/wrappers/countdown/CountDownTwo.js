@@ -14,7 +14,7 @@ const CountDownTwo = ({ spaceTopClass, spaceBottomClass, dateTime }) => {
         <div className="row align-items-center">
           <div className="col-md-6">
             <div className="funfact-content funfact-res text-center">
-              <h2>Đồng hồ sinh học</h2>
+              <h2 className="font-weight-bold">Đồng hồ sinh học</h2>
               <div className="timer">
                 <Countdown date={new Date('2023-10-30')} renderer={Renderer} />
               </div>
