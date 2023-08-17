@@ -34,7 +34,7 @@ const Cart = ({
   return (
     <Fragment>
       <MetaTags>
-        <title>Poly Food | Cart</title>
+        <title>Poly Food | Giỏ hàng</title>
         <meta name="description" content="Cart page of PolyFood." />
       </MetaTags>
 
@@ -42,7 +42,7 @@ const Cart = ({
         Trang chủ
       </BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
-        Cart
+        Giỏ hàng
       </BreadcrumbsItem>
 
       <LayoutOne headerTop="visible">
@@ -86,9 +86,9 @@ const Cart = ({
                               finalProductPrice * cartItem.quantity;
                             discountedPrice != null
                               ? (cartTotalPrice +=
-                                  finalDiscountedPrice * cartItem.quantity)
+                                finalDiscountedPrice * cartItem.quantity)
                               : (cartTotalPrice +=
-                                  finalProductPrice * cartItem.quantity);
+                                finalProductPrice * cartItem.quantity);
                             return (
                               <tr key={key}>
                                 <td className="product-thumbnail">
@@ -119,7 +119,7 @@ const Cart = ({
                                     {cartItem.name}
                                   </Link>
                                   {cartItem.selectedProductColor &&
-                                  cartItem.selectedProductSize ? (
+                                    cartItem.selectedProductSize ? (
                                     <div className="cart-item-variation">
                                       <span>
                                         Color: {cartItem.selectedProductColor}
@@ -193,11 +193,11 @@ const Cart = ({
                                         cartItem !== undefined &&
                                         cartItem.quantity &&
                                         cartItem.quantity >=
-                                          cartItemStock(
-                                            cartItem,
-                                            cartItem.selectedProductColor,
-                                            cartItem.selectedProductSize
-                                          )
+                                        cartItemStock(
+                                          cartItem,
+                                          cartItem.selectedProductColor,
+                                          cartItem.selectedProductSize
+                                        )
                                       }>
                                       +
                                     </button>
@@ -206,23 +206,23 @@ const Cart = ({
                                 <td className="product-subtotal">
                                   {discountedPrice !== null
                                     ? parseInt(
+                                      (
+                                        currency.currencySymbol +
                                         (
-                                          currency.currencySymbol +
-                                          (
-                                            finalDiscountedPrice *
-                                            cartItem.quantity
-                                          ).toFixed(2)
-                                        ).replace("$", "")
-                                      ).toLocaleString("en-US") + " VND"
+                                          finalDiscountedPrice *
+                                          cartItem.quantity
+                                        ).toFixed(2)
+                                      ).replace("$", "")
+                                    ).toLocaleString("en-US") + " VND"
                                     : parseInt(
+                                      (
+                                        currency.currencySymbol +
                                         (
-                                          currency.currencySymbol +
-                                          (
-                                            finalProductPrice *
-                                            cartItem.quantity
-                                          ).toFixed(2)
-                                        ).replace("$", "")
-                                      ).toLocaleString("en-US") + " VND"}
+                                          finalProductPrice *
+                                          cartItem.quantity
+                                        ).toFixed(2)
+                                      ).replace("$", "")
+                                    ).toLocaleString("en-US") + " VND"}
                                 </td>
 
                                 <td className="product-remove">

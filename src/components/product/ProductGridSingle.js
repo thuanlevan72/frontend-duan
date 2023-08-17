@@ -111,8 +111,8 @@ const ProductGridSingle = ({
                     {" "}
                     <i className="pe-7s-cart"></i>{" "}
                     {cartItem !== undefined && cartItem.quantity > 0
-                      ? "Added"
-                      : "Add to cart"}
+                      ? "Đã thêm"
+                      : "Thêm"}
                   </button>
                 ) : (
                   <button disabled className="active">
@@ -128,10 +128,9 @@ const ProductGridSingle = ({
             </div>
           </div>
           <div className="product-content text-center">
-            <h3 style={{ fontSize: "20px", fontWeight: "bold", marginBottom: "10px" }}>
+            <h3 style={{ fontSize: "20px", textTransform: "uppercase", marginBottom: "10px" }}>
               <Link
                 to={process.env.PUBLIC_URL + "/product/" + product.id}
-                style={{ textDecoration: "none", color: "#333", borderBottom: "2px solid #333" }}
               >
                 {product.name}
               </Link>

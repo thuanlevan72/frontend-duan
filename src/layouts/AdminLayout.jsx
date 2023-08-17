@@ -31,11 +31,13 @@ import {
   MdOutlineContactSupport,
 } from "react-icons/md";
 import { FiUsers } from "react-icons/fi";
+import { TbTruckDelivery } from "react-icons/tb";
 import { HiOutlineReceiptPercent } from "react-icons/hi2";
 import { IoCreateOutline } from "react-icons/io5";
 import SubMenu from "antd/es/menu/SubMenu";
 import OrderList from "../components/admin/OrdersManager/OrderList";
 import OrderPending from "../components/admin/OrdersManager/OrderPending";
+import OrderBeingDilivered from "../components/admin/OrdersManager/OrderBeingDelivered";
 import OrderCompleted from "../components/admin/OrdersManager/OrderCompleted";
 import OrderCanceled from "../components/admin/OrdersManager/OrderCanceled";
 import ContactsList from "../components/admin/ContactsManager/ContactsList";
@@ -183,15 +185,16 @@ const AdminLayout = () => {
               <NavLink to="/admin/orders">Danh sách đơn hàng</NavLink>
             </Menu.Item>
             <Menu.Item key="/admin/orders-pending" icon={<BsClock />}>
-              <NavLink to="/admin/orders-pending">Đơn hàng đang chờ</NavLink>
+              <NavLink to="/admin/orders-pending">Đang chờ</NavLink>
+            </Menu.Item>
+            <Menu.Item key="/admin/orders-beingdelivered" icon={<TbTruckDelivery />}>
+              <NavLink to="/admin/orders-beingdelivered">Đang giao</NavLink>
             </Menu.Item>
             <Menu.Item key="/admin/orders-completed" icon={<BsBagCheck />}>
-              <NavLink to="/admin/orders-completed">
-                Đơn hàng hoàn thành
-              </NavLink>
+              <NavLink to="/admin/orders-completed">Hoàn thành</NavLink>
             </Menu.Item>
             <Menu.Item key="/admin/orders-canceled" icon={<MdOutlineCancel />}>
-              <NavLink to="/admin/orders-canceled">Đơn hàng đã hủy</NavLink>
+              <NavLink to="/admin/orders-canceled">Đã hủy</NavLink>
             </Menu.Item>
           </SubMenu>
         </Menu>
@@ -236,6 +239,7 @@ const AdminLayout = () => {
             {/* Order router */}
             <Route path="/admin/orders" component={OrderList} />
             <Route path="/admin/orders-pending" component={OrderPending} />
+            <Route path="/admin/orders-beingdelivered" component={OrderBeingDilivered} />
             <Route path="/admin/orders-completed" component={OrderCompleted} />
             <Route path="/admin/orders-canceled" component={OrderCanceled} />
             {/* Contact router */}

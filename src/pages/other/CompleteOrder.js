@@ -33,7 +33,7 @@ const CompleteOrder = ({
   return (
     <Fragment>
       <MetaTags>
-        <title>Poly Food | Cart</title>
+        <title>Poly Food | Giỏ hàng</title>
         <meta name="description" content="Cart page of PolyFood." />
       </MetaTags>
 
