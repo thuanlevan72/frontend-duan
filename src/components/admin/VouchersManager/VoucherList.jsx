@@ -248,12 +248,21 @@ const VoucherList = () => {
       align: "center",
     },
     {
-      title: "Ngày tạo",
+      title: "Ngày sản xuất",
       dataIndex: "createdAt",
       key: "createdAt",
       align: "center",
       render: (createdAt) => (
-        <>{format(new Date(createdAt), "HH:mm:ss dd/MM/yyyy")}</>
+        <>{format(new Date(createdAt), "dd/MM/yyyy")}</>
+      ),
+    },
+    {
+      title: "Hạn sử dụng",
+      dataIndex: "expirationDate",
+      key: "expirationDate",
+      align: "center",
+      render: (expirationDate) => (
+        <>{format(new Date(expirationDate), "dd/MM/yyyy")}</>
       ),
     },
     {
