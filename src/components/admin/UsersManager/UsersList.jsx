@@ -14,6 +14,7 @@ import {
   Image,
   Input,
   Switch,
+  Select,
 } from "antd";
 import { SearchOutlined, UserOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
@@ -22,12 +23,15 @@ import { format } from "date-fns";
 import LoadingSpin from "../../loading/LoadingSpin";
 import { BiEdit } from "react-icons/bi";
 import { ImEye } from "react-icons/im";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const UsersList = () => {
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
   const [messageApi, contextHolder] = message.useMessage();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [dataCurrent, setDataCurrent] = useState([]);
+  const [listRoles, setListRoles] = useState();
   const [data, setData] = useState({
     totalItems: 0,
     totalPages: 0,
@@ -54,6 +58,17 @@ const UsersList = () => {
     }
     setIsModalOpen(true);
   };
+  useEffect(async () => {
+    try {
+      const res = await UserApi.GetRoles();
+      setListRoles(
+        res.map((item) => ({
+          decentralizationId: item.decentralizationId,
+          authorityName: item.authorityName,
+        }))
+      );
+    } catch (error) {}
+  }, []);
   const handleOk = () => {
     setIsModalOpen(false);
   };
@@ -63,11 +78,11 @@ const UsersList = () => {
   const handlePaginationChange = (page, pageSize) => {
     setParam(
       (prev) =>
-      (prev = {
-        ...param,
-        page: page,
-        pageSize: pageSize,
-      })
+        (prev = {
+          ...param,
+          page: page,
+          pageSize: pageSize,
+        })
     );
   };
   const [param, setParam] = useState({
@@ -83,6 +98,27 @@ const UsersList = () => {
       searchName: value,
       page: 1,
     }));
+  };
+  const handleChangeRole = async (accountId, newRole) => {
+    try {
+      setLoading(true);
+      const res = await UserApi.ChangeRole({
+        accountId: accountId,
+        decentralizationId: newRole,
+      });
+      // setParam(...param);
+
+      setLoading(false);
+      messageApi.open({
+        type: "success",
+        content: "Thay đổi Quyền thành cồng",
+      });
+      setTimeout(() => {
+        setParam({ ...param });
+      }, 500);
+    } catch (error) {
+      setLoading(false);
+    }
   };
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, clearFilters }) => (
@@ -125,15 +161,15 @@ const UsersList = () => {
     onFilter: (value, record) =>
       record[dataIndex]
         ? record[dataIndex]
-          .toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
+            .toString()
+            .toLowerCase()
+            .includes(value.toLowerCase())
         : "",
     render: (text) => {
       return dataIndex === "userName" ? (
         <span>
           {searchText &&
-            text.toLowerCase().includes(searchText.toLowerCase()) ? (
+          text.toLowerCase().includes(searchText.toLowerCase()) ? (
             <span>
               {text
                 .split(new RegExp(`(${searchText})`, "gi"))
@@ -207,6 +243,7 @@ const UsersList = () => {
       accountId: item.accountId,
       userName: item.userName,
       email: item.email,
+      decentralizationId: item.decentralizationId,
       role: (
         <Tag
           color={
@@ -266,6 +303,31 @@ const UsersList = () => {
       align: "center",
       render: (createdAt) => (
         <>{format(new Date(createdAt), "HH:mm:ss dd/MM/yyyy")}</>
+      ),
+    },
+    {
+      title: "Phân quyền",
+      dataIndex: "decentralizationId",
+      key: "decentralizationId",
+      align: "center",
+      render: (decentralizationId, record) => (
+        <>
+          {/* {decentralizationId} */}
+          <Select
+            value={decentralizationId}
+            onChange={(value) => handleChangeRole(record.accountId, value)}>
+            {listRoles &&
+              listRoles.map((item) => {
+                return (
+                  <Select.Option
+                    key={item.decentralizationId}
+                    value={item.decentralizationId}>
+                    <p>{item.authorityName}</p>
+                  </Select.Option>
+                );
+              })}
+          </Select>
+        </>
       ),
     },
     {

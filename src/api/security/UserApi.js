@@ -5,10 +5,11 @@ const UserApi = {
     const url = "/User";
     return axiosClient.get(url, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")
+        Authorization: `Bearer ${
+          localStorage.getItem("token")
             ? JSON.parse(localStorage.getItem("token"))
             : ""
-          }`,
+        }`,
       },
       params: {
         ...params,
@@ -35,10 +36,11 @@ const UserApi = {
     const url = `/Login/change-pass`;
     return axiosClient.post(url, body, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")
+        Authorization: `Bearer ${
+          localStorage.getItem("token")
             ? JSON.parse(localStorage.getItem("token"))
             : ""
-          }`,
+        }`,
       },
     });
   },
@@ -46,10 +48,11 @@ const UserApi = {
     const url = `/User/updateUser/${id}`;
     return axiosClient.post(url, body, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")
+        Authorization: `Bearer ${
+          localStorage.getItem("token")
             ? JSON.parse(localStorage.getItem("token"))
             : ""
-          }`,
+        }`,
       },
     });
   },
@@ -57,10 +60,11 @@ const UserApi = {
     const url = `/User/update_avatar/${id}`;
     return axiosClient.post(url, body, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")
+        Authorization: `Bearer ${
+          localStorage.getItem("token")
             ? JSON.parse(localStorage.getItem("token"))
             : ""
-          }`,
+        }`,
       },
     });
   },
@@ -68,10 +72,11 @@ const UserApi = {
     const url = "/User";
     return axiosClient.get(url, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")
+        Authorization: `Bearer ${
+          localStorage.getItem("token")
             ? JSON.parse(localStorage.getItem("token"))
             : ""
-          }`,
+        }`,
       },
       params: {
         ...params,
@@ -82,10 +87,11 @@ const UserApi = {
     const url = `/User/${id}`;
     return axiosClient.get(url, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")
+        Authorization: `Bearer ${
+          localStorage.getItem("token")
             ? JSON.parse(localStorage.getItem("token"))
             : ""
-          }`,
+        }`,
       },
     });
   },
@@ -93,10 +99,11 @@ const UserApi = {
     const url = `/User/updateUser/${id}`;
     return axiosClient.post(url, body, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")
+        Authorization: `Bearer ${
+          localStorage.getItem("token")
             ? JSON.parse(localStorage.getItem("token"))
             : ""
-          }`,
+        }`,
       },
     });
   },
@@ -104,10 +111,11 @@ const UserApi = {
     const url = `/User/change-status/${id}`;
     return axiosClient.get(url, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")
+        Authorization: `Bearer ${
+          localStorage.getItem("token")
             ? JSON.parse(localStorage.getItem("token"))
             : ""
-          }`,
+        }`,
       },
     });
   },
@@ -132,6 +140,34 @@ const UserApi = {
   EmailAdmissionForm: (body) => {
     const url = `User/sendMail/welcome-to-admission`;
     return axiosClient.post(url, body);
+  },
+  GetRoles: () => {
+    const url = `Login/get-role`;
+    return axiosClient.post(
+      url,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${
+            localStorage.getItem("token")
+              ? JSON.parse(localStorage.getItem("token"))
+              : ""
+          }`,
+        },
+      }
+    );
+  },
+  ChangeRole: (data) => {
+    const url = `Login/update-role`;
+    return axiosClient.post(url, data, {
+      headers: {
+        Authorization: `Bearer ${
+          localStorage.getItem("token")
+            ? JSON.parse(localStorage.getItem("token"))
+            : ""
+        }`,
+      },
+    });
   },
 };
 
