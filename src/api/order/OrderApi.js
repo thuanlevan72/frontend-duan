@@ -86,8 +86,8 @@ const OrderApi = {
       },
     });
   },
-  GetCanceled: (params = null) => {
-    const url = "Order/orderIsCanceled";
+  GetCompelete: (params = null) => {
+    const url = "Order/getcomplete";
     return axiosClient.get(url, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")

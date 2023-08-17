@@ -61,11 +61,11 @@ const OrderCanceled = () => {
   const handlePaginationChange = (page, pageSize) => {
     setParam(
       (prev) =>
-        (prev = {
-          ...param,
-          page: page,
-          pageSize: pageSize,
-        })
+      (prev = {
+        ...param,
+        page: page,
+        pageSize: pageSize,
+      })
     );
   };
   const [param, setParam] = useState({
@@ -111,7 +111,7 @@ const OrderCanceled = () => {
     try {
       const data = await OrderApi.getOrderStatus();
       setOptions(data);
-    } catch (error) {}
+    } catch (error) { }
   };
   const handleChangeStatus = (id) => async (orderId, newStatus) => {
     try {
@@ -284,7 +284,7 @@ const OrderCanceled = () => {
           margin: "16px 0",
         }}>
         <Breadcrumb.Item>Bảng điều khiển</Breadcrumb.Item>
-        <Breadcrumb.Item>Đơn hàng đang chờ</Breadcrumb.Item>
+        <Breadcrumb.Item>Đơn hàng đã hủy</Breadcrumb.Item>
       </Breadcrumb>
       {contextHolder}
       <Modal
