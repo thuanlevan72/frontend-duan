@@ -111,7 +111,7 @@ const UsersList = () => {
       setLoading(false);
       messageApi.open({
         type: "success",
-        content: "Thay đổi Quyền thành cồng",
+        content: "Thay đổi Quyền thành công",
       });
       setTimeout(() => {
         setParam({ ...param });
