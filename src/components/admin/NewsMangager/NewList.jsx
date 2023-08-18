@@ -1,13 +1,5 @@
 import React, { useEffect } from "react";
-import {
-    Breadcrumb,
-    Image,
-    Space,
-    Table,
-    Typography,
-    Pagination,
-    Button
-} from "antd";
+import { Breadcrumb, Image, Space, Table, Pagination, Popconfirm } from "antd";
 import { NavLink } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import { ImBin } from "react-icons/im";
@@ -15,10 +7,10 @@ import NewsAPI from "../../../api/news/NewsApi";
 import { useState } from "react";
 import { format } from "date-fns";
 import LoadingSpin from "../../loading/LoadingSpin";
+import { useToasts } from "react-toast-notifications";
 
-// const currentDate = new Date();
-const { Text } = Typography;
 const NewList = () => {
+    const { addToast } = useToasts();
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState({
         totalItems: 0,
@@ -32,11 +24,11 @@ const NewList = () => {
     const handlePaginationChange = (page, pageSize) => {
         setParam(
             (prev) =>
-            (prev = {
-                ...param,
-                page: page,
-                pageSize: pageSize,
-            })
+                (prev = {
+                    ...param,
+                    page: page,
+                    pageSize: pageSize,
+                })
         );
     };
     const [param, setParam] = useState({
@@ -57,10 +49,31 @@ const NewList = () => {
         };
         getNews();
     }, [param]);
+    const handleOk = async (id) => {
+        try {
+            await NewsAPI.removeNews(id);
+            const { data } = await NewsAPI.GetNews(param);
+            setData(data);
+            addToast("Xóa bài viết thành công!", {
+                appearance: "success",
+                autoDismiss: true,
+                autoDismissTimeout: 1500,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const handleCancel = () => {
+        addToast("Hủy xóa", {
+            appearance: "error",
+            autoDismiss: true,
+            autoDismissTimeout: 1000,
+        });
+    };
     const dataSource = data?.data?.map((item, index) => {
         return {
             key: index + 1,
-            id: item.newId,
+            id: item.newsId,
             title: item.title,
             image: item.image,
             createdAt: item.createdAt,
@@ -86,12 +99,7 @@ const NewList = () => {
             key: "image",
             align: "center",
             render: (image) => (
-                <Image
-                    src={image}
-                    alt={image}
-                    width={180}
-                    height={180}
-                />
+                <Image src={image} alt={image} width={180} height={180} />
             ),
         },
         {
@@ -122,9 +130,18 @@ const NewList = () => {
                     <NavLink to={`/admin/news-edit/${record.id}`}>
                         <BiEdit className="text-info" />
                     </NavLink>
-                    <Text type="danger">
-                        <ImBin />
-                    </Text>
+                    <Popconfirm
+                        title="Bạn có chắc chắn xóa?"
+                        onConfirm={() => {
+                            handleOk(record.id);
+                        }}
+                        onCancel={handleCancel}
+                        className="border border-white"
+                        okText="Có"
+                        cancelText="Hủy"
+                    >
+                        <ImBin className="text-danger" />
+                    </Popconfirm>
                 </Space>
             ),
         },

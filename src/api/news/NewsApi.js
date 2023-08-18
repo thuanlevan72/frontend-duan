@@ -38,6 +38,18 @@ const NewsApi = {
       },
     });
   },
+  removeNews: (id) => {
+    const url = `/News/delete-news/${id}`;
+    return axiosClient.post(url,{},{
+        headers: {
+            Authorization: `Bearer ${
+                localStorage.getItem("token")
+                    ? JSON.parse(localStorage.getItem("token"))
+                    : ""
+            }`,
+        },
+    });
+},
 };
 
 export default NewsApi;
