@@ -11,6 +11,7 @@ import {
   Modal,
   Form,
   Rate,
+  message,
 } from "antd";
 import { NavLink } from "react-router-dom";
 import { BiComment } from "react-icons/bi";
@@ -28,6 +29,7 @@ const { Text, Paragraph } = Typography;
 const ListCommentManager = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [dataCurrent, setDataCurrent] = useState();
   const { id } = useParams();
@@ -57,7 +59,10 @@ const ListCommentManager = () => {
         dataCurrent.productReviewId,
         values.mess
       );
-      console.log(res);
+      messageApi.open({
+        type: "success",
+        content: "Đã trả lời bình luận thành công",
+      });
       setLoading(false);
       setParam({
         ...param,
@@ -210,6 +215,7 @@ const ListCommentManager = () => {
         <Breadcrumb.Item>Bảng điều khiển</Breadcrumb.Item>
         <Breadcrumb.Item>danh sách bình luận</Breadcrumb.Item>
       </Breadcrumb>
+      {contextHolder}
       <div>
         <Modal
           open={isModalOpen}

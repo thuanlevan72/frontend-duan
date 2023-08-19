@@ -132,7 +132,9 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
       data.paymentId = 1;
       setLoading(true);
       const response = await OrderApi.CreateOrder(data);
-      await VoucherApi.ApllyVoucher(userOrder.userId, codeVoucher);
+      if (codeVoucher) {
+        await VoucherApi.ApllyVoucher(userOrder.userId, codeVoucher);
+      }
       messageApi.open({
         type: "success",
         content: "Cảm ơn bạn đã mua sản phẩm của chúng tôi",
