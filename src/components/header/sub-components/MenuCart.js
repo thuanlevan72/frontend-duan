@@ -48,7 +48,7 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
                         {single.name}{" "}
                       </Link>
                     </h4>
-                    <h6>Qty: {single.quantity}</h6>
+                    <h6>Số lượng: {single.quantity}</h6>
                     <span>
                       {discountedPrice !== null
                         ? parseInt((currency.currencySymbol + finalDiscountedPrice).replace("$", "")).toLocaleString("en-US") + " VND"
