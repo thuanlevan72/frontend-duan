@@ -124,7 +124,7 @@ const LoginRegister = ({ location }) => {
 
         setTimeout(function () {
           setLoading(false);
-          history.push("/");
+          history.push("/admin");
         }, 1000);
         return;
       }
