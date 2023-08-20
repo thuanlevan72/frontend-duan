@@ -193,13 +193,17 @@ const OrderCanceled = () => {
       render: (orderStatus, orderId) => (
         <Select
           defaultValue={orderStatus.orderStatusId}
-          onChange={handleChangeStatus(orderId)}>
+          onChange={handleChangeStatus(orderId)}
+          style={{ width: 130 }}>
           {options &&
             options.map((item) => {
+              const isDisable = item.orderStatusId !== 7;
               return (
                 <Select.Option
                   key={item.orderStatusId}
-                  value={item.orderStatusId}>
+                  value={item.orderStatusId}
+                  disabled={isDisable}
+                  >
                   <p style={{ color: getStatusColor(item.orderStatusId) }}>
                     {item.name}
                   </p>
