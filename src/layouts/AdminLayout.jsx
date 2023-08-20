@@ -234,7 +234,7 @@ const AdminLayout = () => {
                             icon={<BsClock />}
                         >
                             <NavLink to="/admin/orders-pending">
-                                Đang chờ
+                                Đơn hàng đang chờ
                             </NavLink>
                         </Menu.Item>
                         <Menu.Item
@@ -242,7 +242,7 @@ const AdminLayout = () => {
                             icon={<TbTruckDelivery />}
                         >
                             <NavLink to="/admin/orders-beingdelivered">
-                                Đang giao
+                                Đơn hàng đang giao
                             </NavLink>
                         </Menu.Item>
                         <Menu.Item
@@ -250,7 +250,7 @@ const AdminLayout = () => {
                             icon={<BsBagCheck />}
                         >
                             <NavLink to="/admin/orders-completed">
-                                Hoàn thành
+                                Đơn hoàn thành
                             </NavLink>
                         </Menu.Item>
                         <Menu.Item
@@ -258,7 +258,7 @@ const AdminLayout = () => {
                             icon={<MdOutlineCancel />}
                         >
                             <NavLink to="/admin/orders-canceled">
-                                Đã hủy
+                                Đơn đã hủy
                             </NavLink>
                         </Menu.Item>
                     </SubMenu>

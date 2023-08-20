@@ -196,10 +196,13 @@ const OrderBeingDilivered = () => {
                     onChange={handleChangeStatus(orderId)}>
                     {options &&
                         options.map((item) => {
+                            const isDisable = item.orderStatusId === 4;
                             return (
                                 <Select.Option
                                     key={item.orderStatusId}
-                                    value={item.orderStatusId}>
+                                    value={item.orderStatusId}
+                                    disabled={isDisable}
+                                    >
                                     <p style={{ color: getStatusColor(item.orderStatusId) }}>
                                         {item.name}
                                     </p>
