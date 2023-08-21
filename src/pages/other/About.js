@@ -16,7 +16,7 @@ const About = ({ location }) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Poly Food | Giói thiệu</title>
+        <title>Poly Food | Giới thiệu</title>
         <meta name="description" content="About page of PolyFood." />
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>

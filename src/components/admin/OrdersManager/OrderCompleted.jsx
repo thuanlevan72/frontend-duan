@@ -351,7 +351,7 @@ const OrderCompleted = () => {
           total={data.totalItems}
           onChange={handlePaginationChange}
           showSizeChanger
-          showTotal={(total) => `Tổng ${total} sản phẩm`}
+          showTotal={(total) => `Tổng ${total} đơn hàng hoàn thành`}
         />
       </div>
     </>

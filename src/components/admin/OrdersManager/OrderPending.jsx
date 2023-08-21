@@ -125,9 +125,7 @@ const OrderPending = () => {
         content: "Thay đổi trạng thái thành công",
       });
       setLoading(false);
-      setTimeout(() => {
-        history.go(0);
-      }, 500);
+      history.go(0);
       return;
     } catch (error) {
       messageApi.open({
@@ -348,7 +346,7 @@ const OrderPending = () => {
           total={data.totalItems}
           onChange={handlePaginationChange}
           showSizeChanger
-          showTotal={(total) => `Tổng ${total} sản phẩm`}
+          showTotal={(total) => `Tổng ${total} đơn hàng đang chờ`}
         />
       </div>
     </>

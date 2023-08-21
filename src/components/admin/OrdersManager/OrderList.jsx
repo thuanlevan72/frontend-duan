@@ -76,7 +76,14 @@ const OrderList = () => {
       try {
         setLoading(true);
         const { data } = await OrderApi.getAllOrders(param);
-        setData(data);
+        const updatedDataSource = data.data.map((item) => {
+          const orderStatusItem = dataSource.find((prevItem) => prevItem.key === item.key);
+          if (orderStatusItem) {
+            item.orderStatus = orderStatusItem.orderStatus;
+          }
+          return item;
+        });
+        setData({...data, data: updatedDataSource});
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -111,27 +118,27 @@ const OrderList = () => {
       setOptions(data);
     } catch (error) { }
   };
-  const handleChangeStatus = (id) => async (orderId, newStatus) => {
-    try {
-      setLoading(true);
-      await OrderApi.updateOrderStatus({
-        id: id.orderId,
-        idStatus: newStatus.value,
-      });
-      messageApi.open({
-        type: "success",
-        content: "Thay đổi trạng thái thành công",
-      });
-      setLoading(false);
-      return;
-    } catch (error) {
-      messageApi.open({
-        type: "error",
-        content: "Thay đổi trạng thái thất bại",
-      });
-      return;
-    }
-  };
+  // const handleChangeStatus = (id) => async (orderId, newStatus) => {
+  //   try {
+  //     setLoading(true);
+  //     await OrderApi.updateOrderStatus({
+  //       id: id.orderId,
+  //       idStatus: newStatus.value,
+  //     });
+  //     messageApi.open({
+  //       type: "success",
+  //       content: "Thay đổi trạng thái thành công",
+  //     });
+  //     setLoading(false);
+  //     return;
+  //   } catch (error) {
+  //     messageApi.open({
+  //       type: "error",
+  //       content: "Thay đổi trạng thái thất bại",
+  //     });
+  //     return;
+  //   }
+  // };
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -185,23 +192,10 @@ const OrderList = () => {
       dataIndex: "orderStatus",
       key: "orderStatus",
       align: "center",
-      render: (orderStatus, orderId) => (
-        <Select
-          defaultValue={orderStatus.orderStatusId}
-          onChange={handleChangeStatus(orderId)}>
-          {options &&
-            options.map((item) => {
-              return (
-                <Select.Option
-                  key={item.orderStatusId}
-                  value={item.orderStatusId}>
-                  <p style={{ color: getStatusColor(item.orderStatusId) }}>
-                    {item.name}
-                  </p>
-                </Select.Option>
-              );
-            })}
-        </Select>
+      render: (orderStatus) => (
+        <p style={{ color: getStatusColor(orderStatus.orderStatusId) }}>
+          {orderStatus.name}
+        </p>
       ),
     },
     {
@@ -343,7 +337,7 @@ const OrderList = () => {
           total={data.totalItems}
           onChange={handlePaginationChange}
           showSizeChanger
-          showTotal={(total) => `Tổng ${total} sản phẩm`}
+          showTotal={(total) => `Tổng ${total} đơn hàng`}
         />
       </div>
     </>

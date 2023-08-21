@@ -194,7 +194,7 @@ const OrderCanceled = () => {
         <Select
           defaultValue={orderStatus.orderStatusId}
           onChange={handleChangeStatus(orderId)}
-          style={{ width: 130 }}>
+          style={{ width: 107 }}>
           {options &&
             options.map((item) => {
               const isDisable = item.orderStatusId !== 7;
@@ -352,7 +352,7 @@ const OrderCanceled = () => {
           total={data.totalItems}
           onChange={handlePaginationChange}
           showSizeChanger
-          showTotal={(total) => `Tổng ${total} sản phẩm`}
+          showTotal={(total) => `Tổng ${total} đơn hàng hủy`}
         />
       </div>
     </>
