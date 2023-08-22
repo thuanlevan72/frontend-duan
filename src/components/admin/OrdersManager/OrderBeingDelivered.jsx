@@ -16,6 +16,7 @@ import OrderApi from "../../../api/order/OrderApi.js";
 import { format } from "date-fns";
 import LoadingSpin from "../../loading/LoadingSpin";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min.js";
+import Swal from "sweetalert2";
 
 const OrderBeingDilivered = () => {
     const [loading, setLoading] = useState(false);
@@ -43,10 +44,15 @@ const OrderBeingDilivered = () => {
                     nameProduct: item.product.nameProduct,
                     avartarImageProduct: item.product.avartarImageProduct,
                     quantity: item.quantity,
-                    priceOld: item.product.price.toLocaleString("vi-VN") + " " + "vnd",
+                    priceOld:
+                        item.product.price.toLocaleString("vi-VN") +
+                        " " +
+                        "vnd",
                     price: item.price.toLocaleString("vi-VN") + " " + "VND",
                     totalPrice:
-                        (item.price * item.quantity).toLocaleString("vi-VN") + " " + "VND",
+                        (item.price * item.quantity).toLocaleString("vi-VN") +
+                        " " +
+                        "VND",
                 };
             })
         );
@@ -61,11 +67,11 @@ const OrderBeingDilivered = () => {
     const handlePaginationChange = (page, pageSize) => {
         setParam(
             (prev) =>
-            (prev = {
-                ...param,
-                page: page,
-                pageSize: pageSize,
-            })
+                (prev = {
+                    ...param,
+                    page: page,
+                    pageSize: pageSize,
+                })
         );
     };
     const [param, setParam] = useState({
@@ -111,24 +117,41 @@ const OrderBeingDilivered = () => {
         try {
             const data = await OrderApi.getOrderStatus();
             setOptions(data);
-        } catch (error) { }
+        } catch (error) {
+            console.log(error);
+        }
     };
     const handleChangeStatus = (id) => async (orderId, newStatus) => {
         try {
             setLoading(true);
-            await OrderApi.updateOrderStatus({
-                id: id.orderId,
-                idStatus: newStatus.value,
+            const confirmResult = await Swal.fire({
+                title: "Xác nhận thay đổi trạng thái?",
+                text: "Bạn có chắc muốn thay đổi trạng thái này?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                cancelButtonText: "Không",
+                confirmButtonText: "Chắc chắn rồi!",
             });
-            messageApi.open({
-                type: "success",
-                content: "Thay đổi trạng thái thành công",
-            });
-            setLoading(false);
-            setTimeout(() => {
-                history.go(0);
-            }, 500);
-            return;
+            if (confirmResult.isConfirmed) {
+                await OrderApi.updateOrderStatus({
+                    id: id.orderId,
+                    idStatus: newStatus.value,
+                });
+                messageApi.open({
+                    type: "success",
+                    content: "Thay đổi trạng thái thành công",
+                });
+                setLoading(false);
+                setTimeout(() => {
+                    history.go(0);
+                }, 200);
+                return;
+            }else{
+                setLoading(false);
+                return;
+            }
         } catch (error) {
             messageApi.open({
                 type: "error",
@@ -192,8 +215,9 @@ const OrderBeingDilivered = () => {
             align: "center",
             render: (orderStatus, orderId) => (
                 <Select
-                    defaultValue={orderStatus.orderStatusId}
-                    onChange={handleChangeStatus(orderId)}>
+                    value={orderStatus.orderStatusId}
+                    onChange={handleChangeStatus(orderId)}
+                >
                     {options &&
                         options.map((item) => {
                             const isDisable = item.orderStatusId === 4;
@@ -202,8 +226,14 @@ const OrderBeingDilivered = () => {
                                     key={item.orderStatusId}
                                     value={item.orderStatusId}
                                     disabled={isDisable}
+                                >
+                                    <p
+                                        style={{
+                                            color: getStatusColor(
+                                                item.orderStatusId
+                                            ),
+                                        }}
                                     >
-                                    <p style={{ color: getStatusColor(item.orderStatusId) }}>
                                         {item.name}
                                     </p>
                                 </Select.Option>
@@ -285,7 +315,8 @@ const OrderBeingDilivered = () => {
             <Breadcrumb
                 style={{
                     margin: "16px 0",
-                }}>
+                }}
+            >
                 <Breadcrumb.Item>Bảng điều khiển</Breadcrumb.Item>
                 <Breadcrumb.Item>Đơn hàng đang giao</Breadcrumb.Item>
             </Breadcrumb>
@@ -295,7 +326,8 @@ const OrderBeingDilivered = () => {
                 open={isModalOpen}
                 width={1100}
                 onOk={handleOk}
-                onCancel={handleCancel}>
+                onCancel={handleCancel}
+            >
                 <Descriptions title="Chi tiết đơn hàng">
                     <Descriptions.Item label="Tên khách hàng">
                         {dataCurrent && dataCurrent.fullName}
@@ -316,15 +348,20 @@ const OrderBeingDilivered = () => {
                         {" "}
                         {dataCurrent &&
                             dataCurrent.actualPrice &&
-                            dataCurrent.actualPrice.toLocaleString("vi-VN")}{" "}
+                            dataCurrent.actualPrice.toLocaleString(
+                                "vi-VN"
+                            )}{" "}
                         VND
                     </Descriptions.Item>
                     <Descriptions.Item label="Phương thức thanh toán">
                         {dataCurrent && (
                             <Tag
                                 color={
-                                    dataCurrent.paymentOrderPaymentId === 1 ? "cyan" : "green"
-                                }>
+                                    dataCurrent.paymentOrderPaymentId === 1
+                                        ? "cyan"
+                                        : "green"
+                                }
+                            >
                                 {dataCurrent.paymentOrderPaymentId === 1
                                     ? "Thanh Toán Khi Nhận Hàng"
                                     : "Thanh Toán Online"}
@@ -332,7 +369,10 @@ const OrderBeingDilivered = () => {
                         )}
                     </Descriptions.Item>
                 </Descriptions>
-                <Table columns={columnDeatail} dataSource={currenOrderDeatail} />
+                <Table
+                    columns={columnDeatail}
+                    dataSource={currenOrderDeatail}
+                />
             </Modal>
             <div>
                 {loading && (
@@ -340,7 +380,11 @@ const OrderBeingDilivered = () => {
                         <LoadingSpin />
                     </div>
                 )}
-                <Table dataSource={dataSource} columns={columns} pagination={false} />
+                <Table
+                    dataSource={dataSource}
+                    columns={columns}
+                    pagination={false}
+                />
                 <Pagination
                     style={{
                         textAlign: "right",

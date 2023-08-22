@@ -92,7 +92,7 @@ const VoucherAdd = () => {
                         />
                     </Form.Item>
                     <Form.Item
-                        label="Giá trị"
+                        label="Phần trăm mã giảm giá"
                         name="valuevoucher"
                         labelCol={{ span: 3, offset: 1 }}
                         tooltip="Giá gốc mã giảm giá"

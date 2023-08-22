@@ -4,7 +4,6 @@ import {
   Pagination,
   Space,
   Table,
-  Select,
   Tag,
   Button,
   message,
@@ -104,40 +103,6 @@ const OrderCompleted = () => {
   });
 
   const [options, setOptions] = useState([]);
-  useEffect(() => {
-    getStatus();
-  }, []);
-  const getStatus = async () => {
-    try {
-      const data = await OrderApi.getOrderStatus();
-      setOptions(data);
-    } catch (error) { }
-  };
-  const handleChangeStatus = (id) => async (orderId, newStatus) => {
-    try {
-      setLoading(true);
-      await OrderApi.updateOrderStatus({
-        id: id.orderId,
-        idStatus: newStatus.value,
-      });
-      messageApi.open({
-        type: "success",
-        content: "Thay đổi trạng thái thành công",
-      });
-      setLoading(false);
-      setTimeout(() => {
-        history.go(0);
-      }, 500);
-      return;
-    } catch (error) {
-      messageApi.open({
-        type: "error",
-        content: "Thay đổi trạng thái thất bại",
-      });
-      return;
-    }
-  };
-
   const getStatusColor = (status) => {
     switch (status) {
       case 4:
@@ -149,6 +114,15 @@ const OrderCompleted = () => {
       case 9:
         return "#ffa502";
     }
+  };
+  useEffect(() => {
+    getStatus();
+  }, []);
+  const getStatus = async () => {
+    try {
+      const data = await OrderApi.getOrderStatus();
+      setOptions(data);
+    } catch (error) { }
   };
   const columns = [
     {
@@ -190,26 +164,10 @@ const OrderCompleted = () => {
       dataIndex: "orderStatus",
       key: "orderStatus",
       align: "center",
-      render: (orderStatus, orderId) => (
-        <Select
-          defaultValue={orderStatus.orderStatusId}
-          onChange={handleChangeStatus(orderId)}>
-          {options &&
-            options.map((item) => {
-              const isDisable = item.orderStatusId !== 5;
-              return (
-                <Select.Option
-                  key={item.orderStatusId}
-                  value={item.orderStatusId}
-                  disabled={isDisable}
-                  >
-                  <p style={{ color: getStatusColor(item.orderStatusId) }}>
-                    {item.name}
-                  </p>
-                </Select.Option>
-              );
-            })}
-        </Select>
+      render: (orderStatus) => (
+        <p style={{ color: getStatusColor(orderStatus.orderStatusId) }}>
+          {orderStatus.name}
+        </p>
       ),
     },
     {

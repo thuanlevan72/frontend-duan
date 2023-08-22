@@ -5,6 +5,7 @@ import categoryAPI from "../../../api/category/CategoryApi";
 import LoadingSpin from "../../loading/LoadingSpin";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useToasts } from "react-toast-notifications";
+import Swal from "sweetalert2";
 
 const CategoryAdd = () => {
     const { addToast } = useToasts();
@@ -22,17 +23,18 @@ const CategoryAdd = () => {
     const handleUpload = () => {
         const file = fileList[0];
         if (file.size > 2 * 1024 * 1024) {
-            messageApi.open({
-                type: "error",
-                content:
-                    "Tệp tin quá lớn. Vui lòng chọn một tệp tin nhỏ hơn 2MB.",
+            Swal.fire({
+                icon: "error",
+                title: "Tệp tin quá lớn...",
+                text: "Vui lòng chọn một tệp tin nhỏ hơn 2MB!",
             });
             return;
         }
         if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
-            messageApi.open({
-                type: "error",
-                content: "Vui lòng chọn một tệp tin hình ảnh (jpg, png, webp).",
+            Swal.fire({
+                icon: "error",
+                title: "Sai tệp tin...",
+                text: "Vui lòng chọn một tệp tin hình ảnh (jpg, png, webp)!",
             });
             return;
         }

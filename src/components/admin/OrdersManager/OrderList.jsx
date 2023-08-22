@@ -118,28 +118,6 @@ const OrderList = () => {
       setOptions(data);
     } catch (error) { }
   };
-  // const handleChangeStatus = (id) => async (orderId, newStatus) => {
-  //   try {
-  //     setLoading(true);
-  //     await OrderApi.updateOrderStatus({
-  //       id: id.orderId,
-  //       idStatus: newStatus.value,
-  //     });
-  //     messageApi.open({
-  //       type: "success",
-  //       content: "Thay đổi trạng thái thành công",
-  //     });
-  //     setLoading(false);
-  //     return;
-  //   } catch (error) {
-  //     messageApi.open({
-  //       type: "error",
-  //       content: "Thay đổi trạng thái thất bại",
-  //     });
-  //     return;
-  //   }
-  // };
-
   const getStatusColor = (status) => {
     switch (status) {
       case 4:
@@ -277,7 +255,6 @@ const OrderList = () => {
       </Breadcrumb>
       {contextHolder}
       <Modal
-        // title="Basic Modal"
         open={isModalOpen}
         width={1100}
         onOk={handleOk}
