@@ -12,7 +12,7 @@ export const fetchProducts = (products) => {
   return async (dispatch) => {
     const currentTime = Date.now();
     const lastFetchTime = localStorage.getItem("lastFetchTime");
-    if (!lastFetchTime || currentTime - lastFetchTime >= 3600000) {
+    if (!lastFetchTime || currentTime - lastFetchTime >= 3600000 || 1 < 2) {
       try {
         const response = await ProductApi.getAllNoPagition();
         dispatch(fetchProductsSuccess(response));

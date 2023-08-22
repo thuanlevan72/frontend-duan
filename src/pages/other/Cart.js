@@ -15,6 +15,7 @@ import {
 } from "../../redux/actions/cartActions";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
+import Swal from "sweetalert2";
 
 const Cart = ({
   location,
@@ -86,9 +87,9 @@ const Cart = ({
                               finalProductPrice * cartItem.quantity;
                             discountedPrice != null
                               ? (cartTotalPrice +=
-                                finalDiscountedPrice * cartItem.quantity)
+                                  finalDiscountedPrice * cartItem.quantity)
                               : (cartTotalPrice +=
-                                finalProductPrice * cartItem.quantity);
+                                  finalProductPrice * cartItem.quantity);
                             return (
                               <tr key={key}>
                                 <td className="product-thumbnail">
@@ -119,7 +120,7 @@ const Cart = ({
                                     {cartItem.name}
                                   </Link>
                                   {cartItem.selectedProductColor &&
-                                    cartItem.selectedProductSize ? (
+                                  cartItem.selectedProductSize ? (
                                     <div className="cart-item-variation">
                                       <span>
                                         Color: {cartItem.selectedProductColor}
@@ -169,9 +170,29 @@ const Cart = ({
                                   <div className="cart-plus-minus">
                                     <button
                                       className="dec qtybutton"
-                                      onClick={() =>
-                                        decreaseQuantity(cartItem, addToast)
-                                      }>
+                                      onClick={() => {
+                                        if (cartItem.quantity <= 1) {
+                                          Swal.fire({
+                                            title: "Bạn có muốn xóa không?",
+                                            text: "Bạn hãy suy nghĩ thật",
+                                            icon: "warning",
+                                            showCancelButton: true,
+                                            confirmButtonColor: "#3085d6",
+                                            cancelButtonColor: "#d33",
+                                            cancelButtonText: "Thôi",
+                                            confirmButtonText: "Tôi chắc chắn",
+                                          }).then((result) => {
+                                            if (result.isConfirmed) {
+                                              decreaseQuantity(
+                                                cartItem,
+                                                addToast
+                                              );
+                                            }
+                                          });
+                                        } else {
+                                          decreaseQuantity(cartItem, addToast);
+                                        }
+                                      }}>
                                       -
                                     </button>
                                     <input
@@ -193,11 +214,11 @@ const Cart = ({
                                         cartItem !== undefined &&
                                         cartItem.quantity &&
                                         cartItem.quantity >=
-                                        cartItemStock(
-                                          cartItem,
-                                          cartItem.selectedProductColor,
-                                          cartItem.selectedProductSize
-                                        )
+                                          cartItemStock(
+                                            cartItem,
+                                            cartItem.selectedProductColor,
+                                            cartItem.selectedProductSize
+                                          )
                                       }>
                                       +
                                     </button>
@@ -206,23 +227,23 @@ const Cart = ({
                                 <td className="product-subtotal">
                                   {discountedPrice !== null
                                     ? parseInt(
-                                      (
-                                        currency.currencySymbol +
                                         (
-                                          finalDiscountedPrice *
-                                          cartItem.quantity
-                                        ).toFixed(2)
-                                      ).replace("$", "")
-                                    ).toLocaleString("en-US") + " VND"
+                                          currency.currencySymbol +
+                                          (
+                                            finalDiscountedPrice *
+                                            cartItem.quantity
+                                          ).toFixed(2)
+                                        ).replace("$", "")
+                                      ).toLocaleString("en-US") + " VND"
                                     : parseInt(
-                                      (
-                                        currency.currencySymbol +
                                         (
-                                          finalProductPrice *
-                                          cartItem.quantity
-                                        ).toFixed(2)
-                                      ).replace("$", "")
-                                    ).toLocaleString("en-US") + " VND"}
+                                          currency.currencySymbol +
+                                          (
+                                            finalProductPrice *
+                                            cartItem.quantity
+                                          ).toFixed(2)
+                                        ).replace("$", "")
+                                      ).toLocaleString("en-US") + " VND"}
                                 </td>
 
                                 <td className="product-remove">
@@ -251,7 +272,23 @@ const Cart = ({
                         </Link>
                       </div>
                       <div className="cart-clear">
-                        <button onClick={() => deleteAllFromCart(addToast)}>
+                        <button
+                          onClick={() => {
+                            Swal.fire({
+                              title: "Bạn có muốn xóa hết hay không?",
+                              text: "bạn phải suy nghĩ thật kỹ!",
+                              icon: "warning",
+                              showCancelButton: true,
+                              confirmButtonColor: "#3085d6",
+                              cancelButtonColor: "#d33",
+                              cancelButtonText: "thôi",
+                              confirmButtonText: "Đồng ý tôi đồng ý",
+                            }).then((result) => {
+                              if (result.isConfirmed) {
+                                deleteAllFromCart(addToast);
+                              }
+                            });
+                          }}>
                           Xóa giỏ hàng
                         </button>
                       </div>

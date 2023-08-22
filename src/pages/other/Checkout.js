@@ -165,7 +165,10 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
     }
     try {
       setLoading(true);
-      const response = await OrderApi.CreateUrlVnPay(data.actualPrice);
+      debugger;
+      const response = await OrderApi.CreateUrlVnPay(
+        parseInt(data.actualPrice)
+      );
       messageApi.open({
         type: "success",
         content: "Đang tạo liên kết đến VnPay",
