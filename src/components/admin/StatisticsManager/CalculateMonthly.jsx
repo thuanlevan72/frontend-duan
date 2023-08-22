@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { DualAxes } from "@ant-design/plots";
 import StatisticsApi from "../../../api/statistic/StatisticsApi";
-import { Alert, DatePicker } from "antd";
+import { Alert, DatePicker, Tag } from "antd";
 import dayjs from "dayjs";
 import "dayjs/locale/vi"; // Import locale for Vietnamese language
+import { useRef } from "react";
 const { RangePicker } = DatePicker;
 const CalculateMonthly = () => {
   const [selectedDate, setSelectedDate] = useState({
@@ -12,6 +13,7 @@ const CalculateMonthly = () => {
   });
   const [startDate, setStartDate] = useState(dayjs().subtract(6, "month"));
   const [endDate, setEndDate] = useState(dayjs());
+  const totleRevenue = useRef(0);
   const [data, setData] = useState([
     {
       MonthYear: "1991/2/2",
@@ -50,6 +52,11 @@ const CalculateMonthly = () => {
   useEffect(async () => {
     try {
       const res = await StatisticsApi.GetCalculateMonthlyRevenue(selectedDate);
+      totleRevenue.current = res.reduce(
+        (total, item) => total + item.Revenue,
+        0
+      );
+      console.log(res);
       setData(res);
     } catch (error) {
       //   SetLoading(false);
@@ -95,11 +102,23 @@ const CalculateMonthly = () => {
         <div
           style={{
             display: "flex",
-            justifyContent: "flex-end",
+            justifyContent: "space-between",
             alignItems: "center",
             paddingRight: "10px",
           }}>
           {" "}
+          <div>
+            {" "}
+            <Tag color="blue">
+              Doanh thu {" của " + data && data.length + " tháng: "}
+            </Tag>
+            <Tag color="red">
+              {totleRevenue.current.toLocaleString("it-IT", {
+                style: "currency",
+                currency: "VND",
+              })}
+            </Tag>
+          </div>
           <RangePicker
             value={[startDate, endDate]}
             onChange={handleDateChange}

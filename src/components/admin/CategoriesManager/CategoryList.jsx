@@ -78,6 +78,7 @@ const CategoryList = () => {
       key: index + 1,
       id: item.productTypeId,
       nameProductType: item.nameProductType,
+      quantity: item.products.length,
       imageTypeProduct: item.imageTypeProduct,
       createdAt: item.createdAt,
       // updatedAt: item.updatedAt,
@@ -96,6 +97,13 @@ const CategoryList = () => {
       key: "nameProductType",
       align: "center",
       render: (nameProductType) => <Tag color="#f50">{nameProductType}</Tag>,
+    },
+    {
+      title: "Số lượng",
+      dataIndex: "quantity",
+      key: "quantity",
+      align: "center",
+      render: (quantity) => <Tag color="blue">{quantity}</Tag>,
     },
     {
       title: "Hình ảnh",
