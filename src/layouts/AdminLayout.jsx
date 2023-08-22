@@ -1,6 +1,7 @@
 import React from "react";
 import { Avatar, Badge, Dropdown, Layout, Menu } from "antd";
 import { useState } from "react";
+import Swal from "sweetalert2"
 import { Route, Switch, Redirect, NavLink } from "react-router-dom";
 import ProductList from "../components/admin/ProductsManager/ProductList";
 import ProductAdd from "../components/admin/ProductsManager/ProductAdd";
@@ -64,11 +65,19 @@ const AdminLayout = () => {
             // Truy cập vào giá trị "role"
             const role = payloadObject.role;
             if (role !== "admin") {
-                alert("bạn không có quyền để vào dây chơi");
-                history.push("/login-register");
+                Swal.fire({
+                    icon: "error",
+                    title: "Thất bại...",
+                    text: "Bạn không có quyền để vào trang quản trị!",
+                });
+                history.push("/");
             }
         } else {
-            alert("vui lòng đăng nhập để có thể vào đây chơi");
+            Swal.fire({
+                icon: "error",
+                title: "Thất bại...",
+                text: "Vui lòng đăng nhập để có thể vào hệ thống!",
+            });
             history.push("/login-register");
         }
     }, [history]);
@@ -108,8 +117,8 @@ const AdminLayout = () => {
                         className="logo-admin text-center"
                         style={{ fontSize: "34px", margin: "20px 0 14px" }}
                     >
-                        <span style={{color: "#f58634"}}>POLY</span>
-                        <span style={{color: "#69b550"}}>FOOD</span>
+                        <span style={{ color: "#f58634" }}>POLY</span>
+                        <span style={{ color: "#69b550" }}>FOOD</span>
                     </p>
                 </NavLink>
                 <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
