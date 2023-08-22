@@ -111,7 +111,7 @@ const UsersList = () => {
       setLoading(false);
       messageApi.open({
         type: "success",
-        content: "Thay đổi Quyền thành công",
+        content: "Thay đổi quyền thành công",
       });
       setTimeout(() => {
         setParam({ ...param });
@@ -372,7 +372,7 @@ const UsersList = () => {
         width={1100}
         onOk={handleOk}
         onCancel={handleCancel}>
-        <Descriptions title="Chi tiết đơn hàng">
+        <Descriptions title="Thông tin khách hàng">
           <Descriptions.Item label="Tên khách hàng">
             {dataCurrent.length > 0 && dataCurrent[0].name}
           </Descriptions.Item>
