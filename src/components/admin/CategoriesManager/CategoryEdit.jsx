@@ -8,6 +8,7 @@ import {
     useParams,
 } from "react-router-dom/cjs/react-router-dom.min";
 import { useToasts } from "react-toast-notifications";
+import Swal from "sweetalert2";
 
 const CategoryEdit = () => {
     const { id } = useParams();
@@ -35,17 +36,18 @@ const CategoryEdit = () => {
     const handleUpload = () => {
         const file = fileList[0];
         if (file.size > 2 * 1024 * 1024) {
-            messageApi.open({
-                type: "error",
-                content:
-                    "Tệp tin quá lớn. Vui lòng chọn một tệp tin nhỏ hơn 2MB.",
+            Swal.fire({
+                icon: "error",
+                title: "Tệp tin quá lớn...",
+                text: "Vui lòng chọn một tệp tin nhỏ hơn 2MB!",
             });
             return;
         }
         if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
-            messageApi.open({
-                type: "error",
-                content: "Vui lòng chọn một tệp tin hình ảnh (jpg, png, webp).",
+            Swal.fire({
+                icon: "error",
+                title: "Sai tệp tin...",
+                text: "Vui lòng chọn một tệp tin hình ảnh (jpg, png, webp)!",
             });
             return;
         }
@@ -60,9 +62,10 @@ const CategoryEdit = () => {
             imageTypeProduct: fileList[0] || preview,
         };
         if (!formData.nameProductType || !formData.imageTypeProduct) {
-            messageApi.open({
-                type: "error",
-                content: "Không để trống các trường",
+            Swal.fire({
+                icon: "error",
+                title: "Không để trống các trường...",
+                text: "Không để trống các trường!",
             });
             return;
         }

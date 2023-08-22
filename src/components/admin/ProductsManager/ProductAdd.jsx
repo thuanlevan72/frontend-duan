@@ -15,8 +15,8 @@ import LoadingSpin from "../../loading/LoadingSpin";
 import ProductApi from "../../../api/product/ProductApi";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useToasts } from "react-toast-notifications";
+import Swal from "sweetalert2";
 const { TextArea } = Input;
-
 /* eslint-disable no-template-curly-in-string */
 const validateMessages = {
     required: "* ${label} không được để trống",
@@ -38,11 +38,19 @@ const ProductAdd = () => {
     const handleUpload = () => {
         const file = fileList[0];
         if (file.size > 2 * 1024 * 1024) {
-            alert("Tệp tin quá lớn. Vui lòng chọn một tệp tin nhỏ hơn 2MB.");
+            Swal.fire({
+                icon: "error",
+                title: "Tệp tin quá lớn...",
+                text: "Vui lòng chọn một tệp tin nhỏ hơn 2MB!",
+            });
             return;
         }
         if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
-            alert("Vui lòng chọn một tệp tin hình ảnh (jpg, png, webp).");
+            Swal.fire({
+                icon: "error",
+                title: "Sai tệp tin...",
+                text: "Vui lòng chọn một tệp tin hình ảnh (jpg, png, webp)!",
+            });
             return;
         }
         const filePreview = URL.createObjectURL(file);
