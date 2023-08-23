@@ -1,7 +1,11 @@
+import { useSelector } from "react-redux";
+import CartApi from "../../api/cart/CartApi";
+
 export const ADD_TO_CART = "ADD_TO_CART";
 export const DECREASE_QUANTITY = "DECREASE_QUANTITY";
 export const DELETE_FROM_CART = "DELETE_FROM_CART";
 export const DELETE_ALL_FROM_CART = "DELETE_ALL_FROM_CART";
+export const FETCH_CARTS = "FETCH_CARTS";
 
 //add to cart
 export const addToCart = (
@@ -11,9 +15,12 @@ export const addToCart = (
   selectedProductColor,
   selectedProductSize
 ) => {
-  return dispatch => {
+  return (dispatch) => {
     if (addToast) {
-      addToast("Đã thêm vào giỏ hàng", { appearance: "success", autoDismiss: true });
+      addToast("Đã thêm vào giỏ hàng", {
+        appearance: "success",
+        autoDismiss: true,
+      });
     }
     dispatch({
       type: ADD_TO_CART,
@@ -23,24 +30,24 @@ export const addToCart = (
         selectedProductColor: selectedProductColor
           ? selectedProductColor
           : item.selectedProductColor
-            ? item.selectedProductColor
-            : null,
+          ? item.selectedProductColor
+          : null,
         selectedProductSize: selectedProductSize
           ? selectedProductSize
           : item.selectedProductSize
-            ? item.selectedProductSize
-            : null
-      }
+          ? item.selectedProductSize
+          : null,
+      },
     });
   };
 };
 //decrease from cart
 export const decreaseQuantity = (item, addToast) => {
-  return dispatch => {
+  return (dispatch) => {
     if (addToast) {
       addToast("Đã xóa khỏi giỏ hàng", {
         appearance: "warning",
-        autoDismiss: true
+        autoDismiss: true,
       });
     }
     dispatch({ type: DECREASE_QUANTITY, payload: item });
@@ -48,27 +55,30 @@ export const decreaseQuantity = (item, addToast) => {
 };
 //delete from cart
 export const deleteFromCart = (item, addToast) => {
-  return dispatch => {
+  return (dispatch) => {
     if (addToast) {
-      addToast("Đã xóa khỏi giỏ hàng", { appearance: "error", autoDismiss: true });
+      addToast("Đã xóa khỏi giỏ hàng", {
+        appearance: "error",
+        autoDismiss: true,
+      });
     }
     dispatch({ type: DELETE_FROM_CART, payload: item });
   };
 };
 //delete all from cart
-export const deleteAllFromCart = addToast => {
-  return dispatch => {
+export const deleteAllFromCart = (addToast) => {
+  return (dispatch) => {
     if (addToast) {
       addToast("Đã xóa khỏi giỏ hàng", {
         appearance: "error",
-        autoDismiss: true
+        autoDismiss: true,
       });
     }
     dispatch({ type: DELETE_ALL_FROM_CART });
   };
 };
 export const confirmOrder = () => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({ type: DELETE_ALL_FROM_CART });
   };
 };
@@ -78,7 +88,31 @@ export const cartItemStock = (item, color, size) => {
     return item.stock;
   } else {
     return item.variation
-      .filter(single => single.color === color)[0]
-      .size.filter(single => single.name === size)[0].stock;
+      .filter((single) => single.color === color)[0]
+      .size.filter((single) => single.name === size)[0].stock;
   }
+};
+export const fetchDCarts = (data) => ({
+  type: FETCH_CARTS,
+  payload: data,
+});
+export const cleanCart = () => {
+  return (dispatch) => {
+    dispatch(fetchDCarts([]));
+  };
+};
+export const fetchDataCarts = (cart) => {
+  return async (dispatch) => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user) {
+        const res = await CartApi.GetCart(user.user.userId);
+        if (res) {
+          dispatch(fetchDCarts(res));
+          return;
+        }
+        // useSelector((state) => state.cartData);
+      }
+    } catch (error) {}
+  };
 };
