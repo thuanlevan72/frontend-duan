@@ -6,9 +6,8 @@ const TestimonialOneSingle = ({ data, sliderClass, testimonialClass }) => {
     <div
       className={`${
         testimonialClass ? testimonialClass : "single-testimonial"
-      } text-center ${sliderClass ? sliderClass : ""}`}
-    >
-      <img src={process.env.PUBLIC_URL + data.image} alt="" />
+      } text-center ${sliderClass ? sliderClass : ""}`}>
+      <img src={process.env.PUBLIC_URL + data.image} alt="polyfood" />
       <p>{data.content}</p>
       <div className="client-info">
         <i className="fa fa-map-signs" />
@@ -21,7 +20,7 @@ const TestimonialOneSingle = ({ data, sliderClass, testimonialClass }) => {
 
 TestimonialOneSingle.propTypes = {
   data: PropTypes.object,
-  sliderClass: PropTypes.string
+  sliderClass: PropTypes.string,
 };
 
 export default TestimonialOneSingle;

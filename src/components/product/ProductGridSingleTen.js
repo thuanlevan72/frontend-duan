@@ -17,7 +17,7 @@ const ProductGridSingleTen = ({
   sliderClassName,
   spaceBottomClass,
   colorClass,
-  productGridStyleClass
+  productGridStyleClass,
 }) => {
   const [modalShow, setModalShow] = useState(false);
   const { addToast } = useToasts();
@@ -31,26 +31,27 @@ const ProductGridSingleTen = ({
   return (
     <Fragment>
       <div
-        className={`col-md-6 col-lg-4 col-sm-6 ${sliderClassName ? sliderClassName : ""
-          }`}
-      >
+        className={`col-md-6 col-lg-4 col-sm-6 ${
+          sliderClassName ? sliderClassName : ""
+        }`}>
         <div
-          className={`product-wrap-10 ${spaceBottomClass ? spaceBottomClass : ""
-            } ${colorClass ? colorClass : ""} ${productGridStyleClass ? productGridStyleClass : ""
-            } `}
-        >
+          className={`product-wrap-10 ${
+            spaceBottomClass ? spaceBottomClass : ""
+          } ${colorClass ? colorClass : ""} ${
+            productGridStyleClass ? productGridStyleClass : ""
+          } `}>
           <div className="product-img">
             <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
               <img
                 className="default-img"
                 src={process.env.PUBLIC_URL + product.image[0]}
-                alt=""
+                alt="polyfood"
               />
               {product.image.length > 1 ? (
                 <img
                   className="hover-img"
                   src={process.env.PUBLIC_URL + product.image[1]}
-                  alt=""
+                  alt="polyfood"
                 />
               ) : (
                 ""
@@ -71,16 +72,14 @@ const ProductGridSingleTen = ({
                   href={product.affiliateLink}
                   rel="noopener noreferrer"
                   target="_blank"
-                  title="Buy now"
-                >
+                  title="Buy now">
                   {" "}
                   <i className="fa fa-shopping-cart"></i>{" "}
                 </a>
               ) : product.variation && product.variation.length >= 1 ? (
                 <Link
                   to={`${process.env.PUBLIC_URL}/product/${product.id}`}
-                  title="Select options"
-                >
+                  title="Select options">
                   <i className="fa fa-cog"></i>
                 </Link>
               ) : product.stock && product.stock > 0 ? (
@@ -94,8 +93,7 @@ const ProductGridSingleTen = ({
                   disabled={cartItem !== undefined && cartItem.quantity > 0}
                   title={
                     cartItem !== undefined ? "Added to cart" : "Add to cart"
-                  }
-                >
+                  }>
                   {" "}
                   <i className="fa fa-shopping-cart"></i>{" "}
                 </button>
@@ -117,8 +115,7 @@ const ProductGridSingleTen = ({
                     ? "Added to compare"
                     : "Add to compare"
                 }
-                onClick={() => addToCompare(product, addToast)}
-              >
+                onClick={() => addToCompare(product, addToast)}>
                 <i className="fa fa-retweet"></i>
               </button>
               <button
@@ -129,8 +126,7 @@ const ProductGridSingleTen = ({
                     ? "Added to wishlist"
                     : "Add to wishlist"
                 }
-                onClick={() => addToWishlist(product, addToast)}
-              >
+                onClick={() => addToWishlist(product, addToast)}>
                 <i className="fa fa-heart-o" />
               </button>
             </div>
@@ -192,7 +188,7 @@ ProductGridSingleTen.propTypes = {
   sliderClassName: PropTypes.string,
   spaceBottomClass: PropTypes.string,
   colorClass: PropTypes.string,
-  wishlistItem: PropTypes.object
+  wishlistItem: PropTypes.object,
 };
 
 export default ProductGridSingleTen;

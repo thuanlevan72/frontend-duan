@@ -6,10 +6,9 @@ const BannerEighteenSingle = ({ data, spaceBottomClass }) => {
   return (
     <div className="col-xl-4 col-md-6">
       <div
-        className={`single-banner ${spaceBottomClass ? spaceBottomClass : ""}`}
-      >
+        className={`single-banner ${spaceBottomClass ? spaceBottomClass : ""}`}>
         <Link to={process.env.PUBLIC_URL + data.link}>
-          <img src={process.env.PUBLIC_URL + data.image} alt="" />
+          <img src={process.env.PUBLIC_URL + data.image} alt="polyfood" />
         </Link>
         <div className="banner-content banner-content--style2">
           <h3>{data.title}</h3>
@@ -25,7 +24,7 @@ const BannerEighteenSingle = ({ data, spaceBottomClass }) => {
 
 BannerEighteenSingle.propTypes = {
   data: PropTypes.object,
-  spaceBottomClass: PropTypes.string
+  spaceBottomClass: PropTypes.string,
 };
 
 export default BannerEighteenSingle;

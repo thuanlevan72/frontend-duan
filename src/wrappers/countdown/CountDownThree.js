@@ -8,13 +8,13 @@ const CountDownThree = ({
   spaceTopClass,
   spaceBottomClass,
   dateTime,
-  countDownImage
+  countDownImage,
 }) => {
   return (
     <div
-      className={`funfact-area ${spaceTopClass ? spaceTopClass : ""} ${spaceBottomClass ? spaceBottomClass : ""
-        }`}
-    >
+      className={`funfact-area ${spaceTopClass ? spaceTopClass : ""} ${
+        spaceBottomClass ? spaceBottomClass : ""
+      }`}>
       <div className="container">
         <div className="row align-items-center">
           <div className="col-md-8 col-lg-6 order-1 order-lg-2">
@@ -35,7 +35,7 @@ const CountDownThree = ({
               <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
                 <img
                   src={process.env.PUBLIC_URL + countDownImage}
-                  alt=""
+                  alt="polyfood"
                   className="img-fluid"
                 />
               </Link>
@@ -51,7 +51,7 @@ CountDownThree.propTypes = {
   countDownImage: PropTypes.string,
   dateTime: PropTypes.string,
   spaceBottomClass: PropTypes.string,
-  spaceTopClass: PropTypes.string
+  spaceTopClass: PropTypes.string,
 };
 
 export default CountDownThree;

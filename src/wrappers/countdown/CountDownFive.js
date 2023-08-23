@@ -9,14 +9,14 @@ const CountDownFive = ({
   spaceBottomClass,
   bgImg,
   image,
-  dateTime
+  dateTime,
 }) => {
   return (
     <div
-      className={`funfact-area ${spaceTopClass ? spaceTopClass : ""} ${spaceBottomClass ? spaceBottomClass : ""
-        }`}
-      style={{ backgroundImage: `url(${process.env.PUBLIC_URL + bgImg})` }}
-    >
+      className={`funfact-area ${spaceTopClass ? spaceTopClass : ""} ${
+        spaceBottomClass ? spaceBottomClass : ""
+      }`}
+      style={{ backgroundImage: `url(${process.env.PUBLIC_URL + bgImg})` }}>
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg-6 mb-md-5">
@@ -36,7 +36,7 @@ const CountDownFive = ({
             <div className="funfact-image text-center text-lg-right">
               <img
                 src={process.env.PUBLIC_URL + image}
-                alt=""
+                alt="polyfood"
                 className="img-fluid"
               />
             </div>
@@ -52,7 +52,7 @@ CountDownFive.propTypes = {
   image: PropTypes.string,
   dateTime: PropTypes.string,
   spaceBottomClass: PropTypes.string,
-  spaceTopClass: PropTypes.string
+  spaceTopClass: PropTypes.string,
 };
 
 export default CountDownFive;

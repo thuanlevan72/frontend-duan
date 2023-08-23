@@ -7,7 +7,7 @@ const CategoryThreeSingle = ({ data, sliderClass }) => {
     <div className={`collection-product ${sliderClass ? sliderClass : ""}`}>
       <div className="collection-img">
         <Link to={process.env.PUBLIC_URL + data.link}>
-          <img src={process.env.PUBLIC_URL + data.image} alt="" />
+          <img src={process.env.PUBLIC_URL + data.image} alt="polyfood" />
         </Link>
       </div>
       <div className="collection-content text-center">
@@ -17,8 +17,7 @@ const CategoryThreeSingle = ({ data, sliderClass }) => {
         </h4>
         <Link
           to={process.env.PUBLIC_URL + data.link}
-          className="collection-btn"
-        >
+          className="collection-btn">
           SHOP NOW
         </Link>
       </div>
@@ -28,7 +27,7 @@ const CategoryThreeSingle = ({ data, sliderClass }) => {
 
 CategoryThreeSingle.propTypes = {
   data: PropTypes.object,
-  sliderClass: PropTypes.string
+  sliderClass: PropTypes.string,
 };
 
 export default CategoryThreeSingle;

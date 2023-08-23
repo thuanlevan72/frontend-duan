@@ -33,7 +33,7 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
                   <div className="shopping-cart-img">
                     <Link to={process.env.PUBLIC_URL + "/product/" + single.id}>
                       <img
-                        alt=""
+                        alt="polyfood"
                         src={process.env.PUBLIC_URL + single.image[0]}
                         className="img-fluid"
                       />
@@ -42,8 +42,7 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
                   <div className="shopping-cart-title">
                     <h4>
                       <Link
-                        to={process.env.PUBLIC_URL + "/product/" + single.id}
-                      >
+                        to={process.env.PUBLIC_URL + "/product/" + single.id}>
                         {" "}
                         {single.name}{" "}
                       </Link>
@@ -51,12 +50,19 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
                     <h6>Số lượng: {single.quantity} món</h6>
                     <span>
                       {discountedPrice !== null
-                        ? parseInt((currency.currencySymbol + finalDiscountedPrice).replace("$", "")).toLocaleString("en-US") + " VND"
-                        : parseInt((currency.currencySymbol + finalProductPrice).replace("$", "")).toLocaleString("en-US") + " VND"
-                      }
+                        ? parseInt(
+                            (
+                              currency.currencySymbol + finalDiscountedPrice
+                            ).replace("$", "")
+                          ).toLocaleString("en-US") + " VND"
+                        : parseInt(
+                            (
+                              currency.currencySymbol + finalProductPrice
+                            ).replace("$", "")
+                          ).toLocaleString("en-US") + " VND"}
                     </span>
                     {single.selectedProductColor &&
-                      single.selectedProductSize ? (
+                    single.selectedProductSize ? (
                       <div className="cart-item-variation">
                         <span>Color: {single.selectedProductColor}</span>
                         <span>Size: {single.selectedProductSize}</span>
@@ -78,7 +84,12 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
             <h4>
               Tổng giá :{" "}
               <span className="shop-total">
-                {parseInt((currency.currencySymbol + cartTotalPrice.toFixed(2)).replace("$", "")).toLocaleString("en-US") + " VND"}
+                {parseInt(
+                  (currency.currencySymbol + cartTotalPrice.toFixed(2)).replace(
+                    "$",
+                    ""
+                  )
+                ).toLocaleString("en-US") + " VND"}
               </span>
             </h4>
           </div>
@@ -88,8 +99,7 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
             </Link>
             <Link
               className="default-btn"
-              to={process.env.PUBLIC_URL + "/checkout"}
-            >
+              to={process.env.PUBLIC_URL + "/checkout"}>
               Thanh toán
             </Link>
           </div>
@@ -104,7 +114,7 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
 MenuCart.propTypes = {
   cartData: PropTypes.array,
   currency: PropTypes.object,
-  deleteFromCart: PropTypes.func
+  deleteFromCart: PropTypes.func,
 };
 
 export default MenuCart;

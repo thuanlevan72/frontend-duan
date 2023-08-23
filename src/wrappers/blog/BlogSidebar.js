@@ -25,7 +25,7 @@ const BlogSidebar = () => {
                   src={
                     process.env.PUBLIC_URL + "/assets/img/blog/sidebar-1.jpg"
                   }
-                  alt=""
+                  alt="polyfood"
                 />
               </Link>
             </div>
@@ -45,7 +45,7 @@ const BlogSidebar = () => {
                   src={
                     process.env.PUBLIC_URL + "/assets/img/blog/sidebar-2.jpg"
                   }
-                  alt=""
+                  alt="polyfood"
                 />
               </Link>
             </div>
@@ -65,7 +65,7 @@ const BlogSidebar = () => {
                   src={
                     process.env.PUBLIC_URL + "/assets/img/blog/sidebar-3.jpg"
                   }
-                  alt=""
+                  alt="polyfood"
                 />
               </Link>
             </div>
@@ -85,7 +85,7 @@ const BlogSidebar = () => {
                   src={
                     process.env.PUBLIC_URL + "/assets/img/blog/sidebar-2.jpg"
                   }
-                  alt=""
+                  alt="polyfood"
                 />
               </Link>
             </div>

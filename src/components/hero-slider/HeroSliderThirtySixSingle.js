@@ -9,9 +9,10 @@ const HeroSliderThirtySixSingle = ({ data, sliderClassName }) => {
         sliderClassName ? sliderClassName : ""
       }`}
       style={{
-        backgroundImage: `url(${process.env.PUBLIC_URL + data.backgroundImage})`
-      }}
-    >
+        backgroundImage: `url(${
+          process.env.PUBLIC_URL + data.backgroundImage
+        })`,
+      }}>
       <div className="container">
         <div className="row">
           <div className="col-12">
@@ -20,7 +21,7 @@ const HeroSliderThirtySixSingle = ({ data, sliderClassName }) => {
                 <img
                   className="animated"
                   src={process.env.PUBLIC_URL + data.image}
-                  alt=""
+                  alt="polyfood"
                 />
               </div>
               <h1
@@ -30,8 +31,7 @@ const HeroSliderThirtySixSingle = ({ data, sliderClassName }) => {
               <div className="valentine-btn btn-hover">
                 <Link
                   className="animated"
-                  to={process.env.PUBLIC_URL + "/shop-grid-standard"}
-                >
+                  to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
                   SHOP NOW
                 </Link>
               </div>
@@ -45,7 +45,7 @@ const HeroSliderThirtySixSingle = ({ data, sliderClassName }) => {
 
 HeroSliderThirtySixSingle.propTypes = {
   data: PropTypes.object,
-  sliderClassName: PropTypes.string
+  sliderClassName: PropTypes.string,
 };
 
 export default HeroSliderThirtySixSingle;

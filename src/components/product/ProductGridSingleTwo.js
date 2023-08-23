@@ -17,7 +17,7 @@ const ProductGridSingleTwo = ({
   sliderClassName,
   spaceBottomClass,
   colorClass,
-  titlePriceClass
+  titlePriceClass,
 }) => {
   const [modalShow, setModalShow] = useState(false);
   const { addToast } = useToasts();
@@ -31,106 +31,74 @@ const ProductGridSingleTwo = ({
   return (
     <Fragment>
       <div
-        className={`col-xl-3 col-md-6 col-lg-4 col-sm-6 ${sliderClassName ? sliderClassName : ""
-          }`}
-      >
+        className={`col-xl-3 col-md-6 col-lg-4 col-sm-6 ${
+          sliderClassName ? sliderClassName : ""
+        }`}>
         <div
-          className={`product-wrap-2 ${spaceBottomClass ? spaceBottomClass : ""
-            } ${colorClass ? colorClass : ""} `}
-        >
+          className={`product-wrap-2 ${
+            spaceBottomClass ? spaceBottomClass : ""
+          } ${colorClass ? colorClass : ""} `}>
           <div className="product-img">
-            <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
+            <Link
+              to={process.env.PUBLIC_URL + "/product/" + product.id}
+              style={{
+                width: "270px",
+                height: "200px",
+                objectFit: "contain",
+                display: "flex",
+                alignItems: "center",
+              }}>
               <img
                 className="default-img"
+                style={{
+                  width: "270px !important",
+                  height: "200px",
+                  objectFit: "contain",
+                  display: "flex",
+                  alignItems: "center",
+                }}
                 src={process.env.PUBLIC_URL + product.image[0]}
-                alt=""
+                alt="polyfood"
               />
-              {product.image.length > 1 ? (
-                <img
-                  className="hover-img"
-                  src={process.env.PUBLIC_URL + product.image[1]}
-                  alt=""
-                />
-              ) : (
-                ""
-              )}
             </Link>
-            {product.discount || product.new ? (
+            {product.discount || product.new_product ? (
               <div className="product-img-badges">
                 {product.discount ? (
-                  <span className="pink">-{product.discount}%</span>
+                  <span
+                    className=""
+                    style={{
+                      border: "1px  red",
+                      backgroundColor: "#69b550",
+                      color: "white",
+                    }}>
+                    -{product.discount}%
+                  </span>
                 ) : (
                   ""
                 )}
-                {product.new ? <span className="purple">New</span> : ""}
+                {product.new_product ? (
+                  <span
+                    className="purple"
+                    style={{
+                      // border: "",
+                      backgroundColor: "#f58634",
+                      color: "white",
+                    }}>
+                    New
+                  </span>
+                ) : (
+                  ""
+                )}
               </div>
             ) : (
               ""
             )}
-
-            <div className="product-action-2">
-              {product.affiliateLink ? (
-                <a
-                  href={product.affiliateLink}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  title="Buy now"
-                >
-                  {" "}
-                  <i className="fa fa-shopping-cart"></i>{" "}
-                </a>
-              ) : product.variation && product.variation.length >= 1 ? (
-                <Link
-                  to={`${process.env.PUBLIC_URL}/product/${product.id}`}
-                  title="Select options"
-                >
-                  <i className="fa fa-cog"></i>
-                </Link>
-              ) : product.stock && product.stock > 0 ? (
-                <button
-                  onClick={() => addToCart(product, addToast)}
-                  className={
-                    cartItem !== undefined && cartItem.quantity > 0
-                      ? "active"
-                      : ""
-                  }
-                  disabled={cartItem !== undefined && cartItem.quantity > 0}
-                  title={
-                    cartItem !== undefined ? "Added to cart" : "Add to cart"
-                  }
-                >
-                  {" "}
-                  <i className="fa fa-shopping-cart"></i>{" "}
-                </button>
-              ) : (
-                <button disabled className="active" title="Hết hàng">
-                  <i className="fa fa-shopping-cart"></i>
-                </button>
-              )}
-
-              <button onClick={() => setModalShow(true)} title="Quick View">
-                <i className="fa fa-eye"></i>
-              </button>
-
-              <button
-                className={compareItem !== undefined ? "active" : ""}
-                disabled={compareItem !== undefined}
-                title={
-                  compareItem !== undefined
-                    ? "Added to compare"
-                    : "Add to compare"
-                }
-                onClick={() => addToCompare(product, addToast)}
-              >
-                <i className="fa fa-retweet"></i>
-              </button>
-            </div>
           </div>
           <div className="product-content-2">
             <div
-              className={`title-price-wrap-2 ${titlePriceClass ? titlePriceClass : ""
-                }`}
-            >
+              className={`title-price-wrap-2 ${
+                titlePriceClass ? titlePriceClass : ""
+              }`}>
               <h3>
                 <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
                   {product.name}
@@ -140,10 +108,19 @@ const ProductGridSingleTwo = ({
                 {discountedPrice !== null ? (
                   <Fragment>
                     <span>
-                      {currency.currencySymbol + finalDiscountedPrice}
+                      {parseInt(
+                        (
+                          currency.currencySymbol + finalDiscountedPrice
+                        ).replace("$", "")
+                      ).toLocaleString("en-US") + " VND"}
                     </span>{" "}
                     <span className="old">
-                      {currency.currencySymbol + finalProductPrice}
+                      {parseInt(
+                        (currency.currencySymbol + finalProductPrice).replace(
+                          "$",
+                          ""
+                        )
+                      ).toLocaleString("en-US") + " VND"}
                     </span>
                   </Fragment>
                 ) : (
@@ -160,8 +137,7 @@ const ProductGridSingleTwo = ({
                     ? "Added to wishlist"
                     : "Add to wishlist"
                 }
-                onClick={() => addToWishlist(product, addToast)}
-              >
+                onClick={() => addToWishlist(product, addToast)}>
                 <i className="fa fa-heart-o" />
               </button>
             </div>
@@ -169,7 +145,7 @@ const ProductGridSingleTwo = ({
         </div>
       </div>
       {/* product modal */}
-      <ProductModal
+      {/* <ProductModal
         show={modalShow}
         onHide={() => setModalShow(false)}
         product={product}
@@ -184,7 +160,7 @@ const ProductGridSingleTwo = ({
         addtowishlist={addToWishlist}
         addtocompare={addToCompare}
         addtoast={addToast}
-      />
+      /> */}
     </Fragment>
   );
 };
@@ -201,7 +177,7 @@ ProductGridSingleTwo.propTypes = {
   spaceBottomClass: PropTypes.string,
   colorClass: PropTypes.string,
   titlePriceClass: PropTypes.string,
-  wishlistItem: PropTypes.object
+  wishlistItem: PropTypes.object,
 };
 
 export default ProductGridSingleTwo;

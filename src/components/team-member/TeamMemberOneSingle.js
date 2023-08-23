@@ -5,12 +5,11 @@ const TeamMemberOneSingle = ({ data, spaceBottomClass }) => {
   return (
     <div className="col-lg-3 col-md-6 col-sm-6">
       <div
-        className={`team-wrapper ${spaceBottomClass ? spaceBottomClass : ""}`}
-      >
+        className={`team-wrapper ${spaceBottomClass ? spaceBottomClass : ""}`}>
         <div className="team-img">
           <img
             src={process.env.PUBLIC_URL + data.image}
-            alt=""
+            alt="polyfood"
             className="img-fluid"
           />
           <div className="team-action">
@@ -18,24 +17,21 @@ const TeamMemberOneSingle = ({ data, spaceBottomClass }) => {
               className="facebook"
               href={data.fbLink}
               target="_blank"
-              rel="noopener noreferrer"
-            >
+              rel="noopener noreferrer">
               <i className="fa fa-facebook" />
             </a>
             <a
               className="twitter"
               href={data.twitterLink}
               target="_blank"
-              rel="noopener noreferrer"
-            >
+              rel="noopener noreferrer">
               <i className="fa fa-twitter" />
             </a>
             <a
               className="instagram"
               href={data.instagramLink}
               target="_blank"
-              rel="noopener noreferrer"
-            >
+              rel="noopener noreferrer">
               <i className="fa fa-instagram" />
             </a>
           </div>
@@ -51,7 +47,7 @@ const TeamMemberOneSingle = ({ data, spaceBottomClass }) => {
 
 TeamMemberOneSingle.propTypes = {
   data: PropTypes.object,
-  spaceBottomClass: PropTypes.string
+  spaceBottomClass: PropTypes.string,
 };
 
 export default TeamMemberOneSingle;

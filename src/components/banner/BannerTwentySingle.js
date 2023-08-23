@@ -8,10 +8,9 @@ const BannerTwentySingle = ({ data, spaceBottomClass }) => {
       <div
         className={`single-banner-2 ${
           spaceBottomClass ? spaceBottomClass : ""
-        } ${data.textAlign === "right" ? "align_right" : ""}`}
-      >
+        } ${data.textAlign === "right" ? "align_right" : ""}`}>
         <Link to={process.env.PUBLIC_URL + data.link}>
-          <img src={process.env.PUBLIC_URL + data.image} alt="" />
+          <img src={process.env.PUBLIC_URL + data.image} alt="polyfood" />
         </Link>
         <div className="banner-content-2 banner-content-2--style2 banner-content-2--style2--pink">
           <h3>{data.title}</h3>
@@ -29,7 +28,7 @@ const BannerTwentySingle = ({ data, spaceBottomClass }) => {
 
 BannerTwentySingle.propTypes = {
   data: PropTypes.object,
-  spaceBottomClass: PropTypes.string
+  spaceBottomClass: PropTypes.string,
 };
 
 export default BannerTwentySingle;

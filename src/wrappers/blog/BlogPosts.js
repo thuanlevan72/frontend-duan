@@ -16,7 +16,12 @@ const BlogPosts = ({ data }) => {
                       "/blog-details-standard/" +
                       item.newsId
                     }>
-                    <img src={item.image} alt="" width={"auto"} height={440} />
+                    <img
+                      src={item.image}
+                      alt="polyfood"
+                      width={"auto"}
+                      height={440}
+                    />
                   </Link>
                 </div>
                 <div className="blog-content-2">

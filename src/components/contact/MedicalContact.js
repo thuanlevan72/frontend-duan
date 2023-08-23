@@ -7,9 +7,8 @@ const MedicalContact = () => {
       style={{
         backgroundImage: `url(${
           process.env.PUBLIC_URL + "/assets/img/bg/medicine-bg.jpg"
-        })`
-      }}
-    >
+        })`,
+      }}>
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg-6 col-md-5">
@@ -27,7 +26,7 @@ const MedicalContact = () => {
                       process.env.PUBLIC_URL +
                       "/assets/img/icon-img/medical-contact-shape.png"
                     }
-                    alt=""
+                    alt="polyfood"
                   />
                 </div>
               </div>
@@ -39,7 +38,7 @@ const MedicalContact = () => {
                         process.env.PUBLIC_URL +
                         "/assets/img/icon-img/medical-contact.png"
                       }
-                      alt=""
+                      alt="polyfood"
                     />
                   </div>
                   <div className="medical-contact-number">

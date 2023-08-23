@@ -5,15 +5,17 @@ import { Link } from "react-router-dom";
 const FooterCopyright = ({ footerLogo, spaceBottomClass, colorClass }) => {
   return (
     <div
-      className={`copyright ${spaceBottomClass ? spaceBottomClass : ""} ${colorClass ? colorClass : ""
-        }`}
-    >
+      className={`copyright ${spaceBottomClass ? spaceBottomClass : ""} ${
+        colorClass ? colorClass : ""
+      }`}>
       <div className="footer-logo text-center">
         <Link to={process.env.PUBLIC_URL + "/"}>
           <img
-            alt=""
+            alt="polyfood"
             style={{ maxWidth: "200px" }}
-            src={"https://res.cloudinary.com/do9rcgv5s/image/upload/v1692137209/e2nw6oqvtlvpqmdwtmnh.png"}
+            src={
+              "https://res.cloudinary.com/do9rcgv5s/image/upload/v1692137209/e2nw6oqvtlvpqmdwtmnh.png"
+            }
           />
         </Link>
       </div>
@@ -27,7 +29,7 @@ const FooterCopyright = ({ footerLogo, spaceBottomClass, colorClass }) => {
 FooterCopyright.propTypes = {
   footerLogo: PropTypes.string,
   spaceBottomClass: PropTypes.string,
-  colorClass: PropTypes.string
+  colorClass: PropTypes.string,
 };
 
 export default FooterCopyright;

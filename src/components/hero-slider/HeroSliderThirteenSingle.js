@@ -7,8 +7,7 @@ const HeroSliderThirteenSingle = ({ data, sliderClassName }) => {
     <div
       className={`single-slider-3 slider-height-3 bg-gray-2 d-flex align-items-center slider-height-res-hm4 ${
         sliderClassName ? sliderClassName : ""
-      }`}
-    >
+      }`}>
       <div className="container">
         <div className="row align-items-center">
           <div className="col-xl-7 col-lg-7 col-md-6 col-12 col-sm-6">
@@ -19,8 +18,7 @@ const HeroSliderThirteenSingle = ({ data, sliderClassName }) => {
               <div className="slider-btn btn-hover">
                 <Link
                   className="animated"
-                  to={process.env.PUBLIC_URL + data.url}
-                >
+                  to={process.env.PUBLIC_URL + data.url}>
                   SHOP NOW
                 </Link>
               </div>
@@ -31,10 +29,13 @@ const HeroSliderThirteenSingle = ({ data, sliderClassName }) => {
               <img
                 className="animated img-fluid"
                 src={process.env.PUBLIC_URL + data.image}
-                alt=""
+                alt="polyfood"
               />
               <div className="single-price-wrap">
-                <img src={process.env.PUBLIC_URL + data.shapeImage} alt="" />
+                <img
+                  src={process.env.PUBLIC_URL + data.shapeImage}
+                  alt="polyfood"
+                />
                 <div className="single-price">
                   <span>{data.shapeTitle}</span>
                   <span className="dollar">{data.shapeSubtitle}</span>
@@ -50,7 +51,7 @@ const HeroSliderThirteenSingle = ({ data, sliderClassName }) => {
 
 HeroSliderThirteenSingle.propTypes = {
   data: PropTypes.object,
-  sliderClassName: PropTypes.string
+  sliderClassName: PropTypes.string,
 };
 
 export default HeroSliderThirteenSingle;

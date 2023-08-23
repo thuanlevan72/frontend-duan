@@ -106,7 +106,7 @@ const Cart = ({
                                         process.env.PUBLIC_URL +
                                         cartItem.image[0]
                                       }
-                                      alt=""
+                                      alt="polyfood"
                                     />
                                   </Link>
                                 </td>

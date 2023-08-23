@@ -6,7 +6,7 @@ const ImageSliderOneSingle = ({ data, sliderClass }) => {
   return (
     <div className={`single-image ${sliderClass ? sliderClass : ""}`}>
       <Link to={process.env.PUBLIC_URL + data.link}>
-        <img src={process.env.PUBLIC_URL + data.image} alt="" />
+        <img src={process.env.PUBLIC_URL + data.image} alt="polyfood" />
       </Link>
     </div>
   );
@@ -14,7 +14,7 @@ const ImageSliderOneSingle = ({ data, sliderClass }) => {
 
 ImageSliderOneSingle.propTypes = {
   data: PropTypes.object,
-  sliderClass: PropTypes.string
+  sliderClass: PropTypes.string,
 };
 
 export default ImageSliderOneSingle;

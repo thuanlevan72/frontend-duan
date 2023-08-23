@@ -6,16 +6,14 @@ const VideoPopupTwo = ({ spaceBottomClass }) => {
   const [modalStatus, isOpen] = useState(false);
   return (
     <div
-      className={`video-popup-2 ${spaceBottomClass ? spaceBottomClass : ""}`}
-    >
+      className={`video-popup-2 ${spaceBottomClass ? spaceBottomClass : ""}`}>
       <div
         className="video-popup-2__left bg-img"
         style={{
           backgroundImage: `url(${
             process.env.PUBLIC_URL + "/assets/img/bg/bg-7.jpg"
-          })`
-        }}
-      >
+          })`,
+        }}>
         <div className="video-popup-2__content">
           <h2 className="title mb-30">
             Furniture 2020 <br /> Collections
@@ -37,7 +35,7 @@ const VideoPopupTwo = ({ spaceBottomClass }) => {
           <button onClick={() => isOpen(true)}>
             <img
               src={process.env.PUBLIC_URL + "/assets/img/icon-img/play.png"}
-              alt=""
+              alt="polyfood"
             />
           </button>
         </div>
@@ -47,9 +45,8 @@ const VideoPopupTwo = ({ spaceBottomClass }) => {
         style={{
           backgroundImage: `url(${
             process.env.PUBLIC_URL + "/assets/img/bg/bg-8.jpg"
-          })`
-        }}
-      ></div>
+          })`,
+        }}></div>
     </div>
   );
 };

@@ -76,7 +76,7 @@ const Compare = ({
                                         process.env.PUBLIC_URL +
                                         compareItem.image[0]
                                       }
-                                      alt=""
+                                      alt="polyfood"
                                     />
                                   </Link>
                                   <div className="product-title">

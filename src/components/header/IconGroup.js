@@ -124,7 +124,7 @@ const IconGroup = ({
                 borderRadius: "35px",
               }}
               src={avartar}
-              alt=""
+              alt="polyfood"
             />
           ) : (
             <i className="pe-7s-user-female" />

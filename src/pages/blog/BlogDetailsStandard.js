@@ -56,7 +56,11 @@ const BlogDetailsStandard = ({ location, match }) => {
                         (data.account.user.userName || data.account.email)}
                     </h5>
                     <div className="text-center" style={{ margin: "10px 0" }}>
-                      <img src={data && data.image} alt="" height={500} />
+                      <img
+                        src={data && data.image}
+                        alt="polyfood"
+                        height={500}
+                      />
                     </div>
                   </div>
                   {data && (

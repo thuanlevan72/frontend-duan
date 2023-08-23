@@ -17,7 +17,7 @@ const ProductGridSingleEight = ({
   compareItem,
   sliderClassName,
   spaceBottomClass,
-  colorClass
+  colorClass,
 }) => {
   const [modalShow, setModalShow] = useState(false);
   const { addToast } = useToasts();
@@ -31,19 +31,27 @@ const ProductGridSingleEight = ({
   return (
     <Fragment>
       <div
-        className={`col-xl-4 col-md-6 ${sliderClassName ? sliderClassName : ""
-          }`}
-      >
+        className={`col-xl-4 col-md-6 ${
+          sliderClassName ? sliderClassName : ""
+        }`}>
         <div
-          className={`product-wrap-8 ${spaceBottomClass ? spaceBottomClass : ""
-            } ${colorClass ? colorClass : ""}`}
-        >
-          <div className="product-img" style={{ width: "auto", height: "200px", objectFit: "contain", display: "flex", alignItems: "center" }}>
+          className={`product-wrap-8 ${
+            spaceBottomClass ? spaceBottomClass : ""
+          } ${colorClass ? colorClass : ""}`}>
+          <div
+            className="product-img"
+            style={{
+              width: "auto",
+              height: "200px",
+              objectFit: "contain",
+              display: "flex",
+              alignItems: "center",
+            }}>
             <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
               <img
                 className="default-img img-fluid"
                 src={process.env.PUBLIC_URL + product.image[0]}
-                alt=""
+                alt="polyfood"
               />
             </Link>
             {product.discount || product.new ? (
@@ -60,11 +68,19 @@ const ProductGridSingleEight = ({
             )}
           </div>
           <div className="product-content">
-            <h3 style={{ fontSize: "20px", fontWeight: "bold", marginBottom: "10px" }}>
+            <h3
+              style={{
+                fontSize: "20px",
+                fontWeight: "bold",
+                marginBottom: "10px",
+              }}>
               <Link
                 to={process.env.PUBLIC_URL + "/product/" + product.id}
-                style={{ textDecoration: "none", color: "#333", borderBottom: "2px solid #333" }}
-              >
+                style={{
+                  textDecoration: "none",
+                  color: "#333",
+                  borderBottom: "2px solid #333",
+                }}>
                 {product.name}
               </Link>
             </h3>
@@ -97,8 +113,7 @@ const ProductGridSingleEight = ({
                       ? "Added to wishlist"
                       : "Add to wishlist"
                   }
-                  onClick={() => addToWishlist(product, addToast)}
-                >
+                  onClick={() => addToWishlist(product, addToast)}>
                   <i className="pe-7s-like" />
                 </button>
               </div>
@@ -108,15 +123,13 @@ const ProductGridSingleEight = ({
                     href={product.affiliateLink}
                     rel="noopener noreferrer"
                     target="_blank"
-                    title="Buy now"
-                  >
+                    title="Buy now">
                     <i className="pe-7s-cart"></i>
                   </a>
                 ) : product.variation && product.variation.length >= 1 ? (
                   <Link
                     to={`${process.env.PUBLIC_URL}/product/${product.id}`}
-                    title="Select option"
-                  >
+                    title="Select option">
                     <i className="pe-7s-cart"></i>
                   </Link>
                 ) : product.stock && product.stock > 0 ? (
@@ -130,8 +143,7 @@ const ProductGridSingleEight = ({
                     disabled={cartItem !== undefined && cartItem.quantity > 0}
                     title={
                       cartItem !== undefined ? "Added to cart" : "Add to cart"
-                    }
-                  >
+                    }>
                     <i className="pe-7s-cart"></i>
                   </button>
                 ) : (
@@ -149,8 +161,7 @@ const ProductGridSingleEight = ({
                       ? "Added to compare"
                       : "Add to compare"
                   }
-                  onClick={() => addToCompare(product, addToast)}
-                >
+                  onClick={() => addToCompare(product, addToast)}>
                   <i className="pe-7s-shuffle" />
                 </button>
               </div>
@@ -190,7 +201,7 @@ ProductGridSingleEight.propTypes = {
   sliderClassName: PropTypes.string,
   spaceBottomClass: PropTypes.string,
   colorClass: PropTypes.string,
-  wishlistItem: PropTypes.object
+  wishlistItem: PropTypes.object,
 };
 
 export default ProductGridSingleEight;
