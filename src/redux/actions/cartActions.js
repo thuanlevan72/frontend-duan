@@ -68,12 +68,6 @@ export const deleteFromCart = (item, addToast) => {
 //delete all from cart
 export const deleteAllFromCart = (addToast) => {
   return (dispatch) => {
-    if (addToast) {
-      addToast("Đã xóa khỏi giỏ hàng", {
-        appearance: "error",
-        autoDismiss: true,
-      });
-    }
     dispatch({ type: DELETE_ALL_FROM_CART });
   };
 };
