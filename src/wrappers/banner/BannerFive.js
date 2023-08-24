@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Rate } from "antd";
+import { Badge, Card, Space } from "antd";
 import StatisticsApi from "../../api/statistic/StatisticsApi";
 
 const BannerFive = () => {
@@ -59,7 +60,7 @@ const BannerFive = () => {
     return (
         <div className="banner-area hm9-section-padding">
             <div className="container-fluid">
-                <h2 className="banner-title font-weight-bold">
+                <h2 className="banner-title">
                     Thực Phẩm Bán Chạy
                 </h2>
                 <div className="d-flex flex-column slider-container">
@@ -79,17 +80,23 @@ const BannerFive = () => {
                                             item.productId || item.id
                                         }`}
                                     >
-                                        <img
-                                            src={
-                                                item.product
-                                                    ?.avartarImageProduct ||
-                                                item.image[0]
-                                            }
-                                            alt={
-                                                item.product?.nameProduct ||
-                                                item.name
-                                            }
-                                        />
+                                        <Badge.Ribbon
+                                            text={`-${item.product.discount}%`}
+                                            style={{ insetInlineEnd: 2 }}
+                                            color="volcano"
+                                        >
+                                            <img
+                                                src={
+                                                    item.product
+                                                        ?.avartarImageProduct ||
+                                                    item.image[0]
+                                                }
+                                                alt={
+                                                    item.product?.nameProduct ||
+                                                    item.name
+                                                }
+                                            />
+                                        </Badge.Ribbon>
                                         <h3 className="product-name two-lines">
                                             {item.product?.nameProduct}
                                         </h3>
@@ -118,6 +125,14 @@ const BannerFive = () => {
                             );
                         })}
                     </Slider>
+                </div>
+                <div className="view-more text-center mt-20 toggle-btn6 col-12">
+                    <Link
+                        className="loadMore6"
+                        to={process.env.PUBLIC_URL + "/shop-grid-standard"}
+                    >
+                        Xem thêm
+                    </Link>
                 </div>
             </div>
         </div>
