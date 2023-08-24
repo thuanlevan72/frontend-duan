@@ -63,7 +63,7 @@ const ShopGridStandard = ({ location, products }) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Poly Food | Sản phẩm</title>
+        <title>Poly Food | Danh sách món ăn</title>
         <meta name="description" content="Shop page of PolyFood." />
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>
