@@ -3,6 +3,7 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 import { getDiscountPrice } from "../../../helpers/product";
+import CartApi from "../../../api/cart/CartApi";
 
 const MenuCart = ({ cartData, currency, deleteFromCart }) => {
   let cartTotalPrice = 0;
@@ -72,7 +73,19 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
                     )}
                   </div>
                   <div className="shopping-cart-delete">
-                    <button onClick={() => deleteFromCart(single, addToast)}>
+                    <button
+                      onClick={() => {
+                        if (JSON.parse(localStorage.getItem("user"))) {
+                          CartApi.ChangeCartItem({
+                            quantity: single.quantity,
+                            userId: JSON.parse(localStorage.getItem("user"))
+                              .user.userId,
+                            productId: Number(single.id),
+                            IsAdd: 0,
+                          });
+                        }
+                        deleteFromCart(single, addToast);
+                      }}>
                       <i className="fa fa-times-circle" />
                     </button>
                   </div>

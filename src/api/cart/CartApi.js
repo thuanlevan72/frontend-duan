@@ -37,6 +37,18 @@ const CartApi = {
       },
     });
   },
+  AddListCart: (data) => {
+    const url = `Cart/add-cart-list`;
+    return axiosClient.post(url, data, {
+      headers: {
+        Authorization: `Bearer ${
+          localStorage.getItem("token")
+            ? JSON.parse(localStorage.getItem("token"))
+            : ""
+        }`,
+      },
+    });
+  },
 };
 
 export default CartApi;

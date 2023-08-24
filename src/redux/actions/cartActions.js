@@ -102,14 +102,28 @@ export const cleanCart = () => {
   };
 };
 export const fetchDataCarts = (cart) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
       if (user) {
         const res = await CartApi.GetCart(user.user.userId);
-        if (res) {
+        if (res.length > 0) {
           dispatch(fetchDCarts(res));
           return;
+        } else if (getState().cartData.length > 0) {
+          const userId = user.user.userId;
+          const carts = getState().cartData.map((product) => ({
+            productId: product.id,
+            userId: userId,
+            quantity: product.quantity,
+            isAdd: 1, // or another appropriate value
+          }));
+
+          const result = {
+            userId: userId,
+            carts: carts,
+          };
+          await CartApi.AddListCart(result);
         }
         // useSelector((state) => state.cartData);
       }

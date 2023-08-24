@@ -12,7 +12,6 @@ const initState = [];
 const cartReducer = (state = initState, action) => {
   const cartItems = state,
     product = action.payload;
-  console.log(state);
   if (action.type === FETCH_CARTS) {
     return action.payload;
   }
@@ -121,7 +120,6 @@ const cartReducer = (state = initState, action) => {
       return false;
     });
   }
-  console.log(state);
   return state;
 };
 
