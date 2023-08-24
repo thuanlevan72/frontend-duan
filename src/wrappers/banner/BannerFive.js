@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
+import Skeleton from "react-loading-skeleton";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Rate } from "antd";
@@ -45,87 +46,97 @@ const BannerFive = () => {
     };
     // Get Top Selling Products
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         const getProducts = async () => {
             try {
                 let data = await StatisticsApi.GetTopSellingProducts();
                 setProducts(data);
+                setLoading(false);
             } catch (error) {
                 console.error(error);
             }
         };
         getProducts();
     }, []);
-    console.log(products);
     return (
         <div className="banner-area hm9-section-padding">
             <div className="container-fluid">
-                <h2 className="banner-title">
-                    Thực Phẩm Bán Chạy
-                </h2>
-                <div className="d-flex flex-column slider-container">
-                    <Slider {...settings}>
-                        {products.map((item, index) => {
-                            const originalPrice = item.product.price;
-                            const discountPercentage = item.product.discount;
-                            const discountedPrice =
-                                originalPrice * (1 - discountPercentage / 100);
-                            return (
-                                <div
-                                    className="single-banner mb-20"
-                                    key={index}
-                                >
-                                    <Link
-                                        to={`/product/${
-                                            item.productId || item.id
-                                        }`}
+                <h2 className="banner-title">Thực Phẩm Bán Chạy</h2>
+                {loading ? (
+                    <div className="d-flex justify-content-between">
+                        {Array.from({ length: 5 }).map(() => (
+                            <Skeleton width={260} height={260} />
+                        ))}
+                    </div>
+                ) : (
+                    <div className="d-flex flex-column">
+                        <Slider {...settings}>
+                            {products.map((item, index) => {
+                                const originalPrice = item.product.price;
+                                const discountPercentage =
+                                    item.product.discount;
+                                const discountedPrice =
+                                    originalPrice *
+                                    (1 - discountPercentage / 100);
+                                return (
+                                    <div
+                                        className="single-banner mb-20"
+                                        key={index}
                                     >
-                                        <Badge.Ribbon
-                                            text={`-${item.product.discount}%`}
-                                            style={{ insetInlineEnd: 2 }}
-                                            color="volcano"
+                                        <Link
+                                            to={`/product/${
+                                                item.productId || item.id
+                                            }`}
                                         >
-                                            <img
-                                                src={
-                                                    item.product
-                                                        ?.avartarImageProduct ||
-                                                    item.image[0]
-                                                }
-                                                alt={
-                                                    item.product?.nameProduct ||
-                                                    item.name
-                                                }
-                                            />
-                                        </Badge.Ribbon>
-                                        <h3 className="product-name two-lines">
-                                            {item.product?.nameProduct}
-                                        </h3>
-                                        <div className="container-price">
-                                            <span className="discount">
-                                                {discountedPrice.toLocaleString(
-                                                    "vi-VN",
-                                                    {
-                                                        style: "currency",
-                                                        currency: "VND",
+                                            <Badge.Ribbon
+                                                text={`-${item.product.discount}%`}
+                                                style={{ insetInlineEnd: 2 }}
+                                                color="volcano"
+                                            >
+                                                <img
+                                                    src={
+                                                        item.product
+                                                            ?.avartarImageProduct ||
+                                                        item.image[0]
                                                     }
-                                                )}
-                                            </span>
-                                            <span className="price">
-                                                {originalPrice.toLocaleString(
-                                                    "vi-VN",
-                                                    {
-                                                        style: "currency",
-                                                        currency: "VND",
+                                                    alt={
+                                                        item.product
+                                                            ?.nameProduct ||
+                                                        item.name
                                                     }
-                                                )}
-                                            </span>
-                                        </div>
-                                    </Link>
-                                </div>
-                            );
-                        })}
-                    </Slider>
-                </div>
+                                                />
+                                            </Badge.Ribbon>
+                                            <h3 className="product-name two-lines">
+                                                {item.product?.nameProduct}
+                                            </h3>
+                                            <div className="container-price">
+                                                <span className="discount">
+                                                    {discountedPrice.toLocaleString(
+                                                        "vi-VN",
+                                                        {
+                                                            style: "currency",
+                                                            currency: "VND",
+                                                        }
+                                                    )}
+                                                </span>
+                                                <span className="price">
+                                                    {originalPrice.toLocaleString(
+                                                        "vi-VN",
+                                                        {
+                                                            style: "currency",
+                                                            currency: "VND",
+                                                        }
+                                                    )}
+                                                </span>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                );
+                            })}
+                        </Slider>
+                    </div>
+                )}
                 <div className="view-more text-center mt-20 toggle-btn6 col-12">
                     <Link
                         className="loadMore6"
