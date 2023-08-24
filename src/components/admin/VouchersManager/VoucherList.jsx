@@ -252,9 +252,7 @@ const VoucherList = () => {
       dataIndex: "createdAt",
       key: "createdAt",
       align: "center",
-      render: (createdAt) => (
-        <>{format(new Date(createdAt), "dd/MM/yyyy")}</>
-      ),
+      render: (createdAt) => <>{format(new Date(createdAt), "dd/MM/yyyy")}</>,
     },
     {
       title: "Hạn sử dụng",
@@ -404,7 +402,7 @@ const VoucherList = () => {
         <Table columns={columnUser} dataSource={currentUsed} />
       </Modal>
       <Modal
-        title="Modal 1000px width"
+        title="Danh sách người dùng"
         centered
         open={open}
         onOk={() => setOpen(false)}

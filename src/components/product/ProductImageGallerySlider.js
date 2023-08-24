@@ -10,7 +10,7 @@ const ProductImageGallerySlider = ({ product }) => {
     loop: true,
     navigation: {
       nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev"
+      prevEl: ".swiper-button-prev",
     },
     renderPrevButton: () => (
       <button className="swiper-button-prev ht-swiper-button-nav">
@@ -24,18 +24,18 @@ const ProductImageGallerySlider = ({ product }) => {
     ),
     breakpoints: {
       1024: {
-        slidesPerView: 3
+        slidesPerView: 3,
       },
       768: {
-        slidesPerView: 2
+        slidesPerView: 2,
       },
       640: {
-        slidesPerView: 2
+        slidesPerView: 2,
       },
       320: {
-        slidesPerView: 1
-      }
-    }
+        slidesPerView: 1,
+      },
+    },
   };
   return (
     <div className="product-large-image-wrapper product-large-image-wrapper--slider">
@@ -48,7 +48,7 @@ const ProductImageGallerySlider = ({ product }) => {
                   <img
                     src={process.env.PUBLIC_URL + single}
                     className="img-fluid"
-                    alt=""
+                    alt="polyfood"
                   />
                 </div>
               </div>
@@ -60,7 +60,7 @@ const ProductImageGallerySlider = ({ product }) => {
 };
 
 ProductImageGallerySlider.propTypes = {
-  product: PropTypes.object
+  product: PropTypes.object,
 };
 
 export default ProductImageGallerySlider;

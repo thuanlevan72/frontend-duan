@@ -15,7 +15,7 @@ const ProductGridSingleFive = ({
   wishlistItem,
   compareItem,
   sliderClassName,
-  spaceBottomClass
+  spaceBottomClass,
 }) => {
   const [modalShow, setModalShow] = useState(false);
   const { addToast } = useToasts();
@@ -29,19 +29,19 @@ const ProductGridSingleFive = ({
   return (
     <Fragment>
       <div
-        className={`col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 ${sliderClassName ? sliderClassName : ""
-          }`}
-      >
+        className={`col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 ${
+          sliderClassName ? sliderClassName : ""
+        }`}>
         <div
-          className={`product-wrap-3 scroll-zoom ${spaceBottomClass ? spaceBottomClass : ""
-            }`}
-        >
+          className={`product-wrap-3 scroll-zoom ${
+            spaceBottomClass ? spaceBottomClass : ""
+          }`}>
           <div className="product-img">
             <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
               <img
                 className="default-img"
                 src={process.env.PUBLIC_URL + product.image[0]}
-                alt=""
+                alt="polyfood"
               />
             </Link>
             {product.discount || product.new ? (
@@ -62,8 +62,7 @@ const ProductGridSingleFive = ({
                 <div className="product-title">
                   <h3>
                     <Link
-                      to={process.env.PUBLIC_URL + "/product/" + product.id}
-                    >
+                      to={process.env.PUBLIC_URL + "/product/" + product.id}>
                       {product.name}
                     </Link>
                   </h3>
@@ -92,8 +91,7 @@ const ProductGridSingleFive = ({
                           ? "Added to wishlist"
                           : "Add to wishlist"
                       }
-                      onClick={() => addToWishlist(product, addToast)}
-                    >
+                      onClick={() => addToWishlist(product, addToast)}>
                       <i className="fa fa-heart-o" />
                     </button>
                   </div>
@@ -103,16 +101,14 @@ const ProductGridSingleFive = ({
                         href={product.affiliateLink}
                         rel="noopener noreferrer"
                         target="_blank"
-                        title="Buy now"
-                      >
+                        title="Buy now">
                         {" "}
                         <i className="fa fa-shopping-cart"></i>{" "}
                       </a>
                     ) : product.variation && product.variation.length >= 1 ? (
                       <Link
                         to={`${process.env.PUBLIC_URL}/product/${product.id}`}
-                        title="Select options"
-                      >
+                        title="Select options">
                         <i class="fa fa-cog"></i>
                       </Link>
                     ) : product.stock && product.stock > 0 ? (
@@ -130,8 +126,7 @@ const ProductGridSingleFive = ({
                           cartItem !== undefined
                             ? "Added to cart"
                             : "Add to cart"
-                        }
-                      >
+                        }>
                         {" "}
                         <i className="fa fa-shopping-cart"></i>{" "}
                       </button>
@@ -151,8 +146,7 @@ const ProductGridSingleFive = ({
                           ? "Added to compare"
                           : "Add to compare"
                       }
-                      onClick={() => addToCompare(product, addToast)}
-                    >
+                      onClick={() => addToCompare(product, addToast)}>
                       <i className="fa fa-retweet"></i>
                     </button>
                   </div>
@@ -160,8 +154,7 @@ const ProductGridSingleFive = ({
                   <div className="pro-same-action pro-quickview">
                     <button
                       onClick={() => setModalShow(true)}
-                      title="Quick View"
-                    >
+                      title="Quick View">
                       <i className="fa fa-eye"></i>
                     </button>
                   </div>
@@ -202,7 +195,7 @@ ProductGridSingleFive.propTypes = {
   product: PropTypes.object,
   sliderClassName: PropTypes.string,
   spaceBottomClass: PropTypes.string,
-  wishlistItem: PropTypes.object
+  wishlistItem: PropTypes.object,
 };
 
 export default ProductGridSingleFive;

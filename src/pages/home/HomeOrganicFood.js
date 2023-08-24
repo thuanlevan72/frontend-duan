@@ -3,10 +3,12 @@ import MetaTags from "react-meta-tags";
 import LayoutThree from "../../layouts/LayoutThree";
 import HeroSliderFive from "../../wrappers/hero-slider/HeroSliderFive";
 import FeatureIconFour from "../../wrappers/feature-icon/FeatureIconFour";
+import TabProductFour from "../../wrappers/product/TabProductFour";
 import BannerFive from "../../wrappers/banner/BannerFive";
 import CountDownTwo from "../../wrappers/countdown/CountDownTwo";
 import TestimonialOne from "../../wrappers/testimonial/TestimonialOne";
 import NewsletterTwo from "../../wrappers/newsletter/NewsletterTwo";
+import SectionTitleThree from "../../components/section-title/SectionTitleThree";
 
 const HomeOrganicFood = () => {
   return (
@@ -31,11 +33,27 @@ const HomeOrganicFood = () => {
         {/* banner */}
         <BannerFive />
         {/* countdown */}
+        <p style={{ marginTop: "40px" }}></p>
+        <TabProductFour
+          spaceBottomClass="pb-100"
+          category="all"
+          status={0}
+          titleText="Sản phẩm mới nhất"
+          productTabClass="product-tab-fruits"
+        />
         <CountDownTwo
           spaceTopClass="pt-80"
           spaceBottomClass="pb-95"
           dateTime="November 13, 2020 12:12:00"
         />
+        <TabProductFour
+          spaceBottomClass="pb-100"
+          category="all"
+          status={1}
+          titleText="Sản phẩm giảm giá"
+          productTabClass="product-tab-fruits"
+        />
+
         {/* testimonial */}
         <TestimonialOne
           spaceTopClass="pt-100"

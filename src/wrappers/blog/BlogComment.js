@@ -9,30 +9,26 @@ const BlogComment = () => {
           <div className="blog-comment-img">
             <img
               src={process.env.PUBLIC_URL + "/assets/img/team/user.png"}
-              alt=""
+              alt="polyfood"
             />
           </div>
           <div className="blog-comment-content">
             <h4>Lê Hùng</h4>
             <span>5 July, 2023 </span>
-            <p>
-              Ăn chay tốt cho sức khỏe{" "}
-            </p>
+            <p>Ăn chay tốt cho sức khỏe </p>
           </div>
         </div>
         <div className="single-comment-wrapper mt-50 ml-120">
           <div className="blog-comment-img">
             <img
               src={process.env.PUBLIC_URL + "/assets/img/team/user.png"}
-              alt=""
+              alt="polyfood"
             />
           </div>
           <div className="blog-comment-content">
             <h4>Nguyễn Đức Thắng</h4>
             <span>12 July, 2023 </span>
-            <p>
-              Đúng vậy{" "}
-            </p>
+            <p>Đúng vậy </p>
           </div>
         </div>
       </div>

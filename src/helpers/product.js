@@ -2,12 +2,12 @@
 export const getProducts = (products, category, type, limit) => {
   const finalProducts = category
     ? products.filter(
-      (product) => product.category.filter((single) => single === category)[0]
-    )
+        (product) => product.category.filter((single) => single === category)[0]
+      )
     : products;
 
-  if (type && type === "new") {
-    const newProducts = finalProducts.filter((single) => single.new);
+  if (type && type === "new_product") {
+    const newProducts = finalProducts.filter((single) => single.new_product);
     return newProducts.slice(0, limit ? limit : newProducts.length);
   }
   if (type && type === "bestSeller") {
@@ -105,12 +105,18 @@ export const getSortedProducts = (
       }
       if (sortValue === "priceHighToLow") {
         return sortProducts.sort((a, b) => {
-          return (b.price * (100 - b.discount)) / 100 - (a.price * (100 - a.discount)) / 100;
+          return (
+            (b.price * (100 - b.discount)) / 100 -
+            (a.price * (100 - a.discount)) / 100
+          );
         });
       }
       if (sortValue === "priceLowToHigh") {
         return sortProducts.sort((a, b) => {
-          return (a.price * (100 - a.discount)) / 100 - (b.price * (100 - b.discount)) / 100;
+          return (
+            (a.price * (100 - a.discount)) / 100 -
+            (b.price * (100 - b.discount)) / 100
+          );
         });
       }
     }

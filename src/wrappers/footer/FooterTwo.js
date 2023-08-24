@@ -12,7 +12,7 @@ const FooterTwo = ({
   footerTopSpaceTopClass,
   footerTopSpaceBottomClass,
   footerLogo,
-  backgroundImage
+  backgroundImage,
 }) => {
   const [scroll, setScroll] = useState(0);
   const [top, setTop] = useState(0);
@@ -34,35 +34,37 @@ const FooterTwo = ({
   };
   return (
     <footer
-      className={`footer-area ${backgroundColorClass ? backgroundColorClass : ""
-        } ${spaceLeftClass ? spaceLeftClass : ""} ${spaceRightClass ? spaceRightClass : ""
-        } ${backgroundImage ? "bg-img" : ""}`}
+      className={`footer-area ${
+        backgroundColorClass ? backgroundColorClass : ""
+      } ${spaceLeftClass ? spaceLeftClass : ""} ${
+        spaceRightClass ? spaceRightClass : ""
+      } ${backgroundImage ? "bg-img" : ""}`}
       style={{
-        backgroundImage: ` ${backgroundImage
-          ? `url(${process.env.PUBLIC_URL + backgroundImage})`
-          : `url()`
-          }`
-      }}
-    >
+        backgroundImage: ` ${
+          backgroundImage
+            ? `url(${process.env.PUBLIC_URL + backgroundImage})`
+            : `url()`
+        }`,
+      }}>
       <div
-        className={`footer-top text-center ${footerTopBackgroundColorClass ? footerTopBackgroundColorClass : ""
-          } ${footerTopSpaceTopClass ? footerTopSpaceTopClass : ""}  ${footerTopSpaceBottomClass ? footerTopSpaceBottomClass : ""
-          }`}
-      >
+        className={`footer-top text-center ${
+          footerTopBackgroundColorClass ? footerTopBackgroundColorClass : ""
+        } ${footerTopSpaceTopClass ? footerTopSpaceTopClass : ""}  ${
+          footerTopSpaceBottomClass ? footerTopSpaceBottomClass : ""
+        }`}>
         <div className="container">
           <div className="footer-logo">
             <Link to={process.env.PUBLIC_URL}>
               <img
-                alt=""
+                alt="polyfood"
                 style={{ maxWidth: "250px" }}
-                src={"https://res.cloudinary.com/do9rcgv5s/image/upload/v1692137209/e2nw6oqvtlvpqmdwtmnh.png"}
+                src={
+                  "https://res.cloudinary.com/do9rcgv5s/image/upload/v1692137209/e2nw6oqvtlvpqmdwtmnh.png"
+                }
               />
-
             </Link>
           </div>
-          <p>
-            Chúng tôi luôn cố gắng để phục vụ tốt nhất với khách hàng
-          </p>
+          <p>Chúng tôi luôn cố gắng để phục vụ tốt nhất với khách hàng</p>
           <div className="footer-social">
             <ul>
               <li>
@@ -97,19 +99,16 @@ const FooterTwo = ({
       <div className="footer-bottom text-center">
         <div className="container">
           <div
-            className={`copyright-2 ${copyrightColorClass ? copyrightColorClass : ""
-              }`}
-          >
-            <p>
-              Poly Food - © FPT Polytechnic Hà Nội
-            </p>
+            className={`copyright-2 ${
+              copyrightColorClass ? copyrightColorClass : ""
+            }`}>
+            <p>Poly Food - © FPT Polytechnic Hà Nội</p>
           </div>
         </div>
       </div>
       <button
         className={`scroll-top ${scroll > top ? "show" : ""}`}
-        onClick={() => scrollToTop()}
-      >
+        onClick={() => scrollToTop()}>
         <i className="fa fa-angle-double-up"></i>
       </button>
     </footer>
@@ -125,7 +124,7 @@ FooterTwo.propTypes = {
   footerTopSpaceBottomClass: PropTypes.string,
   footerTopSpaceTopClass: PropTypes.string,
   spaceLeftClass: PropTypes.string,
-  spaceRightClass: PropTypes.string
+  spaceRightClass: PropTypes.string,
 };
 
 export default FooterTwo;

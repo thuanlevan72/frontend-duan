@@ -10,8 +10,8 @@ const TestimonialThree = () => {
     loop: true,
     autoplay: {
       delay: 5000,
-      disableOnInteraction: false
-    }
+      disableOnInteraction: false,
+    },
   };
 
   return (
@@ -20,9 +20,8 @@ const TestimonialThree = () => {
       style={{
         backgroundImage: `url(${
           process.env.PUBLIC_URL + "/assets/img/bg/testimonial-bg-2.jpg"
-        })`
-      }}
-    >
+        })`,
+      }}>
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg-6 col-md-7">
@@ -48,7 +47,7 @@ const TestimonialThree = () => {
                 src={
                   process.env.PUBLIC_URL + "/assets/img/testimonial/testi-2.png"
                 }
-                alt=""
+                alt="polyfood"
               />
             </div>
           </div>

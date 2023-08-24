@@ -3,8 +3,9 @@ import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 import { getDiscountPrice } from "../../helpers/product";
-import { Rate } from 'antd';
+import { Rate } from "antd";
 import ProductModal from "./ProductModal";
+import CartApi from "../../api/cart/CartApi";
 
 const ProductGridListSingle = ({
   product,
@@ -16,7 +17,7 @@ const ProductGridListSingle = ({
   wishlistItem,
   compareItem,
   sliderClassName,
-  spaceBottomClass
+  spaceBottomClass,
 }) => {
   const [modalShow, setModalShow] = useState(false);
   const { addToast } = useToasts();
@@ -29,24 +30,33 @@ const ProductGridListSingle = ({
   return (
     <Fragment>
       <div
-        className={`col-xl-4 col-sm-6 ${sliderClassName ? sliderClassName : ""
-          }`}
-      >
+        className={`col-xl-4 col-sm-6 ${
+          sliderClassName ? sliderClassName : ""
+        }`}>
         <div
-          className={`product-wrap ${spaceBottomClass ? spaceBottomClass : ""}`}
-        >
-          <div className="product-img" style={{ width: "auto", height: "200px", objectFit: "contain", display: "flex", alignItems: "center" }}>
+          className={`product-wrap ${
+            spaceBottomClass ? spaceBottomClass : ""
+          }`}>
+          <div
+            className="product-img"
+            style={{
+              width: "auto",
+              height: "200px",
+              objectFit: "contain",
+              display: "flex",
+              alignItems: "center",
+            }}>
             <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
               <img
                 className="default-img"
                 src={process.env.PUBLIC_URL + product.image[0]}
-                alt=""
+                alt="polyfood"
               />
               {product.image.length > 1 ? (
                 <img
                   className="hover-img"
                   src={process.env.PUBLIC_URL + product.image[1]}
-                  alt=""
+                  alt="polyfood"
                 />
               ) : (
                 ""
@@ -74,8 +84,7 @@ const ProductGridListSingle = ({
                       ? "Đã thêm vào danh sách yêu thích"
                       : "Thêm vào danh sách yêu thích"
                   }
-                  onClick={() => addToWishlist(product, addToast)}
-                >
+                  onClick={() => addToWishlist(product, addToast)}>
                   <i className="pe-7s-like" />
                 </button>
               </div>
@@ -84,8 +93,7 @@ const ProductGridListSingle = ({
                   <a
                     href={product.affiliateLink}
                     rel="noopener noreferrer"
-                    target="_blank"
-                  >
+                    target="_blank">
                     Mua ngay
                   </a>
                 ) : product.variation && product.variation.length >= 1 ? (
@@ -94,7 +102,18 @@ const ProductGridListSingle = ({
                   </Link>
                 ) : product.stock && product.stock > 0 ? (
                   <button
-                    onClick={() => addToCart(product, addToast)}
+                    onClick={() => {
+                      if (JSON.parse(localStorage.getItem("user"))) {
+                        CartApi.ChangeCartItem({
+                          quantity: 1,
+                          userId: JSON.parse(localStorage.getItem("user")).user
+                            .userId,
+                          productId: Number(product.id),
+                          IsAdd: 1,
+                        });
+                      }
+                      addToCart(product, addToast);
+                    }}
                     className={
                       cartItem !== undefined && cartItem.quantity > 0
                         ? "active"
@@ -102,9 +121,10 @@ const ProductGridListSingle = ({
                     }
                     disabled={cartItem !== undefined && cartItem.quantity > 0}
                     title={
-                      cartItem !== undefined ? "Thêm vào giỏ hàng" : "Thêm vào giỏ hàng"
-                    }
-                  >
+                      cartItem !== undefined
+                        ? "Thêm vào giỏ hàng"
+                        : "Thêm vào giỏ hàng"
+                    }>
                     {" "}
                     <i className="pe-7s-cart"></i>{" "}
                     {cartItem !== undefined && cartItem.quantity > 0
@@ -125,23 +145,45 @@ const ProductGridListSingle = ({
             </div>
           </div>
           <div className="product-content text-center">
-            <h3 style={{ fontSize: "20px", textTransform: "uppercase", marginBottom: "10px" }}>
-              <Link
-                to={process.env.PUBLIC_URL + "/product/" + product.id}
-              >
+            <h3
+              style={{
+                fontSize: "20px",
+                textTransform: "uppercase",
+                marginBottom: "10px",
+              }}>
+              <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
                 {product.name}
               </Link>
             </h3>
             <div className="product-price">
               {discountedPrice !== null ? (
                 <Fragment>
-                  <span>{parseInt((currency.currencySymbol + finalDiscountedPrice).replace("$", "")).toLocaleString("en-US") + " VND"}</span>{" "}
+                  <span>
+                    {parseInt(
+                      (currency.currencySymbol + finalDiscountedPrice).replace(
+                        "$",
+                        ""
+                      )
+                    ).toLocaleString("en-US") + " VND"}
+                  </span>{" "}
                   <span className="old">
-                    {parseInt((currency.currencySymbol + finalProductPrice).replace("$", "")).toLocaleString("en-US") + " VND"}
+                    {parseInt(
+                      (currency.currencySymbol + finalProductPrice).replace(
+                        "$",
+                        ""
+                      )
+                    ).toLocaleString("en-US") + " VND"}
                   </span>
                 </Fragment>
               ) : (
-                <span>{parseInt((currency.currencySymbol + finalProductPrice).replace("$", "")).toLocaleString("en-US") + " VND"} </span>
+                <span>
+                  {parseInt(
+                    (currency.currencySymbol + finalProductPrice).replace(
+                      "$",
+                      ""
+                    )
+                  ).toLocaleString("en-US") + " VND"}{" "}
+                </span>
               )}
             </div>
             <div className="product-rating">
@@ -162,13 +204,13 @@ const ProductGridListSingle = ({
                     <img
                       className="default-img img-fluid"
                       src={process.env.PUBLIC_URL + product.image[0]}
-                      alt=""
+                      alt="polyfood"
                     />
                     {product.image.length > 1 ? (
                       <img
                         className="hover-img img-fluid"
                         src={process.env.PUBLIC_URL + product.image[1]}
-                        alt=""
+                        alt="polyfood"
                       />
                     ) : (
                       ""
@@ -181,7 +223,11 @@ const ProductGridListSingle = ({
                       ) : (
                         ""
                       )}
-                      {product.new_product_product ? <span className="purple">Mới</span> : ""}
+                      {product.new_product_product ? (
+                        <span className="purple">Mới</span>
+                      ) : (
+                        ""
+                      )}
                     </div>
                   ) : (
                     ""
@@ -214,14 +260,30 @@ const ProductGridListSingle = ({
                   {discountedPrice !== null ? (
                     <Fragment>
                       <span>
-                        {parseInt((currency.currencySymbol + finalDiscountedPrice).replace("$", "")).toLocaleString("en-US") + " VND"}
+                        {parseInt(
+                          (
+                            currency.currencySymbol + finalDiscountedPrice
+                          ).replace("$", "")
+                        ).toLocaleString("en-US") + " VND"}
                       </span>{" "}
                       <span className="old">
-                        {parseInt((currency.currencySymbol + finalProductPrice).replace("$", "")).toLocaleString("en-US") + " VND"}
+                        {parseInt(
+                          (currency.currencySymbol + finalProductPrice).replace(
+                            "$",
+                            ""
+                          )
+                        ).toLocaleString("en-US") + " VND"}
                       </span>
                     </Fragment>
                   ) : (
-                    <span>{parseInt((currency.currencySymbol + finalProductPrice).replace("$", "")).toLocaleString("en-US") + " VND"} </span>
+                    <span>
+                      {parseInt(
+                        (currency.currencySymbol + finalProductPrice).replace(
+                          "$",
+                          ""
+                        )
+                      ).toLocaleString("en-US") + " VND"}{" "}
+                    </span>
                   )}
                 </div>
                 <div className="shop-list-actions d-flex align-items-center">
@@ -230,19 +292,28 @@ const ProductGridListSingle = ({
                       <a
                         href={product.affiliateLink}
                         rel="noopener noreferrer"
-                        target="_blank"
-                      >
+                        target="_blank">
                         Mua ngay
                       </a>
                     ) : product.variation && product.variation.length >= 1 ? (
                       <Link
-                        to={`${process.env.PUBLIC_URL}/product/${product.id}`}
-                      >
+                        to={`${process.env.PUBLIC_URL}/product/${product.id}`}>
                         Select Option
                       </Link>
                     ) : product.stock && product.stock > 0 ? (
                       <button
-                        onClick={() => addToCart(product, addToast)}
+                        onClick={() => {
+                          if (JSON.parse(localStorage.getItem("user"))) {
+                            CartApi.ChangeCartItem({
+                              quantity: 1,
+                              userId: JSON.parse(localStorage.getItem("user"))
+                                .user.userId,
+                              productId: Number(product.id),
+                              IsAdd: 1,
+                            });
+                          }
+                          addToCart(product, addToast);
+                        }}
                         className={
                           cartItem !== undefined && cartItem.quantity > 0
                             ? "active"
@@ -255,8 +326,7 @@ const ProductGridListSingle = ({
                           cartItem !== undefined
                             ? "Đã thêm vào giỏ hàng"
                             : "Thêm vào giỏ hàng"
-                        }
-                      >
+                        }>
                         {" "}
                         <i className="pe-7s-cart"></i>{" "}
                         {cartItem !== undefined && cartItem.quantity > 0
@@ -278,8 +348,7 @@ const ProductGridListSingle = ({
                           ? "Đã thêm vào danh sách yêu thích"
                           : "thêm vào danh sách yêu thíc"
                       }
-                      onClick={() => addToWishlist(product, addToast)}
-                    >
+                      onClick={() => addToWishlist(product, addToast)}>
                       <i className="pe-7s-like" />
                     </button>
                   </div>
@@ -290,10 +359,9 @@ const ProductGridListSingle = ({
                       title={
                         compareItem !== undefined
                           ? "Đã thêm vào danh sách yêu thích"
-                          : "thêm vào danh sách yêu thíc"
+                          : "thêm vào danh sách yêu thích"
                       }
-                      onClick={() => addToCompare(product, addToast)}
-                    >
+                      onClick={() => addToCompare(product, addToast)}>
                       <i className="pe-7s-shuffle" />
                     </button>
                   </div>
@@ -334,7 +402,7 @@ ProductGridListSingle.propTypes = {
   product: PropTypes.object,
   sliderClassName: PropTypes.string,
   spaceBottomClass: PropTypes.string,
-  wishlistItem: PropTypes.object
+  wishlistItem: PropTypes.object,
 };
 
 export default ProductGridListSingle;

@@ -11,6 +11,7 @@ import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import OrderApi from "../../api/order/OrderApi";
 import LoadingSpin from "../loading/LoadingSpin";
 import VoucherApi from "../../api/voucher/VoucherApi";
+import CartApi from "../../api/cart/CartApi";
 
 const ResVnPay = ({ location, confirmOrders }) => {
   const [paymentResult, setPaymentResult] = useState(null);
@@ -38,10 +39,15 @@ const ResVnPay = ({ location, confirmOrders }) => {
         localStorage.removeItem("dataOrderOnline");
         setLoading(true);
         const response = await OrderApi.CreateOrder(storedData);
-        if (response.codeVoucher) {
-          await VoucherApi.ApllyVoucher(response.userId, response.codeVoucher);
+        if (storedData.userId) {
+          CartApi.RemoveAllCart(storedData.userId);
         }
-
+        if (storedData.codeVoucher) {
+          await VoucherApi.ApllyVoucher(
+            storedData.userId,
+            storedData.codeVoucher
+          );
+        }
         setLoading(false);
       } catch (error) {
         setLoading(false);

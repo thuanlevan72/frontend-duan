@@ -8,10 +8,9 @@ const BannerThirtyTwoSingle = ({ data, spaceBottomClass }) => {
       <div
         className={`single-banner banner-red-color ${
           spaceBottomClass ? spaceBottomClass : ""
-        }`}
-      >
+        }`}>
         <Link to={process.env.PUBLIC_URL + data.link}>
-          <img src={process.env.PUBLIC_URL + data.image} alt="" />
+          <img src={process.env.PUBLIC_URL + data.image} alt="polyfood" />
         </Link>
         <div className="banner-content">
           <h3>{data.title}</h3>
@@ -29,7 +28,7 @@ const BannerThirtyTwoSingle = ({ data, spaceBottomClass }) => {
 
 BannerThirtyTwoSingle.propTypes = {
   data: PropTypes.object,
-  spaceBottomClass: PropTypes.string
+  spaceBottomClass: PropTypes.string,
 };
 
 export default BannerThirtyTwoSingle;

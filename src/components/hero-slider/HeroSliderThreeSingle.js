@@ -7,8 +7,7 @@ const HeroSliderThreeSingle = ({ data, sliderClass }) => {
     <div
       className={`slider-height-7 bg-glaucous d-flex align-items-center ${
         sliderClass ? sliderClass : ""
-      }`}
-    >
+      }`}>
       <div className="container">
         <div className="row align-items-center slider-h9-mrg">
           <div className="col-lg-6 col-md-6 col-12 col-sm-6">
@@ -21,8 +20,7 @@ const HeroSliderThreeSingle = ({ data, sliderClass }) => {
               <div className="slider-btn-9 btn-hover">
                 <Link
                   className="animated"
-                  to={process.env.PUBLIC_URL + data.url}
-                >
+                  to={process.env.PUBLIC_URL + data.url}>
                   SHOP NOW
                 </Link>
               </div>
@@ -33,7 +31,7 @@ const HeroSliderThreeSingle = ({ data, sliderClass }) => {
               <img
                 className="animated"
                 src={process.env.PUBLIC_URL + data.image}
-                alt=""
+                alt="polyfood"
               />
             </div>
           </div>
@@ -45,7 +43,7 @@ const HeroSliderThreeSingle = ({ data, sliderClass }) => {
 
 HeroSliderThreeSingle.propTypes = {
   data: PropTypes.object,
-  sliderClass: PropTypes.string
+  sliderClass: PropTypes.string,
 };
 
 export default HeroSliderThreeSingle;

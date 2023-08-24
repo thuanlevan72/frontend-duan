@@ -10,7 +10,7 @@ const CategoryFiveSingle = ({ data }) => {
           <Link to={process.env.PUBLIC_URL + data.url}>
             <img
               src={process.env.PUBLIC_URL + data.image}
-              alt=""
+              alt="polyfood"
               className="img-fluid"
             />
           </Link>
@@ -24,7 +24,7 @@ const CategoryFiveSingle = ({ data }) => {
 };
 
 CategoryFiveSingle.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.object,
 };
 
 export default CategoryFiveSingle;

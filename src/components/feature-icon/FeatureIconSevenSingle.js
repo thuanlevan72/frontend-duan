@@ -7,10 +7,9 @@ const FeatureIconSevenSingle = ({ data, spaceBottomClass, textAlignClass }) => {
       <div
         className={`support-wrap-6 support-shape ${
           spaceBottomClass ? spaceBottomClass : ""
-        } ${textAlignClass ? textAlignClass : ""}`}
-      >
+        } ${textAlignClass ? textAlignClass : ""}`}>
         <div className="support-content-6">
-          <img src={process.env.PUBLIC_URL + data.image} alt="" />
+          <img src={process.env.PUBLIC_URL + data.image} alt="polyfood" />
           <h5>{data.title}</h5>
           <p>{data.subtitle}</p>
         </div>
@@ -22,7 +21,7 @@ const FeatureIconSevenSingle = ({ data, spaceBottomClass, textAlignClass }) => {
 FeatureIconSevenSingle.propTypes = {
   data: PropTypes.object,
   spaceBottomClass: PropTypes.string,
-  textAlignClass: PropTypes.string
+  textAlignClass: PropTypes.string,
 };
 
 export default FeatureIconSevenSingle;

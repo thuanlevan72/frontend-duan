@@ -9,7 +9,7 @@ const FeatureIconSingle = ({ singleFeature }) => {
           <img
             className="animated"
             src={process.env.PUBLIC_URL + singleFeature.image}
-            alt=""
+            alt="polyfood"
           />
         </div>
         <div className="support-content">
@@ -22,7 +22,7 @@ const FeatureIconSingle = ({ singleFeature }) => {
 };
 
 FeatureIconSingle.propTypes = {
-  singleFeature: PropTypes.object
+  singleFeature: PropTypes.object,
 };
 
 export default FeatureIconSingle;

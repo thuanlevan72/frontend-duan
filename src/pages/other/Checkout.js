@@ -14,6 +14,7 @@ import { Spin, message } from "antd";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { typeOf } from "react-hooks-paginator";
 import VoucherApi from "../../api/voucher/VoucherApi";
+import CartApi from "../../api/cart/CartApi";
 
 const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
   const validateUserOrder = (userOrder) => {
@@ -142,6 +143,7 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
       setLoading(false);
       setTimeout(function () {
         confirmOrders();
+        CartApi.RemoveAllCart(userOrder.userId);
         history.push("/Complete");
       }, 1500);
     } catch (error) {

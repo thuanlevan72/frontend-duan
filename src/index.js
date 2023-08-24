@@ -9,11 +9,13 @@ import { Provider } from "react-redux";
 import { fetchProducts } from "./redux/actions/productActions";
 import rootReducer from "./redux/reducers/rootReducer";
 import products from "./data/products.json";
+import carts from "./data/carts/carts.json";
 import App from "./App";
 import "./assets/scss/style.scss";
 import * as serviceWorker from "./serviceWorker";
 
 import { composeWithDevTools } from "redux-devtools-extension";
+import { fetchDataCarts } from "./redux/actions/cartActions";
 
 const store = createStore(
   rootReducer,
@@ -23,6 +25,7 @@ const store = createStore(
 
 // fetch products from json file
 store.dispatch(fetchProducts(products));
+store.dispatch(fetchDataCarts(carts));
 
 ReactDOM.render(
   <Provider store={store}>

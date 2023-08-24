@@ -6,7 +6,7 @@ const CategoryOneSingle = ({ data, sliderClass }) => {
   return (
     <div className={`collection-product-2 ${sliderClass ? sliderClass : ""}`}>
       <Link to={process.env.PUBLIC_URL + data.link}>
-        <img src={process.env.PUBLIC_URL + data.image} alt="" />
+        <img src={process.env.PUBLIC_URL + data.image} alt="polyfood" />
       </Link>
       <div className="collection-content-2 text-center">
         <span>{data.subtitle}</span>
@@ -20,7 +20,7 @@ const CategoryOneSingle = ({ data, sliderClass }) => {
 
 CategoryOneSingle.propTypes = {
   data: PropTypes.object,
-  sliderClass: PropTypes.string
+  sliderClass: PropTypes.string,
 };
 
 export default CategoryOneSingle;

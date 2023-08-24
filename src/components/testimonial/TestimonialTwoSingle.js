@@ -6,9 +6,8 @@ const TestimonialTwoSingle = ({ data, sliderClass }) => {
     <div
       className={`single-testimonial single-testimonial--style2 text-center ${
         sliderClass ? sliderClass : ""
-      }`}
-    >
-      <img src={process.env.PUBLIC_URL + data.image} alt="" />
+      }`}>
+      <img src={process.env.PUBLIC_URL + data.image} alt="polyfood" />
       <p>{data.content}</p>
       <div className="client-info">
         <h5>{data.customerName}</h5>
@@ -20,7 +19,7 @@ const TestimonialTwoSingle = ({ data, sliderClass }) => {
 
 TestimonialTwoSingle.propTypes = {
   data: PropTypes.object,
-  sliderClass: PropTypes.string
+  sliderClass: PropTypes.string,
 };
 
 export default TestimonialTwoSingle;

@@ -13,7 +13,7 @@ const TabProductEleven = ({
   category,
   sectionTitle,
   bgShape,
-  colorClass
+  colorClass,
 }) => {
   const [swiper, updateSwiper] = useState(null);
   const [swiper2, updateSwiper2] = useState(null);
@@ -26,18 +26,18 @@ const TabProductEleven = ({
     observeParents: true,
     breakpoints: {
       1024: {
-        slidesPerView: 4
+        slidesPerView: 4,
       },
       768: {
-        slidesPerView: 3
+        slidesPerView: 3,
       },
       640: {
-        slidesPerView: 2
+        slidesPerView: 2,
       },
       320: {
-        slidesPerView: 1
-      }
-    }
+        slidesPerView: 1,
+      },
+    },
   };
 
   const goNext = () => {
@@ -78,8 +78,7 @@ const TabProductEleven = ({
         spaceTopClass ? spaceTopClass : ""
       } ${spaceBottomClass ? spaceBottomClass : ""} ${
         bgColorClass ? bgColorClass : ""
-      }`}
-    >
+      }`}>
       <div className="container">
         <div className="product-tab-slider-wrapper position-relative">
           <Tab.Container defaultActiveKey="saleItems">
@@ -87,8 +86,7 @@ const TabProductEleven = ({
               <SectionTitleFive titleText={sectionTitle} />
               <Nav
                 variant="pills"
-                className="product-tab-list-3 bg-gray-5 text-center"
-              >
+                className="product-tab-list-3 bg-gray-5 text-center">
                 <Nav.Item>
                   <Nav.Link eventKey="newArrival">
                     <h4>New Arrivals</h4>
@@ -122,14 +120,12 @@ const TabProductEleven = ({
                   <div className="swiper-slider-navigation-wrapper product-slider-active">
                     <button
                       className="swiper-button-prev ht-swiper-button-nav"
-                      onClick={goPrev}
-                    >
+                      onClick={goPrev}>
                       <i className="pe-7s-angle-left" />
                     </button>
                     <button
                       className="swiper-button-next ht-swiper-button-nav"
-                      onClick={goNext}
-                    >
+                      onClick={goNext}>
                       <i className="pe-7s-angle-right" />
                     </button>
                   </div>
@@ -150,14 +146,12 @@ const TabProductEleven = ({
                   <div className="swiper-slider-navigation-wrapper">
                     <button
                       className="swiper-button-prev ht-swiper-button-nav"
-                      onClick={goPrev2}
-                    >
+                      onClick={goPrev2}>
                       <i className="pe-7s-angle-left" />
                     </button>
                     <button
                       className="swiper-button-next ht-swiper-button-nav"
-                      onClick={goNext2}
-                    >
+                      onClick={goNext2}>
                       <i className="pe-7s-angle-right" />
                     </button>
                   </div>
@@ -178,14 +172,12 @@ const TabProductEleven = ({
                   <div className="swiper-slider-navigation-wrapper">
                     <button
                       className="swiper-button-prev ht-swiper-button-nav"
-                      onClick={goPrev3}
-                    >
+                      onClick={goPrev3}>
                       <i className="pe-7s-angle-left" />
                     </button>
                     <button
                       className="swiper-button-next ht-swiper-button-nav"
-                      onClick={goNext3}
-                    >
+                      onClick={goNext3}>
                       <i className="pe-7s-angle-right" />
                     </button>
                   </div>
@@ -199,7 +191,7 @@ const TabProductEleven = ({
         <div className="bg-png-1">
           <img
             src={process.env.PUBLIC_URL + "/assets/img/bg/shape-2.png"}
-            alt=""
+            alt="polyfood"
           />
         </div>
       ) : (
@@ -216,7 +208,7 @@ TabProductEleven.propTypes = {
   category: PropTypes.string,
   sectionTitle: PropTypes.string,
   spaceBottomClass: PropTypes.string,
-  spaceTopClass: PropTypes.string
+  spaceTopClass: PropTypes.string,
 };
 
 export default TabProductEleven;

@@ -7,8 +7,7 @@ const HeroSliderTwoSingle = ({ data, sliderClassName }) => {
     <div
       className={`single-slider single-slider-10 slider-height-8 bg-aqua ${
         sliderClassName ? sliderClassName : ""
-      }`}
-    >
+      }`}>
       <div className="container">
         <div className="row">
           <div className="col-12 col-sm-6 d-flex align-items-center">
@@ -18,8 +17,7 @@ const HeroSliderTwoSingle = ({ data, sliderClassName }) => {
               <div className="slider-btn btn-hover">
                 <Link
                   className="animated"
-                  to={process.env.PUBLIC_URL + data.url}
-                >
+                  to={process.env.PUBLIC_URL + data.url}>
                   SHOP NOW
                 </Link>
               </div>
@@ -30,7 +28,7 @@ const HeroSliderTwoSingle = ({ data, sliderClassName }) => {
               <img
                 className="animated img-fluid"
                 src={process.env.PUBLIC_URL + data.image}
-                alt=""
+                alt="polyfood"
               />
             </div>
           </div>
@@ -42,7 +40,7 @@ const HeroSliderTwoSingle = ({ data, sliderClassName }) => {
 
 HeroSliderTwoSingle.propTypes = {
   data: PropTypes.object,
-  sliderClassName: PropTypes.string
+  sliderClassName: PropTypes.string,
 };
 
 export default HeroSliderTwoSingle;

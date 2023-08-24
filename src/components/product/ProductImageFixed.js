@@ -21,7 +21,7 @@ const ProductImageFixed = ({ product }) => {
         {product.image ? (
           <img
             src={process.env.PUBLIC_URL + product.image[0]}
-            alt=""
+            alt="polyfood"
             className="img-fluid"
           />
         ) : (
@@ -33,7 +33,7 @@ const ProductImageFixed = ({ product }) => {
 };
 
 ProductImageFixed.propTypes = {
-  product: PropTypes.object
+  product: PropTypes.object,
 };
 
 export default ProductImageFixed;

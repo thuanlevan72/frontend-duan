@@ -23,7 +23,7 @@ const productImageGallerySticky = ({ product }) => {
               <div className="product-sticky-image__single mb-10" key={key}>
                 <img
                   src={process.env.PUBLIC_URL + single}
-                  alt=""
+                  alt="polyfood"
                   className="img-fluid"
                 />
               </div>
@@ -35,7 +35,7 @@ const productImageGallerySticky = ({ product }) => {
 };
 
 productImageGallerySticky.propTypes = {
-  product: PropTypes.object
+  product: PropTypes.object,
 };
 
 export default productImageGallerySticky;

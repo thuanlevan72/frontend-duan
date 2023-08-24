@@ -56,11 +56,11 @@ const ProductDescriptionTab = ({
   const handlePaginationChange = (page, pageSize) => {
     setParam(
       (prev) =>
-      (prev = {
-        ...param,
-        page: page,
-        pageSize: pageSize,
-      })
+        (prev = {
+          ...param,
+          page: page,
+          pageSize: pageSize,
+        })
     );
   };
   const subMitMess = async (e) => {
@@ -117,7 +117,9 @@ const ProductDescriptionTab = ({
                 </Nav.Link>
               </Nav.Item> */}
               <Nav.Item>
-                <Nav.Link eventKey="productDescription">Mô tả chi tiết</Nav.Link>
+                <Nav.Link eventKey="productDescription">
+                  Mô tả chi tiết
+                </Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="productReviews">
@@ -168,7 +170,7 @@ const ProductDescriptionTab = ({
                               <img
                                 style={{ width: 80, height: 90 }}
                                 src={item.user.account.avartar}
-                                alt=""
+                                alt="polyfood"
                               />
                             </div>
                             <div className="review-content">
@@ -205,7 +207,7 @@ const ProductDescriptionTab = ({
                                 <img
                                   style={{ width: 80, height: 90 }}
                                   src="https://cdn-icons-png.flaticon.com/512/186/186037.png"
-                                  alt=""
+                                  alt="polyfood"
                                 />
                               </div>
                               <div className="review-content">

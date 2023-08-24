@@ -5,6 +5,7 @@ import { getProductCartQuantity } from "../../helpers/product";
 import { Modal } from "react-bootstrap";
 import Rating from "./sub-components/ProductRating";
 import { connect } from "react-redux";
+import CartApi from "../../api/cart/CartApi";
 
 function ProductModal(props) {
   const { product } = props;
@@ -59,7 +60,7 @@ function ProductModal(props) {
     getSwiper: getGallerySwiper,
     spaceBetween: 10,
     loopedSlides: 4,
-    loop: true
+    loop: true,
   };
 
   const thumbnailSwiperParams = {
@@ -73,7 +74,7 @@ function ProductModal(props) {
     slideToClickedSlide: true,
     navigation: {
       nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev"
+      prevEl: ".swiper-button-prev",
     },
     renderPrevButton: () => (
       <button className="swiper-button-prev ht-swiper-button-nav">
@@ -84,7 +85,7 @@ function ProductModal(props) {
       <button className="swiper-button-next ht-swiper-button-nav">
         <i className="pe-7s-angle-right" />
       </button>
-    )
+    ),
   };
 
   return (
@@ -92,8 +93,7 @@ function ProductModal(props) {
       <Modal
         show={props.show}
         onHide={props.onHide}
-        className="product-quickview-modal-wrapper"
-      >
+        className="product-quickview-modal-wrapper">
         <Modal.Header closeButton></Modal.Header>
 
         <div className="modal-body">
@@ -109,7 +109,7 @@ function ProductModal(props) {
                             <img
                               src={process.env.PUBLIC_URL + single}
                               className="img-fluid"
-                              alt=""
+                              alt="polyfood"
                             />
                           </div>
                         </div>
@@ -127,7 +127,7 @@ function ProductModal(props) {
                             <img
                               src={process.env.PUBLIC_URL + single}
                               className="img-fluid"
-                              alt=""
+                              alt="polyfood"
                             />
                           </div>
                         </div>
@@ -175,8 +175,7 @@ function ProductModal(props) {
                           return (
                             <label
                               className={`pro-details-color-content--single ${single.color}`}
-                              key={key}
-                            >
+                              key={key}>
                               <input
                                 type="radio"
                                 value={single.color}
@@ -203,37 +202,36 @@ function ProductModal(props) {
                       <span>Size</span>
                       <div className="pro-details-size-content">
                         {product.variation &&
-                          product.variation.map(single => {
+                          product.variation.map((single) => {
                             return single.color === selectedProductColor
                               ? single.size.map((singleSize, key) => {
-                                return (
-                                  <label
-                                    className={`pro-details-size-content--single`}
-                                    key={key}
-                                  >
-                                    <input
-                                      type="radio"
-                                      value={singleSize.name}
-                                      checked={
-                                        singleSize.name ===
+                                  return (
+                                    <label
+                                      className={`pro-details-size-content--single`}
+                                      key={key}>
+                                      <input
+                                        type="radio"
+                                        value={singleSize.name}
+                                        checked={
+                                          singleSize.name ===
                                           selectedProductSize
-                                          ? "checked"
-                                          : ""
-                                      }
-                                      onChange={() => {
-                                        setSelectedProductSize(
-                                          singleSize.name
-                                        );
-                                        setProductStock(singleSize.stock);
-                                        setQuantityCount(1);
-                                      }}
-                                    />
-                                    <span className="size-name">
-                                      {singleSize.name}
-                                    </span>
-                                  </label>
-                                );
-                              })
+                                            ? "checked"
+                                            : ""
+                                        }
+                                        onChange={() => {
+                                          setSelectedProductSize(
+                                            singleSize.name
+                                          );
+                                          setProductStock(singleSize.stock);
+                                          setQuantityCount(1);
+                                        }}
+                                      />
+                                      <span className="size-name">
+                                        {singleSize.name}
+                                      </span>
+                                    </label>
+                                  );
+                                })
                               : "";
                           })}
                       </div>
@@ -248,8 +246,7 @@ function ProductModal(props) {
                       <a
                         href={product.affiliateLink}
                         rel="noopener noreferrer"
-                        target="_blank"
-                      >
+                        target="_blank">
                         Buy Now
                       </a>
                     </div>
@@ -263,8 +260,7 @@ function ProductModal(props) {
                             quantityCount > 1 ? quantityCount - 1 : 1
                           )
                         }
-                        className="dec qtybutton"
-                      >
+                        className="dec qtybutton">
                         -
                       </button>
                       <input
@@ -281,25 +277,32 @@ function ProductModal(props) {
                               : quantityCount
                           )
                         }
-                        className="inc qtybutton"
-                      >
+                        className="inc qtybutton">
                         +
                       </button>
                     </div>
                     <div className="pro-details-cart btn-hover">
                       {productStock && productStock > 0 ? (
                         <button
-                          onClick={() =>
+                          onClick={() => {
+                            if (JSON.parse(localStorage.getItem("user"))) {
+                              CartApi.ChangeCartItem({
+                                quantity: 1,
+                                userId: JSON.parse(localStorage.getItem("user"))
+                                  .user.userId,
+                                productId: Number(product.id),
+                                IsAdd: 1,
+                              });
+                            }
                             addToCart(
                               product,
                               addToast,
                               quantityCount,
                               selectedProductColor,
                               selectedProductSize
-                            )
-                          }
-                          disabled={productCartQty >= productStock}
-                        >
+                            );
+                          }}
+                          disabled={productCartQty >= productStock}>
                           {" "}
                           Thêm{" "}
                         </button>
@@ -311,13 +314,8 @@ function ProductModal(props) {
                       <button
                         className={wishlistItem !== undefined ? "active" : ""}
                         disabled={wishlistItem !== undefined}
-                        title={
-                          wishlistItem !== undefined
-                            ? "Đã thêm"
-                            : "Thêm"
-                        }
-                        onClick={() => addToWishlist(product, addToast)}
-                      >
+                        title={wishlistItem !== undefined ? "Đã thêm" : "Thêm"}
+                        onClick={() => addToWishlist(product, addToast)}>
                         <i className="pe-7s-like" />
                       </button>
                     </div>
@@ -325,13 +323,8 @@ function ProductModal(props) {
                       <button
                         className={compareItem !== undefined ? "active" : ""}
                         disabled={compareItem !== undefined}
-                        title={
-                          compareItem !== undefined
-                            ? "Đã thêm"
-                            : "Thêm"
-                        }
-                        onClick={() => addToCompare(product, addToast)}
-                      >
+                        title={compareItem !== undefined ? "Đã thêm" : "Thêm"}
+                        onClick={() => addToCompare(product, addToast)}>
                         <i className="pe-7s-shuffle" />
                       </button>
                     </div>
@@ -360,12 +353,12 @@ ProductModal.propTypes = {
   onHide: PropTypes.func,
   product: PropTypes.object,
   show: PropTypes.bool,
-  wishlistitem: PropTypes.object
+  wishlistitem: PropTypes.object,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    cartitems: state.cartData
+    cartitems: state.cartData,
   };
 };
 

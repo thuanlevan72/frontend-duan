@@ -287,7 +287,7 @@
       top: 0;
       left: 50%;
 
-      visibility: hidden;
+      
 
       transition-duration: 0.7s;
       transform: translate(-50%, 20px);
@@ -309,7 +309,7 @@
       transform: translateX(-50%);
       > div {
         display: flex;
-        visibility: hidden;
+        
         align-items: center;
         justify-content: center;
 
@@ -743,7 +743,7 @@
               top: -7px;
               left: -4px;
 
-              visibility: hidden;
+              
 
               width: 20px;
               height: 20px;
@@ -1407,7 +1407,6 @@
 .product-wrap-2 {
   position: relative;
 
-  overflow: hidden;
   .product-img {
     position: relative;
     img {
@@ -1438,12 +1437,12 @@
       top: 0;
       left: 0;
 
-      visibility: hidden;
+      
 
       width: 100%;
 
       transition: all 0.5s ease-in-out;
-      transform: translateX(100%);
+      // transform: translateX(100%);
 
       opacity: 0;
     }
@@ -1456,7 +1455,7 @@
 
       width: 100%;
 
-      transform: translateY(-50%);
+      // transform: translateY(-50%);
       a,
       button {
         font-size: 16px;
@@ -1469,7 +1468,7 @@
         margin: 0 3px;
 
         transition: all 0.4s ease-in-out;
-        transform: scaleX(0);
+        // transform: scaleX(0);
         text-align: center;
 
         color: #fff;
@@ -1619,20 +1618,20 @@
   &:hover .hover-img {
     visibility: visible;
 
-    transform: translateX(0);
+    // transform: translateX(0);
 
     opacity: 1;
   }
   &:hover .default-img {
-    visibility: hidden;
+    
 
-    transform: translateX(-100%);
+    // transform: translateX(-100%);
   }
   &:hover .product-action-2 a {
-    transform: scaleX(1);
+    // transform: scaleX(1);
   }
   &:hover .product-action-2 button {
-    transform: scaleX(1);
+    // transform: scaleX(1);
   }
   &.pro-glaucous-color {
     .product-img {
@@ -1880,13 +1879,13 @@
     bottom: 5%;
     left: 5%;
 
-    visibility: hidden;
+    
 
     width: 90%;
     height: 90%;
 
     transition: all 0.4s ease 0s;
-    transform: scale(0.85);
+    // transform: scale(0.85);
 
     opacity: 0;
     background: rgba(255, 255, 255, 0.9) none repeat scroll 0 0;
@@ -1898,7 +1897,7 @@
       width: 100%;
 
       transition: all 0.4s ease 0s;
-      transform: translate(-50%, -50%);
+      // transform: translate(-50%, -50%);
       text-align: center;
       .product-title {
         h3 {
@@ -2570,7 +2569,7 @@
       top: 0;
       left: 0;
 
-      visibility: hidden;
+      
 
       width: 100%;
 
@@ -2937,7 +2936,7 @@
       top: 0;
       left: 0;
 
-      visibility: hidden;
+      
 
       width: 100%;
 
@@ -3129,7 +3128,7 @@
       top: 0;
       left: 0;
 
-      visibility: hidden;
+      
 
       width: 100%;
 
@@ -3281,7 +3280,7 @@
     opacity: 1;
   }
   &:hover .default-img {
-    visibility: hidden;
+    
 
     transform: translateX(-100%);
   }

@@ -8,17 +8,16 @@ const FeatureIconFourSingle = ({ data, spaceBottomClass }) => {
         className={`support-wrap-3 text-center ${
           spaceBottomClass ? spaceBottomClass : ""
         }`}
-        style={{ backgroundColor: `${data.backgroundColor}` }}
-      >
+        style={{ backgroundColor: `${data.backgroundColor}` }}>
         <div className="support-icon-2">
           <img
             className="animated"
             src={process.env.PUBLIC_URL + data.iconImage}
-            alt=""
+            alt="polyfood"
           />
         </div>
         <div className="support-content-3">
-          <img src={process.env.PUBLIC_URL + data.titleImage} alt="" />
+          <img src={process.env.PUBLIC_URL + data.titleImage} alt="polyfood" />
           <p>{data.title}</p>
         </div>
       </div>
@@ -28,7 +27,7 @@ const FeatureIconFourSingle = ({ data, spaceBottomClass }) => {
 
 FeatureIconFourSingle.propTypes = {
   data: PropTypes.object,
-  spaceBottomClass: PropTypes.string
+  spaceBottomClass: PropTypes.string,
 };
 
 export default FeatureIconFourSingle;

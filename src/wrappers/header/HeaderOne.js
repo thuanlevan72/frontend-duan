@@ -12,7 +12,7 @@ const HeaderOne = ({
   borderStyle,
   headerPaddingClass,
   headerPositionClass,
-  headerBgClass
+  headerBgClass,
 }) => {
   const [scroll, setScroll] = useState(0);
   const [headerTop, setHeaderTop] = useState(0);
@@ -34,15 +34,13 @@ const HeaderOne = ({
     <header
       className={`header-area clearfix ${headerBgClass ? headerBgClass : ""} ${
         headerPositionClass ? headerPositionClass : ""
-      }`}
-    >
+      }`}>
       <div
         className={`${headerPaddingClass ? headerPaddingClass : ""} ${
           top === "visible" ? "d-none d-lg-block" : "d-none"
         } header-top-area ${
           borderStyle === "fluid-border" ? "border-none" : ""
-        }`}
-      >
+        }`}>
         <div className={layout === "container-fluid" ? layout : "container"}>
           {/* header top */}
           <HeaderTop borderStyle={borderStyle} />
@@ -54,13 +52,15 @@ const HeaderOne = ({
           headerPaddingClass ? headerPaddingClass : ""
         } sticky-bar header-res-padding clearfix ${
           scroll > headerTop ? "stick" : ""
-        }`}
-      >
+        }`}>
         <div className={layout === "container-fluid" ? layout : "container"}>
           <div className="row align-items-center">
             <div className="col-xl-2 col-lg-2 col-md-6 col-4">
               {/* header logo */}
-              <Logo imageUrl="https://res.cloudinary.com/do9rcgv5s/image/upload/v1692137209/e2nw6oqvtlvpqmdwtmnh.png" logoClass="logo mt-0" />
+              <Logo
+                imageUrl="https://res.cloudinary.com/do9rcgv5s/image/upload/v1692137209/e2nw6oqvtlvpqmdwtmnh.png"
+                logoClass="logo mt-0"
+              />
             </div>
             <div className="col-xl-8 col-lg-8 d-none d-lg-block">
               {/* Nav menu */}
@@ -84,7 +84,7 @@ HeaderOne.propTypes = {
   headerPaddingClass: PropTypes.string,
   headerPositionClass: PropTypes.string,
   layout: PropTypes.string,
-  top: PropTypes.string
+  top: PropTypes.string,
 };
 
 export default HeaderOne;

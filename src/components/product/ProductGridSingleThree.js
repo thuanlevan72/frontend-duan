@@ -15,7 +15,7 @@ const ProductGridSingleThree = ({
   wishlistItem,
   compareItem,
   sliderClassName,
-  spaceBottomClass
+  spaceBottomClass,
 }) => {
   const [modalShow, setModalShow] = useState(false);
   const { addToast } = useToasts();
@@ -29,24 +29,23 @@ const ProductGridSingleThree = ({
   return (
     <Fragment>
       <div
-        className={`custom2-col-5 ${sliderClassName ? sliderClassName : ""}`}
-      >
+        className={`custom2-col-5 ${sliderClassName ? sliderClassName : ""}`}>
         <div
-          className={`product-wrap-2 pro-glaucous-color ${spaceBottomClass ? spaceBottomClass : ""
-            }`}
-        >
+          className={`product-wrap-2 pro-glaucous-color ${
+            spaceBottomClass ? spaceBottomClass : ""
+          }`}>
           <div className="product-img">
             <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
               <img
                 className="default-img"
                 src={process.env.PUBLIC_URL + product.image[0]}
-                alt=""
+                alt="polyfood"
               />
               {product.image.length > 1 ? (
                 <img
                   className="hover-img"
                   src={process.env.PUBLIC_URL + product.image[1]}
-                  alt=""
+                  alt="polyfood"
                 />
               ) : (
                 ""
@@ -71,16 +70,14 @@ const ProductGridSingleThree = ({
                   href={product.affiliateLink}
                   rel="noopener noreferrer"
                   target="_blank"
-                  title="Buy now"
-                >
+                  title="Buy now">
                   {" "}
                   <i className="fa fa-shopping-cart"></i>{" "}
                 </a>
               ) : product.variation && product.variation.length >= 1 ? (
                 <Link
                   to={`${process.env.PUBLIC_URL}/product/${product.id}`}
-                  title="Select options"
-                >
+                  title="Select options">
                   <i class="fa fa-cog"></i>
                 </Link>
               ) : product.stock && product.stock > 0 ? (
@@ -94,8 +91,7 @@ const ProductGridSingleThree = ({
                   disabled={cartItem !== undefined && cartItem.quantity > 0}
                   title={
                     cartItem !== undefined ? "Added to cart" : "Add to cart"
-                  }
-                >
+                  }>
                   {" "}
                   <i className="fa fa-shopping-cart"></i>{" "}
                 </button>
@@ -117,8 +113,7 @@ const ProductGridSingleThree = ({
                     ? "Added to compare"
                     : "Add to compare"
                 }
-                onClick={() => addToCompare(product, addToast)}
-              >
+                onClick={() => addToCompare(product, addToast)}>
                 <i className="fa fa-retweet"></i>
               </button>
             </div>
@@ -154,8 +149,7 @@ const ProductGridSingleThree = ({
                     ? "Added to wishlist"
                     : "Add to wishlist"
                 }
-                onClick={() => addToWishlist(product, addToast)}
-              >
+                onClick={() => addToWishlist(product, addToast)}>
                 <i className="fa fa-heart-o" />
               </button>
             </div>
@@ -193,7 +187,7 @@ ProductGridSingleThree.propTypes = {
   product: PropTypes.object,
   sliderClassName: PropTypes.string,
   spaceBottomClass: PropTypes.string,
-  wishlistItem: PropTypes.object
+  wishlistItem: PropTypes.object,
 };
 
 export default ProductGridSingleThree;

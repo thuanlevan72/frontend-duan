@@ -16,6 +16,7 @@ import {
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import Swal from "sweetalert2";
+import CartApi from "../../api/cart/CartApi";
 
 const Cart = ({
   location,
@@ -105,7 +106,7 @@ const Cart = ({
                                         process.env.PUBLIC_URL +
                                         cartItem.image[0]
                                       }
-                                      alt=""
+                                      alt="polyfood"
                                     />
                                   </Link>
                                 </td>
@@ -170,6 +171,22 @@ const Cart = ({
                                             confirmButtonText: "Tôi chắc chắn",
                                           }).then((result) => {
                                             if (result.isConfirmed) {
+                                              if (
+                                                JSON.parse(
+                                                  localStorage.getItem("user")
+                                                )
+                                              ) {
+                                                CartApi.ChangeCartItem({
+                                                  quantity: 1,
+                                                  userId: JSON.parse(
+                                                    localStorage.getItem("user")
+                                                  ).user.userId,
+                                                  productId: Number(
+                                                    cartItem.id
+                                                  ),
+                                                  IsAdd: 0,
+                                                });
+                                              }
                                               decreaseQuantity(
                                                 cartItem,
                                                 addToast
@@ -177,6 +194,20 @@ const Cart = ({
                                             }
                                           });
                                         } else {
+                                          if (
+                                            JSON.parse(
+                                              localStorage.getItem("user")
+                                            )
+                                          ) {
+                                            CartApi.ChangeCartItem({
+                                              quantity: 1,
+                                              userId: JSON.parse(
+                                                localStorage.getItem("user")
+                                              ).user.userId,
+                                              productId: Number(cartItem.id),
+                                              IsAdd: 0,
+                                            });
+                                          }
                                           decreaseQuantity(cartItem, addToast);
                                         }
                                       }}>
@@ -190,13 +221,27 @@ const Cart = ({
                                     />
                                     <button
                                       className="inc qtybutton"
-                                      onClick={() =>
+                                      onClick={() => {
+                                        if (
+                                          JSON.parse(
+                                            localStorage.getItem("user")
+                                          )
+                                        ) {
+                                          CartApi.ChangeCartItem({
+                                            quantity: 1,
+                                            userId: JSON.parse(
+                                              localStorage.getItem("user")
+                                            ).user.userId,
+                                            productId: Number(cartItem.id),
+                                            IsAdd: 1,
+                                          });
+                                        }
                                         addToCart(
                                           cartItem,
                                           addToast,
                                           quantityCount
-                                        )
-                                      }
+                                        );
+                                      }}
                                       disabled={
                                         cartItem !== undefined &&
                                         cartItem.quantity &&
@@ -235,9 +280,36 @@ const Cart = ({
 
                                 <td className="product-remove">
                                   <button
-                                    onClick={() =>
-                                      deleteFromCart(cartItem, addToast)
-                                    }>
+                                    onClick={() => {
+                                      Swal.fire({
+                                        title: "Bạn có muốn xóa không?",
+                                        text: "Bạn hãy suy nghĩ thật",
+                                        icon: "warning",
+                                        showCancelButton: true,
+                                        confirmButtonColor: "#3085d6",
+                                        cancelButtonColor: "#d33",
+                                        cancelButtonText: "Thôi",
+                                        confirmButtonText: "Tôi chắc chắn",
+                                      }).then((result) => {
+                                        if (result.isConfirmed) {
+                                          if (
+                                            JSON.parse(
+                                              localStorage.getItem("user")
+                                            )
+                                          ) {
+                                            CartApi.ChangeCartItem({
+                                              quantity: cartItem.quantity,
+                                              userId: JSON.parse(
+                                                localStorage.getItem("user")
+                                              ).user.userId,
+                                              productId: Number(cartItem.id),
+                                              IsAdd: 0,
+                                            });
+                                          }
+                                          deleteFromCart(cartItem, addToast);
+                                        }
+                                      });
+                                    }}>
                                     <i className="fa fa-times"></i>
                                   </button>
                                 </td>
@@ -272,6 +344,16 @@ const Cart = ({
                               confirmButtonText: "Đồng ý tôi đồng ý",
                             }).then((result) => {
                               if (result.isConfirmed) {
+                                if (result.isConfirmed) {
+                                  if (
+                                    JSON.parse(localStorage.getItem("user"))
+                                  ) {
+                                    CartApi.RemoveAllCart(
+                                      JSON.parse(localStorage.getItem("user"))
+                                        .user.userId
+                                    );
+                                  }
+                                }
                                 deleteAllFromCart(addToast);
                               }
                             });

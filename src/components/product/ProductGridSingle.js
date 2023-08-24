@@ -16,7 +16,7 @@ const ProductGridSingle = ({
   wishlistItem,
   compareItem,
   sliderClassName,
-  spaceBottomClass
+  spaceBottomClass,
 }) => {
   const [modalShow, setModalShow] = useState(false);
   const { addToast } = useToasts();
@@ -30,24 +30,33 @@ const ProductGridSingle = ({
   return (
     <Fragment>
       <div
-        className={`col-xl-3 col-md-6 col-lg-4 col-sm-6 ${sliderClassName ? sliderClassName : ""
-          }`}
-      >
+        className={`col-xl-3 col-md-6 col-lg-4 col-sm-6 ${
+          sliderClassName ? sliderClassName : ""
+        }`}>
         <div
-          className={`product-wrap ${spaceBottomClass ? spaceBottomClass : ""}`}
-        >
-          <div className="product-img" style={{ width: "auto", height: "200px", objectFit: "contain", display: "flex", alignItems: "center" }}>
+          className={`product-wrap ${
+            spaceBottomClass ? spaceBottomClass : ""
+          }`}>
+          <div
+            className="product-img"
+            style={{
+              width: "auto",
+              height: "200px",
+              objectFit: "contain",
+              display: "flex",
+              alignItems: "center",
+            }}>
             <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
               <img
                 className="default-img"
                 src={process.env.PUBLIC_URL + product.image[0]}
-                alt=""
+                alt="polyfood"
               />
               {product.image.length > 1 ? (
                 <img
                   className="hover-img"
                   src={process.env.PUBLIC_URL + product.image[1]}
-                  alt=""
+                  alt="polyfood"
                 />
               ) : (
                 ""
@@ -76,8 +85,7 @@ const ProductGridSingle = ({
                       ? "Added to wishlist"
                       : "Add to wishlist"
                   }
-                  onClick={() => addToWishlist(product, addToast)}
-                >
+                  onClick={() => addToWishlist(product, addToast)}>
                   <i className="pe-7s-like" />
                 </button>
               </div>
@@ -86,8 +94,7 @@ const ProductGridSingle = ({
                   <a
                     href={product.affiliateLink}
                     rel="noopener noreferrer"
-                    target="_blank"
-                  >
+                    target="_blank">
                     {" "}
                     Buy now{" "}
                   </a>
@@ -106,8 +113,7 @@ const ProductGridSingle = ({
                     disabled={cartItem !== undefined && cartItem.quantity > 0}
                     title={
                       cartItem !== undefined ? "Added to cart" : "Add to cart"
-                    }
-                  >
+                    }>
                     {" "}
                     <i className="pe-7s-cart"></i>{" "}
                     {cartItem !== undefined && cartItem.quantity > 0
@@ -128,23 +134,45 @@ const ProductGridSingle = ({
             </div>
           </div>
           <div className="product-content text-center">
-            <h3 style={{ fontSize: "20px", textTransform: "uppercase", marginBottom: "10px" }}>
-              <Link
-                to={process.env.PUBLIC_URL + "/product/" + product.id}
-              >
+            <h3
+              style={{
+                fontSize: "20px",
+                textTransform: "uppercase",
+                marginBottom: "10px",
+              }}>
+              <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
                 {product.name}
               </Link>
             </h3>
             <div className="product-price">
               {discountedPrice !== null ? (
                 <Fragment>
-                  <span>{parseInt((currency.currencySymbol + finalDiscountedPrice).replace("$", "")).toLocaleString("en-US") + " VND"}</span>{" "}
+                  <span>
+                    {parseInt(
+                      (currency.currencySymbol + finalDiscountedPrice).replace(
+                        "$",
+                        ""
+                      )
+                    ).toLocaleString("en-US") + " VND"}
+                  </span>{" "}
                   <span className="old">
-                    {parseInt((currency.currencySymbol + finalProductPrice).replace("$", "")).toLocaleString("en-US") + " VND"}
+                    {parseInt(
+                      (currency.currencySymbol + finalProductPrice).replace(
+                        "$",
+                        ""
+                      )
+                    ).toLocaleString("en-US") + " VND"}
                   </span>
                 </Fragment>
               ) : (
-                <span>{parseInt((currency.currencySymbol + finalProductPrice).replace("$", "")).toLocaleString("en-US") + " VND"} </span>
+                <span>
+                  {parseInt(
+                    (currency.currencySymbol + finalProductPrice).replace(
+                      "$",
+                      ""
+                    )
+                  ).toLocaleString("en-US") + " VND"}{" "}
+                </span>
               )}
             </div>
             <div className="product-rating">
@@ -188,7 +216,7 @@ ProductGridSingle.propTypes = {
   product: PropTypes.object,
   sliderClassName: PropTypes.string,
   spaceBottomClass: PropTypes.string,
-  wishlistItem: PropTypes.object
+  wishlistItem: PropTypes.object,
 };
 
 export default ProductGridSingle;
