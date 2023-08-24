@@ -3,31 +3,52 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Rate } from "antd";
+import { Badge, Card, Space } from "antd";
 import StatisticsApi from "../../api/statistic/StatisticsApi";
-import ProductApi from "../../api/product/ProductApi";
 
 const BannerFive = () => {
-    const isLoggedIn = localStorage.getItem("user") !== null;
     var settings = {
         dots: false,
         infinite: true,
-        slidesToShow: 4,
+        slidesToShow: 5,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 3000,
         pauseOnHover: true,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true,
+                },
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    initialSlide: 2,
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+        ],
     };
     // Get Top Selling Products
     const [products, setProducts] = useState([]);
     useEffect(() => {
         const getProducts = async () => {
             try {
-                let data;
-                if (isLoggedIn) {
-                    data = await StatisticsApi.GetTopSellingProducts();
-                } else {
-                    data = await ProductApi.getAllNoPagition();
-                }
+                let data = await StatisticsApi.GetTopSellingProducts();
                 setProducts(data);
             } catch (error) {
                 console.error(error);
@@ -35,38 +56,83 @@ const BannerFive = () => {
         };
         getProducts();
     }, []);
+    console.log(products);
     return (
         <div className="banner-area hm9-section-padding">
-            <h1 className="banner-title font-weight-bold">Sản phẩm bán chạy</h1>
             <div className="container-fluid">
-                <div className="d-flex flex-column">
+                <h2 className="banner-title">
+                    Thực Phẩm Bán Chạy
+                </h2>
+                <div className="d-flex flex-column slider-container">
                     <Slider {...settings}>
-                        {products.map((item, index) => (
-                            <div key={index} className="col-lg-3 col-md-6">
-                                <div className="single-banner mb-20">
+                        {products.map((item, index) => {
+                            const originalPrice = item.product.price;
+                            const discountPercentage = item.product.discount;
+                            const discountedPrice =
+                                originalPrice * (1 - discountPercentage / 100);
+                            return (
+                                <div
+                                    className="single-banner mb-20"
+                                    key={index}
+                                >
                                     <Link
                                         to={`/product/${
                                             item.productId || item.id
                                         }`}
                                     >
-                                        <img
-                                            src={
-                                                item.product
-                                                    ?.avartarImageProduct ||
-                                                item.image[0]
-                                            }
-                                            alt={
-                                                item.product?.nameProduct ||
-                                                item.name
-                                            }
-                                            width={246}
-                                            className="item-card"
-                                        />
+                                        <Badge.Ribbon
+                                            text={`-${item.product.discount}%`}
+                                            style={{ insetInlineEnd: 2 }}
+                                            color="volcano"
+                                        >
+                                            <img
+                                                src={
+                                                    item.product
+                                                        ?.avartarImageProduct ||
+                                                    item.image[0]
+                                                }
+                                                alt={
+                                                    item.product?.nameProduct ||
+                                                    item.name
+                                                }
+                                            />
+                                        </Badge.Ribbon>
+                                        <h3 className="product-name two-lines">
+                                            {item.product?.nameProduct}
+                                        </h3>
+                                        <div className="container-price">
+                                            <span className="discount">
+                                                {discountedPrice.toLocaleString(
+                                                    "vi-VN",
+                                                    {
+                                                        style: "currency",
+                                                        currency: "VND",
+                                                    }
+                                                )}
+                                            </span>
+                                            <span className="price">
+                                                {originalPrice.toLocaleString(
+                                                    "vi-VN",
+                                                    {
+                                                        style: "currency",
+                                                        currency: "VND",
+                                                    }
+                                                )}
+                                            </span>
+                                        </div>
                                     </Link>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </Slider>
+                </div>
+                <div className="view-more text-center mt-20 toggle-btn6 col-12">
+                    <Link
+                        className="loadMore6"
+                        to={process.env.PUBLIC_URL + "/shop-grid-standard"}
+                    >
+                        Xem thêm
+                    </Link>
                 </div>
             </div>
         </div>
