@@ -124,7 +124,14 @@ const ProductGridSingleTwo = ({
                     </span>
                   </Fragment>
                 ) : (
-                  <span>{currency.currencySymbol + finalProductPrice} </span>
+                  <span>
+                    {parseInt(
+                      (currency.currencySymbol + finalProductPrice).replace(
+                        "$",
+                        ""
+                      )
+                    ).toLocaleString("en-US") + " VND"}
+                  </span>
                 )}
               </div>
             </div>
