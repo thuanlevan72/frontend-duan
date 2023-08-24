@@ -13,6 +13,7 @@ import carts from "./data/carts/carts.json";
 import App from "./App";
 import "./assets/scss/style.scss";
 import * as serviceWorker from "./serviceWorker";
+import 'react-loading-skeleton/dist/skeleton.css'
 
 import { composeWithDevTools } from "redux-devtools-extension";
 import { fetchDataCarts } from "./redux/actions/cartActions";
