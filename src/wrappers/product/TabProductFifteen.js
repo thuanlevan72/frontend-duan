@@ -9,22 +9,20 @@ const TabProductFifteen = ({
   spaceTopClass,
   spaceBottomClass,
   category,
-  productTabClass
+  productTabClass,
 }) => {
   return (
     <div
       className={`product-area ${spaceTopClass ? spaceTopClass : ""} ${
         spaceBottomClass ? spaceBottomClass : ""
-      }`}
-    >
+      }`}>
       <div className="container">
         <Tab.Container defaultActiveKey="bestSeller">
           <Nav
             variant="pills"
             className={`product-tab-list-2 mb-60 justify-content-center ${
               productTabClass ? productTabClass : ""
-            }`}
-          >
+            }`}>
             <Nav.Item>
               <Nav.Link eventKey="newArrival">
                 <h4>New Arrivals</h4>
@@ -77,9 +75,8 @@ const TabProductFifteen = ({
         <div className="view-more text-center mt-20 toggle-btn6 col-12">
           <Link
             className="loadMore6"
-            to={process.env.PUBLIC_URL + "/shop-grid-standard"}
-          >
-            VIEW MORE PRODUCTS
+            to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
+            Xem thêm sản phẩm
           </Link>
         </div>
       </div>
@@ -91,7 +88,7 @@ TabProductFifteen.propTypes = {
   category: PropTypes.string,
   productTabClass: PropTypes.string,
   spaceBottomClass: PropTypes.string,
-  spaceTopClass: PropTypes.string
+  spaceTopClass: PropTypes.string,
 };
 
 export default TabProductFifteen;

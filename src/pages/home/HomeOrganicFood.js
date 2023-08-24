@@ -8,7 +8,7 @@ import BannerFive from "../../wrappers/banner/BannerFive";
 import CountDownTwo from "../../wrappers/countdown/CountDownTwo";
 import TestimonialOne from "../../wrappers/testimonial/TestimonialOne";
 import NewsletterTwo from "../../wrappers/newsletter/NewsletterTwo";
-import SectionTitleThree from "../../components/section-title/SectionTitleThree";
+import TabProductCategory from "../../wrappers/product/TabProductCategory";
 
 const HomeOrganicFood = () => {
   return (
@@ -39,6 +39,11 @@ const HomeOrganicFood = () => {
           category="all"
           status={0}
           titleText="Sản phẩm mới nhất"
+          productTabClass="product-tab-fruits"
+        />
+        <TabProductCategory
+          spaceBottomClass="pb-100"
+          category="all"
           productTabClass="product-tab-fruits"
         />
         <CountDownTwo
