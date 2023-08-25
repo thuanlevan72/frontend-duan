@@ -37,6 +37,7 @@ const Cart = ({ location, cartItems }) => {
       phone: data.phone,
       paymentOrder: data.paymentOrder.paymentMethod,
       noteOrder: data.noteOrder,
+      imageComplete: data.imageComplete,
       orderStatus: data.orderStatus.name,
       actualPrice: data.actualPrice,
       paymentId: data.paymentId,
@@ -70,11 +71,11 @@ const Cart = ({ location, cartItems }) => {
   const handlePaginationChange = (page, pageSize) => {
     setParam(
       (prev) =>
-      (prev = {
-        ...param,
-        page: page,
-        pageSize: pageSize,
-      })
+        (prev = {
+          ...param,
+          page: page,
+          pageSize: pageSize,
+        })
     );
   };
   const [param, setParam] = useState({
@@ -89,7 +90,7 @@ const Cart = ({ location, cartItems }) => {
         const res = await OrderApi.GetOrderForUserId(accountId, param);
         setLoading(false);
         setDataOrderHistory(res);
-      } catch (error) { }
+      } catch (error) {}
     };
     getDataApi();
   }, [param]);
@@ -169,7 +170,7 @@ const Cart = ({ location, cartItems }) => {
           open={isModalOpen}
           onOk={handleOk}
           onCancel={handleCancel}
-          width={"1000"}>
+          width={1200}>
           <Descriptions title="Thông Tin Tiết người đặt">
             <Descriptions.Item label="UserName">
               {curentInfo && curentInfo.fullName}
@@ -198,6 +199,11 @@ const Cart = ({ location, cartItems }) => {
             <Descriptions.Item label="Mã hóa đơn">
               {curentInfo && curentInfo.codeOrder}
             </Descriptions.Item>
+            {curentInfo && curentInfo.imageComplete && (
+              <Descriptions.Item label="Ảnh xác nhận khi hoàn thành">
+                <Image width={100} src={curentInfo.imageComplete} />
+              </Descriptions.Item>
+            )}
           </Descriptions>
           <Table columns={columns} dataSource={currenOrderDeatail} />
         </Modal>
@@ -210,8 +216,8 @@ const Cart = ({ location, cartItems }) => {
             )}
 
             {dataOrderHistory &&
-              dataOrderHistory.data &&
-              dataOrderHistory?.data?.data?.length > 0 ? (
+            dataOrderHistory.data &&
+            dataOrderHistory?.data?.data?.length > 0 ? (
               <>
                 <h3 className="cart-page-title">Lịch sử đơn hàng.</h3>
                 <div className="row">
@@ -247,12 +253,12 @@ const Cart = ({ location, cartItems }) => {
                                       item.orderStatus.orderStatusId === 4
                                         ? "#70a1ff"
                                         : item.orderStatus.orderStatusId === 5
-                                          ? "#2ed573"
-                                          : item.orderStatus.orderStatusId === 7
-                                            ? "#ff4757"
-                                            : item.orderStatus.orderStatusId === 9
-                                              ? "#ffa502"
-                                              : "white"
+                                        ? "#2ed573"
+                                        : item.orderStatus.orderStatusId === 7
+                                        ? "#ff4757"
+                                        : item.orderStatus.orderStatusId === 9
+                                        ? "#ffa502"
+                                        : "white"
                                     }>
                                     {item.orderStatus.name}
                                   </Tag>
@@ -271,21 +277,21 @@ const Cart = ({ location, cartItems }) => {
                                       display: "flex",
                                       justifyContent:
                                         item.orderStatus.orderStatusId == 4 &&
-                                          new Date() - new Date(item.createdAt) <
+                                        new Date() - new Date(item.createdAt) <
                                           twoDaysInMillis
                                           ? "center"
                                           : "space-around",
                                     }}>
                                     {item.orderStatus.orderStatusId == 4 &&
                                       new Date() - new Date(item.createdAt) <
-                                      twoDaysInMillis && (
+                                        twoDaysInMillis && (
                                         <Button type="dashed" danger>
                                           Hủy đơn
                                         </Button>
                                       )}
                                     {item.orderStatus.orderStatusId == 4 &&
                                       new Date() - new Date(item.createdAt) <
-                                      twoDaysInMillis && (
+                                        twoDaysInMillis && (
                                         <div style={{ width: "5px" }}> </div>
                                       )}
                                     <Button

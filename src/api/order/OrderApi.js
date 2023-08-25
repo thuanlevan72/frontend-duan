@@ -107,6 +107,18 @@ const OrderApi = {
       },
     });
   },
+  CompleteOrder: (data) => {
+    const url = "Order/CompleteOrder";
+    return axiosClient.post(url, data, {
+      headers: {
+        Authorization: `Bearer ${
+          localStorage.getItem("token")
+            ? JSON.parse(localStorage.getItem("token"))
+            : ""
+        }`,
+      },
+    });
+  },
   GetBeingDelivered: (params = null) => {
     const url = "Order/getordersAreBeingDelivered";
     return axiosClient.get(url, {

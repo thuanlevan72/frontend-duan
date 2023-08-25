@@ -60,11 +60,11 @@ const OrderCompleted = () => {
   const handlePaginationChange = (page, pageSize) => {
     setParam(
       (prev) =>
-      (prev = {
-        ...param,
-        page: page,
-        pageSize: pageSize,
-      })
+        (prev = {
+          ...param,
+          page: page,
+          pageSize: pageSize,
+        })
     );
   };
   const [param, setParam] = useState({
@@ -77,6 +77,7 @@ const OrderCompleted = () => {
       try {
         setLoading(true);
         const { data } = await OrderApi.GetCompelete(param);
+        console.log(data);
         setData(data);
         setLoading(false);
       } catch (error) {
@@ -122,7 +123,7 @@ const OrderCompleted = () => {
     try {
       const data = await OrderApi.getOrderStatus();
       setOptions(data);
-    } catch (error) { }
+    } catch (error) {}
   };
   const columns = [
     {
@@ -287,6 +288,11 @@ const OrderCompleted = () => {
                   ? "Thanh Toán Khi Nhận Hàng"
                   : "Thanh Toán Online"}
               </Tag>
+            )}
+          </Descriptions.Item>
+          <Descriptions.Item label="Ảnh hoàn thành">
+            {dataCurrent && (
+              <Image width={100} src={dataCurrent.imageComplete} />
             )}
           </Descriptions.Item>
         </Descriptions>
