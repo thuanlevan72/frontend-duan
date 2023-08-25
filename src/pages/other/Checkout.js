@@ -15,6 +15,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { typeOf } from "react-hooks-paginator";
 import VoucherApi from "../../api/voucher/VoucherApi";
 import CartApi from "../../api/cart/CartApi";
+import AddressApi from "../../api/ghn/AddressApi";
 
 const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
   const validateUserOrder = (userOrder) => {
@@ -40,9 +41,7 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
     updatedAt: "0001-01-01T00:00:00",
     voucherUsers: null,
   });
-  console.log(discount);
   const [codeVoucher, setCodeVoucher] = useState("");
-
   const [loading, setLoading] = useState(false);
   const totalPriceOld = cartItems?.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -56,6 +55,13 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
   const localUser = localStorage.getItem("user");
   const [messageApi, contextHolder] = message.useMessage();
   const history = useHistory();
+  // getProvinceData
+  const [provinces, setProvinces] = useState([]);
+  const [selectedProvince, setSelectedProvince] = useState(null);
+  const [districts, setDistricts] = useState([]);
+  const [selectedDistrict, setSelectedDistrict] = useState(null);
+  const [wards, setWards] = useState([]);
+  const [selectedWard, setSelectedWard] = useState(null);
   const [userOrder, setUserOrder] = useState({
     paymentId: 1,
     userId:
@@ -89,6 +95,61 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
         totalPriceNew - (totalPriceNew / 100) * discount.valuevoucher,
     });
   }, [discount]);
+  // getProvinceData
+  useEffect(() => {
+    const getProvinceData = async () => {
+      try {
+        const { data } = await AddressApi.getProvinceData();
+        setProvinces(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getProvinceData();
+  }, []);
+  // getDistrictByProvince
+  useEffect(() => {
+    if(selectedProvince){
+      const getDistrictByProvince = async () => {
+        try {
+          const { data } = await AddressApi.getDistrictByProvince(selectedProvince);
+          setDistricts(data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      getDistrictByProvince();
+    }
+  }, [selectedProvince]);
+  // getWardsByDistrict
+  useEffect(() => {
+    if(selectedDistrict){
+      const getWardsByDistrict = async () => {
+        try {
+          const { data } = await AddressApi.getWardsByDistrict(selectedDistrict);
+          setWards(data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      getWardsByDistrict();
+    }
+  }, [selectedDistrict]);
+  const handleProvinceChange = (e) => {
+    setSelectedProvince(e.target.value);
+    setSelectedDistrict(null);
+    setSelectedWard(null);
+  };
+  const handleDistrictChange = (e) => {
+    setSelectedDistrict(e.target.value);
+    setSelectedWard(null);
+  };
+  const handleWardChange = (e) => {
+    setSelectedWard(e.target.value);
+  };
+  console.log(provinces);
+  console.log(districts);
+  console.log(wards);
   const { pathname } = location;
   let cartTotalPrice = 0;
   let cartTotalPriceDiscount = 0;
@@ -118,7 +179,6 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
       });
     }
   };
-  console.log(discount);
   const confirmOrderShipCode = async () => {
     const data = userOrder;
     if (!validateUserOrder(data)) {
@@ -221,18 +281,6 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
                   <div className="billing-info-wrap">
                     <h3>Thông tin khách hàng</h3>
                     <div className="row">
-                      {/* <div className="col-lg-6 col-md-6">
-                        <div className="billing-info mb-20">
-                          <label>First Name</label>
-                          <input type="text" />
-                        </div>
-                      </div>
-                      <div className="col-lg-6 col-md-6">
-                        <div className="billing-info mb-20">
-                          <label>Last Name</label>
-                          <input type="text" />
-                        </div>
-                      </div> */}
                       <div className="col-lg-12">
                         <div className="billing-info mb-20">
                           <label>Họ và Tên</label>
@@ -244,19 +292,58 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
                           />
                         </div>
                       </div>
-                      {/* <div className="col-lg-12">
-                        <div className="billing-select mb-20">
-                          <label>Country</label>
-                          <select>
-                            <option>Select a country</option>
-                            <option>Azerbaijan</option>
-                            <option>Bahamas</option>
-                            <option>Bahrain</option>
-                            <option>Bangladesh</option>
-                            <option>Barbados</option>
-                          </select>
+                      <div className="col-lg-12">
+                        <div className="row">
+                          <div className="col">
+                            <div className="billing-select mb-20">
+                              <label>Tỉnh - Thành</label>
+                              <select 
+                                onChange={handleProvinceChange}
+                                value={selectedProvince || ""}
+                              >
+                                <option value="">Chọn tỉnh thành</option>
+                                {provinces.data?.map(province => (
+                                  <option key={province.ProvinceID} value={province.ProvinceID}>
+                                    {province.ProvinceName}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          </div>
+                          <div className="col">
+                            <div className="billing-select mb-20">
+                              <label>Quận - Huyện</label>
+                              <select
+                                onChange={handleDistrictChange}
+                                value={selectedDistrict || ""}
+                              >
+                                <option value="">Chọn quận huyện</option>
+                                {districts.data?.map(district => (
+                                  <option key={district.DistrictID} value={district.DistrictID}>
+                                    {district.DistrictName}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          </div>
+                          <div className="col">
+                            <div className="billing-select mb-20">
+                              <label>Phường - Xã</label>
+                              <select
+                                onChange={handleWardChange}
+                                value={selectedWard || ""}
+                              >
+                                <option>Chọn phường xã</option>
+                                {wards.data?.map(ward => (
+                                  <option key={ward.WardID} value={ward.WardID}>
+                                    {ward.WardName}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          </div>
                         </div>
-                      </div> */}
+                      </div>
                       <div className="col-lg-12">
                         <div className="billing-info mb-20">
                           <label>Địa chỉ</label>
