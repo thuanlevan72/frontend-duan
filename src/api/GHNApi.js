@@ -1,11 +1,11 @@
 import axios from "axios";
-const GHN_API_BASE_URL =
-    "https://online-gateway.ghn.vn/shiip/public-api/master-data/";
+
+const GHN_API_BASE_URL = "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/";
 const GHNApi = axios.create({
     baseURL: GHN_API_BASE_URL,
     headers: {
         "Content-Type": "application/json",
-        Token: "08150c33-42ba-11ee-af43-6ead57e9219a",
+        Token: "d69d5ac4-428d-11ee-a6e6-e60958111f48",
     },
 });
 export default GHNApi;
