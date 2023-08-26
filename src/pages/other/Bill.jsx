@@ -2,12 +2,13 @@ import React from "react";
 
 class Bill extends React.Component {
   render() {
+    const { curentInfo, count, currenOrderDeatail } = this.props;
     const body = {
       font: "VCR OSD Mono",
       color: " #000",
       textAlign: "center",
       display: "flex",
-      // justifyContent: "center",
+      justifyContent: "center",
       fontZize: "10px",
     };
     const billStyles = {
@@ -41,61 +42,65 @@ class Bill extends React.Component {
     return (
       <>
         <div style={body}>
+          {console.log(currenOrderDeatail)}
           <div style={billStyles} className="bill">
-            <div className="brand">AMIT CHAMBIAL PVT LTD</div>
-            <div className="address">
-              FLoor 2 Building No 34 India <br /> Phone No- 0192083910
+            <div className="brand">
+              <b>PolyFood</b> - Hóa đơn
             </div>
-            <div className="shop-details">PAN: AAKPS9298A TIN: 09820163701</div>
-            <div>RETAIL INVOICE </div>
+            <div className="address">
+              địa chỉ - {curentInfo.address} <br /> Số điện thoại -{" "}
+              {curentInfo.phone}
+            </div>
+            <div className="shop-details">
+              Mã hóa đơn: {curentInfo.codeOrder}
+            </div>
+            <div className="shop-details">
+              Tên người đặt: {curentInfo.fullName}
+            </div>
             <div className="bill-details">
-              <div className="flex justify-between">
-                <div>BILL NO: 091</div>
-                <div>TABLE NO: 091</div>
+              <div>
+                Tổng đơn: {curentInfo.actualPrice.toLocaleString("vi-VN")} vnd
               </div>
+
               <div className="flex justify-between">
-                <div>BILL DATE: 10/Mar/2022</div>
-                <div>TIME: 14:10</div>
+                <div>Ngày đặt: {curentInfo.createdAt}</div>
+                {/* <div>TIME: 14:10</div> */}
               </div>
             </div>
             <table style={tableStyles} className="table">
               <tbody>
                 <tr style={headerRowStyles} className="header">
-                  <th>Particulars</th> <th>Rate</th> <th>Qty</th>
+                  <th>Particulars</th> <th>Qty</th>
+                  <th></th>
                   <th>Amount</th>
                 </tr>
-                <tr>
-                  <td>Head and Shoulder</td>
-                  <td>100</td>
-                  <td>2</td>
-                  <td>200</td>
-                </tr>
-                <tr>
-                  <td>Britania</td>
-                  <td>25</td>
-                  <td>2</td>
-                  <td>50</td>
-                </tr>
-                <tr>
-                  <td>Tomatoes</td>
-                  <td>40</td>
-                  <td>1</td>
-                  <td>40</td>
-                </tr>
-                <tr>
-                  <td>Chocolates</td>
-                  <td>5</td>
-                  <td>12</td>
-                  <td>60</td>
-                </tr>
+                {/* {
+    "productId": 2,
+    "nameProduct": "Khoai môn",
+    "avartarImageProduct": "https://res.cloudinary.com/doedovklj/image/upload/v1686122885/xyz-abc_638217448807644326image.webp",
+    "priceOld": "56.000 vnd",
+    "quantity": 1,
+    "price": "53.200 vnd",
+    "totalPrice": "53.200 vnd"
+} */}
+                {currenOrderDeatail.map((item, index) => {
+                  return (
+                    <tr>
+                      <td>{item.nameProduct}</td>
+                      <td>{item.quantity}</td>
+                      <td></td>
+                      <td>{item.totalPrice}</td>
+                    </tr>
+                  );
+                })}
                 <tr style={totalRowStyles} className="total">
                   <td />
-                  <td>Total</td>
-                  <td>17</td>
-                  <td>350</td>
+                  <td>Tổng tiền</td>
+                  <td>{count}</td>
+                  <td>{curentInfo.actualPrice.toLocaleString("vi-VN")} vnd</td>
                 </tr>
-                <tr>
-                  <td />
+
+                {/* <td />
                   <td>CGST</td>
                   <td>5%</td>
                   <td>17.5</td>
@@ -111,21 +116,22 @@ class Bill extends React.Component {
                   <td>RND-Off</td>
                   <td>0</td>
                   <td>17.5</td>
-                </tr>
-                <tr style={netAmountRowStyles} className="net-amount">
+                </tr> */}
+                {/* <tr style={netAmountRowStyles} className="net-amount">
                   <td />
                   <td>Net Amnt</td>
                   <td />
                   <td>385</td>
-                </tr>
+                </tr> */}
               </tbody>
             </table>
-            Payment Method:Card
+            Phương thức thanh toán: {curentInfo.paymentOrder}
             <br />
-            Transaction ID: 082098082783
+            Mã đơn hàng ID: {curentInfo.codeOrder}
             <br />
-            Username: Pradeep [Biller] <br />
-            Thank You ! Please visit again
+            Tên tài khoảng: {curentInfo.fullName}
+            <br />
+            Cảm ơn ! Vui lòng ghé thăm lại
           </div>
         </div>
       </>
