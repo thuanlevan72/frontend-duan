@@ -32,7 +32,7 @@ import {
     MdOutlineContactSupport,
 } from "react-icons/md";
 import { FiUsers } from "react-icons/fi";
-import { TbTruckDelivery } from "react-icons/tb";
+import { TbTruckDelivery, TbSlideshow } from "react-icons/tb";
 import { HiOutlineReceiptPercent } from "react-icons/hi2";
 import { IoCreateOutline } from "react-icons/io5";
 import SubMenu from "antd/es/menu/SubMenu";
@@ -47,6 +47,9 @@ import CreateNews from "../components/admin/NewsMangager/CreateNews";
 import ListCommentManager from "../components/admin/CommentManager/ListCommentManager";
 import VoucherList from "../components/admin/VouchersManager/VoucherList";
 import VoucherAdd from "../components/admin/VouchersManager/VoucherAdd";
+import SlideList from "../components/admin/SlidesManager/SlideList";
+import SlideAdd from "../components/admin/SlidesManager/SlideAdd";
+
 const { Header, Content, Footer, Sider } = Layout;
 
 const AdminLayout = () => {
@@ -271,6 +274,23 @@ const AdminLayout = () => {
                             </NavLink>
                         </Menu.Item>
                     </SubMenu>
+                    {/* Slide Manager */}
+                    <SubMenu
+                        key="subMenu-8"
+                        icon={<TbSlideshow />}
+                        title="Quản lý slide"
+                    >
+                        <Menu.Item key="/admin/slide" icon={<CiBoxList />}>
+                            <NavLink to="/admin/slide">
+                                Danh sách slide
+                            </NavLink>
+                        </Menu.Item>
+                        <Menu.Item key="/create-slide" icon={<IoCreateOutline />}>
+                            <NavLink to="/admin/slide-add">
+                                Thêm mới slide
+                            </NavLink>
+                        </Menu.Item>
+                    </SubMenu>
                 </Menu>
             </Sider>
             <Layout>
@@ -369,6 +389,12 @@ const AdminLayout = () => {
                             path={"/admin/comment/:id"}
                             component={ListCommentManager}
                         />
+                        {/* Slide router */}
+                        <Route
+                            path={"/admin/slide"}
+                            component={SlideList}
+                        />
+                        <Route path="/admin/slide-add" component={SlideAdd} />
                         {/* Redirect to Dashboard */}
                         <Redirect to="/admin/dashboard" />
                     </Switch>
