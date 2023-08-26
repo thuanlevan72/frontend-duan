@@ -20,7 +20,6 @@ import {
 } from "antd";
 import LoadingSpin from "../../components/loading/LoadingSpin";
 import { format } from "date-fns";
-// import Bill from "./Bill";
 import ReactToPrint from "react-to-print";
 import Bill from "./Bill";
 const PrintButton = ({ invoiceRef }) => {
@@ -38,7 +37,6 @@ const Cart = ({ location, cartItems }) => {
   const { pathname } = location;
   const [loading, setLoading] = useState(false);
   const invoiceRef = useRef(null);
-
   const [currenOrderDeatail, setCurrenOrderDeatail] = useState([]);
   const [isModal, setIsModal] = useState(false);
   const [dataOrderHistory, setDataOrderHistory] = useState([]);
@@ -68,11 +66,11 @@ const Cart = ({ location, cartItems }) => {
           productId: index + 1,
           nameProduct: item.product.nameProduct,
           avartarImageProduct: item.product.avartarImageProduct,
-          priceOld: item.product.price.toLocaleString("vi-VN") + " " + "vnd",
+          priceOld: item.product.price.toLocaleString("vi-VN") + " " + "VNĐ",
           quantity: item.quantity,
-          price: item.price.toLocaleString("vi-VN") + " " + "vnd",
+          price: item.price.toLocaleString("vi-VN") + " " + "VNĐ",
           totalPrice:
-            (item.price * item.quantity).toLocaleString("vi-VN") + " " + "vnd",
+            (item.price * item.quantity).toLocaleString("vi-VN") + " " + "VNĐ",
         };
       })
     );
@@ -121,13 +119,13 @@ const Cart = ({ location, cartItems }) => {
       align: "center",
     },
     {
-      title: "Tên sản phẩm",
+      title: "Tên món",
       dataIndex: "nameProduct",
       key: "nameProduct",
       align: "center",
     },
     {
-      title: "Hình ảnh",
+      title: "Ảnh món ăn",
       dataIndex: "avartarImageProduct",
       key: "avartarImageProduct",
       align: "center",
@@ -137,7 +135,7 @@ const Cart = ({ location, cartItems }) => {
           alt={"image"}
           width={100}
           height={100}
-          className="object-fit-cover border rounded-circle border border-success"
+          className="object-fit-cover border rounded border border-white"
         />
       ),
     },
@@ -153,11 +151,10 @@ const Cart = ({ location, cartItems }) => {
       key: "price",
       align: "center",
       render: (price, record) => (
-        <span>
+        <div>
+          <span className="mr-2 text-danger">{price}</span>
           <del style={{ color: "#535c68" }}>{record.priceOld}</del>
-          <br />
-          {price}
-        </span>
+        </div>
       ),
     },
     {
@@ -173,40 +170,34 @@ const Cart = ({ location, cartItems }) => {
         <title>Poly Food | Lịch sử đơn hàng</title>
         <meta name="description" content="Cart page of PolyFood." />
       </MetaTags>
-
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>
         Trang chủ
       </BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
         Lịch sử đơn hàng
       </BreadcrumbsItem>
-
       <LayoutOne headerTop="visible">
-        {/* breadcrumb */}
         <Breadcrumb />
         <Modal
-          title="Thông tin Đơn Hàng"
           open={isModalOpen}
           onOk={handleOk}
           onCancel={handleCancel}
           width={1200}>
-          <Descriptions title="Thông Tin Tiết người đặt">
-            <Descriptions.Item label="UserName">
+          <Descriptions title="Đơn của bạn tại POLYFOOD">
+            <Descriptions.Item label="Tên khách hàng">
               {curentInfo && curentInfo.fullName}
             </Descriptions.Item>
-            <Descriptions.Item label="Telephone">
-              {" "}
+            <Descriptions.Item label="Số điện thoại">
               {curentInfo && curentInfo.phone}
             </Descriptions.Item>
-            <Descriptions.Item label="address">
+            <Descriptions.Item label="Địa chỉ">
               {curentInfo && curentInfo.address}
             </Descriptions.Item>
             <Descriptions.Item label="Tổng tiền">
-              {" "}
               {curentInfo &&
                 curentInfo.actualPrice &&
                 curentInfo.actualPrice.toLocaleString("vi-VN")}{" "}
-              vnd
+              VNĐ
             </Descriptions.Item>
             <Descriptions.Item label="Phương thức thanh toán">
               {curentInfo && (
@@ -223,15 +214,14 @@ const Cart = ({ location, cartItems }) => {
                 <Image width={100} src={curentInfo.imageComplete} />
               </Descriptions.Item>
             )}
-
-            <Descriptions.Item label="In hóa đơn">
+            <Descriptions.Item label="Hóa đơn">
               <Button
                 size="small"
                 type="primary"
                 onClick={() => {
                   setIsModal(true);
                 }}>
-                xem qua
+                In hóa đơn
               </Button>
             </Descriptions.Item>
           </Descriptions>
@@ -265,29 +255,27 @@ const Cart = ({ location, cartItems }) => {
             dataOrderHistory.data &&
             dataOrderHistory?.data?.data?.length > 0 ? (
               <>
-                <h3 className="cart-page-title">Lịch sử đơn hàng.</h3>
+                <h3 className="cart-page-title">Lịch sử đơn hàng</h3>
                 <div className="row">
                   <div className="col-12">
-                    {dataOrderHistory.data.data.map((item) => (
-                      <>
                         <div className="table-content table-responsive cart-table-content">
                           <table>
                             <thead>
                               <tr>
+                                <th>STT</th>
                                 <th>Mã đơn hàng</th>
                                 <th>Trạng thái đơn hàng</th>
                                 <th>Ngày tạo đơn</th>
-                                <th>hoạt động</th>
+                                <th>Hành động</th>
                               </tr>
                             </thead>
                             <tbody>
+                            {dataOrderHistory.data.data.map((item, index) => (
                               <tr key={item.orderId}>
-                                <td
-                                  className="product-thumbnail"
-                                  style={{ color: "green" }}>
+                                <td>{index + 1}</td>
+                                <td className="product-thumbnail">
                                   {item.codeOrder}
                                 </td>
-
                                 <td
                                   className="product-name"
                                   style={{
@@ -350,6 +338,7 @@ const Cart = ({ location, cartItems }) => {
                                   </div>
                                 </td>
                               </tr>
+                            ))}
                             </tbody>
                           </table>
                         </div>
@@ -360,8 +349,6 @@ const Cart = ({ location, cartItems }) => {
                             border: "2px inset #fff",
                             margin: "20px 15%",
                           }}></div>
-                      </>
-                    ))}
                     <Pagination
                       style={{
                         textAlign: "right",
@@ -372,7 +359,7 @@ const Cart = ({ location, cartItems }) => {
                       total={dataOrderHistory.data.totalItems}
                       onChange={handlePaginationChange}
                       showSizeChanger
-                      showTotal={(total) => `Tổng ${total} sản phẩm`}
+                      showTotal={(total) => `Tổng ${total} đơn hàng`}
                     />
                   </div>
                 </div>
