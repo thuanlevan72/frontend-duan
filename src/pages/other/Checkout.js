@@ -16,6 +16,8 @@ import { typeOf } from "react-hooks-paginator";
 import VoucherApi from "../../api/voucher/VoucherApi";
 import CartApi from "../../api/cart/CartApi";
 import AddressApi from "../../api/ghn/AddressApi";
+import GiaoHangNhanhApi from "../../api/ghn/GiaoHangNhanhApi";
+import { number } from "prop-types";
 
 const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
   const validateUserOrder = (userOrder) => {
@@ -43,6 +45,8 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
   });
   const [codeVoucher, setCodeVoucher] = useState("");
   const [loading, setLoading] = useState(false);
+  const [transportFee, setTransportFee] = useState(0);
+  console.log(transportFee);
   const totalPriceOld = cartItems?.reduce(
     (total, item) => total + item.price * item.quantity,
     0
@@ -59,6 +63,8 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
   const [provinces, setProvinces] = useState([]);
   const [selectedProvince, setSelectedProvince] = useState(null);
   const [districts, setDistricts] = useState([]);
+  const [intendTime, setIntendTime] = useState(0);
+  console.log(intendTime);
   const [selectedDistrict, setSelectedDistrict] = useState(null);
   const [wards, setWards] = useState([]);
   const [selectedWard, setSelectedWard] = useState(null);
@@ -79,7 +85,10 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
       : "",
     email: localUser ? JSON.parse(localStorage.getItem("user")).user.email : "",
     originalPrice: totalPriceOld,
-    actualPrice: totalPriceNew - (totalPriceNew / 100) * discount.valuevoucher,
+    actualPrice:
+      totalPriceNew +
+      transportFee -
+      (totalPriceNew / 100) * discount.valuevoucher,
     orderDetailDtos: cartItems?.map((item) => {
       return {
         productId: Number(item.id),
@@ -91,10 +100,13 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
   useEffect(() => {
     setUserOrder({
       ...userOrder,
+      intendTime: intendTime,
       actualPrice:
-        totalPriceNew - (totalPriceNew / 100) * discount.valuevoucher,
+        totalPriceNew +
+        transportFee -
+        (totalPriceNew / 100) * discount.valuevoucher,
     });
-  }, [discount]);
+  }, [discount, transportFee]);
   // getProvinceData
   useEffect(() => {
     const getProvinceData = async () => {
@@ -107,12 +119,32 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
     };
     getProvinceData();
   }, []);
+  useEffect(async () => {
+    try {
+      const res = await GiaoHangNhanhApi.CalculateShippingFeeApi({
+        service_id: 53320,
+        coupon: null,
+        to_district_id: parseInt(selectedDistrict),
+        to_ward_code: `${selectedWard}`,
+        weight: 1000,
+      });
+      const res2 = await GiaoHangNhanhApi.IntendTime({
+        service_id: 53320,
+        to_district_id: parseInt(selectedDistrict),
+        to_ward_code: `${selectedWard}`,
+      });
+      setTransportFee(Number(res.data.data.total));
+      setIntendTime(res2.data.data.leadtime);
+    } catch (error) {}
+  }, [selectedWard]);
   // getDistrictByProvince
   useEffect(() => {
-    if(selectedProvince){
+    if (selectedProvince) {
       const getDistrictByProvince = async () => {
         try {
-          const { data } = await AddressApi.getDistrictByProvince(selectedProvince);
+          const { data } = await AddressApi.getDistrictByProvince(
+            selectedProvince
+          );
           setDistricts(data);
         } catch (error) {
           console.log(error);
@@ -123,10 +155,13 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
   }, [selectedProvince]);
   // getWardsByDistrict
   useEffect(() => {
-    if(selectedDistrict){
+    if (selectedDistrict) {
       const getWardsByDistrict = async () => {
         try {
-          const { data } = await AddressApi.getWardsByDistrict(selectedDistrict);
+          const { data } = await AddressApi.getWardsByDistrict(
+            selectedDistrict
+          );
+          console.log(data);
           setWards(data);
         } catch (error) {
           console.log(error);
@@ -147,9 +182,6 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
   const handleWardChange = (e) => {
     setSelectedWard(e.target.value);
   };
-  console.log(provinces);
-  console.log(districts);
-  console.log(wards);
   const { pathname } = location;
   let cartTotalPrice = 0;
   let cartTotalPriceDiscount = 0;
@@ -297,13 +329,14 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
                           <div className="col">
                             <div className="billing-select mb-20">
                               <label>Tỉnh - Thành</label>
-                              <select 
+                              <select
                                 onChange={handleProvinceChange}
-                                value={selectedProvince || ""}
-                              >
+                                value={selectedProvince || ""}>
                                 <option value="">Chọn tỉnh thành</option>
-                                {provinces.data?.map(province => (
-                                  <option key={province.ProvinceID} value={province.ProvinceID}>
+                                {provinces.data?.map((province) => (
+                                  <option
+                                    key={province.ProvinceID}
+                                    value={province.ProvinceID}>
                                     {province.ProvinceName}
                                   </option>
                                 ))}
@@ -315,11 +348,12 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
                               <label>Quận - Huyện</label>
                               <select
                                 onChange={handleDistrictChange}
-                                value={selectedDistrict || ""}
-                              >
+                                value={selectedDistrict || ""}>
                                 <option value="">Chọn quận huyện</option>
-                                {districts.data?.map(district => (
-                                  <option key={district.DistrictID} value={district.DistrictID}>
+                                {districts.data?.map((district) => (
+                                  <option
+                                    key={district.DistrictID}
+                                    value={district.DistrictID}>
                                     {district.DistrictName}
                                   </option>
                                 ))}
@@ -331,11 +365,12 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
                               <label>Phường - Xã</label>
                               <select
                                 onChange={handleWardChange}
-                                value={selectedWard || ""}
-                              >
+                                value={selectedWard || ""}>
                                 <option>Chọn phường xã</option>
-                                {wards.data?.map(ward => (
-                                  <option key={ward.WardID} value={ward.WardID}>
+                                {wards.data?.map((ward) => (
+                                  <option
+                                    key={ward.WardID}
+                                    value={ward.WardCode}>
                                     {ward.WardName}
                                   </option>
                                 ))}
@@ -490,9 +525,13 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
                         <div className="your-order-bottom">
                           <ul>
                             <li className="your-order-shipping">
-                              Khuyến mãi vận chuyển
+                              Chi phí vận chuyển
                             </li>
-                            <li>Miễn phí vận chuyển</li>
+                            <li>
+                              {transportFee != 0
+                                ? transportFee.toLocaleString("en-US") + " VND"
+                                : "đang tính chi phí"}
+                            </li>
                           </ul>
                         </div>
                         {discount && discount.valuevoucher > 0 && (
@@ -518,6 +557,10 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
                                     (cartTotalPrice / 100) *
                                       discount.valuevoucher)
                                 }
+                                {
+                                  (cartTotalPriceDiscount =
+                                    cartTotalPriceDiscount + transportFee)
+                                }
                               </div>
                               {discount.valuevoucher > 0 ? (
                                 <del className="text-dark">
@@ -530,7 +573,9 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
                                 </del>
                               ) : (
                                 parseInt(
-                                  cartTotalPrice.toFixed(2).replace("$", "")
+                                  (cartTotalPrice + transportFee)
+                                    .toFixed(2)
+                                    .replace("$", "")
                                 ).toLocaleString("en-US") + " VND"
                               )}
                             </li>
@@ -547,7 +592,31 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
                           </ul>
                         </div>
                       </div>
-                      <div className="payment-method"></div>
+                      <div className="payment-method">
+                        <b>Thời gian giao hàng dự kiến</b>:{" "}
+                        {intendTime != 0
+                          ? Math.floor(
+                              Math.abs(
+                                intendTime - Math.floor(Date.now() / 1000)
+                              ) /
+                                (60 * 60 * 24)
+                            ) === 0
+                            ? "Đơn hàng sẽ được giao trong ngày"
+                            : Math.floor(
+                                Math.abs(
+                                  intendTime - Math.floor(Date.now() / 1000)
+                                ) /
+                                  (60 * 60 * 24)
+                              ) + " ngày"
+                          : "Vui lòng chọn địa chỉ giao hàng"}
+                      </div>
+                      <div className="payment-method">
+                        <li style={{ color: "#f58634", padding: "10px 0" }}>
+                          {" "}
+                          Chi phí cuối cùng đã là chi phí đã được tính cùng với
+                          phí vận chuyển
+                        </li>
+                      </div>
                     </div>
                     <div className="place-order mt-25">
                       <button
