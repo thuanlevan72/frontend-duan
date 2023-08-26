@@ -7,8 +7,8 @@ import {
   Typography,
   Pagination,
   Tag,
-  Button,
   Popconfirm,
+  Badge
 } from "antd";
 import { NavLink } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
@@ -17,8 +17,8 @@ import categoryAPI from "../../../api/category/CategoryApi";
 import { useState } from "react";
 import { format } from "date-fns";
 import LoadingSpin from "../../loading/LoadingSpin";
+import Swal from "sweetalert2";
 
-// const currentDate = new Date();
 const { Text } = Typography;
 const CategoryList = () => {
   const [loading, setLoading] = useState(false);
@@ -63,13 +63,20 @@ const CategoryList = () => {
   const DeleteCategory = async (id) => {
     try {
       setLoading(true);
-      const res = await categoryAPI.removeCategory(id);
+      await categoryAPI.removeCategory(id);
       setParam({ ...param });
+      Swal.fire({
+        icon: 'success',
+        title: 'Thành công',
+        text: 'Xóa danh mục thành công!',
+      })
       setLoading(false);
     } catch (error) {
-      alert(
-        "sản phẩm xóa thất bại có thể là loại sản phẩm này đã có sản phẩm phụ thuộc rồi"
-      );
+      Swal.fire({
+        icon: 'error',
+        title: 'Thất bại...',
+        text: 'Danh mục đã tồn tại sản phẩm!',
+      })
       setLoading(false);
     }
   };
@@ -81,7 +88,6 @@ const CategoryList = () => {
       quantity: item.products.length,
       imageTypeProduct: item.imageTypeProduct,
       createdAt: item.createdAt,
-      // updatedAt: item.updatedAt,
     };
   });
   const columns = [
@@ -96,17 +102,14 @@ const CategoryList = () => {
       dataIndex: "nameProductType",
       key: "nameProductType",
       align: "center",
-      render: (nameProductType) => <Tag color="#f50">{nameProductType}</Tag>,
+      render: (nameProductType, record) => (
+        <Badge count={record.quantity}>
+          <Tag color="green">{nameProductType}</Tag>
+        </Badge>
+      ),
     },
     {
-      title: "Số lượng",
-      dataIndex: "quantity",
-      key: "quantity",
-      align: "center",
-      render: (quantity) => <Tag color="blue">{quantity}</Tag>,
-    },
-    {
-      title: "Hình ảnh",
+      title: "Ảnh danh mục",
       dataIndex: "imageTypeProduct",
       key: "imageTypeProduct",
       align: "center",
@@ -116,7 +119,7 @@ const CategoryList = () => {
           alt={imageTypeProduct}
           width={100}
           height={100}
-          className="object-fit-cover border rounded-circle border border-success"
+          className="object-fit-cover border rounded border border-white"
         />
       ),
     },
@@ -140,12 +143,12 @@ const CategoryList = () => {
             <BiEdit className="text-info" />
           </NavLink>
           <Popconfirm
-            title="Xóa loại sản phẩm"
-            description="Bạn chắc chắn là muốn xóa loại sản phẩn này chứ?"
+            title="Xóa danh mục sản phẩm"
+            description="Bạn chắc chắn xóa danh mục sản phẩm này?"
             onConfirm={() => DeleteCategory(record.id)}
             onCancel={cancel}
-            okText="Yes"
-            cancelText="No">
+            okText="Có"
+            cancelText="Hủy">
             <Text type="danger">
               <ImBin />
             </Text>

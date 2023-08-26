@@ -18,6 +18,7 @@ import { ImBin } from "react-icons/im";
 import ProductApi from "../../../api/product/ProductApi";
 import LoadingSpin from "../../loading/LoadingSpin";
 import { useToasts } from "react-toast-notifications";
+import Swal from "sweetalert2";
 
 const ProductList = () => {
   const { addToast } = useToasts();
@@ -146,13 +147,17 @@ const ProductList = () => {
       await ProductApi.removeProduct(id);
       const { data } = await ProductApi.getAllProducts(param);
       setData(data);
-      addToast("Xóa sản phẩm thành công!", {
-        appearance: "success",
-        autoDismiss: true,
-        autoDismissTimeout: 1500,
-      });
+      Swal.fire({
+        icon: 'success',
+        title: 'Thành công',
+        text: 'Xóa sản phẩm thành công!',
+      })
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Thất bại...',
+        text: 'Xóa sản phẩm thất bại!',
+      })
     }
   };
   const handleCancel = () => {
@@ -168,7 +173,7 @@ const ProductList = () => {
       id: item.productId,
       name: item.nameProduct,
       image: item.avartarImageProduct,
-      price: item.price.toLocaleString("vi-VN"),
+      price: item.price.toLocaleString("vi-VN") + " " + "VNĐ",
       discount: item.discount,
       quantity: item.quantity,
       categoryName: item.productType.nameProductType,
@@ -205,12 +210,12 @@ const ProductList = () => {
           alt={image}
           width={100}
           height={100}
-          className="object-fit-cover border rounded-circle border border-success"
+          className="object-fit-cover border rounded border border-white"
         />
       ),
     },
     {
-      title: "Giá (VNĐ)",
+      title: "Giá món",
       dataIndex: "price",
       key: "price",
       align: "center",
