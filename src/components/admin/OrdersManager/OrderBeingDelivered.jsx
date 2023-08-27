@@ -149,7 +149,11 @@ const OrderBeingDilivered = () => {
   const getStatus = async () => {
     try {
       const data = await OrderApi.getOrderStatus();
-      setOptions(data);
+      const excludedStatusIds = [4, 15, 12];
+      const filteredOrderStatuses = data.filter(
+        (orderStatus) => !excludedStatusIds.includes(orderStatus.orderStatusId)
+      );
+      setOptions(filteredOrderStatuses);
     } catch (error) {
       console.log(error);
     }
