@@ -33,7 +33,7 @@ const SlideAdd = () => {
                 autoDismiss: true,
                 autoDismissTimeout: 1000,
             });
-            history.push(`/admin/slide`);
+            history.push(`/admin/slides`);
         });
     };
 
@@ -84,7 +84,7 @@ const SlideAdd = () => {
                             onClick={onHandleSubmit}
                             block
                         >
-                            Thêm
+                            Thêm mới slideshow
                         </Button>
                     </Form.Item>
                 </Form>

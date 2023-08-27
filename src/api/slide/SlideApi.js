@@ -15,6 +15,10 @@ const SlideApi = {
             },
         });
     },
+    getSlideFrontEnd: () => {
+        const url = "/Silde/slide-frontend";
+        return axiosClient.get(url);
+    },
     createSlide: (body) => {
         const url = "/Silde";
         return axiosClient.post(url, body, {

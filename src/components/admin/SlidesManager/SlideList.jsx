@@ -5,7 +5,9 @@ import SlideApi from '../../../api/slide/SlideApi';
 import { Breadcrumb, Image, Modal, Pagination, Popconfirm, Space, Switch, Table, Tag, message } from 'antd';
 import { format } from 'date-fns';
 import { ImBin, ImEye } from 'react-icons/im';
+import { GrAddCircle } from 'react-icons/gr';
 import Swal from 'sweetalert2';
+import { NavLink } from 'react-router-dom';
 
 const SlideList = () => {
     const { addToast } = useToasts();
@@ -131,8 +133,6 @@ const SlideList = () => {
             setLoading(false);
         }
     };
-
-
     const dataSource = data.data?.map((item, index) => {
         return {
             key: index + 1,
@@ -144,7 +144,6 @@ const SlideList = () => {
             updatedAt: item.updatedAt,
         };
     });
-
     const columns = [
         {
             title: "STT",
@@ -198,6 +197,9 @@ const SlideList = () => {
                         cancelText="Hủy">
                         <ImBin className="text-danger" />
                     </Popconfirm>
+                    <NavLink to={`slides-child-add/${record.id}`} className='p-0'>
+                        <GrAddCircle />
+                    </NavLink>
                 </Space>
             )
         },
@@ -211,10 +213,19 @@ const SlideList = () => {
             align: "center",
         },
         {
-            title: "Tên ảnh",
+            title: "Hình ảnh",
             dataIndex: "slideImage",
             key: "slideImage",
             align: "center",
+            render: (slideImage) => (
+                <Image
+                    src={slideImage}
+                    alt={"slideImage"}
+                    width={200}
+                    height={100}
+                    className="object-fit-cover border  border border-success"
+                />
+            ),
         },
         {
             title: "Tiêu đề",
@@ -229,19 +240,10 @@ const SlideList = () => {
             align: "center",
         },
         {
-            title: "Hình ảnh",
+            title: "URL",
             dataIndex: "url",
             key: "url",
             align: "center",
-            render: (url) => (
-                <Image
-                    src={url}
-                    alt={"url"}
-                    width={200}
-                    height={100}
-                    className="object-fit-cover border  border border-success"
-                />
-            ),
         },
     ];
 
