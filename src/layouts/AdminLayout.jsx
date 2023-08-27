@@ -19,7 +19,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { RxDashboard } from "react-icons/rx";
 import { AiFillRead } from "react-icons/ai";
 import { GiConfirmed } from "react-icons/gi";
-import { BiConfused } from "react-icons/bi";
+import { BiConfused, BiSlideshow } from "react-icons/bi";
 import {
   UserOutlined,
   BellOutlined,
@@ -53,6 +53,7 @@ import VoucherList from "../components/admin/VouchersManager/VoucherList";
 import VoucherAdd from "../components/admin/VouchersManager/VoucherAdd";
 import SlideList from "../components/admin/SlidesManager/SlideList";
 import SlideAdd from "../components/admin/SlidesManager/SlideAdd";
+import SlideChildAdd from "../components/admin/SlidesManager/SlideChildAdd";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -228,6 +229,18 @@ const AdminLayout = () => {
               </NavLink>
             </Menu.Item>
           </SubMenu>
+          {/* SlideShow Manager */}
+          <SubMenu
+            key="subMenu-8"
+            icon={<BiSlideshow />}
+            title="Quản lý slideshow">
+            <Menu.Item key="/slides" icon={<CiBoxList />}>
+              <NavLink to="/admin/slides">Danh sách slideshow</NavLink>
+            </Menu.Item>
+            <Menu.Item key="/create-slides" icon={<IoCreateOutline />}>
+              <NavLink to="/admin/slides-add">Thêm mới slideshow</NavLink>
+            </Menu.Item>
+          </SubMenu>
         </Menu>
       </Sider>
       <Layout>
@@ -294,6 +307,10 @@ const AdminLayout = () => {
             <Route path="/admin/voucher-add" component={VoucherAdd} />
             {/* comment router */}
             <Route path={"/admin/comment/:id"} component={ListCommentManager} />
+            {/* Slideshow router */}
+            <Route path="/admin/slides" component={SlideList} />
+            <Route path="/admin/slides-add" component={SlideAdd} />
+            <Route path="/admin/slides-child-add/:id" component={SlideChildAdd} />
             {/* Redirect to Dashboard */}
             <Redirect to="/admin/dashboard" />
           </Switch>
