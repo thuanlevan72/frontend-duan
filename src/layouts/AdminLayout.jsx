@@ -18,6 +18,8 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 // Icons
 import { RxDashboard } from "react-icons/rx";
 import { AiFillRead } from "react-icons/ai";
+import { GiConfirmed } from "react-icons/gi";
+import { BiConfused } from "react-icons/bi";
 import {
   UserOutlined,
   BellOutlined,
@@ -173,7 +175,7 @@ const AdminLayout = () => {
           <SubMenu
             key="subMenu-5"
             icon={<MdOutlineContactSupport />}
-            title="Quản lý Liên hệ">
+            title="Quản lý liên hệ">
             <Menu.Item key="/admin/Contacts" icon={<CiBoxList />}>
               <NavLink to="/admin/Contacts">Danh sách liên hệ</NavLink>
             </Menu.Item>
@@ -200,9 +202,9 @@ const AdminLayout = () => {
             <Menu.Item key="/admin/orders-pending" icon={<BsClock />}>
               <NavLink to="/admin/orders-pending">Đơn hàng đang chờ</NavLink>
             </Menu.Item>
-            <Menu.Item key="/admin/orders-been-confirmed" icon={<BsClock />}>
+            <Menu.Item key="/admin/orders-been-confirmed" icon={<GiConfirmed />}>
               <NavLink to="/admin/orders-been-confirmed">
-                Đơn hàng đã được xác nhận
+                Đơn hàng xác nhận
               </NavLink>
             </Menu.Item>
             <Menu.Item
@@ -220,9 +222,9 @@ const AdminLayout = () => {
             </Menu.Item>
             <Menu.Item
               key="/admin/orders-canceled-by-customer"
-              icon={<MdOutlineCancel />}>
+              icon={<BiConfused />}>
               <NavLink to="/admin/orders-canceled-by-customer">
-                Đơn đã hủy do khách hàng
+                Đơn khách hàng hủy
               </NavLink>
             </Menu.Item>
           </SubMenu>

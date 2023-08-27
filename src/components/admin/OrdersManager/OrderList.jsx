@@ -128,6 +128,10 @@ const OrderList = () => {
         return "#ff4757";
       case 9:
         return "#ffa502";
+      case 12:
+        return "#EE3B3B";
+      case 15:
+        return "#00FA9A";
     }
   };
   const columns = [
@@ -142,6 +146,9 @@ const OrderList = () => {
       dataIndex: "code",
       key: "code",
       align: "center",
+      render: (code) => (
+        <b>{code}</b>
+      )
     },
     {
       title: "Tên khách hàng",
@@ -276,11 +283,10 @@ const OrderList = () => {
             {dataCurrent && dataCurrent.address}
           </Descriptions.Item>
           <Descriptions.Item label="Tổng đơn hàng">
-            {" "}
             {dataCurrent &&
               dataCurrent.actualPrice &&
               dataCurrent.actualPrice.toLocaleString("vi-VN")}{" "}
-            VND
+            VNĐ
           </Descriptions.Item>
           <Descriptions.Item label="Phương thức thanh toán">
             {dataCurrent && (

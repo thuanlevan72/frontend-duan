@@ -168,6 +168,8 @@ const OrderPending = () => {
         return "#ff4757";
       case 9:
         return "#ffa502";
+      case 15:
+        return "#00FA9A";
     }
   };
   const columns = [
@@ -213,13 +215,16 @@ const OrderPending = () => {
       render: (orderStatus, orderId) => (
         <Select
           value={orderStatus.orderStatusId}
-          onChange={handleChangeStatus(orderId)}>
+          onChange={handleChangeStatus(orderId)}
+          style={{width: 140}}
+          >
           {options &&
             options.map((item) => {
               return (
                 <Select.Option
                   key={item.orderStatusId}
-                  value={item.orderStatusId}>
+                  value={item.orderStatusId}
+                  >
                   <p
                     style={{
                       color: getStatusColor(item.orderStatusId),

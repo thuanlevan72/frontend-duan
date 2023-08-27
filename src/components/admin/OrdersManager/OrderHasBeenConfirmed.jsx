@@ -283,6 +283,8 @@ const OrderHasBeenConfirmed = () => {
         return "#ff4757";
       case 9:
         return "#ffa502";
+      case 15:
+        return "#00FA9A";
     }
   };
   const columns = [
