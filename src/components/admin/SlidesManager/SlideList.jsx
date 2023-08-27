@@ -5,6 +5,7 @@ import SlideApi from '../../../api/slide/SlideApi';
 import { Breadcrumb, Image, Modal, Pagination, Popconfirm, Space, Switch, Table, Tag, message } from 'antd';
 import { format } from 'date-fns';
 import { ImBin, ImEye } from 'react-icons/im';
+import Swal from 'sweetalert2';
 
 const SlideList = () => {
     const { addToast } = useToasts();
@@ -78,13 +79,17 @@ const SlideList = () => {
             await SlideApi.removeSlide(id);
             const { data } = await SlideApi.getAllSlides(param);
             setData(data);
-            addToast("Xóa thành công!", {
-                appearance: "success",
-                autoDismiss: true,
-                autoDismissTimeout: 1500,
-            });
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Xóa bản trình chiếu thành công!',
+            })
         } catch (error) {
-            console.log(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại...',
+                text: 'Xóa bản trình chiếu thất bại!',
+            })
         }
     };
     const handleCancel = () => {
@@ -98,14 +103,12 @@ const SlideList = () => {
     const handleChangeStatus = async (id) => {
         try {
             await SlideApi.updateStatusSlide(id.id);
-
-            // Cập nhật trạng thái mới trong data
             setData((prevData) => {
                 const newData = prevData.data.map((item) => {
                     if (item.slidesId === id.id) {
                         return {
                             ...item,
-                            status: !item.status, // Đảo ngược trạng thái
+                            status: !item.status,
                         };
                     }
                     return item;
@@ -115,7 +118,6 @@ const SlideList = () => {
                     data: newData,
                 };
             });
-
             messageApi.open({
                 type: "success",
                 content: "Thay đổi trạng thái thành công",
@@ -151,7 +153,7 @@ const SlideList = () => {
             align: "center",
         },
         {
-            title: "Tên slide",
+            title: "Tên slideshow",
             dataIndex: "name",
             key: "name",
             align: "center",
@@ -250,7 +252,7 @@ const SlideList = () => {
                     margin: "16px 0",
                 }}>
                 <Breadcrumb.Item>Bảng điều khiển</Breadcrumb.Item>
-                <Breadcrumb.Item>Danh sách slide</Breadcrumb.Item>
+                <Breadcrumb.Item>Danh sách slideshow</Breadcrumb.Item>
             </Breadcrumb>
             {contextHolder}
             <Modal
@@ -278,7 +280,7 @@ const SlideList = () => {
                     total={data.totalItems}
                     onChange={handlePaginationChange}
                     showSizeChanger
-                    showTotal={(total) => `Tổng ${total} slide`}
+                    showTotal={(total) => `Tổng ${total} slideshow`}
                 />
             </div>
         </>
