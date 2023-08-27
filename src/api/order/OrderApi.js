@@ -5,6 +5,22 @@ const OrderApi = {
     const url = "/Order";
     return axiosClient.post(url, data);
   },
+  CancelOrder: (Code) => {
+    const url = `/Order/cancelOrder/${Code}`;
+    return axiosClient.post(
+      url,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${
+            localStorage.getItem("token")
+              ? JSON.parse(localStorage.getItem("token"))
+              : ""
+          }`,
+        },
+      }
+    );
+  },
   getDetailOrder: (id) => {
     const url = `/Order/getDetail/${id}`;
     return axiosClient.get(url, {
@@ -64,6 +80,36 @@ const OrderApi = {
   },
   GetWaitingorder: (params = null) => {
     const url = "/Order/getwaitingorder";
+    return axiosClient.get(url, {
+      headers: {
+        Authorization: `Bearer ${
+          localStorage.getItem("token")
+            ? JSON.parse(localStorage.getItem("token"))
+            : ""
+        }`,
+      },
+      params: {
+        ...params,
+      },
+    });
+  },
+  OrderCanceledByCustomer: (params = null) => {
+    const url = "/Order/OrderCanceledByCustomer";
+    return axiosClient.get(url, {
+      headers: {
+        Authorization: `Bearer ${
+          localStorage.getItem("token")
+            ? JSON.parse(localStorage.getItem("token"))
+            : ""
+        }`,
+      },
+      params: {
+        ...params,
+      },
+    });
+  },
+  OrderHasBeenConfirmed: (params = null) => {
+    const url = "/Order/OrderHasBeenConfirmed";
     return axiosClient.get(url, {
       headers: {
         Authorization: `Bearer ${

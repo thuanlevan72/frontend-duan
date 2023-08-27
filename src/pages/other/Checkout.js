@@ -46,7 +46,6 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
   const [codeVoucher, setCodeVoucher] = useState("");
   const [loading, setLoading] = useState(false);
   const [transportFee, setTransportFee] = useState(0);
-  console.log(transportFee);
   const totalPriceOld = cartItems?.reduce(
     (total, item) => total + item.price * item.quantity,
     0
@@ -63,11 +62,11 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
   const [provinces, setProvinces] = useState([]);
   const [selectedProvince, setSelectedProvince] = useState(null);
   const [districts, setDistricts] = useState([]);
-  const [intendTime, setIntendTime] = useState(0);
-  console.log(intendTime);
+  const [intendTime, setIntendTime] = useState(-1);
   const [selectedDistrict, setSelectedDistrict] = useState(null);
   const [wards, setWards] = useState([]);
   const [selectedWard, setSelectedWard] = useState(null);
+  console.log(selectedProvince, selectedDistrict, selectedWard);
   const [userOrder, setUserOrder] = useState({
     paymentId: 1,
     userId:
@@ -100,22 +99,24 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
   useEffect(() => {
     setUserOrder({
       ...userOrder,
-      intendTime: intendTime,
+      wards: selectedWard,
+      provinces: selectedProvince,
+      districts: selectedDistrict,
+      pickupTime: intendTime,
       actualPrice:
         totalPriceNew +
         transportFee -
         (totalPriceNew / 100) * discount.valuevoucher,
     });
-  }, [discount, transportFee]);
+  }, [discount, transportFee, selectedWard, intendTime]);
+  console.log(userOrder);
   // getProvinceData
   useEffect(() => {
     const getProvinceData = async () => {
       try {
         const { data } = await AddressApi.getProvinceData();
         setProvinces(data);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     };
     getProvinceData();
   }, []);
@@ -146,9 +147,7 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
             selectedProvince
           );
           setDistricts(data);
-        } catch (error) {
-          console.log(error);
-        }
+        } catch (error) {}
       };
       getDistrictByProvince();
     }
@@ -161,11 +160,9 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
           const { data } = await AddressApi.getWardsByDistrict(
             selectedDistrict
           );
-          console.log(data);
+
           setWards(data);
-        } catch (error) {
-          console.log(error);
-        }
+        } catch (error) {}
       };
       getWardsByDistrict();
     }
@@ -594,13 +591,13 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
                       </div>
                       <div className="payment-method">
                         <b>Thời gian giao hàng dự kiến</b>:{" "}
-                        {intendTime != 0
+                        {intendTime !== -1
                           ? Math.floor(
                               Math.abs(
                                 intendTime - Math.floor(Date.now() / 1000)
                               ) /
                                 (60 * 60 * 24)
-                            ) === 0
+                            ) === 1
                             ? "Đơn hàng sẽ được giao trong ngày"
                             : Math.floor(
                                 Math.abs(
@@ -608,7 +605,7 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
                                 ) /
                                   (60 * 60 * 24)
                               ) + " ngày"
-                          : "Vui lòng chọn địa chỉ giao hàng"}
+                          : "Vui lòng nhập vào địa chỉ."}
                       </div>
                       <div className="payment-method">
                         <li style={{ color: "#f58634", padding: "10px 0" }}>

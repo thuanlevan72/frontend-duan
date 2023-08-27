@@ -99,12 +99,23 @@ const Cart = ({ location, cartItems }) => {
     page: 1,
     pageSize: 6,
   });
+  const CancelOrder = async (codeOrder) => {
+    setLoading(true);
+    await OrderApi.CancelOrder(codeOrder);
+
+    setLoading(false);
+    setParam({
+      ...param,
+    });
+  };
+
   useEffect(() => {
     const getDataApi = async () => {
       try {
         setLoading(true);
         const accountId = JSON.parse(localStorage.getItem("user")).accountId;
         const res = await OrderApi.GetOrderForUserId(accountId, param);
+
         setLoading(false);
         setDataOrderHistory(res);
       } catch (error) {}
@@ -258,97 +269,104 @@ const Cart = ({ location, cartItems }) => {
                 <h3 className="cart-page-title">Lịch sử đơn hàng</h3>
                 <div className="row">
                   <div className="col-12">
-                        <div className="table-content table-responsive cart-table-content">
-                          <table>
-                            <thead>
-                              <tr>
-                                <th>STT</th>
-                                <th>Mã đơn hàng</th>
-                                <th>Trạng thái đơn hàng</th>
-                                <th>Ngày tạo đơn</th>
-                                <th>Hành động</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            {dataOrderHistory.data.data.map((item, index) => (
-                              <tr key={item.orderId}>
-                                <td>{index + 1}</td>
-                                <td className="product-thumbnail">
-                                  {item.codeOrder}
-                                </td>
-                                <td
-                                  className="product-name"
+                    <div className="table-content table-responsive cart-table-content">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>STT</th>
+                            <th>Mã đơn hàng</th>
+                            <th>Trạng thái đơn hàng</th>
+                            <th>Ngày tạo đơn</th>
+                            <th>Hành động</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {dataOrderHistory.data.data.map((item, index) => (
+                            <tr key={item.orderId}>
+                              <td>{index + 1}</td>
+                              <td className="product-thumbnail">
+                                {item.codeOrder}
+                              </td>
+                              <td
+                                className="product-name"
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                }}>
+                                <Tag
+                                  color={
+                                    item.orderStatus.orderStatusId === 4
+                                      ? "#70a1ff"
+                                      : item.orderStatus.orderStatusId === 5
+                                      ? "#2ed573"
+                                      : item.orderStatus.orderStatusId === 7
+                                      ? "#ff4757"
+                                      : item.orderStatus.orderStatusId === 9
+                                      ? "#ffa502"
+                                      : item.orderStatus.orderStatusId === 12
+                                      ? "red"
+                                      : "white"
+                                  }>
+                                  {item.orderStatus.name}
+                                </Tag>
+                              </td>
+
+                              <td className="product-name">
+                                {format(
+                                  new Date(item.createdAt),
+                                  "HH:mm:ss dd/MM/yyyy"
+                                )}
+                              </td>
+
+                              <td className="product-quantity">
+                                <div
                                   style={{
                                     display: "flex",
-                                    justifyContent: "center",
+                                    justifyContent:
+                                      item.orderStatus.orderStatusId == 4 &&
+                                      new Date() - new Date(item.createdAt) <
+                                        twoDaysInMillis
+                                        ? "center"
+                                        : "space-around",
                                   }}>
-                                  <Tag
-                                    color={
-                                      item.orderStatus.orderStatusId === 4
-                                        ? "#70a1ff"
-                                        : item.orderStatus.orderStatusId === 5
-                                        ? "#2ed573"
-                                        : item.orderStatus.orderStatusId === 7
-                                        ? "#ff4757"
-                                        : item.orderStatus.orderStatusId === 9
-                                        ? "#ffa502"
-                                        : "white"
+                                  {item.orderStatus.orderStatusId == 4 &&
+                                    new Date() - new Date(item.createdAt) <
+                                      twoDaysInMillis && (
+                                      <Button
+                                        type="dashed"
+                                        onClick={() =>
+                                          CancelOrder(item.codeOrder)
+                                        }
+                                        danger>
+                                        Hủy đơn
+                                      </Button>
+                                    )}
+                                  {item.orderStatus.orderStatusId == 4 &&
+                                    new Date() - new Date(item.createdAt) <
+                                      twoDaysInMillis && (
+                                      <div style={{ width: "5px" }}> </div>
+                                    )}
+                                  <Button
+                                    type="primary"
+                                    onClick={() =>
+                                      showModal(item.codeOrder, item)
                                     }>
-                                    {item.orderStatus.name}
-                                  </Tag>
-                                </td>
-
-                                <td className="product-name">
-                                  {format(
-                                    new Date(item.createdAt),
-                                    "HH:mm:ss dd/MM/yyyy"
-                                  )}
-                                </td>
-
-                                <td className="product-quantity">
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      justifyContent:
-                                        item.orderStatus.orderStatusId == 4 &&
-                                        new Date() - new Date(item.createdAt) <
-                                          twoDaysInMillis
-                                          ? "center"
-                                          : "space-around",
-                                    }}>
-                                    {item.orderStatus.orderStatusId == 4 &&
-                                      new Date() - new Date(item.createdAt) <
-                                        twoDaysInMillis && (
-                                        <Button type="dashed" danger>
-                                          Hủy đơn
-                                        </Button>
-                                      )}
-                                    {item.orderStatus.orderStatusId == 4 &&
-                                      new Date() - new Date(item.createdAt) <
-                                        twoDaysInMillis && (
-                                        <div style={{ width: "5px" }}> </div>
-                                      )}
-                                    <Button
-                                      type="primary"
-                                      onClick={() =>
-                                        showModal(item.codeOrder, item)
-                                      }>
-                                      Chi tiết
-                                    </Button>
-                                  </div>
-                                </td>
-                              </tr>
-                            ))}
-                            </tbody>
-                          </table>
-                        </div>
-                        <div
-                          style={{
-                            width: "70%",
-                            height: "1px",
-                            border: "2px inset #fff",
-                            margin: "20px 15%",
-                          }}></div>
+                                    Chi tiết
+                                  </Button>
+                                </div>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    <div
+                      style={{
+                        width: "70%",
+                        height: "1px",
+                        border: "2px inset #fff",
+                        margin: "20px 15%",
+                      }}></div>
                     <Pagination
                       style={{
                         textAlign: "right",

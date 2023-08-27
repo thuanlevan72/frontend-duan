@@ -10,5 +10,9 @@ const GiaoHangNhanhApi = {
     const url = "v2/shipping-order/leadtime";
     return GHNApi.post(url, data);
   },
+  CreateOrder: (data) => {
+    const url = "v2/shipping-order/create";
+    return GHNApi.post(url, data);
+  },
 };
 export default GiaoHangNhanhApi;
