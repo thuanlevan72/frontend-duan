@@ -32,7 +32,7 @@ import {
   MdOutlineContactSupport,
 } from "react-icons/md";
 import { FiUsers } from "react-icons/fi";
-import { TbTruckDelivery } from "react-icons/tb";
+import { TbTruckDelivery, TbSlideshow } from "react-icons/tb";
 import { HiOutlineReceiptPercent } from "react-icons/hi2";
 import { IoCreateOutline } from "react-icons/io5";
 import SubMenu from "antd/es/menu/SubMenu";
@@ -49,6 +49,9 @@ import CreateNews from "../components/admin/NewsMangager/CreateNews";
 import ListCommentManager from "../components/admin/CommentManager/ListCommentManager";
 import VoucherList from "../components/admin/VouchersManager/VoucherList";
 import VoucherAdd from "../components/admin/VouchersManager/VoucherAdd";
+import SlideList from "../components/admin/SlidesManager/SlideList";
+import SlideAdd from "../components/admin/SlidesManager/SlideAdd";
+
 const { Header, Content, Footer, Sider } = Layout;
 
 const AdminLayout = () => {
