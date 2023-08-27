@@ -164,6 +164,8 @@ const OrderCanceledByCustomer = () => {
         return "#ff4757";
       case 9:
         return "#ffa502";
+        case 12:
+        return "#EE3B3B";
     }
   };
   const columns = [
@@ -206,27 +208,11 @@ const OrderCanceledByCustomer = () => {
       dataIndex: "orderStatus",
       key: "orderStatus",
       align: "center",
-      render: (orderStatus, orderId) => (
-        <Select
-          value={orderStatus.orderStatusId}
-          onChange={handleChangeStatus(orderId)}>
-          {options &&
-            options.map((item) => {
-              return (
-                <Select.Option
-                  key={item.orderStatusId}
-                  value={item.orderStatusId}>
-                  <p
-                    style={{
-                      color: getStatusColor(item.orderStatusId),
-                    }}>
-                    {item.name}
-                  </p>
-                </Select.Option>
-              );
-            })}
-        </Select>
-      ),
+      render: (orderStatus) => (
+        <p style={{ color: getStatusColor(orderStatus.orderStatusId) }}>
+            {orderStatus.name}
+        </p>
+    ),
     },
     {
       title: "Xem chi tiết",
