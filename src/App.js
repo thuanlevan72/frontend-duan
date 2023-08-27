@@ -13,8 +13,6 @@ import { connect } from "react-redux";
 import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic";
 import AdminLayout from "./layouts/AdminLayout";
 import { message } from "antd";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import CartHistory from "./pages/other/OrderHistory";
 import OrderHistory from "./pages/other/OrderHistory";
 import ResVnPay from "./components/vnPay/ResVnPay";
 import SeenMailPointLts from "./components/contact/SeenMailPointLts";
@@ -168,10 +166,7 @@ const App = (props) => {
                   component={ResetPassword}
                 />
                 {/* Router Admin Manager */}
-                <Route
-                  path="/admin"
-                  component={AdminLayout}
-                />
+                <Route path="/admin" component={AdminLayout} />
                 <Route
                   path={process.env.PUBLIC_URL + "/my-account"}
                   component={MyAccount}

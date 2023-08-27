@@ -23,9 +23,12 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
   const validateUserOrder = (userOrder) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^\d{10}$/;
-
     const isValidEmail = emailRegex.test(userOrder.email);
-    const isValidAddress = userOrder.address.trim() !== "";
+    const isValidAddress =
+      userOrder.address.trim() !== "" &&
+      userOrder.pickupTime &&
+      userOrder.districts &&
+      userOrder.wards;
     const isValidFullName = userOrder.fullName.trim() !== "";
     const isValidPhone = phoneRegex.test(userOrder.phone);
 

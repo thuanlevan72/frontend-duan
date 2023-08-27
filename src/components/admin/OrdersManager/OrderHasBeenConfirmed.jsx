@@ -186,6 +186,7 @@ const OrderHasBeenConfirmed = () => {
         type: "error",
         content: "Tiến hàng giao hàng thất bại do có phát sinh lỗi",
       });
+      setLoading(false);
       setIsModalShipOpen(false);
     }
   };
@@ -200,7 +201,6 @@ const OrderHasBeenConfirmed = () => {
   });
   const handleChangeStatus = (id) => async (orderId, newStatus) => {
     if (newStatus.value == 9) {
-      const dataCreateGiaoHangNhanh = console.log(newStatus.value);
       const dataOrderCurrent = data.data.filter(
         (x) => x.orderId === id.orderId
       )[0];
