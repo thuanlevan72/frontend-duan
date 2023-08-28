@@ -1,7 +1,5 @@
 import PropTypes from "prop-types";
 import React, { Fragment, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { useToasts } from "react-toast-notifications";
 import MetaTags from "react-meta-tags";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import LayoutOne from "../../layouts/LayoutOne";
@@ -14,7 +12,6 @@ import {
   Image,
   Modal,
   Pagination,
-  Space,
   Table,
   Tag,
 } from "antd";
@@ -26,7 +23,7 @@ const PrintButton = ({ invoiceRef }) => {
   return (
     <div style={{ textAlign: "center", padding: "20px" }}>
       <ReactToPrint
-        trigger={() => <Button>In ra ngay</Button>}
+        trigger={() => <Button type="link">In hóa đơn</Button>}
         content={() => invoiceRef.current}
       />
     </div>
@@ -193,7 +190,9 @@ const Cart = ({ location, cartItems }) => {
           open={isModalOpen}
           onOk={handleOk}
           onCancel={handleCancel}
-          width={1200}>
+          width={1200}
+          footer={null}
+          >
           <Descriptions title="Đơn của bạn tại POLYFOOD">
             <Descriptions.Item label="Tên khách hàng">
               {curentInfo && curentInfo.fullName}
@@ -238,10 +237,12 @@ const Cart = ({ location, cartItems }) => {
           </Descriptions>
           <Table columns={columns} dataSource={currenOrderDeatail} />
           <Modal
-            title="Demo hóa đơn"
+            title="Hóa đơn chi tiết"
             open={isModal}
-            width={600}
-            onCancel={handleCancelBill}>
+            width={829}
+            onCancel={handleCancelBill}
+            footer={null}
+            >
             <Bill
               curentInfo={curentInfo}
               count={currenOrderDeatail.reduce(
@@ -261,7 +262,6 @@ const Cart = ({ location, cartItems }) => {
                 <LoadingSpin />
               </div>
             )}
-
             {dataOrderHistory &&
             dataOrderHistory.data &&
             dataOrderHistory?.data?.data?.length > 0 ? (
