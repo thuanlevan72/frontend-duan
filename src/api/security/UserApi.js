@@ -16,6 +16,10 @@ const UserApi = {
       },
     });
   },
+  RefreshToken: (body) => {
+    const url = "/Login/refresh-token";
+    return axiosClient.post(url, body);
+  },
   Register: (body) => {
     const url = "/Login/register-user";
     return axiosClient.post(url, body, {

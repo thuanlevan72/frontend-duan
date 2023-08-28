@@ -94,6 +94,7 @@ const OrderCanceledByCustomer = () => {
       code: item.codeOrder,
       fullName: item.fullName,
       createdAt: item.createdAt,
+      reasonForCancellation: item.reasonForCancellation,
       paymentOrder:
         item.paymentOrderPaymentId == 1 ? (
           <Tag color="cyan">Thanh toàn khi nhận hàng</Tag>
@@ -164,7 +165,7 @@ const OrderCanceledByCustomer = () => {
         return "#ff4757";
       case 9:
         return "#ffa502";
-        case 12:
+      case 12:
         return "#EE3B3B";
     }
   };
@@ -210,9 +211,16 @@ const OrderCanceledByCustomer = () => {
       align: "center",
       render: (orderStatus) => (
         <p style={{ color: getStatusColor(orderStatus.orderStatusId) }}>
-            {orderStatus.name}
+          {orderStatus.name}
         </p>
-    ),
+      ),
+    },
+    {
+      title: "Lý do hủy khách hàng",
+      dataIndex: "reasonForCancellation",
+      key: "reasonForCancellation",
+      align: "left",
+      render: (reasonForCancellation) => <p>{reasonForCancellation}</p>,
     },
     {
       title: "Xem chi tiết",

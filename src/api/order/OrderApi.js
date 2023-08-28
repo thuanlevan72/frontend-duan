@@ -5,7 +5,7 @@ const OrderApi = {
     const url = "/Order";
     return axiosClient.post(url, data);
   },
-  CancelOrder: (Code) => {
+  CancelOrder: (Code, message) => {
     const url = `/Order/cancelOrder/${Code}`;
     return axiosClient.post(
       url,
@@ -17,6 +17,9 @@ const OrderApi = {
               ? JSON.parse(localStorage.getItem("token"))
               : ""
           }`,
+        },
+        params: {
+          message: message,
         },
       }
     );

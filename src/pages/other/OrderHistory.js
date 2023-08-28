@@ -11,7 +11,9 @@ import OrderApi from "../../api/order/OrderApi";
 import {
   Button,
   Descriptions,
+  Form,
   Image,
+  Input,
   Modal,
   Pagination,
   Space,
@@ -35,13 +37,34 @@ const PrintButton = ({ invoiceRef }) => {
 const Cart = ({ location, cartItems }) => {
   const twoDaysInMillis = 2 * 24 * 60 * 60 * 1000;
   const { pathname } = location;
+  const [codeOrder, setCodeOrder] = useState("");
   const [loading, setLoading] = useState(false);
   const invoiceRef = useRef(null);
   const [currenOrderDeatail, setCurrenOrderDeatail] = useState([]);
   const [isModal, setIsModal] = useState(false);
   const [dataOrderHistory, setDataOrderHistory] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalCancelOpen, setIsModalCancelOpen] = useState(false);
   const [curentInfo, setCurenInfo] = useState({});
+  const handleOkCancel = () => {
+    setIsModalCancelOpen(false);
+  };
+  const handleCancelCancel = () => {
+    setIsModalCancelOpen(false);
+  };
+  const onFinish = async (values) => {
+    try {
+      setLoading(true);
+      await OrderApi.CancelOrder(codeOrder, values.content);
+      setLoading(false);
+      setParam({
+        ...param,
+      });
+      setIsModalCancelOpen(false);
+    } catch (error) {
+      alert("hủy đơn thất bại");
+    }
+  };
   const showModal = (codeOrder, data) => {
     const orderDetails = dataOrderHistory.data.data.filter(
       (x) => x.codeOrder === codeOrder
@@ -99,14 +122,9 @@ const Cart = ({ location, cartItems }) => {
     page: 1,
     pageSize: 6,
   });
-  const CancelOrder = async (codeOrder) => {
-    setLoading(true);
-    await OrderApi.CancelOrder(codeOrder);
-
-    setLoading(false);
-    setParam({
-      ...param,
-    });
+  const CancelOrder = async (value) => {
+    setIsModalCancelOpen(true);
+    setCodeOrder(value);
   };
 
   useEffect(() => {
@@ -254,6 +272,29 @@ const Cart = ({ location, cartItems }) => {
             <PrintButton invoiceRef={invoiceRef} />
           </Modal>
         </Modal>
+        <Modal
+          title="Lý do hủy đơn"
+          open={isModalCancelOpen}
+          onOk={handleOkCancel}
+          onCancel={handleCancelCancel}>
+          <Form
+            onFinish={onFinish}
+            labelCol={{ span: 6 }}
+            wrapperCol={{ span: 18 }}>
+            <Form.Item
+              label="Nội dung"
+              name="content"
+              rules={[{ required: true, message: "nội dung cần phải có" }]}>
+              <Input />
+            </Form.Item>
+
+            <Form.Item wrapperCol={{ offset: 6, span: 18 }}>
+              <Button type="primary" htmlType="submit">
+                Gửi
+              </Button>
+            </Form.Item>
+          </Form>
+        </Modal>
         <div className="cart-main-area pt-90 pb-100">
           <div className="container">
             {loading && (
@@ -305,6 +346,8 @@ const Cart = ({ location, cartItems }) => {
                                       ? "#ffa502"
                                       : item.orderStatus.orderStatusId === 12
                                       ? "red"
+                                      : item.orderStatus.orderStatusId === 15
+                                      ? "green"
                                       : "white"
                                   }>
                                   {item.orderStatus.name}
