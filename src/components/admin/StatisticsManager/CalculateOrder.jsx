@@ -50,7 +50,7 @@ const CalculateOrder = () => {
       const res = await StatisticsApi.GetCalculateOrderStatusData(selectedDate);
       setData(res);
     } catch (error) {
-      //   SetLoading(false);
+      console.log(error);
     }
   }, [selectedDate]);
   const totalOrderCount = data?.reduce((acc, item) => acc + item.orderCount, 0);
@@ -58,7 +58,7 @@ const CalculateOrder = () => {
     appendPadding: 10,
     data,
     angleField: "orderCount",
-    colorField: "orderStatus", // or seriesField in some cases
+    colorField: "orderStatus",
     color: ({ orderStatus }) => {
       if (orderStatus === "Đang xử lý") {
         return "#70a1ff";
@@ -66,6 +66,10 @@ const CalculateOrder = () => {
         return "#ff4757";
       } else if (orderStatus === "Đang giao") {
         return "#ffa502";
+      }else if (orderStatus === "Khách hàng hủy") {
+        return "#FF4500";
+      }else if (orderStatus === "Xác nhận đơn") {
+        return "#9ACD32";
       }
       return "#2ed573";
     },
@@ -95,7 +99,7 @@ const CalculateOrder = () => {
           overflow: "hidden",
           textOverflow: "ellipsis",
         },
-        formatter: () => `Tổng đơn: ${totalOrderCount}`,
+        formatter: () => `Tổng đơn ${totalOrderCount}`,
       },
     },
   };
