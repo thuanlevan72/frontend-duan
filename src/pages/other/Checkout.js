@@ -305,7 +305,7 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
         JSON.stringify({
           address: data.address,
           phone: data.phone,
-          paymentOrder: "Thanh Toán Khi Nhận Hàng",
+          paymentOrder: "Thanh Toán online",
           noteOrder: data.noteOrder,
           imageComplete: data.imageComplete,
           orderStatus: "đang sử lý",
