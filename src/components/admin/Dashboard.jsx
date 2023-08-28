@@ -160,7 +160,7 @@ const Dashboard = () => {
           <LoadingSpin />
         </div>
       )}
-      <Row wrap={false} justify="space-between" style={{ marginTop: "16px" }}>
+      <Row wrap={false} justify="space-evenly" style={{ marginTop: "16px" }}>
         <Col
           span={11}
           style={{
