@@ -21,6 +21,9 @@ import LoadingSpin from "../../loading/LoadingSpin";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min.js";
 import Swal from "sweetalert2";
 import GiaoHangNhanhApi from "../../../api/ghn/GiaoHangNhanhApi.js";
+import { useRef } from "react";
+import Bill from "../../../pages/other/Bill.jsx";
+import PrintButton from "../../../pages/other/PrintButton.jsx";
 const { Option } = Select;
 const OrderHasBeenConfirmed = () => {
   const [loading, setLoading] = useState(false);
@@ -30,6 +33,12 @@ const OrderHasBeenConfirmed = () => {
   const history = useHistory();
   const [currenOrderDeatail, setCurrenOrderDeatail] = useState([]);
   const [dataCurrent, setDataCurrent] = useState({});
+  const [curentInfo, setCurenInfo] = useState({});
+  const [isModal, setIsModal] = useState(false);
+  const invoiceRef = useRef(null);
+  const handleCancelBill = () => {
+    setIsModal(false);
+  };
   const [dataCurrentShip, setDataCurrentShip] = useState({
     payment_type_id: 2,
     note: "",
@@ -75,6 +84,23 @@ const OrderHasBeenConfirmed = () => {
   const showModal = (id) => {
     const dataOrderCurrent = data.data.filter((x) => x.orderId === id)[0];
     setDataCurrent(dataOrderCurrent);
+    setCurenInfo({
+      address: dataOrderCurrent.address,
+      phone: dataOrderCurrent.phone,
+      paymentOrder:
+        dataCurrent.paymentOrderPaymentId === 1
+          ? "Thanh Toán Khi Nhận Hàng"
+          : "Thanh Toán Online",
+      noteOrder: dataOrderCurrent.noteOrder,
+      imageComplete: dataOrderCurrent.imageComplete,
+      orderStatus: dataOrderCurrent.orderStatus.name,
+      actualPrice: dataOrderCurrent.actualPrice,
+      paymentId: dataOrderCurrent.paymentId,
+      fullName: dataOrderCurrent.fullName,
+      email: dataOrderCurrent.address,
+      createdAt: dataOrderCurrent.createdAt,
+      codeOrder: dataOrderCurrent.codeOrder,
+    });
     setCurrenOrderDeatail(
       dataOrderCurrent.orderDetails.map((item, index) => {
         return {
@@ -468,8 +494,35 @@ const OrderHasBeenConfirmed = () => {
               </Tag>
             )}
           </Descriptions.Item>
+          <Descriptions.Item label="Hóa đơn">
+            <Button
+              size="small"
+              type="primary"
+              onClick={() => {
+                setIsModal(true);
+              }}>
+              In hóa đơn
+            </Button>
+          </Descriptions.Item>
         </Descriptions>
         <Table columns={columnDeatail} dataSource={currenOrderDeatail} />
+      </Modal>
+      <Modal
+        title="Hóa đơn chi tiết"
+        open={isModal}
+        width={829}
+        onCancel={handleCancelBill}
+        footer={null}>
+        <Bill
+          curentInfo={curentInfo}
+          count={currenOrderDeatail.reduce(
+            (total, product) => total + product.quantity,
+            0
+          )}
+          currenOrderDeatail={currenOrderDeatail}
+          ref={invoiceRef}
+        />
+        <PrintButton invoiceRef={invoiceRef} />
       </Modal>
       <Modal
         title="Thông tin gửi thêm cho người giao hàng"

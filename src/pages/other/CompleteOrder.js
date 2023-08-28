@@ -15,6 +15,10 @@ import {
 } from "../../redux/actions/cartActions";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
+import { Button, Descriptions, Modal } from "antd";
+import Bill from "./Bill";
+import PrintButton from "./PrintButton";
+import { useRef } from "react";
 
 const CompleteOrder = ({
   location,
@@ -28,6 +32,14 @@ const CompleteOrder = ({
   const [quantityCount] = useState(1);
   const { addToast } = useToasts();
   const { pathname } = location;
+  const [dataBill, setDataBill] = useState(
+    JSON.parse(localStorage.getItem("dataBill")) || ""
+  );
+  const invoiceRef = useRef(null);
+  const [isModal, setIsModal] = useState(false);
+  const handleCancelBill = () => {
+    setIsModal(false);
+  };
   let cartTotalPrice = 0;
 
   return (
@@ -60,6 +72,30 @@ const CompleteOrder = ({
                     <h4>
                       Chúng tôi sẽ gửi thông báo về đơn hàng sớm nhất cho bạn
                     </h4>
+                    <Descriptions.Item label="Hóa đơn">
+                      <Button
+                        size="small"
+                        type="primary"
+                        onClick={() => {
+                          setIsModal(true);
+                        }}>
+                        In hóa đơn
+                      </Button>
+                    </Descriptions.Item>
+                    <br />
+                    <Modal
+                      title="Hóa đơn chi tiết"
+                      open={isModal}
+                      width={829}
+                      onCancel={handleCancelBill}
+                      footer={null}>
+                      <Bill
+                        curentInfo={dataBill}
+                        currenOrderDeatail={dataBill.currenOrderDeatail}
+                        ref={invoiceRef}
+                      />
+                      <PrintButton invoiceRef={invoiceRef} />
+                    </Modal>
                     <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
                       Tiếp tục mua sắm
                     </Link>

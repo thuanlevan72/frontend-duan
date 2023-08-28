@@ -17,14 +17,23 @@ import { format } from "date-fns";
 import LoadingSpin from "../../loading/LoadingSpin";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min.js";
 import Swal from "sweetalert2";
+import { useRef } from "react";
+import Bill from "../../../pages/other/Bill.jsx";
+import PrintButton from "../../../pages/other/PrintButton.jsx";
 
 const OrderPending = () => {
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   const history = useHistory();
+  const invoiceRef = useRef(null);
+  const [isModal, setIsModal] = useState(false);
   const [currenOrderDeatail, setCurrenOrderDeatail] = useState([]);
+  const [curentInfo, setCurenInfo] = useState({});
   const [dataCurrent, setDataCurrent] = useState({});
+  const handleCancelBill = () => {
+    setIsModal(false);
+  };
   const [data, setData] = useState({
     totalItems: 0,
     totalPages: 0,
@@ -37,6 +46,23 @@ const OrderPending = () => {
   const showModal = (id) => {
     const dataOrderCurrent = data.data.filter((x) => x.orderId === id)[0];
     setDataCurrent(dataOrderCurrent);
+    setCurenInfo({
+      address: dataOrderCurrent.address,
+      phone: dataOrderCurrent.phone,
+      paymentOrder:
+        dataCurrent.paymentOrderPaymentId === 1
+          ? "Thanh Toán Khi Nhận Hàng"
+          : "Thanh Toán Online",
+      noteOrder: dataOrderCurrent.noteOrder,
+      imageComplete: dataOrderCurrent.imageComplete,
+      orderStatus: dataOrderCurrent.orderStatus.name,
+      actualPrice: dataOrderCurrent.actualPrice,
+      paymentId: dataOrderCurrent.paymentId,
+      fullName: dataOrderCurrent.fullName,
+      email: dataOrderCurrent.address,
+      createdAt: dataOrderCurrent.createdAt,
+      codeOrder: dataOrderCurrent.codeOrder,
+    });
     setCurrenOrderDeatail(
       dataOrderCurrent.orderDetails.map((item, index) => {
         return {
@@ -216,15 +242,13 @@ const OrderPending = () => {
         <Select
           value={orderStatus.orderStatusId}
           onChange={handleChangeStatus(orderId)}
-          style={{width: 140}}
-          >
+          style={{ width: 140 }}>
           {options &&
             options.map((item) => {
               return (
                 <Select.Option
                   key={item.orderStatusId}
-                  value={item.orderStatusId}
-                  >
+                  value={item.orderStatusId}>
                   <p
                     style={{
                       color: getStatusColor(item.orderStatusId),
@@ -356,8 +380,31 @@ const OrderPending = () => {
               </Tag>
             )}
           </Descriptions.Item>
+          <Descriptions.Item label="Hóa đơn">
+            <Button
+              size="small"
+              type="primary"
+              onClick={() => {
+                setIsModal(true);
+              }}>
+              In hóa đơn
+            </Button>
+          </Descriptions.Item>
         </Descriptions>
         <Table columns={columnDeatail} dataSource={currenOrderDeatail} />
+      </Modal>
+      <Modal
+        title="Hóa đơn chi tiết"
+        open={isModal}
+        width={829}
+        onCancel={handleCancelBill}
+        footer={null}>
+        <Bill
+          curentInfo={curentInfo}
+          currenOrderDeatail={currenOrderDeatail}
+          ref={invoiceRef}
+        />
+        <PrintButton invoiceRef={invoiceRef} />
       </Modal>
       <div>
         {loading && (

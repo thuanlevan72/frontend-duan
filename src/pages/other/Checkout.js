@@ -224,6 +224,47 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
     try {
       data.paymentId = 1;
       setLoading(true);
+      localStorage.setItem(
+        "dataBill",
+        JSON.stringify({
+          address: data.address,
+          phone: data.phone,
+          paymentOrder: "Thanh Toán Khi Nhận Hàng",
+          noteOrder: data.noteOrder,
+          imageComplete: data.imageComplete,
+          orderStatus: "đang sử lý",
+          actualPrice: data.actualPrice,
+          paymentId: data.paymentId,
+          fullName: data.fullName,
+          email: data.email,
+          createdAt: new Date(),
+          codeOrder: data.codeOrder,
+          currenOrderDeatail: cartItems.map((item, index) => {
+            return {
+              productId: index + 1,
+              nameProduct: item.name,
+              avartarImageProduct: item.image,
+              quantity: item.quantity,
+              priceOld: item.price.toLocaleString("vi-VN") + " " + "vnd",
+              price:
+                (
+                  item.price -
+                  (item.price / 100) * item.discount
+                ).toLocaleString("vi-VN") +
+                " " +
+                "VND",
+              totalPrice:
+                (
+                  (item.price - (item.price / 100) * item.discount) *
+                  item.quantity
+                ).toLocaleString("vi-VN") +
+                " " +
+                "VND",
+            };
+          }),
+        })
+      );
+      return;
       const response = await OrderApi.CreateOrder(data);
       if (codeVoucher) {
         await VoucherApi.ApllyVoucher(userOrder.userId, codeVoucher);
@@ -259,7 +300,47 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
     }
     try {
       setLoading(true);
-      debugger;
+      localStorage.setItem(
+        "dataBill",
+        JSON.stringify({
+          address: data.address,
+          phone: data.phone,
+          paymentOrder: "Thanh Toán Khi Nhận Hàng",
+          noteOrder: data.noteOrder,
+          imageComplete: data.imageComplete,
+          orderStatus: "đang sử lý",
+          actualPrice: data.actualPrice,
+          paymentId: data.paymentId,
+          fullName: data.fullName,
+          email: data.email,
+          createdAt: new Date(),
+          codeOrder: data.codeOrder,
+          currenOrderDeatail: cartItems.map((item, index) => {
+            return {
+              productId: index + 1,
+              nameProduct: item.name,
+              avartarImageProduct: item.image,
+              quantity: item.quantity,
+              priceOld: item.price.toLocaleString("vi-VN") + " " + "vnd",
+              price:
+                (
+                  item.price -
+                  (item.price / 100) * item.discount
+                ).toLocaleString("vi-VN") +
+                " " +
+                "VND",
+              totalPrice:
+                (
+                  (item.price - (item.price / 100) * item.discount) *
+                  item.quantity
+                ).toLocaleString("vi-VN") +
+                " " +
+                "VND",
+            };
+          }),
+        })
+      );
+      return;
       const response = await OrderApi.CreateUrlVnPay(
         parseInt(data.actualPrice)
       );

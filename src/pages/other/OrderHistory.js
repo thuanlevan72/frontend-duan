@@ -19,18 +19,8 @@ import {
 } from "antd";
 import LoadingSpin from "../../components/loading/LoadingSpin";
 import { format } from "date-fns";
-import ReactToPrint from "react-to-print";
 import Bill from "./Bill";
-const PrintButton = ({ invoiceRef }) => {
-  return (
-    <div style={{ textAlign: "center", padding: "20px" }}>
-      <ReactToPrint
-        trigger={() => <Button type="link">In hóa đơn</Button>}
-        content={() => invoiceRef.current}
-      />
-    </div>
-  );
-};
+import PrintButton from "./PrintButton";
 const Cart = ({ location, cartItems }) => {
   const twoDaysInMillis = 2 * 24 * 60 * 60 * 1000;
   const { pathname } = location;
@@ -209,8 +199,7 @@ const Cart = ({ location, cartItems }) => {
           onOk={handleOk}
           onCancel={handleCancel}
           width={1200}
-          footer={null}
-          >
+          footer={null}>
           <Descriptions title="Đơn của bạn tại POLYFOOD">
             <Descriptions.Item label="Tên khách hàng">
               {curentInfo && curentInfo.fullName}
@@ -259,8 +248,7 @@ const Cart = ({ location, cartItems }) => {
             open={isModal}
             width={829}
             onCancel={handleCancelBill}
-            footer={null}
-            >
+            footer={null}>
             <Bill
               curentInfo={curentInfo}
               count={currenOrderDeatail.reduce(

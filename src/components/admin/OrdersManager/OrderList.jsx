@@ -15,13 +15,22 @@ import {
 import OrderApi from "../../../api/order/OrderApi.js";
 import { format } from "date-fns";
 import LoadingSpin from "../../loading/LoadingSpin";
+import Bill from "../../../pages/other/Bill.jsx";
+import PrintButton from "../../../pages/other/PrintButton.jsx";
+import { useRef } from "react";
 
 const OrderList = () => {
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
+  const invoiceRef = useRef(null);
   const [currenOrderDeatail, setCurrenOrderDeatail] = useState([]);
   const [dataCurrent, setDataCurrent] = useState({});
+  const [isModal, setIsModal] = useState(false);
+  const handleCancelBill = () => {
+    setIsModal(false);
+  };
+  const [curentInfo, setCurenInfo] = useState({});
   const [data, setData] = useState({
     totalItems: 0,
     totalPages: 0,
@@ -34,6 +43,23 @@ const OrderList = () => {
   const showModal = (id) => {
     const dataOrderCurrent = data.data.filter((x) => x.orderId === id)[0];
     setDataCurrent(dataOrderCurrent);
+    setCurenInfo({
+      address: dataOrderCurrent.address,
+      phone: dataOrderCurrent.phone,
+      paymentOrder:
+        dataCurrent.paymentOrderPaymentId === 1
+          ? "Thanh Toán Khi Nhận Hàng"
+          : "Thanh Toán Online",
+      noteOrder: dataOrderCurrent.noteOrder,
+      imageComplete: dataOrderCurrent.imageComplete,
+      orderStatus: dataOrderCurrent.orderStatus.name,
+      actualPrice: dataOrderCurrent.actualPrice,
+      paymentId: dataOrderCurrent.paymentId,
+      fullName: dataOrderCurrent.fullName,
+      email: dataOrderCurrent.address,
+      createdAt: dataOrderCurrent.createdAt,
+      codeOrder: dataOrderCurrent.codeOrder,
+    });
     setCurrenOrderDeatail(
       dataOrderCurrent.orderDetails.map((item, index) => {
         return {
@@ -59,11 +85,11 @@ const OrderList = () => {
   const handlePaginationChange = (page, pageSize) => {
     setParam(
       (prev) =>
-      (prev = {
-        ...param,
-        page: page,
-        pageSize: pageSize,
-      })
+        (prev = {
+          ...param,
+          page: page,
+          pageSize: pageSize,
+        })
     );
   };
   const [param, setParam] = useState({
@@ -77,13 +103,15 @@ const OrderList = () => {
         setLoading(true);
         const { data } = await OrderApi.getAllOrders(param);
         const updatedDataSource = data.data.map((item) => {
-          const orderStatusItem = dataSource.find((prevItem) => prevItem.key === item.key);
+          const orderStatusItem = dataSource.find(
+            (prevItem) => prevItem.key === item.key
+          );
           if (orderStatusItem) {
             item.orderStatus = orderStatusItem.orderStatus;
           }
           return item;
         });
-        setData({...data, data: updatedDataSource});
+        setData({ ...data, data: updatedDataSource });
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -116,7 +144,7 @@ const OrderList = () => {
     try {
       const data = await OrderApi.getOrderStatus();
       setOptions(data);
-    } catch (error) { }
+    } catch (error) {}
   };
   const getStatusColor = (status) => {
     switch (status) {
@@ -146,9 +174,7 @@ const OrderList = () => {
       dataIndex: "code",
       key: "code",
       align: "center",
-      render: (code) => (
-        <b>{code}</b>
-      )
+      render: (code) => <b>{code}</b>,
     },
     {
       title: "Tên khách hàng",
@@ -300,8 +326,31 @@ const OrderList = () => {
               </Tag>
             )}
           </Descriptions.Item>
+          <Descriptions.Item label="Hóa đơn">
+            <Button
+              size="small"
+              type="primary"
+              onClick={() => {
+                setIsModal(true);
+              }}>
+              In hóa đơn
+            </Button>
+          </Descriptions.Item>
         </Descriptions>
         <Table columns={columnDeatail} dataSource={currenOrderDeatail} />
+      </Modal>
+      <Modal
+        title="Hóa đơn chi tiết"
+        open={isModal}
+        width={829}
+        onCancel={handleCancelBill}
+        footer={null}>
+        <Bill
+          curentInfo={curentInfo}
+          currenOrderDeatail={currenOrderDeatail}
+          ref={invoiceRef}
+        />
+        <PrintButton invoiceRef={invoiceRef} />
       </Modal>
       <div>
         {loading && (

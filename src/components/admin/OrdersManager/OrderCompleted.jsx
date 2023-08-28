@@ -15,6 +15,9 @@ import OrderApi from "../../../api/order/OrderApi.js";
 import { format } from "date-fns";
 import LoadingSpin from "../../loading/LoadingSpin";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min.js";
+import { useRef } from "react";
+import Bill from "../../../pages/other/Bill.jsx";
+import PrintButton from "../../../pages/other/PrintButton.jsx";
 
 const OrderCompleted = () => {
   const [loading, setLoading] = useState(false);
@@ -32,9 +35,32 @@ const OrderCompleted = () => {
     hasNext: true,
     data: [],
   });
+  const [curentInfo, setCurenInfo] = useState({});
+  const [isModal, setIsModal] = useState(false);
+  const invoiceRef = useRef(null);
+  const handleCancelBill = () => {
+    setIsModal(false);
+  };
   const showModal = (id) => {
     const dataOrderCurrent = data.data.filter((x) => x.orderId === id)[0];
     setDataCurrent(dataOrderCurrent);
+    setCurenInfo({
+      address: dataOrderCurrent.address,
+      phone: dataOrderCurrent.phone,
+      paymentOrder:
+        dataCurrent.paymentOrderPaymentId === 1
+          ? "Thanh Toán Khi Nhận Hàng"
+          : "Thanh Toán Online",
+      noteOrder: dataOrderCurrent.noteOrder,
+      imageComplete: dataOrderCurrent.imageComplete,
+      orderStatus: dataOrderCurrent.orderStatus.name,
+      actualPrice: dataOrderCurrent.actualPrice,
+      paymentId: dataOrderCurrent.paymentId,
+      fullName: dataOrderCurrent.fullName,
+      email: dataOrderCurrent.address,
+      createdAt: dataOrderCurrent.createdAt,
+      codeOrder: dataOrderCurrent.codeOrder,
+    });
     setCurrenOrderDeatail(
       dataOrderCurrent.orderDetails.map((item, index) => {
         return {
@@ -290,6 +316,16 @@ const OrderCompleted = () => {
               </Tag>
             )}
           </Descriptions.Item>
+          <Descriptions.Item label="Hóa đơn">
+            <Button
+              size="small"
+              type="primary"
+              onClick={() => {
+                setIsModal(true);
+              }}>
+              In hóa đơn
+            </Button>
+          </Descriptions.Item>
           <Descriptions.Item label="Ảnh hoàn thành">
             {dataCurrent && (
               <Image width={100} src={dataCurrent.imageComplete} />
@@ -297,6 +333,19 @@ const OrderCompleted = () => {
           </Descriptions.Item>
         </Descriptions>
         <Table columns={columnDeatail} dataSource={currenOrderDeatail} />
+      </Modal>
+      <Modal
+        title="Hóa đơn chi tiết"
+        open={isModal}
+        width={829}
+        onCancel={handleCancelBill}
+        footer={null}>
+        <Bill
+          curentInfo={curentInfo}
+          currenOrderDeatail={currenOrderDeatail}
+          ref={invoiceRef}
+        />
+        <PrintButton invoiceRef={invoiceRef} />
       </Modal>
       <div>
         {loading && (

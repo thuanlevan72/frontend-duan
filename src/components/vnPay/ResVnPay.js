@@ -12,10 +12,22 @@ import OrderApi from "../../api/order/OrderApi";
 import LoadingSpin from "../loading/LoadingSpin";
 import VoucherApi from "../../api/voucher/VoucherApi";
 import CartApi from "../../api/cart/CartApi";
+import { Button, Descriptions, Modal } from "antd";
+import Bill from "../../pages/other/Bill";
+import PrintButton from "../../pages/other/PrintButton";
+import { useRef } from "react";
 
 const ResVnPay = ({ location, confirmOrders }) => {
   const [paymentResult, setPaymentResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [dataBill, setDataBill] = useState(
+    JSON.parse(localStorage.getItem("dataBill")) || ""
+  );
+  const invoiceRef = useRef(null);
+  const [isModal, setIsModal] = useState(false);
+  const handleCancelBill = () => {
+    setIsModal(false);
+  };
   useEffect(async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const vnpResponseCode = urlParams.get("vnp_ResponseCode");
@@ -111,6 +123,30 @@ const ResVnPay = ({ location, confirmOrders }) => {
                   <div className="item-empty-area__text">
                     <h1>Đã Hoàn Tất đơn hàng</h1> <br />{" "}
                     <>{paymentResult && renderPaymentResult()}</>
+                    <Descriptions.Item label="Hóa đơn">
+                      <Button
+                        size="small"
+                        type="primary"
+                        onClick={() => {
+                          setIsModal(true);
+                        }}>
+                        In hóa đơn
+                      </Button>
+                    </Descriptions.Item>
+                    <br />
+                    <Modal
+                      title="Hóa đơn chi tiết"
+                      open={isModal}
+                      width={829}
+                      onCancel={handleCancelBill}
+                      footer={null}>
+                      <Bill
+                        curentInfo={dataBill}
+                        currenOrderDeatail={dataBill.currenOrderDeatail}
+                        ref={invoiceRef}
+                      />
+                      <PrintButton invoiceRef={invoiceRef} />
+                    </Modal>
                     <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
                       Tiếp tục mua sắm
                     </Link>

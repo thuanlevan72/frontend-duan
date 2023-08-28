@@ -22,6 +22,8 @@ import { UploadOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min.js";
 import Swal from "sweetalert2";
 import { useRef } from "react";
+import Bill from "../../../pages/other/Bill.jsx";
+import PrintButton from "../../../pages/other/PrintButton.jsx";
 
 const OrderBeingDilivered = () => {
   const [loading, setLoading] = useState(false);
@@ -43,6 +45,12 @@ const OrderBeingDilivered = () => {
   });
   const [form] = Form.useForm();
   const [fileList, setFileList] = useState([]);
+  const [curentInfo, setCurenInfo] = useState({});
+  const [isModalBill, setIsModalBill] = useState(false);
+  const invoiceRef = useRef(null);
+  const handleCancelBill = () => {
+    setIsModalBill(false);
+  };
 
   const onFinish = async (values) => {
     if (!fileList[0]) {
@@ -68,6 +76,23 @@ const OrderBeingDilivered = () => {
   const showModal = (id) => {
     const dataOrderCurrent = data.data.filter((x) => x.orderId === id)[0];
     setDataCurrent(dataOrderCurrent);
+    setCurenInfo({
+      address: dataOrderCurrent.address,
+      phone: dataOrderCurrent.phone,
+      paymentOrder:
+        dataCurrent.paymentOrderPaymentId === 1
+          ? "Thanh Toán Khi Nhận Hàng"
+          : "Thanh Toán Online",
+      noteOrder: dataOrderCurrent.noteOrder,
+      imageComplete: dataOrderCurrent.imageComplete,
+      orderStatus: dataOrderCurrent.orderStatus.name,
+      actualPrice: dataOrderCurrent.actualPrice,
+      paymentId: dataOrderCurrent.paymentId,
+      fullName: dataOrderCurrent.fullName,
+      email: dataOrderCurrent.address,
+      createdAt: dataOrderCurrent.createdAt,
+      codeOrder: dataOrderCurrent.codeOrder,
+    });
     setCurrenOrderDeatail(
       dataOrderCurrent.orderDetails.map((item, index) => {
         return {
@@ -421,10 +446,33 @@ const OrderBeingDilivered = () => {
               </Tag>
             )}
           </Descriptions.Item>
+          <Descriptions.Item label="Hóa đơn">
+            <Button
+              size="small"
+              type="primary"
+              onClick={() => {
+                setIsModalBill(true);
+              }}>
+              In hóa đơn
+            </Button>
+          </Descriptions.Item>
         </Descriptions>
         <Table columns={columnDeatail} dataSource={currenOrderDeatail} />
       </Modal>
       <div>
+        <Modal
+          title="Hóa đơn chi tiết"
+          open={isModalBill}
+          width={829}
+          onCancel={handleCancelBill}
+          footer={null}>
+          <Bill
+            curentInfo={curentInfo}
+            currenOrderDeatail={currenOrderDeatail}
+            ref={invoiceRef}
+          />
+          <PrintButton invoiceRef={invoiceRef} />
+        </Modal>
         {loading && (
           <div>
             <LoadingSpin />
