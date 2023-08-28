@@ -43,9 +43,10 @@ const ScrollToTop = (props) => {
         }
       }
     };
-    const interval = setInterval(checkAndRefreshToken, 2 * 60 * 60 * 1000);
-    // Clean up the interval when the component unmounts
-    return () => clearInterval(interval);
+    checkAndRefreshToken();
+    // const interval = setInterval(checkAndRefreshToken, 2 * 60 * 60 * 1000);
+    // // Clean up the interval when the component unmounts
+    // return () => clearInterval(interval);
   }, []);
   return props.children;
 };
