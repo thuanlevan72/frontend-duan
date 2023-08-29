@@ -11,9 +11,9 @@ const SectionTitleThree = ({
     <div
       className={`section-title-5 ${positionClass ? positionClass : ""} ${
         spaceClass ? spaceClass : ""
-      }`}
+      } banner-title`}
     >
-      <h2 className={`${colorClass ? colorClass : ""}`}>{titleText}</h2>
+      <h2 className={`${colorClass ? colorClass : ""} banner-title`}>{titleText}</h2>
     </div>
   );
 };
