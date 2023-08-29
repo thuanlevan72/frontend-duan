@@ -17,6 +17,7 @@ import OrderHistory from "./pages/other/OrderHistory";
 import ResVnPay from "./components/vnPay/ResVnPay";
 import SeenMailPointLts from "./components/contact/SeenMailPointLts";
 import EmailAdmissionForm from "./components/contact/EmailAdmissionForm";
+import Policy from "./pages/other/Policy";
 
 const HomeOrganicFood = lazy(() => import("./pages/home/HomeOrganicFood"));
 // shop pages
@@ -112,6 +113,10 @@ const App = (props) => {
                 <Route
                   path={process.env.PUBLIC_URL + "/about"}
                   component={About}
+                />
+                <Route
+                  path={process.env.PUBLIC_URL + "/policy"}
+                  component={Policy}
                 />
                 <Route
                   path={process.env.PUBLIC_URL + "/contact"}
