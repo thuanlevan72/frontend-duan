@@ -1,8 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";
-import Tab from "react-bootstrap/Tab";
-import Nav from "react-bootstrap/Nav";
 import SectionTitleThree from "../../components/section-title/SectionTitleThree";
 import ProductGridTwo from "./ProductGridTwo";
 
@@ -17,7 +15,6 @@ const TabProductFour = ({
     <div className={`product-area ${spaceBottomClass ? spaceBottomClass : ""}`}>
       <div className="container">
         <SectionTitleThree titleText={titleText} positionClass="text-center" />
-        <div className="" style={{ padding: "20px" }}></div>
         <div className="row my-10">
           {status == 1 ? (
             <ProductGridTwo
@@ -27,21 +24,19 @@ const TabProductFour = ({
               spaceBottomClass="mb-25"
             />
           ) : (
-            <div className="row">
               <ProductGridTwo
                 category={category}
                 type="new_product"
                 limit={8}
                 spaceBottomClass="mb-25"
               />
-            </div>
           )}
         </div>
         <div className="view-more text-center mt-20 toggle-btn6 col-12">
           <Link
             className="loadMore6"
             to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
-            Xem thêm sản phẩm
+            Xem thêm
           </Link>
         </div>
       </div>

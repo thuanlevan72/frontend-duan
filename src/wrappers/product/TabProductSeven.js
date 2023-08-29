@@ -76,7 +76,7 @@ const TabProductSeven = ({
           <Link
             className="loadMore6"
             to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
-            Xem thêm sản phẩm
+            Xem thêm
           </Link>
         </div>
       </div>

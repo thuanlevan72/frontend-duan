@@ -24,18 +24,19 @@ const HomeOrganicFood = () => {
         {/* hero slider */}
         <HeroSliderFive spaceLeftClass="ml-70" spaceRightClass="mr-70" />
         {/* banner */}
+        <p style={{ marginTop: "40px" }}></p>
         <BannerFive />
         {/* countdown */}
         <p style={{ marginTop: "40px" }}></p>
         <TabProductFour
-          spaceBottomClass="pb-100"
+          spaceBottomClass="pb-30"
           category="all"
           status={0}
-          titleText="Sản phẩm mới nhất"
+          titleText="Món ăn mới nhất"
           productTabClass="product-tab-fruits"
         />
         <TabProductCategory
-          spaceBottomClass="pb-100"
+          spaceBottomClass="pb-30"
           category="all"
           productTabClass="product-tab-fruits"
         />
@@ -45,13 +46,12 @@ const HomeOrganicFood = () => {
           dateTime="November 13, 2020 12:12:00"
         />
         <TabProductFour
-          spaceBottomClass="pb-100"
+          spaceBottomClass="pb-30"
           category="all"
           status={1}
-          titleText="Sản phẩm giảm giá"
+          titleText="Món ăn giảm giá"
           productTabClass="product-tab-fruits"
         />
-
         {/* testimonial */}
         <TestimonialOne
           spaceTopClass="pt-100"
@@ -63,7 +63,7 @@ const HomeOrganicFood = () => {
         {/* newsletter */}
         <NewsletterTwo
           spaceTopClass="pt-100"
-          spaceBottomClass="pb-100"
+          spaceBottomClass="pb-30"
           subscribeBtnClass="green-subscribe"
         />
       </LayoutThree>

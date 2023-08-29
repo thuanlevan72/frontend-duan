@@ -13,7 +13,7 @@ const BannerFive = () => {
   var settings = {
     dots: false,
     infinite: true,
-    slidesToShow: 5,
+    slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
@@ -62,11 +62,11 @@ const BannerFive = () => {
   }, []);
   return (
     <div className="banner-area hm9-section-padding">
-      <div className="container-fluid">
+      <div className="container">
         <h2 className="banner-title">Thực Phẩm Bán Chạy</h2>
         {loading ? (
           <div className="d-flex justify-content-between">
-            {Array.from({ length: 5 }).map(() => (
+            {Array.from({ length: 4 }).map(() => (
               <Skeleton width={260} height={260} />
             ))}
           </div>

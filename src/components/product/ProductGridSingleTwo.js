@@ -39,23 +39,12 @@ const ProductGridSingleTwo = ({
             spaceBottomClass ? spaceBottomClass : ""
           } ${colorClass ? colorClass : ""} `}>
           <div className="product-img">
-            <Link
-              to={process.env.PUBLIC_URL + "/product/" + product.id}
-              style={{
-                width: "270px",
-                height: "200px",
-                objectFit: "contain",
-                display: "flex",
-                alignItems: "center",
-              }}>
+            <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
               <img
-                className="default-img"
+                className="default-img d-flex object-fit-cover align-items-center"
                 style={{
                   width: "270px !important",
-                  height: "200px",
-                  objectFit: "contain",
-                  display: "flex",
-                  alignItems: "center",
+                  height: "232px",
                 }}
                 src={process.env.PUBLIC_URL + product.image[0]}
                 alt="polyfood"
@@ -80,11 +69,10 @@ const ProductGridSingleTwo = ({
                   <span
                     className="purple"
                     style={{
-                      // border: "",
                       backgroundColor: "#f58634",
                       color: "white",
                     }}>
-                    New
+                    Mới
                   </span>
                 ) : (
                   ""
