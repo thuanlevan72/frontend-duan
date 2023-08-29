@@ -102,7 +102,7 @@ const FooterOne = ({
                     <Link to={process.env.PUBLIC_URL + "#/"}>Điều khoản</Link>
                   </li>
                   <li>
-                    <Link to={process.env.PUBLIC_URL + "#/"}>Chính sách & Bảo mật</Link>
+                    <Link to={process.env.PUBLIC_URL + "/policy"}>Chính sách & Bảo mật</Link>
                   </li>
                 </ul>
               </div>
