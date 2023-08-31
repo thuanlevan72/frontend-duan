@@ -17,6 +17,9 @@ const ScrollToTop = (props) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   });
+  useEffect(() => {
+    dispatch(fetchDataCarts([]));
+  }, [localStorage.getItem("token")]);
   useEffect(async () => {
     const user = JSON.parse(localStorage.getItem("user")) || {};
     const expiration = localStorage.getItem("expiration") || "";

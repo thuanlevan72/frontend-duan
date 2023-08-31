@@ -264,7 +264,6 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
           }),
         })
       );
-      return;
       const response = await OrderApi.CreateOrder(data);
       if (codeVoucher) {
         await VoucherApi.ApllyVoucher(userOrder.userId, codeVoucher);
@@ -340,19 +339,18 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
           }),
         })
       );
-      return;
       const response = await OrderApi.CreateUrlVnPay(
         parseInt(data.actualPrice)
+      );
+      localStorage.setItem(
+        "dataOrderOnline",
+        JSON.stringify({ ...data, codeVoucher })
       );
       messageApi.open({
         type: "success",
         content: "Đang tạo liên kết đến VnPay",
       });
       setLoading(false);
-      localStorage.setItem(
-        "dataOrderOnline",
-        JSON.stringify({ ...data, codeVoucher })
-      );
       setTimeout(function () {
         window.location.href = response;
       }, 500);
