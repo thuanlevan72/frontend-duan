@@ -13,7 +13,7 @@ const HomeOrganicFood = () => {
   return (
     <Fragment>
       <MetaTags>
-        <title>POLYFOOD | Đồ ăn thuần chay</title>
+        <title>POLYFOOD | Đồ ăn thuần chay uy tín</title>
         <meta name="description" content="Đồ ăn thuần chay của POLYFOOD" />
       </MetaTags>
       <LayoutThree
