@@ -4,7 +4,8 @@ import { useToasts } from "react-toast-notifications";
 import SlideApi from '../../../api/slide/SlideApi';
 import { Breadcrumb, Image, Modal, Pagination, Popconfirm, Space, Switch, Table, Tag, message } from 'antd';
 import { format } from 'date-fns';
-import { ImBin, ImEye } from 'react-icons/im';
+import { ImBin } from 'react-icons/im';
+import { BiDetail } from 'react-icons/bi';
 import { GrAddCircle } from 'react-icons/gr';
 import Swal from 'sweetalert2';
 import { NavLink } from 'react-router-dom';
@@ -104,33 +105,37 @@ const SlideList = () => {
 
     const handleChangeStatus = async (id) => {
         try {
-            await SlideApi.updateStatusSlide(id.id);
-            setData((prevData) => {
-                const newData = prevData.data.map((item) => {
-                    if (item.slidesId === id.id) {
-                        return {
-                            ...item,
-                            status: !item.status,
-                        };
-                    }
-                    return item;
-                });
-                return {
+            const confirmResult = await Swal.fire({
+                title: "Xác nhận thay đổi trạng thái?",
+                text: "Bạn có chắc muốn thay đổi trạng thái này?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                cancelButtonText: "Không",
+                confirmButtonText: "Chắc chắn rồi!",
+            });
+            if (confirmResult.isConfirmed) {
+                await SlideApi.updateStatusSlide(id.id);
+                const updatedData = data.data.map((item) => ({
+                    ...item,
+                    isShow: item.slidesId === id.id ? !item.isShow : false,
+                }));
+                setData((prevData) => ({
                     ...prevData,
-                    data: newData,
-                };
-            });
-            messageApi.open({
-                type: "success",
-                content: "Thay đổi trạng thái thành công",
-            });
+                    data: updatedData,
+                }));
+                messageApi.open({
+                    type: "success",
+                    content: "Thay đổi trạng thái thành công",
+                });
+            }
         } catch (error) {
             messageApi.open({
                 type: "error",
                 content: "Thay đổi trạng thái thất bại",
             });
-        } finally {
-            setLoading(false);
+            return;
         }
     };
     const dataSource = data.data?.map((item, index) => {
@@ -185,7 +190,7 @@ const SlideList = () => {
             align: "center",
             render: (text, record) => (
                 <Space size="middle">
-                    <ImEye onClick={() => showModal(record.id)} />
+                    <BiDetail onClick={() => showModal(record.id)} />
                     <Popconfirm
                         title="Bạn có chắc chắn xóa?"
                         onConfirm={() => {
@@ -262,6 +267,7 @@ const SlideList = () => {
                 width={1100}
                 onOk={handleOut}
                 onCancel={handleOut}
+                footer={null}
             >
                 <Table dataSource={currenOrderDeatail} columns={columnDeatail} />
             </Modal>
