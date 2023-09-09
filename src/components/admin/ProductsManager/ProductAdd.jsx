@@ -184,6 +184,7 @@ const ProductAdd = () => {
                         <Input
                             style={{ height: 30 }}
                             placeholder="Nhập giảm giá..."
+                            defaultValue={0}
                         />
                     </Form.Item>
                     <Row gutter={16}>
