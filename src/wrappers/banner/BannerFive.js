@@ -4,8 +4,7 @@ import Slider from "react-slick";
 import Skeleton from "react-loading-skeleton";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Rate } from "antd";
-import { Badge, Card, Space } from "antd";
+import { Badge } from "antd";
 import StatisticsApi from "../../api/statistic/StatisticsApi";
 import { AiOutlinePlus } from "react-icons/ai";
 
@@ -76,8 +75,7 @@ const BannerFive = () => {
               {products.map((item, index) => {
                 const originalPrice = item.product.price;
                 const discountPercentage = item.product.discount;
-                const discountedPrice =
-                  originalPrice * (1 - discountPercentage / 100);
+                const discountedPrice = originalPrice * (1 - discountPercentage / 100);
                 return (
                   <div className="single-banner mb-20" key={index}>
                     <Link to={`/product/${item.productId || item.id}`}>
@@ -121,13 +119,6 @@ const BannerFive = () => {
             </Slider>
           </div>
         )}
-        <div className="view-more text-center mt-20 toggle-btn6 col-12">
-          <Link
-            className="loadMore6"
-            to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
-            Xem thêm
-          </Link>
-        </div>
       </div>
     </div>
   );

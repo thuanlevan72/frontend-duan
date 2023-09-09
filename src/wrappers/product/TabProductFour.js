@@ -15,7 +15,7 @@ const TabProductFour = ({
     <div className={`product-area ${spaceBottomClass ? spaceBottomClass : ""}`}>
       <div className="container">
         <SectionTitleThree titleText={titleText} positionClass="text-center" />
-        <div className="row my-10">
+        <div className="row my-10" style={{padding: "15px"}}>
           {status == 1 ? (
             <ProductGridTwo
               category={category}
