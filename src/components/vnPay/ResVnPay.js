@@ -5,7 +5,10 @@ import { useToasts } from "react-toast-notifications";
 import MetaTags from "react-meta-tags";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { connect } from "react-redux";
-import { confirmOrder } from "../../redux/actions/cartActions";
+import {
+  confirmOrder,
+  deleteAllFromCart,
+} from "../../redux/actions/cartActions";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import OrderApi from "../../api/order/OrderApi";
@@ -38,7 +41,6 @@ const ResVnPay = ({ location, confirmOrders }) => {
     const vnpTmnCode = urlParams.get("vnp_TmnCode");
 
     if (vnpResponseCode === "00") {
-      confirmOrders();
       setPaymentResult({
         vnpAmount,
         vnpBankCode,
@@ -48,11 +50,10 @@ const ResVnPay = ({ location, confirmOrders }) => {
       });
       try {
         const storedData = JSON.parse(localStorage.getItem("dataOrderOnline"));
-        localStorage.removeItem("dataOrderOnline");
         setLoading(true);
-        const response = await OrderApi.CreateOrder(storedData);
+        await OrderApi.CreateOrder(storedData);
         if (storedData.userId) {
-          CartApi.RemoveAllCart(storedData.userId);
+          await CartApi.RemoveAllCart(storedData.userId);
         }
         if (storedData.codeVoucher) {
           await VoucherApi.ApllyVoucher(
@@ -60,11 +61,12 @@ const ResVnPay = ({ location, confirmOrders }) => {
             storedData.codeVoucher
           );
         }
+        localStorage.removeItem("dataOrderOnline");
+        confirmOrders();
         setLoading(false);
       } catch (error) {
         setLoading(false);
       }
-      return;
     } else {
       alert("Giao dịch thất bại");
     }
@@ -175,7 +177,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     confirmOrders: () => {
-      dispatch(confirmOrder());
+      dispatch(deleteAllFromCart());
     },
   };
 };

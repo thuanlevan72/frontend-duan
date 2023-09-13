@@ -25,7 +25,7 @@ const store = createStore(
 
 // fetch products from json file
 store.dispatch(fetchProducts(products));
-store.dispatch(fetchDataCarts([]));
+// store.dispatch(fetchDataCarts([]));
 
 ReactDOM.render(
   <Provider store={store}>

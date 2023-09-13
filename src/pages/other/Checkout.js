@@ -102,7 +102,7 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
   useEffect(() => {
     setUserOrder({
       ...userOrder,
-      wards: selectedWard,
+      wards: Number(selectedWard),
       provinces: selectedProvince,
       districts: selectedDistrict,
       pickupTime: intendTime,
@@ -346,6 +346,9 @@ const Checkout = ({ location, cartItems, currency, confirmOrders }) => {
         "dataOrderOnline",
         JSON.stringify({ ...data, codeVoucher })
       );
+      if (!localStorage.getItem("dataOrderOnline")) {
+        throw new Error();
+      }
       messageApi.open({
         type: "success",
         content: "Đang tạo liên kết đến VnPay",
