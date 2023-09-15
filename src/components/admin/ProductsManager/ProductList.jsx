@@ -176,6 +176,7 @@ const ProductList = () => {
       price: item.price.toLocaleString("vi-VN") + " " + "VNĐ",
       discount: item.discount,
       quantity: item.quantity,
+      quantityOrder: item.quantityOrder,
       categoryName: item.productType.nameProductType,
       status:
         item.status === 1 ? (
@@ -193,7 +194,7 @@ const ProductList = () => {
       align: "center",
     },
     {
-      title: "Tên món",
+      title: "Tên món ăn",
       dataIndex: "name",
       key: "name",
       align: "center",
@@ -215,21 +216,27 @@ const ProductList = () => {
       ),
     },
     {
-      title: "Giá món",
+      title: "Giá món ăn",
       dataIndex: "price",
       key: "price",
       align: "center",
     },
     {
-      title: "Giảm giá (%)",
+      title: "Phần trăm giảm giá",
       dataIndex: "discount",
       key: "discount",
       align: "center",
     },
     {
-      title: "Số lượng",
+      title: "Tồn kho",
       dataIndex: "quantity",
       key: "quantity",
+      align: "center",
+    },
+    {
+      title: "Đã bán",
+      dataIndex: "quantityOrder",
+      key: "quantityOrder",
       align: "center",
     },
     {
