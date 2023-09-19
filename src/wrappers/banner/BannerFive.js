@@ -62,7 +62,7 @@ const BannerFive = () => {
   return (
     <div className="banner-area hm9-section-padding">
       <div className="container">
-        <h2 className="banner-title">Thực Phẩm Bán Chạy</h2>
+        <h2 className="banner-title">Món Ăn Bán Chạy</h2>
         {loading ? (
           <div className="d-flex justify-content-between">
             {Array.from({ length: 4 }).map(() => (
