@@ -32,7 +32,7 @@ const HomeOrganicFood = () => {
           spaceBottomClass="pb-30"
           category="all"
           status={0}
-          titleText="Món ăn mới nhất"
+          titleText="Sản phẩm mới nhất"
           productTabClass="product-tab-fruits"
         />
         <TabProductCategory
@@ -49,7 +49,7 @@ const HomeOrganicFood = () => {
           spaceBottomClass="pb-30"
           category="all"
           status={1}
-          titleText="Món ăn giảm giá"
+          titleText="Thực phẩm giảm giá"
           productTabClass="product-tab-fruits"
         />
         {/* testimonial */}
