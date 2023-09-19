@@ -81,7 +81,7 @@ const TabProductCategory = ({
     <div className={`product-area ${spaceBottomClass ? spaceBottomClass : ""}`}>
       <div className="container">
         <SectionTitleThree
-          titleText="Loại sản phẩm"
+          titleText="Sản phẩm theo danh mục"
           positionClass="text-center"
         />
         <Tab.Container defaultActiveKey={data && data[0].key}>

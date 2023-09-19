@@ -66,7 +66,6 @@ const BlogDetailsStandard = ({ location, match }) => {
                   {data && (
                     <div
                       className="text-center text-justify"
-                      // style={{ tẽ: "left !impt" }}
                       dangerouslySetInnerHTML={{ __html: data.content }}
                     />
                   )}

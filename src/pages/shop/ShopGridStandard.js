@@ -63,14 +63,14 @@ const ShopGridStandard = ({ location, products }) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Poly Food | Danh sách món ăn</title>
+        <title>Poly Food | Thực đơn</title>
         <meta name="description" content="Shop page of PolyFood." />
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>
         Trang chủ
       </BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
-        Sản phẩm
+        Thực đơn
       </BreadcrumbsItem>
 
       <LayoutOne headerTop="visible">
@@ -95,7 +95,6 @@ const ShopGridStandard = ({ location, products }) => {
                   productCount={products.length}
                   sortedProductCount={currentData.length}
                 />
-
                 {/* shop page content default */}
                 <ShopProducts layout={layout} products={currentData} />
                 {/* shop product pagination */}
