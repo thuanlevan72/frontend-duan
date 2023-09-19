@@ -81,7 +81,7 @@ const TabProductCategory = ({
     <div className={`product-area ${spaceBottomClass ? spaceBottomClass : ""}`}>
       <div className="container">
         <SectionTitleThree
-          titleText="Sản phẩm theo danh mục"
+          titleText="Món ăn theo danh mục"
           positionClass="text-center"
         />
         <Tab.Container defaultActiveKey={data && data[0].key}>
@@ -119,13 +119,6 @@ const TabProductCategory = ({
               })}
           </Tab.Content>
         </Tab.Container>
-        <div className="view-more text-center mt-20 toggle-btn6 col-12">
-          <Link
-            className="loadMore6"
-            to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
-            Xem thêm
-          </Link>
-        </div>
       </div>
     </div>
   );

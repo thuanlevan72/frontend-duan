@@ -77,11 +77,110 @@
     }
   }
 }
+.funfact-btn {
+  margin-top: 43px;
+  @media #{$xs-layout} {
+      margin-top: 23px;
+  }
+  a {
+      line-height: 1;
+      z-index: 1;
+      display: inline-block;
+      padding: 16px 56px;
+      color: #fff;
+      border: 1px solid transparent;
+      background-color: #000;
+      &:hover {
+          border: 1px solid $theme-color;
+      }
+  }
+  &.btn-only-round {
+      a {
+          overflow: hidden;
 
+          border-radius: 50px;
+          &:hover {
+              border: 1px solid $theme-color;
+          }
+      }
+  }
+  &.funfact-btn-red {
+      a {
+          background-color: #c61a32;
+          &:hover {
+              border: 1px solid $theme-color;
+          }
+      }
+  }
+  &.funfact-btn-red-2 {
+      a {
+          background-color: #c61a32;
+          &:hover {
+              border: 1px solid $theme-color;
+          }
+      }
+  }
+  &.funfact-btn-violet {
+      a {
+          background-color: #ab87cd;
+          &:hover {
+              border: 1px solid $theme-color;
+          }
+      }
+  }
+  &.funfact-btn-green {
+      a {
+          background-color: #6eab49;
+          &:hover {
+              border: 1px solid $theme-color;
+          }
+      }
+  }
+  &.funfact-btn-brown {
+      a {
+          font-weight: 500;
+          color: #000;
+          border: 2px solid #000;
+          background-color: transparent;
+          &:after {
+              background-color: #bca487;
+          }
+      }
+  }
+  &--round-shape {
+      a {
+          overflow: hidden;
+
+          border-radius: 30px;
+      }
+  }
+}
 .testimonial-area {
+    background-image: url(https://res.cloudinary.com/do9rcgv5s/image/upload/v1695114432/hwjdab2uqsgax1ti2il2.png);
+    background-position: 420px -210px;
+    background-repeat: no-repeat;
+    .special-polyfood-title{
+      color: #f6a700;
+      font-family: $shelia1;
+      font-size: 39px;
+      font-weight: 500;
+    }
+    p{
+      float: right;
+      width: 645px;
+      padding: 40px 0 20px;
+      color: #ffffff;
+      line-height: 24px;
+      font-size: 15px;
+    }
+    .item-vegetable{
+      background-image: url(https://res.cloudinary.com/do9rcgv5s/image/upload/v1695121790/xuwo5rfyhgo5dnp6egk7.png);
+      background-repeat: no-repeat;
+      background-position: 180px 0;
+      height: 313px;
+    }
   &:hover .nav-style-1.owl-carousel > .owl-nav div {
     visibility: visible;
-
     opacity: 1;
   }
   &.ml-70 {

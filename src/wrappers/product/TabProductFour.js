@@ -32,13 +32,6 @@ const TabProductFour = ({
               />
           )}
         </div>
-        <div className="view-more text-center mt-20 toggle-btn6 col-12">
-          <Link
-            className="loadMore6"
-            to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
-            Xem thêm
-          </Link>
-        </div>
       </div>
     </div>
   );
