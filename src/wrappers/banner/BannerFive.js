@@ -50,7 +50,10 @@ const BannerFive = () => {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        let data = await StatisticsApi.GetTopSellingProducts();
+        let data = await StatisticsApi.GetTopSellingProducts({
+          endDate: "2024/02/02",
+          startDate: "2023/02/02",
+        });
         setProducts(data);
         setLoading(false);
       } catch (error) {
@@ -75,7 +78,8 @@ const BannerFive = () => {
               {products.map((item, index) => {
                 const originalPrice = item.product.price;
                 const discountPercentage = item.product.discount;
-                const discountedPrice = originalPrice * (1 - discountPercentage / 100);
+                const discountedPrice =
+                  originalPrice * (1 - discountPercentage / 100);
                 return (
                   <div className="single-banner mb-20" key={index}>
                     <Link to={`/product/${item.productId || item.id}`}>
