@@ -19,15 +19,21 @@ const { Option } = Select;
 const courseName = [
   { name: "Fullstack .NET" },
   { name: "Fullstack Java" },
-  { name: "java on job" },
-  { name: "c++ and c" },
+  { name: "Fullstack .NET Chuyên Sâu" },
+  { name: "Fullstack Java Chuyên Sâu" },
+  { name: "Java on job" },
+  { name: "C++ and C" },
   { name: "Chưa quyết" },
+  { name: "Fullstack" },
+  { name: "Fullstack Chuyên Sâu" },
   { name: "VueJS" },
   { name: "C# on job" },
   { name: "Frontend on job" },
   { name: "React" },
   { name: "BE .NET" },
   { name: "BE Java" },
+  { name: "Back End" },
+  { name: "Frontend" },
 ];
 const SubjectName = [
   { name: "C Basic" },

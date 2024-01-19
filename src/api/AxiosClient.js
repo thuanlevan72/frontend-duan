@@ -1,8 +1,8 @@
 import axios from "axios";
 import queryString from "query-string";
 
-const prodConfig = "https://api.polyfood.store/api/";
-const devConfig = "https://localhost:7064/api/";
+const prodConfig = "http://www.thuanlee.somee.com/api/";
+const devConfig = "http://www.thuanlee.somee.com/api/";
 // Set up default config for http requests here
 // Please have a look at here `https://github.com/axios/axios#request- config` for the full list of configs
 const config = process.env.NODE_ENV === "production" ? prodConfig : devConfig;
